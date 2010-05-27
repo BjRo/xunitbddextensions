@@ -1,0 +1,15 @@
+StructureMap.InstanceBuilder
+StructureMap.Pipeline.IConfiguredInstance
+Rhino.Mocks.Interfaces.IMockedObject
+Rhino.Mocks.Arg
+Rhino.Mocks.Arg`1
+Rhino.Mocks.BackToRecordOptions
+Rhino.Mocks.MethodInvocation
+Rhino.Mocks.MockRepository
+Rhino.Mocks.Function.*
+Rhino.Mocks.Interfaces.*
+Rhino.Mocks.Constraints.*
+Rhino.Mocks.Delegates.*
+Castle.Core.Interceptor.IProxyTargetAccessor
+Castle.DynamicProxy.AbstractInvocation
+Castle.DynamicProxy.Generators.AttributesToAvoidReplicating

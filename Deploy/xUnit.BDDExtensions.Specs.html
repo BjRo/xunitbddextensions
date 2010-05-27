@@ -1,0 +1,713 @@
+<html>
+	<head>
+		<title>Report for xUnit.BDDExtensions.Specs</title>
+		<style type="text/css">
+			
+			body 
+			{
+				font-family: Arial,Helvetica,sans-serif;
+				font-size: .9em;
+			}
+
+			.count 
+			{
+				color: #B0B0B0;
+			}
+
+			h1
+			{
+			    margin: 1em 0em 1em 0em;
+			    padding: 2em;
+			    font-size: 1.5em;
+			    color: #ffffff;
+                background-color: #2F2F4F;
+				border: 1px solid #ffffff;
+			}
+			
+			h2
+			{
+			    background-color: #5C5C9C;
+			    color: #ffffff;
+			    border: 1px solid #ffffff;
+			    margin: 1.5em 0em 0em 2em;
+			    padding: 0.5em 0em 0.5em 0.5em;
+			}
+			
+			h3
+			{
+			    margin: 1.5em 0em 0em 4em;
+			}
+			
+			li
+			{
+			    margin: 0em 0em 0em 6em;    
+			}
+		
+		</style>
+	</head>
+	<body>
+		<h1>xUnit.BDDExtensions.Specs &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">
+				(6 concerns , 
+				57 contexts, 
+				66 observations)
+			</span>
+		</h1>
+	
+				
+		<h2 class="concern">EventRaiserExtensions specifications&nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">
+				(1 context,  1 observation)
+			</span>
+		</h2>
+		
+						
+		<h3 class="context">&nbsp;&nbsp;When raising an event &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should raise event</li>
+			</ul>		
+			
+			        
+         		
+       		
+		<h2 class="concern">InstanceContextSpecification`1 specifications&nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">
+				(6 contexts,  9 observations)
+			</span>
+		</h2>
+		
+						
+		<h3 class="context">&nbsp;&nbsp;When a an external instance is used in a specification &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should inject the external instance into the sut</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When a behavior configuration is used to setup behaviors &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>it should pass the accessor for dependencies into the configuration before the because method is run</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When an instance with a dependency on a generic "IEnumerable" is resolved and the item type can be stubbed &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(3 observations)</span>
+		</h3>
+		
+						<ul>
+				<li>should prefill the enumerable with three stubs</li>
+			</ul>		
+			
+						<ul>
+				<li>should inject the stubs into the SUT that where returned by the THE call</li>
+			</ul>		
+			
+						<ul>
+				<li>should match the items but not the collection</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When an instance with a dependency on a generic "IEnumerable" is resolved and the item type cannot be stubbed &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>needs to be populated manually</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When an instance with a dependency on some interface type is resolved &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(2 observations)</span>
+		</h3>
+		
+						<ul>
+				<li>should be accessible via the "The" accessor</li>
+			</ul>		
+			
+						<ul>
+				<li>should inject a stub object for the dependency</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When an instance with two dependencies on the same interface type is resolved &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>it is a situation which is not properly handled currently because the same instance is injected twice</li>
+			</ul>		
+			
+			        
+         		
+       		
+		<h2 class="concern">BDDExtensions specifications&nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">
+				(37 contexts,  37 observations)
+			</span>
+		</h2>
+		
+						
+		<h3 class="context">&nbsp;&nbsp;When an "Exception" is expected to be thrown and is actually thrown &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When an instance is expected to be "null" and is actually "null" &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When an instance is expected to be "null" but it is not &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw a "NullException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting null to be not "null" &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an "NotNullException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When an instance is expected to be not "null" &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting a particular "Exception" to be thrown and no "Exception" was thrown &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw a "ThrowsException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting a particular "Exception" to be thrown and a different "Exception" was thrown &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw a "ThrowsException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting "False" to be "False" &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting "True" to be "True" &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting "True" to be "False" &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw a "FalseException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting "False" to be "True" &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw a "TrueException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting a collection to contain only a particular set of items and a different set is present &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an "AssertException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting a collection to contain only a particular set of items and more are present &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an "AssertException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting a collection to contain only the items it actually contains &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting a collection to contain only a particular set in a particular order and different set is present &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an "AssertException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting a collection to contain only a particular ordered set of items and more are present &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an "AssertException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting a collection to contain only a particular ordered set of items ordering does not match &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an "AssertException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting a collection to contain only a particular ordered set of items on a set that matches the criteria &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When an instance is expected to be of an unrelated "Type" &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw a "IsAssignableFromException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When an instance is expected to assignable to a related "Type" &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting an instance to be of its own "Type" &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When a "Comparable" is expected to be greater than a second one and it actually is not &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw a "AssertException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When a "Comparable" is expected to be greater than a smaller second one &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When a "Comparable" is expected to be greater than itself &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an "AssertException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When an instance is expected to be contained in a collection and it actually is &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When an instance is expected to be contained in a collection and it actually is not &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw a "ContainsException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting two different instances to be equal &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an "EqualException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting an instance to be equal to itself &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting to differnt instances not to be equal &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw and "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting an instance not to be equal to itself &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an "NotEqualException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting two differnt "strings" to be equal ignoring the casing &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an "EqualException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting a "string"  to be equal to itself ignoring the casing &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting a non empty collection to be empty &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an "EmptyException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting an empty collection to be empty &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting a non empty collection to contain items &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When expecting an empty collection not to be empty &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw a "NotEmptyException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When a string should be equal to a differently cased string and casing is ignored &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         		
+       		
+		<h2 class="concern">PropertyStubExtensions specifications&nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">
+				(1 context,  4 observations)
+			</span>
+		</h2>
+		
+						
+		<h3 class="context">&nbsp;&nbsp;When stubbing properties &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(4 observations)</span>
+		</h3>
+		
+						<ul>
+				<li>should have stub behavior</li>
+			</ul>		
+			
+						<ul>
+				<li>should auto mock interface type properties</li>
+			</ul>		
+			
+						<ul>
+				<li>interface type properties should have stub behavior</li>
+			</ul>		
+			
+						<ul>
+				<li>should not generate stubs for properties of properties</li>
+			</ul>		
+			
+			        
+         		
+       		
+		<h2 class="concern">RhinoMocksExtensions specifications&nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">
+				(10 contexts,  10 observations)
+			</span>
+		</h2>
+		
+						
+		<h3 class="context">&nbsp;&nbsp;When method was expected to be called and it actually has been called &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When method was expected to be called and it actually has not been called &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an "ExpectationViolationException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When a method was not expected to be called but it actually was &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an "ExpectationViolationException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When a method was not expected to be called and it was not called &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When setting up a method result on a generated "Stub" &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should behave like it has been configured</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When setting up a property result on a generated "Stub" &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should behave like it has been configured</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When configuring an "Exception" to be thrown when an interaction is executed &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw the configured "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When a method is expected to be called only once and the method was called at least twice &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an "ExpectationViolationException"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When a method is expected to be called twice and the method was called twice &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should not throw an "Exception"</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When a method is expected to be called more often than it actually has been called &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an "ExpectationViolationException"</li>
+			</ul>		
+			
+			        
+         		
+       		
+		<h2 class="concern">SpecificationCommand specifications&nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">
+				(2 contexts,  5 observations)
+			</span>
+		</h2>
+		
+						
+		<h3 class="context">&nbsp;&nbsp;When a specification test command is executed and the test object does not implement ISpecification &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(1 observation)</span>
+		</h3>
+		
+						<ul>
+				<li>should throw an invalid operation exception</li>
+			</ul>		
+			
+			        
+         				
+		<h3 class="context">&nbsp;&nbsp;When a specification test command is executed on a ITestSpecification implementer &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">(4 observations)</span>
+		</h3>
+		
+						<ul>
+				<li>should ask the test specification to initialize</li>
+			</ul>		
+			
+						<ul>
+				<li>should pass the test specification to the inner test command</li>
+			</ul>		
+			
+						<ul>
+				<li>should return the test result from the inner test command</li>
+			</ul>		
+			
+						<ul>
+				<li>should ask the test specification to cleanup</li>
+			</ul>		
+			
+			        
+         		
+       		
+	</body>
+</html>

@@ -1,0 +1,83 @@
+﻿<html>
+	<head>
+		<title>Report for $report.ReflectedAssembly</title>
+		<style type="text/css">
+			
+			body 
+			{
+				font-family: Arial,Helvetica,sans-serif;
+				font-size: .9em;
+			}
+
+			.count 
+			{
+				color: #B0B0B0;
+			}
+
+			h1
+			{
+			    margin: 1em 0em 1em 0em;
+			    padding: 2em;
+			    font-size: 1.5em;
+			    color: #ffffff;
+                background-color: #2F2F4F;
+				border: 1px solid #ffffff;
+			}
+			
+			h2
+			{
+			    background-color: #5C5C9C;
+			    color: #ffffff;
+			    border: 1px solid #ffffff;
+			    margin: 1.5em 0em 0em 2em;
+			    padding: 0.5em 0em 0.5em 0.5em;
+			}
+			
+			h3
+			{
+			    margin: 1.5em 0em 0em 4em;
+			}
+			
+			li
+			{
+			    margin: 0em 0em 0em 6em;    
+			}
+		
+		</style>
+	</head>
+	<body>
+		<h1>$report.ReflectedAssembly &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">
+				($report.TotalAmountOfConcerns $pluralizer.Pluralize("concern", $report.TotalAmountOfConcerns) , 
+				$report.TotalAmountOfContexts $pluralizer.Pluralize("context", $report.TotalAmountOfContexts), 
+				$report.TotalAmountOfObservations $pluralizer.Pluralize("observation", $report.TotalAmountOfObservations))
+			</span>
+		</h1>
+	
+		#foreach($concern in $report)
+		
+		<h2 class="concern">$concern specifications&nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">
+				($concern.AmountOfContexts $pluralizer.Pluralize("context", $concern.AmountOfContexts),  $concern.AmountOfObservations $pluralizer.Pluralize("observation", $concern.AmountOfObservations))
+			</span>
+		</h2>
+		
+		#foreach($context in $concern)
+				
+		<h3 class="context">&nbsp;&nbsp;$context &nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="count">($context.AmountOfObservations $pluralizer.Pluralize("observation", $context.AmountOfObservations))</span>
+		</h3>
+		
+			#foreach($observation in $context)
+			<ul>
+				<li>$observation</li>
+			</ul>		
+			
+			#end
+        
+         #end	
+		
+       #end
+		
+	</body>
+</html>
