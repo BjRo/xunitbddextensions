@@ -31,21 +31,18 @@ namespace Xunit.Reporting
         /// </summary>
         public EngineRegistry()
         {
-                        Scan(scanner =>
+            Scan(scanner =>
             {
                 scanner.Assembly(typeof (IArgumentMap).Assembly);
                 scanner.WithDefaultConventions();
                 scanner.With(new GeneratorConvensions());
             });
 
-            ForRequestedType<IArgumentMap>()
-                .TheDefault.Is.ConstructedBy(ctor => ctor.GetInstance<ArgumentMapFactory>().Create());
+            For<IArgumentMap>().Use(ctor => ctor.GetInstance<ArgumentMapFactory>().Create());
 
-            ForRequestedType<IReportGenerator>()
-                .MissingNamedInstanceIs.ConstructedBy(exp => exp.GetInstance<IReportGenerator>("Html"));
+            For<IReportGenerator>().MissingNamedInstanceIs.ConstructedBy(exp => exp.GetInstance<IReportGenerator>("Html"));
 
-            ForRequestedType<IReportGenerator>()
-                .TheDefault.Is.ConstructedBy(ctorExpression =>
+            For<IReportGenerator>().Use(ctorExpression =>
                 {
                     var properties = ctorExpression.GetInstance<IArguments>();
                     var generator = properties.Get(ArgumentKeys.Generator);
@@ -53,8 +50,7 @@ namespace Xunit.Reporting
                     return ctorExpression.GetInstance<IReportGenerator>(nameOfTargetGenerator);
                 });
 
-            ForRequestedType<Func<IEnumerable<string>>>()
-                .TheDefault.Is.ConstructedBy(ctor => () => DropProcessName(Environment.GetCommandLineArgs()));
+            For<Func<IEnumerable<string>>>().Use(ctor => () => DropProcessName(Environment.GetCommandLineArgs()));
         }
 
         private static List<string> DropProcessName(string[] commandLineArgs)

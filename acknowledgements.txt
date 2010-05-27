@@ -1,0 +1,9 @@
+xUnit.BDDExtensions uses the following tools internally: 
+
+- Rhino.Mocks (http://www.ayende.com/projects/rhino-mocks.aspx)
+- NVelocity (http://nvelocity.sourceforge.net/)
+- StructureMap (http://structuremap.github.com/structuremap/index.html)
+
+and as the name implies, it is build on top of the xUnit testing framework (http://xunit.codeplex.com).
+
+Most of the structure of the xUnit.BDDExtensions PSake build configuration was shamelessly "borrowed" from Ayendes Rhino.Mocks and Rhino.Queue build configuration.

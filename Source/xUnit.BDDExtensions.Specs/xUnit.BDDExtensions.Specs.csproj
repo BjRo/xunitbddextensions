@@ -54,15 +54,15 @@
   <ItemGroup>
     <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Externals\Rhino\Rhino.Mocks.dll</HintPath>
+      <HintPath>..\..\Lib\Rhino\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Externals\StructureMap\StructureMap.dll</HintPath>
+      <HintPath>..\..\Lib\StructureMap\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap.AutoMocking, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Externals\StructureMap\StructureMap.AutoMocking.dll</HintPath>
+      <HintPath>..\..\Lib\StructureMap\StructureMap.AutoMocking.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -76,9 +76,9 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="xunit, Version=1.1.0.1323, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+    <Reference Include="xunit, Version=1.5.0.1479, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Externals\xUnit\xunit.dll</HintPath>
+      <HintPath>..\..\Lib\xUnit\xunit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
