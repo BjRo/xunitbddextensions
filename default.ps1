@@ -33,15 +33,12 @@ task Init -depends Clean {
 } 
 
 task Compile -depends Init { 
-  exec { msbuild "/p:OutDir=""$buildartifacts_dir "" $sln_file" }
+  exec { msbuild "/p:OutDir=$buildartifacts_dir" "/p:Platform=Any CPU" "$sln_file" }
 } 
 
 task Test -depends Compile {
-  $old = pwd
-  cd $build_dir
   & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Specs.dll
   & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Reporting.Specs.dll
-  cd $old        
 }
 
 task Merge {
