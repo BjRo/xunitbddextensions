@@ -37,8 +37,8 @@ task Compile -depends Init {
 } 
 
 task Test -depends Compile {
-  & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Specs.dll
-  & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Reporting.Specs.dll
+  exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Specs.dll }
+  exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Reporting.Specs.dll }
 }
 
 task Merge {
@@ -48,52 +48,45 @@ task Merge {
     Remove-Item xUnit.BDDExtensions.Partial.dll -ErrorAction SilentlyContinue 
     Rename-Item $build_dir\xUnit.BDDExtensions.dll xUnit.BDDExtensions.Partial.dll
     
-    & $tools_dir\ILMerge\ILMerge.exe xUnit.BDDExtensions.Partial.dll `
+    exec {
+    
+     & $tools_dir\ILMerge\ILMerge.exe xUnit.BDDExtensions.Partial.dll `
         StructureMap.dll `
         StructureMap.AutoMocking.dll `        Rhino.Mocks.dll `
         /out:xUnit.BDDExtensions.dll `
         /t:library ``
         "/internalize:'$base_dir\ILMergeExcludes.txt'"
-           
-    if ($lastExitCode -ne 0)
-    {
-        throw "Error: Failed to merge xUnit.BDDExtensions!"
     }
-    
     
     Remove-Item ReportGenerator.Partial.exe -ErrorAction SilentlyContinue 
     Rename-Item $build_dir\ReportGenerator.exe ReportGenerator.Partial.exe
     
-    & $tools_dir\ILMerge\ILMerge.exe ReportGenerator.Partial.exe `
+    exec { 
+    
+      & $tools_dir\ILMerge\ILMerge.exe ReportGenerator.Partial.exe `
         StructureMap.dll `
         NVelocity.dll `
         /out:ReportGenerator.exe `
         /t:winexe ``
-           
-    if ($lastExitCode -ne 0)
-    {
-        throw "Error: Failed to merge ReportGenerator!"
     }
      
     cd $old
 }
 
 task Docu -depends Test, Merge {
-   & $build_dir\ReportGenerator.exe /generator:HTML /assembly:'$build_dir\xUnit.BDDExtensions.Specs.dll' /assembly:'$build_dir\xUnit.BDDExtensions.Reporting.Specs.dll'  
+   exec { & $build_dir\ReportGenerator.exe /generator:HTML /assembly:'$build_dir\xUnit.BDDExtensions.Specs.dll' /assembly:'$build_dir\xUnit.BDDExtensions.Reporting.Specs.dll' }
 }
 
 task Release -depends Test, Merge {
     
-    & $tools_dir\Zip\zip.exe -9 -A -j `
+    exec {
+    
+      & $tools_dir\Zip\zip.exe -9 -A -j `
         $release_dir\xUnit.BDDExtensions.$version.zip `
         $build_dir\xUnit.BDDExtensions.dll `
         $build_dir\ReportGenerator.exe `
         $build_dir\xunit.dll `
         License.txt `
-        acknowledgements.txt
-        
-    if ($lastExitCode -ne 0) 
-    {
-        throw "Error: Failed to execute ZIP command"
+        acknowledgements.txt    
     }
 }

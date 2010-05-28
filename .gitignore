@@ -1,7 +1,7 @@
 *resharper.user
 [Dd]ebug/
 [Rr]elease/
-build/
+[Bb]uild/
 [Bb]in/
 [Oo]bj/
 *.suo
