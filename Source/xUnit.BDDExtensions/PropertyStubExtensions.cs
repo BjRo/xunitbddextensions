@@ -1,7 +1,8 @@
 // Copyright 2009 
 //
 // Björn Rochel:     http://www.bjro.de/
-// Sergey Shishkin:  http://sergeyshishkin.spaces.live.com/
+// Maxim Tansin
+// Sergey Shishkin:  http://shishkin.org/
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,61 +16,52 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+
 using Rhino.Mocks;
+
+using Xunit.PropertyStubs;
 
 namespace Xunit
 {
     public static class PropertyStubExtensions
     {
+        private static readonly IPropertyStubRule[] rules = new IPropertyStubRule[]
+        {
+            new CollectionPropertyStubRule(),
+            new DefaultPropertyStubRule(),
+            new TerminalPropertyStubRule()
+        };
+
         public static TMock Has<TMock, TProperty>(
             this TMock mock,
             Function<TMock, TProperty> propertySelector)
             where TMock : class
             where TProperty : class
         {
-            var propertyStub = MockRepository.GenerateStub<TProperty>();
-
-            mock.Stub(propertySelector).Return(propertyStub);
-
+            StubProperty(new FuncPropertyAdapter<TMock, TProperty>(mock, propertySelector));
             return mock;
         }
 
         public static void HasProperties<TMock>(this TMock mock) where TMock : class
         {
-            foreach (var property in GetPropertiesToStub(typeof (TMock)))
-            {
-                StubProperty(mock, property);
-            }
+            typeof(TMock)
+                .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                .Select(property => new InfoPropertyAdapter<TMock>(mock, property))
+                .ToList()
+                .ForEach(adapter => StubProperty(adapter));
         }
 
-        private static IEnumerable<PropertyInfo> GetPropertiesToStub(Type type)
+        private static void StubProperty(IPropertyAdapter property)
         {
-            foreach (var property in type.GetProperties(BindingFlags.Instance | BindingFlags.Public))
-            {
-                var propertyType = property.PropertyType;
-
-                if (propertyType.IsInterface && !typeof (IEnumerable).IsAssignableFrom(propertyType))
-                {
-                    yield return property;
-                }
-            }
-        }
-
-        private static void StubProperty<TMock>(TMock mock, PropertyInfo property) where TMock : class
-        {
-            var actionParameter = Expression.Parameter(typeof (TMock), "x");
-            var propertyGetter = Expression.Property(actionParameter, property);
-            var action = Expression.Lambda<Action<TMock>>(propertyGetter, actionParameter);
-
-            var propertyStub = MockRepository.GenerateStub(property.PropertyType);
-
-            mock.Stub(action.Compile()).Return(propertyStub);
+            rules
+                .First(x => x.CanStub(property.PropertyType))
+                .Stub(property);
         }
     }
 }

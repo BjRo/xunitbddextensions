@@ -85,6 +85,7 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CollectionStubSpecs.cs" />
     <Compile Include="EventRaiserExtensionsSpec.cs" />
     <Compile Include="InstanceContextSpecificationSpecs.cs" />
     <Compile Include="BDDExtensionsSpecs.cs" />
