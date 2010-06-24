@@ -30,7 +30,7 @@ namespace Xunit
         /// </summary>
         /// <param name="innerCommand">The inner command.</param>
         /// <param name="testMethod">The test method.</param>
-        public SpecificationCommand(ITestCommand innerCommand, IMethodInfo testMethod) : base(testMethod)
+        public SpecificationCommand(ITestCommand innerCommand, IMethodInfo testMethod) : base(testMethod, testMethod.Name,0)
         {
             _innerCommand = innerCommand;
         }

@@ -437,7 +437,7 @@ namespace Xunit
         /// </exception>
         public static void ShouldBeEqualIgnoringCase(this string item, string other)
         {
-            Assert.Equal(other, item, StringComparer.InvariantCultureIgnoreCase);
+            Assert.Equal(other, item, (IEqualityComparer<string>)StringComparer.InvariantCultureIgnoreCase );
         }
 
         /// <summary>
