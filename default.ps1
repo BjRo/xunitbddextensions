@@ -4,7 +4,7 @@ properties {
   $build_dir = "$base_dir\Build" 
   $buildartifacts_dir = "$build_dir\" 
   $sln_file = "$base_dir\Source\xUnit.BDDExtensions.sln" 
-  $version = "1.0.2.10"
+  $version = "1.0.2.11"
   $tools_dir = "$base_dir\Tools"
   $release_dir = "$base_dir\Release"
 } 
@@ -54,8 +54,8 @@ task Merge {
         StructureMap.dll `
         StructureMap.AutoMocking.dll `        Rhino.Mocks.dll `
         /out:xUnit.BDDExtensions.dll `
+        "/internalize:$base_dir\ILMergeExcludes.txt" `
         /t:library ``
-        "/internalize:'$base_dir\ILMergeExcludes.txt'"
     }
     
     Remove-Item ReportGenerator.Partial.exe -ErrorAction SilentlyContinue 

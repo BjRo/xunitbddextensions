@@ -1,5 +1,3 @@
-StructureMap.InstanceBuilder
-StructureMap.Pipeline.IConfiguredInstance
 Rhino.Mocks.Interfaces.IMockedObject
 Rhino.Mocks.Arg
 Rhino.Mocks.Arg`1
