@@ -136,9 +136,9 @@
     <Compile Include="Core\ReflectionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\xUnit.BDDExtensions\xUnit.BDDExtensions.csproj">
+    <ProjectReference Include="..\xUnit.BDDExtensions\Core.csproj">
       <Project>{01CCC787-B3E5-4D4F-917A-950E276EC3E0}</Project>
-      <Name>xUnit.BDDExtensions</Name>
+      <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

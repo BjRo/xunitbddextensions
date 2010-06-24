@@ -106,13 +106,17 @@
     <Compile Include="Core\TestClasses.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\xUnit.BDDExtensions.Assertions\Assertions.csproj">
+      <Project>{DEE9E6A5-E4CA-475E-9B3A-314C7C0C8E59}</Project>
+      <Name>Assertions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\xUnit.BDDExtensions.Reporting\xUnit.BDDExtensions.Reporting.csproj">
       <Project>{80D7D01B-FB52-4DF5-9C20-9A4F95CD4441}</Project>
       <Name>xUnit.BDDExtensions.Reporting</Name>
     </ProjectReference>
-    <ProjectReference Include="..\xUnit.BDDExtensions\xUnit.BDDExtensions.csproj">
+    <ProjectReference Include="..\xUnit.BDDExtensions\Core.csproj">
       <Project>{01CCC787-B3E5-4D4F-917A-950E276EC3E0}</Project>
-      <Name>xUnit.BDDExtensions</Name>
+      <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -80,7 +80,6 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BDDExtensions.cs" />
     <Compile Include="BehaviorConfigOfTSut.cs" />
     <Compile Include="ConcernAttribute.cs" />
     <Compile Include="EventRaiserExtensions.cs" />
