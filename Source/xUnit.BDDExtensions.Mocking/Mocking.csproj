@@ -37,17 +37,29 @@
     <Reference Include="Rhino.Mocks">
       <HintPath>..\..\Lib\Rhino\Rhino.Mocks.dll</HintPath>
     </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\..\Lib\StructureMap\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.AutoMocking">
+      <HintPath>..\..\Lib\StructureMap\StructureMap.AutoMocking.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="xunit">
+      <HintPath>..\..\Lib\xUnit\xunit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="EventRaiserExtensions.cs" />
+    <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="InstanceContextSpecification.cs" />
     <Compile Include="MethodCallOccurance.cs" />
     <Compile Include="PropertyStubExtensions.cs" />
     <Compile Include="PropertyStubs\CollectionPropertyStubRule.cs" />
@@ -57,10 +69,18 @@
     <Compile Include="PropertyStubs\IPropertyAdapter.cs" />
     <Compile Include="PropertyStubs\IPropertyStubRule.cs" />
     <Compile Include="PropertyStubs\TerminalStubRule.cs" />
+    <Compile Include="RhinoAutoMocker.cs" />
     <Compile Include="RhinoMocksExtensions.cs" />
+    <Compile Include="StaticContextSpecification.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\xUnit.BDDExtensions\Core.csproj">
+      <Project>{01CCC787-B3E5-4D4F-917A-950E276EC3E0}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

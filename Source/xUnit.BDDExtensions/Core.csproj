@@ -52,18 +52,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\Rhino\Rhino.Mocks.dll</HintPath>
-    </Reference>
-    <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\StructureMap\StructureMap.dll</HintPath>
-    </Reference>
-    <Reference Include="StructureMap.AutoMocking, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\StructureMap\StructureMap.AutoMocking.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -82,17 +70,16 @@
     </Compile>
     <Compile Include="BehaviorConfigOfTSut.cs" />
     <Compile Include="ConcernAttribute.cs" />
-    <Compile Include="EventRaiserExtensions.cs" />
+    <Compile Include="IAutoStubber.cs" />
     <Compile Include="IBehaviorConfig.cs" />
     <Compile Include="IDependencyAccessor.cs" />
-    <Compile Include="InstanceContextSpecification.cs" />
-    <Compile Include="RhinoAutoMocker.cs" />
-    <Compile Include="ScopedContextSpecification.cs" />
-    <Compile Include="StaticContextSpecification.cs" />
+    <Compile Include="IStubFactory.cs" />
+    <Compile Include="InstanceContextSpecificationBase.cs" />
+    <Compile Include="StaticContextSpecificationBase.cs" />
+    <Compile Include="StubEngineExtensions.cs" />
     <Compile Include="ISpecification.cs" />
     <Compile Include="ObservationAttribute.cs" />
     <Compile Include="SpecificationCommand.cs" />
-    <Compile Include="ExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
