@@ -29,13 +29,13 @@ namespace Xunit.PropertyStubs
         where TMock : class
         where TProperty : class
     {
-        private readonly TMock mock;
-        private readonly Function<TMock, TProperty> accessor;
+        private readonly TMock _mock;
+        private readonly Function<TMock, TProperty> _accessor;
 
         public FuncPropertyAdapter(TMock mock, Function<TMock, TProperty> accessor)
         {
-            this.mock = mock;
-            this.accessor = accessor;
+            this._mock = mock;
+            this._accessor = accessor;
         }
 
         public Type PropertyType
@@ -45,7 +45,7 @@ namespace Xunit.PropertyStubs
 
         public void Stub(object propertyValue)
         {
-            mock.Stub(accessor).Return((TProperty)propertyValue);
+            _mock.Stub(_accessor).Return((TProperty)propertyValue);
         }
     }
 }

@@ -86,21 +86,11 @@
     <Compile Include="IBehaviorConfig.cs" />
     <Compile Include="IDependencyAccessor.cs" />
     <Compile Include="InstanceContextSpecification.cs" />
-    <Compile Include="MethodCallOccurance.cs" />
-    <Compile Include="PropertyStubExtensions.cs" />
-    <Compile Include="PropertyStubs\CollectionPropertyStubRule.cs" />
-    <Compile Include="PropertyStubs\DefaultPropertyStubRule.cs" />
-    <Compile Include="PropertyStubs\FuncPropertyAdapter.cs" />
-    <Compile Include="PropertyStubs\InfoPropertyAdapter.cs" />
-    <Compile Include="PropertyStubs\IPropertyAdapter.cs" />
-    <Compile Include="PropertyStubs\IPropertyStubRule.cs" />
-    <Compile Include="PropertyStubs\TerminalStubRule.cs" />
     <Compile Include="RhinoAutoMocker.cs" />
     <Compile Include="ScopedContextSpecification.cs" />
     <Compile Include="StaticContextSpecification.cs" />
     <Compile Include="ISpecification.cs" />
     <Compile Include="ObservationAttribute.cs" />
-    <Compile Include="RhinoMocksExtensions.cs" />
     <Compile Include="SpecificationCommand.cs" />
     <Compile Include="ExtensionMethods.cs" />
   </ItemGroup>
