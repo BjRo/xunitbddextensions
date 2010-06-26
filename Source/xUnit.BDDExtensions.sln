@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.Reporti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.Reporting.Specs", "xUnit.BDDExtensions.Reporting.Specs\xUnit.BDDExtensions.Reporting.Specs.csproj", "{345F602A-056A-49B6-BFAB-D1B32E1C4AF8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.MVC", "xUnit.BDDExtensions.MVC\xUnit.BDDExtensions.MVC.csproj", "{03064663-AC5C-4C0A-9E53-FD6C35A0D355}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{345F602A-056A-49B6-BFAB-D1B32E1C4AF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{345F602A-056A-49B6-BFAB-D1B32E1C4AF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{345F602A-056A-49B6-BFAB-D1B32E1C4AF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03064663-AC5C-4C0A-9E53-FD6C35A0D355}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03064663-AC5C-4C0A-9E53-FD6C35A0D355}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03064663-AC5C-4C0A-9E53-FD6C35A0D355}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03064663-AC5C-4C0A-9E53-FD6C35A0D355}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

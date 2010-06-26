@@ -1,0 +1,5 @@
+<Configuration>
+  <NamespaceFolders>
+    <SkipFolder>03064663-AC5C-4C0A-9E53-FD6C35A0D355/d:ActionResultExtensions</SkipFolder>
+  </NamespaceFolders>
+</Configuration>
