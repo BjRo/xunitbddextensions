@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.Mvc">
-      <HintPath>..\..\..\Lib\MVCFutures\Microsoft.Web.Mvc.dll</HintPath>
+      <HintPath>..\..\Lib\MVCFutures\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,6 +55,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="ActionResultExtensions\RedirectToRouteResultExtensions.cs" />
     <Compile Include="ActionResultExtensions\ViewResultExtensions.cs" />
     <Compile Include="ControllerContextSpecification.cs" />

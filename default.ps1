@@ -47,17 +47,31 @@ task Merge {
     
     Remove-Item xUnit.BDDExtensions.Partial.dll -ErrorAction SilentlyContinue 
     Rename-Item $build_dir\xUnit.BDDExtensions.dll xUnit.BDDExtensions.Partial.dll
-    
+
     exec {
     
      & $tools_dir\ILMerge\ILMerge.exe xUnit.BDDExtensions.Partial.dll `
         StructureMap.dll `
-        StructureMap.AutoMocking.dll `        Rhino.Mocks.dll `
+        StructureMap.AutoMocking.dll `
+        Rhino.Mocks.dll `
         /out:xUnit.BDDExtensions.dll `
         "/internalize:$base_dir\ILMergeExcludes.txt" `
         /t:library ``
     }
+
+    Remove-Item xUnit.BDDExtensions.MVC.Partial.dll -ErrorAction SilentlyContinue 
+    Rename-Item $build_dir\xUnit.BDDExtensions.MVC.dll xUnit.BDDExtensions.MVC.Partial.dll
     
+    
+	exec {
+    
+     & $tools_dir\ILMerge\ILMerge.exe xUnit.BDDExtensions.MVC.Partial.dll `
+        Microsoft.Web.MVC.dll `
+        /out:xUnit.BDDExtensions.MVC.dll `
+        "/internalize:$base_dir\ILMergeMVCExcludes.txt" `
+        /t:library ``
+    }
+
     Remove-Item ReportGenerator.Partial.exe -ErrorAction SilentlyContinue 
     Rename-Item $build_dir\ReportGenerator.exe ReportGenerator.Partial.exe
     
@@ -84,6 +98,7 @@ task Release -depends Test, Merge {
       & $tools_dir\Zip\zip.exe -9 -A -j `
         $release_dir\xUnit.BDDExtensions.$version.zip `
         $build_dir\xUnit.BDDExtensions.dll `
+        $build_dir\xUnit.BDDExtensions.MVC.dll `
         $build_dir\ReportGenerator.exe `
         $build_dir\xunit.dll `
         License.txt `
