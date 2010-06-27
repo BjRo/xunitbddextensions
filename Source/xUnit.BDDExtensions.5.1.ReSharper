@@ -1,0 +1,40 @@
+<Configuration>
+  <SharedSolutionTemplateManager>
+    <LiveTemplates>
+      <Template uid="43319128-ae7a-4aaa-8678-8c1e26d76bc3" shortcut="scs" description="BDD style StaticContextSpecification" text="    [Concern(typeof ($ConcernType$))]&#xD;&#xA;    public class When_$ContextName$ : StaticContextSpecification&#xD;&#xA;    {&#xD;&#xA;        protected override void EstablishContext()&#xD;&#xA;        {&#xD;&#xA;            $END$&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        protected override void Because()&#xD;&#xA;        {&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        [Observation]&#xD;&#xA;        public void Should_$Observation$()&#xD;&#xA;        {&#xD;&#xA;        }&#xD;&#xA;    }" reformat="True" shortenQualifiedReferences="True">
+        <Context>
+          <CSharpContext context="TypeAndNamespace" minimumLanguageVersion="2.0" />
+        </Context>
+        <Categories />
+        <Variables>
+          <Variable name="ConcernType" expression="" initialRange="0" />
+          <Variable name="ContextName" expression="" initialRange="0" />
+          <Variable name="Observation" expression="" initialRange="0" />
+        </Variables>
+        <CustomProperties />
+      </Template>
+      <Template uid="b24ed7e6-b233-4506-82ec-cd4bb41c2777" shortcut="ob" description="BDD Observation" text="        [Observation]&#xD;&#xA;        public void Should_$next_observation$()&#xD;&#xA;        {&#xD;&#xA;            $END$&#xD;&#xA;        }" reformat="True" shortenQualifiedReferences="True">
+        <Context>
+          <CSharpContext context="TypeMember" minimumLanguageVersion="2.0" />
+        </Context>
+        <Categories />
+        <Variables>
+          <Variable name="next_observation" expression="" initialRange="0" />
+        </Variables>
+        <CustomProperties />
+      </Template>
+      <Template uid="c2dbcfb2-d973-4b3a-8f17-71eb0c6ebbcb" shortcut="ics" description="BDD style InstanceContextSpecification" text="    [Concern(typeof($ConcernType$))]&#xD;&#xA;    public class When_$ContextName$ : InstanceContextSpecification&lt;$ConcernType$&gt;&#xD;&#xA;    {&#xD;&#xA;        protected override void EstablishContext()&#xD;&#xA;        {&#xD;&#xA;            $END$&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        protected override void Because()&#xD;&#xA;        {&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        [Observation]&#xD;&#xA;        public void Should_$Observation$()&#xD;&#xA;        {&#xD;&#xA;        }&#xD;&#xA;    }" reformat="True" shortenQualifiedReferences="True">
+        <Context>
+          <CSharpContext context="TypeAndNamespace" minimumLanguageVersion="2.0" />
+        </Context>
+        <Categories />
+        <Variables>
+          <Variable name="ConcernType" expression="" initialRange="0" />
+          <Variable name="ContextName" expression="" initialRange="0" />
+          <Variable name="Observation" expression="" initialRange="0" />
+        </Variables>
+        <CustomProperties />
+      </Template>
+    </LiveTemplates>
+  </SharedSolutionTemplateManager>
+</Configuration>

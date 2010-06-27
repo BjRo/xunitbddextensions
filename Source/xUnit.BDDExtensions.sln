@@ -2,9 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{3131532E-C2BB-45E2-88DA-BA2F6BF971CF}"
-	ProjectSection(SolutionItems) = preProject
-		GlobalAssemblyInfo.cs = GlobalAssemblyInfo.cs
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions", "xUnit.BDDExtensions\xUnit.BDDExtensions.csproj", "{01CCC787-B3E5-4D4F-917A-950E276EC3E0}"
 EndProject
@@ -15,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.Reporting.Specs", "xUnit.BDDExtensions.Reporting.Specs\xUnit.BDDExtensions.Reporting.Specs.csproj", "{345F602A-056A-49B6-BFAB-D1B32E1C4AF8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.MVC", "xUnit.BDDExtensions.MVC\xUnit.BDDExtensions.MVC.csproj", "{03064663-AC5C-4C0A-9E53-FD6C35A0D355}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.MVC.Specs", "xUnit.BDDExtensions.MVC.Specs\xUnit.BDDExtensions.MVC.Specs.csproj", "{3DC4AF92-82DE-4BBF-A585-599E6E7E7A51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +41,10 @@ Global
 		{03064663-AC5C-4C0A-9E53-FD6C35A0D355}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03064663-AC5C-4C0A-9E53-FD6C35A0D355}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03064663-AC5C-4C0A-9E53-FD6C35A0D355}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DC4AF92-82DE-4BBF-A585-599E6E7E7A51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DC4AF92-82DE-4BBF-A585-599E6E7E7A51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DC4AF92-82DE-4BBF-A585-599E6E7E7A51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DC4AF92-82DE-4BBF-A585-599E6E7E7A51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
