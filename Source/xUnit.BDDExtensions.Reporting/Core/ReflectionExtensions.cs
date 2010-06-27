@@ -45,9 +45,38 @@ namespace Xunit.Reporting.Core
         public static TAttribute GetFirstAttribute<TAttribute>(this MemberInfo info)
         {
             return info
-                .GetCustomAttributes(typeof (TAttribute), false)
-                .Select(attribute => (TAttribute) attribute)
+                .GetAllCustomAttributes<TAttribute>()
                 .FirstOrDefault();
+        }
+
+        private static IEnumerable<TAttribute> GetAllCustomAttributes<TAttribute>(this MemberInfo info)
+        {
+            foreach (var memberInfo in info.GetAllMemberInfos())
+            {
+                foreach (var attribute in memberInfo.GetCustomAttributes(typeof (TAttribute), false))
+                {
+                    yield return (TAttribute) attribute;
+                }
+            }
+        }
+
+        private static IEnumerable<MemberInfo> GetAllMemberInfos(this MemberInfo info)
+        {
+            var infos = new List<MemberInfo>();
+            Type type = info as Type;
+            while (type != null)
+            {
+                if (infos.Contains(type))
+                {
+                    break;
+                }
+                infos.Add(type);
+                type = type.BaseType;
+            }
+            if (!infos.Contains(info))
+                infos.Add(info);
+
+            return infos;
         }
 
         public static bool Implements<TInterface>(this Type type)

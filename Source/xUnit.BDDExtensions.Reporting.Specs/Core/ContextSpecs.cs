@@ -40,6 +40,28 @@ namespace Xunit.Reporting.Specs.Core
         }
     }
 
+    [Concern(typeof(Context))]
+    public class When_building_a_context_from_a_derived_context_type : StaticContextSpecification
+    {
+        private Context context;
+
+        protected override void Because()
+        {
+            context = Context.BuildFrom(typeof(Foo_bar_derived_concern));
+        }
+
+        [Observation]
+        public void Should_create_a_context()
+        {
+            context.ShouldNotBeNull();
+        }
+
+        [Observation]
+        public void Should_create_observations_for_all_public_methods_marked_with_the__ObservationAttribute__()
+        {
+            context.Count().ShouldBeEqualTo(2);
+        }
+    }
     [Concern(typeof(Observation))]
     public class After_creating_a_readable_representation_of_a__Context__ : StaticContextSpecification
     {

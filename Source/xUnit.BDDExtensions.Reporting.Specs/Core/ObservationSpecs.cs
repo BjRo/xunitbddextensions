@@ -36,6 +36,23 @@ namespace Xunit.Reporting.Specs.Core
         }
     }
 
+    [Concern(typeof(Observation))]
+    public class When_building_observations_from_a_valid_derviced_type : StaticContextSpecification
+    {
+        private IEnumerable<Observation> createdObservations;
+
+        protected override void Because()
+        {
+            createdObservations = Observation.BuildAllFrom(typeof(Foo_bar_derived_concern));
+        }
+
+        [Observation]
+        public void Should_create_observations_for_all_public_methods_marked_with_the__ObservationAttribute__()
+        {
+            createdObservations.Count().ShouldBeEqualTo(2);
+        }
+    }
+
     [Concern(typeof (Observation))]
     public class When_building_observations_from_a_type_without_marked_methods : StaticContextSpecification
     {

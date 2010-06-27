@@ -26,4 +26,13 @@ namespace Xunit.Reporting.Specs.Core
         {
         }
     }
+
+    public class Foo_bar_derived_concern: After_this__fake__specification_has_been_executed
+    {
+        [Observation]
+        public void Just_for_nothing()
+        {
+            
+        }
+    }
 }
