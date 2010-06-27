@@ -27,7 +27,7 @@ namespace Xunit
         {
             HttpContext.Current = new HttpContext(new HttpRequest("/", "http://localhost/", ""),
                                                   new HttpResponse(TextWriter.Null));
-            var viewContext = new ViewContext { HttpContext = context.Context };
+            var viewContext = new ViewContext {HttpContext = context.Context};
             var htmlHelper = new HtmlHelper(viewContext, MockRepository.GenerateStub<IViewDataContainer>());
             var str = htmlHelper.AntiForgeryToken().ToHtmlString();
             var name = GetValue(str, "name");
@@ -49,7 +49,8 @@ namespace Xunit
             return context;
         }
 
-        public static IMockedRequestContext Model(this IMockedRequestContext context, object model, string parameterName)
+        public static IMockedRequestContext SerializeModelToForm(this IMockedRequestContext context, object model,
+                                                                 string parameterName)
         {
             var properties = model.GetType().GetProperties();
             foreach (var propertyInfo in properties)
@@ -64,6 +65,5 @@ namespace Xunit
             }
             return context;
         }
-
     }
 }

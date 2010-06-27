@@ -61,7 +61,8 @@
     <Compile Include="ActionResultExtensions\RedirectToRouteResultExtensions.cs" />
     <Compile Include="ActionResultExtensions\ViewResultExtensions.cs" />
     <Compile Include="ControllerContextSpecification.cs" />
-    <Compile Include="ControllerInvokerBuilder.cs" />
+    <Compile Include="ControllerActionInvokerBuilder.cs" />
+    <Compile Include="ControllerActionInvokerBuilderExtensions.cs" />
     <Compile Include="MvcExpressionHelper.cs" />
     <Compile Include="IMockedRequestContext.cs" />
     <Compile Include="IMockedRequestContextExtensions.cs" />

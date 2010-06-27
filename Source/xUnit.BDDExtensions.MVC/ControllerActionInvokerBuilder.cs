@@ -18,14 +18,14 @@ using System.Web.Mvc;
 
 namespace Xunit
 {
-    public class ControllerInvokerBuilder
+    public class ControllerActionInvokerBuilder
     {
         private Expression actionExpression;
         private Controller controller;
         private readonly RequestContextBuilder contextBuilder;
         private readonly ITestActionInvoker actionInvoker;
 
-        public ControllerInvokerBuilder(IDependencyAccessor dependencyAccessor, ITestActionInvoker actionInvoker)
+        public ControllerActionInvokerBuilder(IDependencyAccessor dependencyAccessor, ITestActionInvoker actionInvoker)
         {
             contextBuilder=new RequestContextBuilder(dependencyAccessor);
             this.actionInvoker = actionInvoker;
@@ -36,13 +36,13 @@ namespace Xunit
             get { return contextBuilder; }
         }
 
-        public ControllerInvokerBuilder Action<T,TResult>(Expression<Func<T, TResult>> expression) where T:Controller
+        public ControllerActionInvokerBuilder Action<T,TResult>(Expression<Func<T, TResult>> expression) where T:Controller
         {
             actionExpression = expression;
             return this;
         }
 
-        public static implicit operator ActionResult(ControllerInvokerBuilder builder)
+        public static implicit operator ActionResult(ControllerActionInvokerBuilder builder)
         {
             return (ActionResult) builder.Execute();
         }
@@ -75,17 +75,17 @@ namespace Xunit
 
             foreach (var parameterName in parameterNames)
             {
-                contextBuilder.Model(MvcExpressionHelper.GetParameterValue(actionExpression, parameterName), parameterName);
+                contextBuilder.SerializeModelToForm(MvcExpressionHelper.GetParameterValue(actionExpression, parameterName), parameterName);
             }
         }
 
-        public ControllerInvokerBuilder Role(string role)
+        public ControllerActionInvokerBuilder Role(string role)
         {
             contextBuilder.Role(role);
             return this;
         }
 
-        public ControllerInvokerBuilder Controller(Controller controllerUnderTest)
+        public ControllerActionInvokerBuilder Controller(Controller controllerUnderTest)
         {
             controller = controllerUnderTest;
             return this;

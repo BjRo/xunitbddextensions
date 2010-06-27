@@ -22,7 +22,7 @@ namespace Xunit
         where T : Controller
     {
         protected ActionResult Result;
-        private ControllerInvokerBuilder invokerBuilder;
+        private ControllerActionInvokerBuilder invokerBuilder;
 
         protected ViewResult ViewResult
         {
@@ -35,19 +35,19 @@ namespace Xunit
             invokerBuilder = CreateTestActionInvoker();
         }
 
-        protected virtual ControllerInvokerBuilder CreateTestActionInvoker()
+        protected virtual ControllerActionInvokerBuilder CreateTestActionInvoker()
         {
-            return new ControllerInvokerBuilder(this, new TestControllerActionInvoker());
+            return new ControllerActionInvokerBuilder(this, new TestControllerActionInvoker());
         }
 
-        protected ControllerInvokerBuilder InvokeAction<TResult>(Expression<Func<T, TResult>> expression)
+        protected ControllerActionInvokerBuilder InvokeAction<TResult>(Expression<Func<T, TResult>> expression)
         {
             invokerBuilder.Controller(Sut).Action(expression);
             return invokerBuilder;
         }
 
 
-        protected ControllerInvokerBuilder InvokePostAction<TResult>(Expression<Func<T, TResult>> expression)
+        protected ControllerActionInvokerBuilder InvokePostAction<TResult>(Expression<Func<T, TResult>> expression)
         {
             invokerBuilder.Controller(Sut).Action(expression).RequestContext.HttpMethod("POST").AntiForgeryToken();
             return invokerBuilder;
