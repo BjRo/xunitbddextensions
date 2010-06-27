@@ -4,7 +4,7 @@ properties {
   $build_dir = "$base_dir\Build" 
   $buildartifacts_dir = "$build_dir\" 
   $sln_file = "$base_dir\Source\xUnit.BDDExtensions.sln" 
-  $version = "1.0.2.11"
+  $version = "1.0.2.12"
   $tools_dir = "$base_dir\Tools"
   $release_dir = "$base_dir\Release"
 } 
@@ -39,6 +39,7 @@ task Compile -depends Init {
 task Test -depends Compile {
   exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Specs.dll }
   exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Reporting.Specs.dll }
+  exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.MVC.Specs.dll }
 }
 
 task Merge {
@@ -88,10 +89,10 @@ task Merge {
 }
 
 task Docu -depends Test, Merge {
-   exec { & $build_dir\ReportGenerator.exe /generator:HTML /assembly:'$build_dir\xUnit.BDDExtensions.Specs.dll' /assembly:'$build_dir\xUnit.BDDExtensions.Reporting.Specs.dll' }
+   exec { & $build_dir\ReportGenerator.exe /generator:HTML /assembly:'$build_dir\xUnit.BDDExtensions.Specs.dll' /assembly:'$build_dir\xUnit.BDDExtensions.Reporting.Specs.dll' /assembly:'$build_dir\xUnit.BDDExtensions.MVC.Specs.dll' }
 }
 
-task Release -depends Test, Merge {
+task Release -depends Test, Merge, Docu {
     
     exec {
     
