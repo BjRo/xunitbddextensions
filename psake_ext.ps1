@@ -1,9 +1,18 @@
 function Get-Git-Commit
 {
 	$gitLog = git log --oneline -1
-	return $gitLog.Split(' ')[0]
+	$tmpString = $gitLog.Split('m') 
+	$index = 0
+	if ($tmpString.Length -gt 2)
+	{
+		$index=1
+	} else 
+	{
+		$tmpString = $gitLog.Split('') 
+	}
+		
+	return $tmpString[$index].SubString(0,6)
 }
-
 function Generate-Assembly-Info
 {
 param(
@@ -32,6 +41,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersionAttribute(""$version / $commit"")]
 [assembly: AssemblyFileVersionAttribute(""$version"")]
 [assembly: AssemblyDelaySignAttribute(false)]
+
 "
 
 	$dir = [System.IO.Path]::GetDirectoryName($file)
