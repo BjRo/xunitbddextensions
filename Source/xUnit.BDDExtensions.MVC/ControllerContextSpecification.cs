@@ -29,10 +29,16 @@ namespace Xunit
             get { return (ViewResult) Result; }
         }
 
-        protected override void PrepareSut()
+        protected override void EstablishContext()
         {
-            base.PrepareSut();
+            base.EstablishContext();
             invokerBuilder = CreateTestActionInvoker();
+            PrepareRequestContext(invokerBuilder.RequestContext);
+        }
+
+        protected virtual void PrepareRequestContext(IMockedRequestContext requestContext)
+        {
+            
         }
 
         protected virtual ControllerActionInvokerBuilder CreateTestActionInvoker()
