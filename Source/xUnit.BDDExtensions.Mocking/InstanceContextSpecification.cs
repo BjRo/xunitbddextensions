@@ -12,10 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
-using System;
-using System.Collections.Generic;
-using Rhino.Mocks;
-
 namespace Xunit
 {
     /// <summary>
@@ -30,7 +26,7 @@ namespace Xunit
         /// <summary>
         /// Creates a new instance of the <see cref="InstanceContextSpecification{TSystemUnderTest}"/>.
         /// </summary>
-        protected InstanceContextSpecification() : base(new RhinoAutoMocker<TSystemUnderTest>())
+        protected InstanceContextSpecification() : base(new RhinoMocksFactory())
         {
         }
     }

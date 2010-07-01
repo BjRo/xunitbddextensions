@@ -69,17 +69,17 @@
     <Compile Include="PropertyStubs\IPropertyAdapter.cs" />
     <Compile Include="PropertyStubs\IPropertyStubRule.cs" />
     <Compile Include="PropertyStubs\TerminalStubRule.cs" />
-    <Compile Include="RhinoAutoMocker.cs" />
     <Compile Include="RhinoMocksExtensions.cs" />
+    <Compile Include="RhinoMocksFactory.cs" />
     <Compile Include="StaticContextSpecification.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\xUnit.BDDExtensions\Core.csproj">
+    <ProjectReference Include="..\xUnit.BDDExtensions\xUnit.BDDExtensions.csproj">
       <Project>{01CCC787-B3E5-4D4F-917A-950E276EC3E0}</Project>
-      <Name>Core</Name>
+      <Name>xUnit.BDDExtensions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

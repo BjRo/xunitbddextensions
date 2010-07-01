@@ -12,18 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
-namespace Xunit
+using System;
+
+namespace Xunit.Internal
 {
     /// <summary>
-    /// Base class for specifications.
+    /// A helper class for argument checking.
     /// </summary>
-    public abstract class StaticContextSpecification : StaticContextSpecificationBase
+    public class Guard
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="StaticContextSpecification"/> class.
+        /// Throws an <see cref="ArgumentNullException"/> in case the 
+        /// argument specified via <paramref name="argument"/> is <c>null</c>.
         /// </summary>
-        protected StaticContextSpecification() : base(new RhinoMocksFactory())
+        /// <param name="argument">Specifies the argument</param>
+        /// <param name="argumentName">Specifies the arguments name.</param>
+        public static void AgainstArgumentNull(object argument, string argumentName)
         {
+            if (argument == null)
+            {
+                throw new ArgumentNullException(argumentName);
+            }
         }
     }
 }

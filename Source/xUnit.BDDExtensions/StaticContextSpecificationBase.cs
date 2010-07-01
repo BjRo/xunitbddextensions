@@ -14,6 +14,7 @@
 // 
 using System;
 using System.Collections.Generic;
+using Xunit.Internal;
 
 namespace Xunit
 {
@@ -22,22 +23,22 @@ namespace Xunit
     /// </summary>
     public abstract class StaticContextSpecificationBase : ISpecification
     {
-        private readonly IStubFactory _stubFactory;
+        private readonly IMockFactory _mockFactory;
 
         /// <summary>
         /// Creates a new instance of the <see cref="StaticContextSpecificationBase"/> class.
         /// </summary>
-        /// <param name="stubFactory">
+        /// <param name="mockFactory">
         /// Specifies the stub engine used for creating dynamic stub instances on the fly.
         /// </param>
-        protected StaticContextSpecificationBase(IStubFactory stubFactory)
+        protected StaticContextSpecificationBase(IMockFactory mockFactory)
         {
-            if (stubFactory == null)
+            if (mockFactory == null)
             {
-                throw new ArgumentNullException("stubFactory");
+                throw new ArgumentNullException("mockFactory");
             }
 
-            _stubFactory = stubFactory;
+            _mockFactory = mockFactory;
         }
 
         #region ISpecification Members
@@ -61,8 +62,6 @@ namespace Xunit
 
         #endregion
 
-        #region Hooks
-
         /// <summary>
         /// Establishes the context for the specification. In AAA terms this 
         /// method implements the Arange part.
@@ -84,10 +83,6 @@ namespace Xunit
         {
         }
 
-        #endregion
-
-        #region Shortcuts
-
         /// <summary>
         /// Creates a dependency of the type specified by <typeparamref name="TInterfaceType"/>.
         /// </summary>
@@ -99,7 +94,7 @@ namespace Xunit
         /// </returns>
         protected TInterfaceType An<TInterfaceType>() where TInterfaceType : class
         {
-            return _stubFactory.CreateStub<TInterfaceType>();
+            return _mockFactory.Stub<TInterfaceType>();
         }
 
         /// <summary>
@@ -113,9 +108,7 @@ namespace Xunit
         /// </returns>
         protected IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
         {
-            return _stubFactory.CreateStubCollectionOf<TInterfaceType>();
+            return _mockFactory.CreateStubCollectionOf<TInterfaceType>();
         }
-
-        #endregion
     }
 }

@@ -1,4 +1,4 @@
-// Copyright 2010 Bj�rn Rochel - http://www.bjro.de/ 
+﻿// Copyright 2010 Björn Rochel - http://www.bjro.de/ 
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,18 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
-namespace Xunit
+namespace Xunit.Internal
 {
     /// <summary>
-    /// Base class for specifications.
+    /// A configuration rule which can be applied to a created instance.
     /// </summary>
-    public abstract class StaticContextSpecification : StaticContextSpecificationBase
+    public interface IConfigurationRule
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="StaticContextSpecification"/> class.
+        /// Configures the instance.
         /// </summary>
-        protected StaticContextSpecification() : base(new RhinoMocksFactory())
-        {
-        }
+        void Configure(object instance, FabricContext context);
     }
 }

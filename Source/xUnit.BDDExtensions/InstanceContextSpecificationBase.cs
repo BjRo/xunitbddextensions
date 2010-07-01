@@ -1,4 +1,4 @@
-// Copyright 2009 Björn Rochel - http://www.bjro.de/ 
+// Copyright 2010 Björn Rochel - http://www.bjro.de/ 
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
 // 
 using System;
 using System.Collections.Generic;
+using Xunit.Internal;
 
 namespace Xunit
 {
@@ -26,32 +27,88 @@ namespace Xunit
     /// </typeparam>
     public abstract class InstanceContextSpecificationBase<TSystemUnderTest> : ISpecification, IDependencyAccessor where TSystemUnderTest : class
     {
-        private readonly IAutoStubber<TSystemUnderTest> _autoStubContainer;
+        private readonly AutoMockingContainer<TSystemUnderTest> _autoMockingContainer;
         private readonly List<IBehaviorConfig> _behaviors = new List<IBehaviorConfig>();
 
         /// <summary>
         /// Creats a new instance of the <see cref="InstanceContextSpecificationBase{TSystemUnderTest}"/>.
         /// </summary>
-        /// <param name="autoStubContainer">
+        /// <param name="mockFactory">
         /// The auto stub container.
         /// </param>
-        protected InstanceContextSpecificationBase(IAutoStubber<TSystemUnderTest> autoStubContainer)
+        protected InstanceContextSpecificationBase(IMockFactory mockFactory)
         {
-            if (autoStubContainer == null)
-            {
-                throw new ArgumentNullException("autoStubContainer");
-            }
+            Guard.AgainstArgumentNull(mockFactory, "mockFactory");
 
-            _autoStubContainer = autoStubContainer;
+            _autoMockingContainer = new AutoMockingContainer<TSystemUnderTest>(mockFactory);
         }
 
-        
         /// <summary>
         /// Gets the system under test. This is the actual class under test.
         /// </summary>
         protected TSystemUnderTest Sut { get; private set; }
 
-        #region ISpecification Members
+        /// <summary>
+        /// Creates a dependency of the type specified by <typeparamref name="TInterfaceType"/>.
+        /// This method reuses existing instances. If an instance of <typeparamref name="TInterfaceType"/>
+        /// was already requested it's returned here. (You can say this is kind of a singleton behavior)
+        /// 
+        /// Besides that, you can obtain a reference to automatically injected stubs with this 
+        /// method.
+        /// </summary>
+        /// <typeparam name="TInterfaceType">
+        /// The type to create a dependency for. (Should be an interface)
+        /// </typeparam>
+        /// <returns>
+        /// An instance implementing <see cref="TInterfaceType"/>.
+        /// </returns>
+        public TInterfaceType The<TInterfaceType>() where TInterfaceType : class
+        {
+            return _autoMockingContainer.Service<TInterfaceType>();
+        }
+
+        /// <summary>
+        /// Creates a dependency of the type specified by <typeparamref name="TInterfaceType"/>.
+        /// </summary>
+        /// <typeparam name="TInterfaceType">
+        /// The type to create a dependency for. (Should be an interface)
+        /// </typeparam>
+        /// <returns>
+        /// An newly created instance implementing <typeparamref name="TInterfaceType"/>.
+        /// </returns>
+        public TInterfaceType An<TInterfaceType>() where TInterfaceType : class
+        {
+            return _autoMockingContainer.Stub<TInterfaceType>();
+        }
+
+        /// <summary>
+        /// Creates a list of dependencies of the type specified by <typeparamref name="TInterfaceType"/>.
+        /// </summary>
+        /// <typeparam name="TInterfaceType">
+        /// Specifies the dependency type. (Should be an interface).
+        /// </typeparam>
+        /// <returns>
+        /// An newly created instance implementing <typeparamref name="TInterfaceType"/>.
+        /// </returns>
+        public IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
+        {
+            return _autoMockingContainer.CreateStubCollectionOf<TInterfaceType>();
+        }
+
+        /// <summary>
+        /// Uses the instance supplied by <paramref name="instance"/> during the 
+        /// creation of the sut. The specified instance will be injected into the constructor.
+        /// </summary>
+        /// <typeparam name="TInterfaceType">
+        /// Specifies the interface type.
+        /// </typeparam>
+        /// <param name="instance">
+        /// Specifies the instance to be used for the specification.
+        /// </param>
+        public void Use<TInterfaceType>(TInterfaceType instance) where TInterfaceType : class
+        {
+            _autoMockingContainer.Inject(typeof(TInterfaceType), instance);
+        }
 
         /// <summary>
         /// Initializes the specification class.
@@ -75,10 +132,6 @@ namespace Xunit
             AfterEachObservation();
         }
 
-        #endregion
-
-        #region Hooks
-
         /// <summary>
         /// Establishes the context for the specification. In AAA terms this 
         /// method implements the Arange part.
@@ -95,7 +148,7 @@ namespace Xunit
         /// </returns>
         protected virtual TSystemUnderTest CreateSut()
         {
-            return _autoStubContainer.BuildInstance();
+            return _autoMockingContainer.ClassUnderTest;
         }
 
         /// <summary>
@@ -120,10 +173,6 @@ namespace Xunit
         {
         }
 
-        #endregion
-
-        #region Spec helpers
-
         /// <summary>
         /// Configures the specification to execute the <see cref="IBehaviorConfig"/> specified
         /// by <typeparamref name="TBehaviorConfig"/> before the action on the sut is executed (<see cref="Because"/>).
@@ -145,76 +194,9 @@ namespace Xunit
         /// </param>
         protected void With(IBehaviorConfig behaviorConfig)
         {
-            if (behaviorConfig == null)
-            {
-                throw new ArgumentNullException("behaviorConfig");
-            }
+            Guard.AgainstArgumentNull(behaviorConfig, "behaviorConfig");
 
             _behaviors.Add(behaviorConfig);
         }
-
-        /// <summary>
-        /// Creates a dependency of the type specified by <typeparamref name="TInterfaceType"/>.
-        /// This method reuses existing instances. If an instance of <typeparamref name="TInterfaceType"/>
-        /// was already requested it's returned here. (You can say this is kind of a singleton behavior)
-        /// 
-        /// Besides that, you can obtain a reference to automatically injected stubs with this 
-        /// method.
-        /// </summary>
-        /// <typeparam name="TInterfaceType">
-        /// The type to create a dependency for. (Should be an interface)
-        /// </typeparam>
-        /// <returns>
-        /// An instance implementing <see cref="TInterfaceType"/>.
-        /// </returns>
-        public TInterfaceType The<TInterfaceType>() where TInterfaceType : class
-        {
-            return _autoStubContainer.GetSingleton<TInterfaceType>();
-        }
-
-        /// <summary>
-        /// Creates a dependency of the type specified by <typeparamref name="TInterfaceType"/>.
-        /// </summary>
-        /// <typeparam name="TInterfaceType">
-        /// The type to create a dependency for. (Should be an interface)
-        /// </typeparam>
-        /// <returns>
-        /// An newly created instance implementing <typeparamref name="TInterfaceType"/>.
-        /// </returns>
-        public TInterfaceType An<TInterfaceType>() where TInterfaceType : class
-        {
-            return _autoStubContainer.CreateStub<TInterfaceType>();
-        }
-
-        /// <summary>
-        /// Creates a list of dependencies of the type specified by <typeparamref name="TInterfaceType"/>.
-        /// </summary>
-        /// <typeparam name="TInterfaceType">
-        /// Specifies the dependency type. (Should be an interface).
-        /// </typeparam>
-        /// <returns>
-        /// An newly created instance implementing <typeparamref name="TInterfaceType"/>.
-        /// </returns>
-        public IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
-        {
-            return _autoStubContainer.CreateStubCollectionOf<TInterfaceType>();
-        }
-
-        /// <summary>
-        /// Uses the instance supplied by <paramref name="instance"/> during the 
-        /// creation of the sut. The specified instance will be injected into the constructor.
-        /// </summary>
-        /// <typeparam name="TInterfaceType">
-        /// Specifies the interface type.
-        /// </typeparam>
-        /// <param name="instance">
-        /// Specifies the instance to be used for the specification.
-        /// </param>
-        public void Use<TInterfaceType>(TInterfaceType instance) where TInterfaceType : class
-        {
-            _autoStubContainer.Inject(typeof(TInterfaceType), instance);
-        }
-
-        #endregion
     }
 }
