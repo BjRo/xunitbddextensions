@@ -52,7 +52,7 @@ task Merge {
     
      & $tools_dir\ILMerge\ILMerge.exe xUnit.BDDExtensions.Partial.dll `
         xUnit.BDDExtensions.Assertions.dll `
-        xUnit.BDDExtensions.Mocking.dll `
+        xUnit.BDDExtensions.Mocking.RhinoMocks.dll `
         StructureMap.dll `
         StructureMap.AutoMocking.dll `        Rhino.Mocks.dll `
         /out:xUnit.BDDExtensions.dll `

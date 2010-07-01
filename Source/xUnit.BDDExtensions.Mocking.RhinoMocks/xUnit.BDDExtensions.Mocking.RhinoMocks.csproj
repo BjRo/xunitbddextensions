@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Xunit</RootNamespace>
-    <AssemblyName>xUnit.BDDExtensions.Mocking</AssemblyName>
+    <AssemblyName>xUnit.BDDExtensions.Mocking.RhinoMocks</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

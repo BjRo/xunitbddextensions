@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.Reporti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.Assertions", "xUnit.BDDExtensions.Assertions\xUnit.BDDExtensions.Assertions.csproj", "{DEE9E6A5-E4CA-475E-9B3A-314C7C0C8E59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.Mocking.RhinoMocks", "xUnit.BDDExtensions.Mocking\xUnit.BDDExtensions.Mocking.RhinoMocks.csproj", "{BBF8D13E-313A-4A6F-B945-948252A655A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.Mocking.RhinoMocks", "xUnit.BDDExtensions.Mocking.RhinoMocks\xUnit.BDDExtensions.Mocking.RhinoMocks.csproj", "{BBF8D13E-313A-4A6F-B945-948252A655A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
