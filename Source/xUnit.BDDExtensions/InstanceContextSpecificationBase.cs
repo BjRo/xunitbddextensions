@@ -64,7 +64,7 @@ namespace Xunit
         /// </returns>
         public TInterfaceType The<TInterfaceType>() where TInterfaceType : class
         {
-            return _autoMockingContainer.Service<TInterfaceType>();
+            return _autoMockingContainer.Get<TInterfaceType>();
         }
 
         /// <summary>
