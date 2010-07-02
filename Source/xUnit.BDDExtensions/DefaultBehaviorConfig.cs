@@ -11,25 +11,21 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-// 
+//
+using System;
+
 namespace Xunit
 {
     /// <summary>
-    /// A base class for behavior configurations with a focus on
-    /// SUT preparations.
+    /// Helper base class for implementing <see cref="IBehaviorConfig"/>.
     /// </summary>
-    /// <typeparam name="TSut">
-    /// Specifies the type of the sut.
-    /// </typeparam>
-    public abstract class BehaviorConfig<TSut> : IBehaviorConfig
+    public abstract class DefaultBehaviorConfig : IBehaviorConfig
     {
         /// <summary>
         /// Uses the accessor specified by <paramref name="accessor"/> in order to configure some behavior on dependencies
         /// of the system under test. This is called before the system under test has been created.
         /// </summary>
-        /// <param name="accessor">
-        /// Specifies the accessor for accessing dependencies of the SUT.
-        /// </param>
+        /// <param name="accessor">Specifies the accessor for accessing dependencies of the SUT.</param>
         public virtual void EstablishContext(IDependencyAccessor accessor)
         {
         }
@@ -37,22 +33,17 @@ namespace Xunit
         /// <summary>
         /// Does some preparation of the sut itself (e.g. adding some elements to container like structures)
         /// </summary>
-        /// <param name="sut">
-        /// Specifies the sut.
-        /// </param>
-        public void PrepareSut(object sut)
+        /// <param name="sut">Specifies the sut.</param>
+        public virtual void PrepareSut(object sut)
         {
-            OnPrepareSut((TSut) sut);
         }
 
         /// <summary>
-        /// Is called in order to prepare some state in the SUT.
+        /// Performs some cleanup operation on the sut.
         /// </summary>
-        /// <param name="sut">
-        /// Specifies the system under test.
-        /// </param>
-        protected virtual void OnPrepareSut(TSut sut)
-        {            
+        /// <param name="sut">Specifies the sut.</param>
+        public virtual void Cleanup(object sut)
+        {
         }
     }
 }

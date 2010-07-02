@@ -35,5 +35,13 @@ namespace Xunit
         /// Specifies the sut.
         /// </param>
         void PrepareSut(object sut);
+
+        /// <summary>
+        /// Performs some cleanup operation on the sut.
+        /// </summary>
+        /// <param name="sut">
+        /// Specifies the sut.
+        /// </param>
+        void Cleanup(object sut);
     }
 }
