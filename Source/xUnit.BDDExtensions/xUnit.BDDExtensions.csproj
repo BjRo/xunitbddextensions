@@ -76,8 +76,8 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="DefaultBehaviorConfig.cs" />
     <Compile Include="Internal\AutoMockingContainer.cs" />
-    <Compile Include="BehaviorConfigOfTSut.cs" />
     <Compile Include="Internal\FabricContext.cs" />
     <Compile Include="ConcernAttribute.cs" />
     <Compile Include="Internal\DefaultBuilder.cs" />

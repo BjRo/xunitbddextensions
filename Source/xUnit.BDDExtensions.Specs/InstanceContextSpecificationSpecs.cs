@@ -1,4 +1,4 @@
-// Copyright 2009 Björn Rochel - http://www.bjro.de/ 
+// Copyright 2010 Björn Rochel - http://www.bjro.de/ 
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ namespace Xunit.Specs
         }
 
         protected override void Because()
-        {
+       { 
             _accessor = _configuration.Accessor;
         }
 
@@ -192,6 +192,10 @@ namespace Xunit.Specs
         public void PrepareSut(object sut)
         {
             
+        }
+
+        public void Cleanup(object sut)
+        {
         }
     }
 
