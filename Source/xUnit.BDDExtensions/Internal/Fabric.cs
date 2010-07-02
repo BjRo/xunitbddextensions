@@ -69,9 +69,18 @@ namespace Xunit.Internal
 
             var buildContext = new FabricContext(typeToBuild, mockFactory, container, this);
 
-            var stub = _builders
-                .FirstOrDefault(x => x.KnowsHowToBuild(buildContext.TypeToBuild))
-                .BuildFrom(buildContext);
+            var responsibleBuilder = _builders.FirstOrDefault(x => x.KnowsHowToBuild(buildContext.TypeToBuild));
+
+            if (responsibleBuilder == null)
+            {
+                throw new InvalidOperationException(
+                    string.Format("Unable to build ctor dependency of type {0}." + Environment.NewLine +
+                                 "Make sure to use only interfaces or abstract base classes in the constructor!", typeToBuild.FullName));
+            }
+
+            var stub = responsibleBuilder.BuildFrom(buildContext);
+
+            Guard.AgainstArgumentNull(stub, "stub");
 
             _configurationRules.Each(x => x.Configure(stub, buildContext));
 

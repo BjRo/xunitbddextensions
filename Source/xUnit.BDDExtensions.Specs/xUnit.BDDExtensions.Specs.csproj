@@ -85,6 +85,7 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Automocking_a_class_with_an_abstract_ctor_dependency.cs" />
     <Compile Include="CollectionStubSpecs.cs" />
     <Compile Include="EventRaiserExtensionsSpec.cs" />
     <Compile Include="InstanceContextSpecificationSpecs.cs" />

@@ -18,7 +18,7 @@ using System.Collections;
 namespace Xunit.Internal
 {
     /// <summary>
-    /// A <see cref="IBuilder"/> implementation for standard interface types.
+    /// A <see cref="IBuilder"/> implementation for standard interface + abstract class types.
     /// </summary>
     public class DefaultBuilder : IBuilder
     {
@@ -33,7 +33,7 @@ namespace Xunit.Internal
         /// </returns>
         public bool KnowsHowToBuild(Type type)
         {
-            return type.IsInterface && !typeof(IEnumerable).IsAssignableFrom(type);
+            return (type.IsInterface && !typeof(IEnumerable).IsAssignableFrom(type)) || (type.IsClass && type.IsAbstract);
         }
 
         /// <summary>

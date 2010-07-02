@@ -22,7 +22,7 @@ namespace Xunit.Internal
     /// found in the constructor of the type specified via <typeparamref name="TTargetClass"/>.
     /// </summary>
     /// <typeparam name = "TTargetClass">The concrete class being tested</typeparam>
-    internal sealed class AutoMockingContainer<TTargetClass> :
+    public sealed class AutoMockingContainer<TTargetClass> :
         AutoMocker<TTargetClass>,
         ServiceLocator,
         IMockFactory where TTargetClass : class
