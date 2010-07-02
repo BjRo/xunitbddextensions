@@ -1,4 +1,4 @@
-// Copyright 2009 Björn Rochel - http://www.bjro.de/ 
+// Copyright 2010 Björn Rochel - http://www.bjro.de/ 
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 // 
 using System;
 using System.Collections.Generic;
-using Rhino.Mocks;
+using Xunit.Internal;
 
 namespace Xunit
 {
@@ -25,18 +25,28 @@ namespace Xunit
     /// <typeparam name="TSystemUnderTest">
     /// Specifies the type of the system under test.
     /// </typeparam>
-    public abstract class InstanceContextSpecification<TSystemUnderTest> : ISpecification, IDependencyAccessor
-        where TSystemUnderTest : class
+    public abstract class InstanceContextSpecificationBase<TSystemUnderTest> : ISpecification, IDependencyAccessor where TSystemUnderTest : class
     {
+        private readonly AutoMockingContainer<TSystemUnderTest> _autoMockingContainer;
         private readonly List<IBehaviorConfig> _behaviors = new List<IBehaviorConfig>();
-        private RhinoAutoMocker<TSystemUnderTest> _autoMockingContainer;
+
+        /// <summary>
+        /// Creats a new instance of the <see cref="InstanceContextSpecificationBase{TSystemUnderTest}"/>.
+        /// </summary>
+        /// <param name="mockFactory">
+        /// The auto stub container.
+        /// </param>
+        protected InstanceContextSpecificationBase(IMockFactory mockFactory)
+        {
+            Guard.AgainstArgumentNull(mockFactory, "mockFactory");
+
+            _autoMockingContainer = new AutoMockingContainer<TSystemUnderTest>(mockFactory);
+        }
 
         /// <summary>
         /// Gets the system under test. This is the actual class under test.
         /// </summary>
         protected TSystemUnderTest Sut { get; private set; }
-
-        #region IDependencyAccessor Members
 
         /// <summary>
         /// Creates a dependency of the type specified by <typeparamref name="TInterfaceType"/>.
@@ -68,7 +78,7 @@ namespace Xunit
         /// </returns>
         public TInterfaceType An<TInterfaceType>() where TInterfaceType : class
         {
-            return MockRepository.GenerateStub<TInterfaceType>();
+            return _autoMockingContainer.Stub<TInterfaceType>();
         }
 
         /// <summary>
@@ -82,12 +92,7 @@ namespace Xunit
         /// </returns>
         public IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
         {
-            return new List<TInterfaceType>
-                       {
-                           An<TInterfaceType>(),
-                           An<TInterfaceType>(),
-                           An<TInterfaceType>()
-                       };
+            return _autoMockingContainer.CreateStubCollectionOf<TInterfaceType>();
         }
 
         /// <summary>
@@ -105,16 +110,11 @@ namespace Xunit
             _autoMockingContainer.Inject(typeof(TInterfaceType), instance);
         }
 
-        #endregion
-
-        #region ISpecification Members
-
         /// <summary>
         /// Initializes the specification class.
         /// </summary>
-        public void Initialize()
+        void ISpecification.Initialize()
         {
-            _autoMockingContainer = new RhinoAutoMocker<TSystemUnderTest>();
             EstablishContext();
             _behaviors.ForEach(x => x.EstablishContext(this));
             Sut = CreateSut();
@@ -126,41 +126,10 @@ namespace Xunit
         /// <summary>
         /// Cleans up the specification class.
         /// </summary>
-        public void Cleanup()
+        void ISpecification.Cleanup()
         {
             _behaviors.Clear();
             AfterEachObservation();
-        }
-
-        #endregion
-
-        /// <summary>
-        /// Configures the specification to execute the <see cref="IBehaviorConfig"/> specified
-        /// by <typeparamref name="TBehaviorConfig"/> before the action on the sut is executed (<see cref="Because"/>).
-        /// </summary>
-        /// <typeparam name="TBehaviorConfig">
-        /// Specifies the type of the config to be executed.
-        /// </typeparam>
-        protected void With<TBehaviorConfig>() where TBehaviorConfig : IBehaviorConfig, new()
-        {
-            With(new TBehaviorConfig());
-        }
-
-        /// <summary>
-        /// Configures the specification to execute the <see cref="IBehaviorConfig"/> specified
-        /// by <paramref name="behaviorConfig"/> before the action on the sut is executed (<see cref="Because"/>).
-        /// </summary>
-        /// <param name="behaviorConfig">
-        /// Specifies the behavior config to be executed.
-        /// </param>
-        protected void With(IBehaviorConfig behaviorConfig)
-        {
-            if (behaviorConfig == null)
-            {
-                throw new ArgumentNullException("behaviorConfig");
-            }
-
-            _behaviors.Add(behaviorConfig);
         }
 
         /// <summary>
@@ -202,6 +171,32 @@ namespace Xunit
         /// </summary>
         protected virtual void AfterEachObservation()
         {
+        }
+
+        /// <summary>
+        /// Configures the specification to execute the <see cref="IBehaviorConfig"/> specified
+        /// by <typeparamref name="TBehaviorConfig"/> before the action on the sut is executed (<see cref="Because"/>).
+        /// </summary>
+        /// <typeparam name="TBehaviorConfig">
+        /// Specifies the type of the config to be executed.
+        /// </typeparam>
+        protected void With<TBehaviorConfig>() where TBehaviorConfig : IBehaviorConfig, new()
+        {
+            With(new TBehaviorConfig());
+        }
+
+        /// <summary>
+        /// Configures the specification to execute the <see cref="IBehaviorConfig"/> specified
+        /// by <paramref name="behaviorConfig"/> before the action on the sut is executed (<see cref="Because"/>).
+        /// </summary>
+        /// <param name="behaviorConfig">
+        /// Specifies the behavior config to be executed.
+        /// </param>
+        protected void With(IBehaviorConfig behaviorConfig)
+        {
+            Guard.AgainstArgumentNull(behaviorConfig, "behaviorConfig");
+
+            _behaviors.Add(behaviorConfig);
         }
     }
 }

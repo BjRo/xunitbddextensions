@@ -16,11 +16,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 
 using Rhino.Mocks;
@@ -31,7 +27,7 @@ namespace Xunit
 {
     public static class PropertyStubExtensions
     {
-        private static readonly IPropertyStubRule[] rules = new IPropertyStubRule[]
+        private static readonly IPropertyStubRule[] Rules = new IPropertyStubRule[]
         {
             new CollectionPropertyStubRule(),
             new DefaultPropertyStubRule(),
@@ -54,12 +50,12 @@ namespace Xunit
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public)
                 .Select(property => new InfoPropertyAdapter<TMock>(mock, property))
                 .ToList()
-                .ForEach(adapter => StubProperty(adapter));
+                .ForEach(StubProperty);
         }
 
         private static void StubProperty(IPropertyAdapter property)
         {
-            rules
+            Rules
                 .First(x => x.CanStub(property.PropertyType))
                 .Stub(property);
         }

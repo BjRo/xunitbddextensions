@@ -12,32 +12,50 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
+using System;
 using System.Collections.Generic;
-using Rhino.Mocks;
+using Xunit.Internal;
 
 namespace Xunit
 {
     /// <summary>
     /// Base class for specifications.
     /// </summary>
-    public abstract class StaticContextSpecification : ISpecification
+    public abstract class StaticContextSpecificationBase : ISpecification
     {
+        private readonly IMockFactory _mockFactory;
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="StaticContextSpecificationBase"/> class.
+        /// </summary>
+        /// <param name="mockFactory">
+        /// Specifies the stub engine used for creating dynamic stub instances on the fly.
+        /// </param>
+        protected StaticContextSpecificationBase(IMockFactory mockFactory)
+        {
+            if (mockFactory == null)
+            {
+                throw new ArgumentNullException("mockFactory");
+            }
+
+            _mockFactory = mockFactory;
+        }
+
         #region ISpecification Members
 
         /// <summary>
         /// Initializes the specification class.
         /// </summary>
-        public void Initialize()
+        void ISpecification.Initialize()
         {
             EstablishContext();
-            InitializeSystemUnderTest();
             Because();
         }
 
         /// <summary>
         /// Cleans up the specification class.
         /// </summary>
-        public void Cleanup()
+        void ISpecification.Cleanup()
         {
             AfterEachObservation();
         }
@@ -59,13 +77,6 @@ namespace Xunit
         protected abstract void Because();
 
         /// <summary>
-        /// Initializes the system under test. Only the sut is created here.
-        /// </summary>
-        protected virtual void InitializeSystemUnderTest()
-        {
-        }
-
-        /// <summary>
         /// Is called after each observation. Can be used for cleanup.
         /// </summary>
         protected virtual void AfterEachObservation()
@@ -81,9 +92,9 @@ namespace Xunit
         /// <returns>
         /// An newly created instance implementing <typeparamref name="TInterfaceType"/>.
         /// </returns>
-        protected static TInterfaceType An<TInterfaceType>() where TInterfaceType : class
+        protected TInterfaceType An<TInterfaceType>() where TInterfaceType : class
         {
-            return MockRepository.GenerateStub<TInterfaceType>();
+            return _mockFactory.Stub<TInterfaceType>();
         }
 
         /// <summary>
@@ -95,14 +106,9 @@ namespace Xunit
         /// <returns>
         /// An newly created instance implementing <typeparamref name="TInterfaceType"/>.
         /// </returns>
-        protected static IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
+        protected IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
         {
-            return new List<TInterfaceType>
-            {
-                An<TInterfaceType>(),
-                An<TInterfaceType>(),
-                An<TInterfaceType>()
-            };
+            return _mockFactory.CreateStubCollectionOf<TInterfaceType>();
         }
     }
 }

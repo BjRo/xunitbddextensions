@@ -25,8 +25,8 @@ namespace Xunit
     /// </typeparam>
     public class MethodCallOccurance<TDependency>
     {
-        private readonly TDependency dependency;
-        public Action<TDependency> _action;
+        private readonly TDependency _dependency;
+        private readonly Action<TDependency> _action;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MethodCallOccurance&lt;TDependency&gt;"/> class.
@@ -35,9 +35,9 @@ namespace Xunit
         /// <param name="action">The action that should have been called.</param>
         public MethodCallOccurance(TDependency mock, Action<TDependency> action)
         {
-            dependency = mock;
+            _dependency = mock;
             _action = action;
-            dependency.AssertWasCalled(action, y => y.Repeat.AtLeastOnce());
+            _dependency.AssertWasCalled(action, y => y.Repeat.AtLeastOnce());
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Xunit
         /// </param>
         public void Times(int numberOfTimesTheMethodShouldHaveBeenCalled)
         {
-            dependency.AssertWasCalled(_action, y => y.Repeat.Times(numberOfTimesTheMethodShouldHaveBeenCalled));
+            _dependency.AssertWasCalled(_action, y => y.Repeat.Times(numberOfTimesTheMethodShouldHaveBeenCalled));
         }
 
         /// <summary>

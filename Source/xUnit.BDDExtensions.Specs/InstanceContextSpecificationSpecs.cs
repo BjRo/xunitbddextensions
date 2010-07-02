@@ -165,6 +165,25 @@ namespace Xunit.Specs
     }
 
     [Concern(typeof(InstanceContextSpecification<>))]
+    public class When_a_mock_instance_is_resolved_with_the_The_accessor : InstanceContextSpecification<object>
+    {
+        private IDependency _dependency;
+
+        protected override void Because()
+        {
+            _dependency = The<IDependency>();
+        }
+
+        [Observation]
+        public void Should_always_the_same_mock_resolved()
+        {
+            _dependency.ShouldBeTheSame(The<IDependency>());
+            _dependency.ShouldBeTheSame(The<IDependency>());
+            _dependency.ShouldBeTheSame(The<IDependency>());
+        }
+
+    }
+    [Concern(typeof(InstanceContextSpecification<>))]
     public class When_an_instance_with_two_dependencies_on_the_same_interface_type_is_resolved : InstanceContextSpecification<ClassWithTwoDependenciesOfTheSameType>
     {
         protected override void Because()

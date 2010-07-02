@@ -5,23 +5,29 @@ namespace Xunit.Specs
     [Concern(typeof (TestControllerActionInvoker))]
     public class When_the_actionresult_should_invoke : InstanceContextSpecification<TestControllerActionInvoker>
     {
-        private FakeTestControllerActionInvoker fakeInvoker;
+        private FakeTestControllerActionInvoker _fakeInvoker;
+        private ActionResult actionResult;
 
+        protected override void EstablishContext()
+        {
+            base.EstablishContext();
+            actionResult = An<ActionResult>();
+        }
         protected override TestControllerActionInvoker CreateSut()
         {
-            fakeInvoker = new FakeTestControllerActionInvoker();
-            return fakeInvoker;
+            _fakeInvoker = new FakeTestControllerActionInvoker();
+            return _fakeInvoker;
         }
 
         protected override void Because()
         {
-            fakeInvoker.FakeInvokeActionResult(An<ControllerContext>(), The<ActionResult>());
+            _fakeInvoker.FakeInvokeActionResult(An<ControllerContext>(), actionResult);
         }
 
         [Observation]
         public void Should_the_actionresult_in_the_result_property()
         {
-            Sut.Result.ShouldBeTheSame(The<ActionResult>());
+            Sut.Result.ShouldBeTheSame(actionResult);
         }
     }
 }

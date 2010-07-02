@@ -8,7 +8,7 @@ function Get-Git-Commit
 		$index=1
 	} else 
 	{
-		$tmpString = $gitLog.Split('') 
+		$tmpString = $gitLog.Split(' ') 
 	}
 		
 	return $tmpString[$index].SubString(0,6)

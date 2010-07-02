@@ -13,6 +13,7 @@
 // limitations under the License.
 // 
 using System.Collections.Generic;
+using System.Linq;
 using Xunit.Sdk;
 
 namespace Xunit
@@ -34,10 +35,7 @@ namespace Xunit
         /// </returns>
         protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
-            foreach (var command in base.EnumerateTestCommands(method))
-            {
-                yield return new SpecificationCommand(command, method);     
-            }
+            return base.EnumerateTestCommands(method).Select(command => new SpecificationCommand(command, method)).Cast<ITestCommand>();
         }
     }
 }

@@ -30,27 +30,27 @@ namespace Xunit.PropertyStubs
     internal class InfoPropertyAdapter<TMock> : IPropertyAdapter
         where TMock : class
     {
-        private readonly TMock mock;
-        private readonly PropertyInfo property;
+        private readonly TMock _mock;
+        private readonly PropertyInfo _property;
 
         public InfoPropertyAdapter(TMock mock, PropertyInfo property)
         {
-            this.mock = mock;
-            this.property = property;
+            this._mock = mock;
+            this._property = property;
         }
 
         public Type PropertyType
         {
-            get { return property.PropertyType; }
+            get { return _property.PropertyType; }
         }
 
         public void Stub(object propertyValue)
         {
             var actionParameter = Expression.Parameter(typeof(TMock), "x");
-            var propertyGetter = Expression.Property(actionParameter, property);
+            var propertyGetter = Expression.Property(actionParameter, _property);
             var action = Expression.Lambda<Action<TMock>>(propertyGetter, actionParameter);
 
-            mock.Stub(action.Compile()).Return(propertyValue);
+            _mock.Stub(action.Compile()).Return(propertyValue);
         }
     }
 }

@@ -52,10 +52,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\Rhino\Rhino.Mocks.dll</HintPath>
-    </Reference>
     <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\StructureMap\StructureMap.dll</HintPath>
@@ -80,30 +76,29 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BDDExtensions.cs" />
+    <Compile Include="Internal\AutoMockingContainer.cs" />
     <Compile Include="BehaviorConfigOfTSut.cs" />
+    <Compile Include="Internal\FabricContext.cs" />
     <Compile Include="ConcernAttribute.cs" />
-    <Compile Include="EventRaiserExtensions.cs" />
+    <Compile Include="Internal\DefaultBuilder.cs" />
+    <Compile Include="Internal\DefaultFabric.cs" />
+    <Compile Include="Internal\EnumerableBuilder.cs" />
+    <Compile Include="Internal\ExtensionMethods.cs" />
+    <Compile Include="Internal\Guard.cs" />
     <Compile Include="IBehaviorConfig.cs" />
     <Compile Include="IDependencyAccessor.cs" />
-    <Compile Include="InstanceContextSpecification.cs" />
-    <Compile Include="MethodCallOccurance.cs" />
-    <Compile Include="PropertyStubExtensions.cs" />
-    <Compile Include="PropertyStubs\CollectionPropertyStubRule.cs" />
-    <Compile Include="PropertyStubs\DefaultPropertyStubRule.cs" />
-    <Compile Include="PropertyStubs\FuncPropertyAdapter.cs" />
-    <Compile Include="PropertyStubs\InfoPropertyAdapter.cs" />
-    <Compile Include="PropertyStubs\IPropertyAdapter.cs" />
-    <Compile Include="PropertyStubs\IPropertyStubRule.cs" />
-    <Compile Include="PropertyStubs\TerminalStubRule.cs" />
-    <Compile Include="RhinoAutoMocker.cs" />
-    <Compile Include="ScopedContextSpecification.cs" />
-    <Compile Include="StaticContextSpecification.cs" />
+    <Compile Include="IMockFactory.cs" />
+    <Compile Include="InstanceContextSpecificationBase.cs" />
+    <Compile Include="Internal\IFabric.cs" />
+    <Compile Include="Internal\IFabricContext.cs" />
+    <Compile Include="Internal\IConfigurationRule.cs" />
+    <Compile Include="Internal\IBuilder.cs" />
+    <Compile Include="Internal\Fabric.cs" />
+    <Compile Include="StaticContextSpecificationBase.cs" />
+    <Compile Include="Internal\MockFactoryExtensions.cs" />
     <Compile Include="ISpecification.cs" />
     <Compile Include="ObservationAttribute.cs" />
-    <Compile Include="RhinoMocksExtensions.cs" />
     <Compile Include="SpecificationCommand.cs" />
-    <Compile Include="ExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
