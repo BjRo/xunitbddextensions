@@ -33,7 +33,7 @@ namespace Xunit.Internal
         /// </returns>
         public bool KnowsHowToBuild(Type type)
         {
-            return (type.IsInterface && !typeof(IEnumerable).IsAssignableFrom(type)) || (type.IsClass && type.IsAbstract);
+            return (type.IsAbstract && !typeof(IEnumerable).IsAssignableFrom(type));
         }
 
         /// <summary>
