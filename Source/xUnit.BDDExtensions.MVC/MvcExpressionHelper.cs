@@ -24,7 +24,7 @@ namespace Xunit
     {
         public static string GetMemberName(Expression expression)
         {
-            MemberInfo memberExpression = GetMemberInfoFromExpression(GetLambdaBody(expression));
+            var memberExpression = GetMemberInfoFromExpression(GetLambdaBody(expression));
             return memberExpression.Name;
         }
 

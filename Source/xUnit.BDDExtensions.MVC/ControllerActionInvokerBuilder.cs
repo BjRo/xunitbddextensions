@@ -20,25 +20,25 @@ namespace Xunit
 {
     public class ControllerActionInvokerBuilder
     {
-        private Expression actionExpression;
-        private Controller controller;
-        private readonly RequestContextBuilder contextBuilder;
-        private readonly ITestActionInvoker actionInvoker;
+        private Expression _actionExpression;
+        private Controller _controller;
+        private readonly RequestContextBuilder _contextBuilder;
+        private readonly ITestActionInvoker _actionInvoker;
 
         public ControllerActionInvokerBuilder(IDependencyAccessor dependencyAccessor, ITestActionInvoker actionInvoker)
         {
-            contextBuilder=new RequestContextBuilder(dependencyAccessor);
-            this.actionInvoker = actionInvoker;
+            _contextBuilder=new RequestContextBuilder(dependencyAccessor);
+            _actionInvoker = actionInvoker;
         }
 
         public IMockedRequestContext RequestContext
         {
-            get { return contextBuilder; }
+            get { return _contextBuilder; }
         }
 
         public ControllerActionInvokerBuilder Action<T,TResult>(Expression<Func<T, TResult>> expression) where T:Controller
         {
-            actionExpression = expression;
+            _actionExpression = expression;
             return this;
         }
 
@@ -51,43 +51,43 @@ namespace Xunit
         {         
             ConvertParameterToFormCollection();
 
-            var controllerContext = new ControllerContext(contextBuilder, controller);
-            controller.ControllerContext = controllerContext;
+            var controllerContext = new ControllerContext(_contextBuilder, _controller);
+            _controller.ControllerContext = controllerContext;
             
-            var actionName = MvcExpressionHelper.GetMemberName(actionExpression);
+            var actionName = MvcExpressionHelper.GetMemberName(_actionExpression);
 
-            contextBuilder.RouteData.Values["action"] = actionName;
-            contextBuilder.RouteData.Values["controller"] = GetControllerName();
+            _contextBuilder.RouteData.Values["action"] = actionName;
+            _contextBuilder.RouteData.Values["controller"] = GetControllerName();
 
-            actionInvoker.InvokeAction(controllerContext, actionName);
-            return actionInvoker.Result;
+            _actionInvoker.InvokeAction(controllerContext, actionName);
+            return _actionInvoker.Result;
         }
 
         private string GetControllerName()
         {
-            var name = controller.GetType().Name;
+            var name = _controller.GetType().Name;
             return name.Substring(0, name.Length - "Controller".Length);
         }
 
         private void ConvertParameterToFormCollection()
         {
-            var parameterNames = MvcExpressionHelper.GetParameterNames(actionExpression);
+            var parameterNames = MvcExpressionHelper.GetParameterNames(_actionExpression);
 
             foreach (var parameterName in parameterNames)
             {
-                contextBuilder.SerializeModelToForm(MvcExpressionHelper.GetParameterValue(actionExpression, parameterName), parameterName);
+                _contextBuilder.SerializeModelToForm(MvcExpressionHelper.GetParameterValue(_actionExpression, parameterName), parameterName);
             }
         }
 
         public ControllerActionInvokerBuilder Role(string role)
         {
-            contextBuilder.Role(role);
+            _contextBuilder.Role(role);
             return this;
         }
 
         public ControllerActionInvokerBuilder Controller(Controller controllerUnderTest)
         {
-            controller = controllerUnderTest;
+            _controller = controllerUnderTest;
             return this;
         }
     }

@@ -23,19 +23,19 @@ namespace Xunit
 {
     internal class RequestContextBuilder : IMockedRequestContext
     {
-        private readonly IDependencyAccessor dependencyAccessor;
+        private readonly IDependencyAccessor _dependencyAccessor;
 
-        private HttpContextBase context;
+        private HttpContextBase _context;
 
         public HttpContextBase Context
         {
             get
             {
-                if (context==null)
+                if (_context==null)
                 {
                     EnsureMockedContext();
                 }
-                return context;
+                return _context;
             }
         }
 
@@ -58,22 +58,22 @@ namespace Xunit
 
         private T An<T>() where T : class
         {
-            return dependencyAccessor.An<T>();
+            return _dependencyAccessor.An<T>();
         }
 
         private T The<T>() where T : class
         {
-            return dependencyAccessor.The<T>();
+            return _dependencyAccessor.The<T>();
         }
 
         public RequestContextBuilder(IDependencyAccessor dependencyAccessor)
         {
-            this.dependencyAccessor = dependencyAccessor;
+            _dependencyAccessor = dependencyAccessor;
         }
 
         private void EnsureMockedContext()
         {
-            if (context != null)
+            if (_context != null)
             {
                 return;
             }
@@ -85,11 +85,11 @@ namespace Xunit
 
         private void CreateHttpContext()
         {
-            context = The<HttpContextBase>();
+            _context = The<HttpContextBase>();
 
-            context.WhenToldTo(s => s.Request).Return(The<HttpRequestBase>());
-            context.WhenToldTo(s => s.Server).Return(The<HttpServerUtilityBase>());
-            context.WhenToldTo(s => s.Response).Return(The<HttpResponseBase>());
+            _context.WhenToldTo(s => s.Request).Return(The<HttpRequestBase>());
+            _context.WhenToldTo(s => s.Server).Return(The<HttpServerUtilityBase>());
+            _context.WhenToldTo(s => s.Response).Return(The<HttpResponseBase>());
 
             Request.WhenToldTo(r => r.Files).Return(The<HttpFileCollectionBase>());
 
@@ -123,7 +123,7 @@ namespace Xunit
         public RequestContextBuilder Role(string role)
         {
             if (string.IsNullOrEmpty(role))
-            {
+            {                  
                 Context.User = An<IPrincipal>();
                 Context.User.WhenToldTo(user => user.Identity).Return(An<IIdentity>());
             }

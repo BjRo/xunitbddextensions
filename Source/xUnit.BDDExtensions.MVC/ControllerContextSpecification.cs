@@ -22,7 +22,7 @@ namespace Xunit
         where T : Controller
     {
         protected ActionResult Result;
-        private ControllerActionInvokerBuilder invokerBuilder;
+        private ControllerActionInvokerBuilder _invokerBuilder;
 
         protected ViewResult ViewResult
         {
@@ -32,8 +32,8 @@ namespace Xunit
         protected override void EstablishContext()
         {
             base.EstablishContext();
-            invokerBuilder = CreateTestActionInvoker();
-            PrepareRequestContext(invokerBuilder.RequestContext);
+            _invokerBuilder = CreateTestActionInvoker();
+            PrepareRequestContext(_invokerBuilder.RequestContext);
         }
 
         protected virtual void PrepareRequestContext(IMockedRequestContext requestContext)
@@ -48,15 +48,15 @@ namespace Xunit
 
         protected ControllerActionInvokerBuilder InvokeAction<TResult>(Expression<Func<T, TResult>> expression)
         {
-            invokerBuilder.Controller(Sut).Action(expression);
-            return invokerBuilder;
+            _invokerBuilder.Controller(Sut).Action(expression);
+            return _invokerBuilder;
         }
 
 
         protected ControllerActionInvokerBuilder InvokePostAction<TResult>(Expression<Func<T, TResult>> expression)
         {
-            invokerBuilder.Controller(Sut).Action(expression).RequestContext.HttpMethod("POST").AntiForgeryToken();
-            return invokerBuilder;
+            _invokerBuilder.Controller(Sut).Action(expression).RequestContext.HttpMethod("POST").AntiForgeryToken();
+            return _invokerBuilder;
         }
     }
 }

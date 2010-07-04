@@ -33,7 +33,6 @@ namespace Xunit.Specs
 
         public string Vorname { get; set; }
         public string Nachname { get; set; }
-
     }
 
     [Concern(typeof (MvcExpressionHelper))]
@@ -50,169 +49,173 @@ namespace Xunit.Specs
         }
     }
 
-    public class When_examining_a_method_with_a_result : ConcernOfMvcExpressionHelper
+    public class When_examine_the_index_method_with_a_result : ConcernOfMvcExpressionHelper
     {
-        private string result;
+        private string _result;
 
         protected override void Because()
         {
-            result = MvcExpressionHelper.GetMemberName(GetExpression<TestClass, ActionResult>(c => c.Index()));
+            _result = MvcExpressionHelper.GetMemberName(GetExpression<TestClass, ActionResult>(c => c.Index()));
         }
 
         [Observation]
-        public void Should_the_member_name_index()
+        public void Should_the_membername_index()
         {
-            result.ShouldBeEqualTo("Index");
+            _result.ShouldBeEqualTo("Index");
         }
     }
 
-    public class When_examining_a_method_with_parameters_with_a_result : ConcernOfMvcExpressionHelper
+    public class When_examine_the_index_method_with_parameters_and_a_result : ConcernOfMvcExpressionHelper
     {
-        private string result;
+        private string _result;
 
         protected override void Because()
         {
-            result = MvcExpressionHelper.GetMemberName(GetExpression<TestClass, ActionResult>(c => c.Index(3, 2, 1)));
+            _result = MvcExpressionHelper.GetMemberName(GetExpression<TestClass, ActionResult>(c => c.Index(3, 2, 1)));
         }
 
         [Observation]
-        public void Should_the_member_name_index()
+        public void Should_the_membername_index()
         {
-            result.ShouldBeEqualTo("Index");
+            _result.ShouldBeEqualTo("Index");
         }
     }
 
-    public class When_examining_a_method_without_a_result : ConcernOfMvcExpressionHelper
+    public class When_examine_the_create_method_without_a_result : ConcernOfMvcExpressionHelper
     {
-        private string result;
+        private string _result;
 
         protected override void Because()
         {
-            result = MvcExpressionHelper.GetMemberName(GetExpression<TestClass>(c => c.Create()));
+            _result = MvcExpressionHelper.GetMemberName(GetExpression<TestClass>(c => c.Create()));
         }
 
         [Observation]
-        public void Should_the_member_name_index()
+        public void Should_the_membername_create()
         {
-            result.ShouldBeEqualTo("Create");
+            _result.ShouldBeEqualTo("Create");
         }
     }
 
-    public class When_examining_parameters_names : ConcernOfMvcExpressionHelper
+    public class When_examine_parameter_names : ConcernOfMvcExpressionHelper
     {
-        private string[] result;
+        private string[] _result;
 
         protected override void Because()
         {
-            result = MvcExpressionHelper.GetParameterNames(GetExpression<TestClass, ActionResult>(c => c.Index(3, 2, 1)));
+            _result =
+                MvcExpressionHelper.GetParameterNames(GetExpression<TestClass, ActionResult>(c => c.Index(3, 2, 1)));
         }
 
         [Observation]
         public void Should_the_names_a_b_c()
         {
-            result.ShouldOnlyContainInOrder("a", "b", "c");
+            _result.ShouldOnlyContainInOrder("a", "b", "c");
         }
     }
 
-    public class When_examining_parameters_names_on_a_method_without_parameters : ConcernOfMvcExpressionHelper
+    public class When_examine_parameter_names_on_a_method_without_parameters : ConcernOfMvcExpressionHelper
     {
-        private string[] result;
+        private string[] _result;
 
         protected override void Because()
         {
-            result = MvcExpressionHelper.GetParameterNames(GetExpression<TestClass, ActionResult>(c => c.Index()));
+            _result = MvcExpressionHelper.GetParameterNames(GetExpression<TestClass, ActionResult>(c => c.Index()));
         }
 
         [Observation]
         public void Should_the_result_an_empty_array()
         {
-            result.ShouldBeEmpty();
+            _result.ShouldBeEmpty();
         }
     }
 
-    public class When_examining_parameters_with_constant_values : ConcernOfMvcExpressionHelper
+    public class When_examine_parameters_with_the_constant_values_3_2_and_1 : ConcernOfMvcExpressionHelper
     {
-        private object result1;
-        private object result2;
-        private object result3;
+        private object _result1;
+        private object _result2;
+        private object _result3;
 
         protected override void Because()
         {
-            result1 =
+            _result1 =
                 MvcExpressionHelper.GetParameterValue(GetExpression<TestClass, ActionResult>(c => c.Index(3, 2, 1)), "a");
-            result2 =
+            _result2 =
                 MvcExpressionHelper.GetParameterValue(GetExpression<TestClass, ActionResult>(c => c.Index(3, 2, 1)), "b");
-            result3 =
+            _result3 =
                 MvcExpressionHelper.GetParameterValue(GetExpression<TestClass, ActionResult>(c => c.Index(3, 2, 1)), "c");
         }
 
         [Observation]
         public void Should_the_first_value_3()
         {
-            result1.ShouldBeEqualTo(3);
+            _result1.ShouldBeEqualTo(3);
         }
 
         [Observation]
         public void Should_the_second_value_2()
         {
-            result2.ShouldBeEqualTo(2);
+            _result2.ShouldBeEqualTo(2);
         }
 
         [Observation]
         public void Should_the_third_value_1()
         {
-            result3.ShouldBeEqualTo(1);
+            _result3.ShouldBeEqualTo(1);
         }
     }
 
-    public class When_examining_parameters_with_a_date_value : ConcernOfMvcExpressionHelper
+    public class When_examine_parameters_with_a_new_datetime_value : ConcernOfMvcExpressionHelper
     {
-        private object result1;
+        private object _result1;
 
         protected override void Because()
         {
-            result1 =
-                MvcExpressionHelper.GetParameterValue(GetExpression<TestClass>(c => c.Date(new DateTime(2010,07,05))), "dateTime");
+            _result1 =
+                MvcExpressionHelper.GetParameterValue(
+                    GetExpression<TestClass>(c => c.Date(new DateTime(2010, 07, 05))), "dateTime");
         }
 
         [Observation]
-        public void Should_the_value_the_2010_07_05()
+        public void Should_the_result_2010_07_05()
         {
-            result1.ShouldBeEqualTo(new DateTime(2010,7,5));
+            _result1.ShouldBeEqualTo(new DateTime(2010, 7, 5));
         }
     }
 
-    public class When_examining_parameters_with_a_object_values : ConcernOfMvcExpressionHelper
+    public class When_examine_parameters_with_a_reference_values : ConcernOfMvcExpressionHelper
     {
-        private object result1;
-        private object result2;
-        private TestClass param1;
-        private TestClass param2;
+        private object _result1;
+        private object _result2;
+        private TestClass _instance1;
+        private TestClass _instnance2;
 
         protected override void EstablishContext()
         {
-            param1 = new TestClass {Vorname = "Eins", Nachname = "Zwei"};
-            param2 = new TestClass { Vorname = "Drei", Nachname = "Vier" };
+            _instance1 = new TestClass {Vorname = "Eins", Nachname = "Zwei"};
+            _instnance2 = new TestClass {Vorname = "Drei", Nachname = "Vier"};
         }
+
         protected override void Because()
         {
-            result1 =
-                MvcExpressionHelper.GetParameterValue(GetExpression<TestClass>(c => c.Person(param1,param2)), "param1");
-            result2 =
-                MvcExpressionHelper.GetParameterValue(GetExpression<TestClass>(c => c.Person(param1, param2)), "param2");
+            _result1 =
+                MvcExpressionHelper.GetParameterValue(GetExpression<TestClass>(c => c.Person(_instance1, _instnance2)),
+                                                      "param1");
+            _result2 =
+                MvcExpressionHelper.GetParameterValue(GetExpression<TestClass>(c => c.Person(_instance1, _instnance2)),
+                                                      "param2");
         }
 
         [Observation]
-        public void Should_the_first_parameter_same_as_instance1()
+        public void Should_the_first_parameter_value_same_as_instance1()
         {
-            result1.ShouldBeTheSame(param1);
+            _result1.ShouldBeTheSame(_instance1);
         }
 
         [Observation]
-        public void Should_the_second_parameter_same_as_instance2()
+        public void Should_the_second_parameter_value_same_as_instance2()
         {
-            result2.ShouldBeTheSame(param2);
+            _result2.ShouldBeTheSame(_instnance2);
         }
     }
-
 }
