@@ -123,13 +123,12 @@ namespace Xunit
         public RequestContextBuilder Role(string role)
         {
             if (string.IsNullOrEmpty(role))
-            {                  
-                Context.User = An<IPrincipal>();
-                Context.User.WhenToldTo(user => user.Identity).Return(An<IIdentity>());
+            {
+                Context.User = new GenericPrincipal(new GenericIdentity(""), null);
             }
             else
             {
-                Context.User = new GenericPrincipal(new GenericIdentity("TheUser"), new[] {role});
+                Context.User = new GenericPrincipal(new GenericIdentity("AnUser"), new[] {role});
             }
             return this;
         }

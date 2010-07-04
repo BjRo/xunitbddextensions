@@ -1,17 +1,24 @@
-using System;
-
 namespace Xunit.Specs
 {
     [Concern(typeof (RequestContextBuilder))]
-    public class When_building_a_requestconext : InstanceContextSpecification<RequestContextBuilder>
+    public abstract class ConcernOfRequestContextBuilder : InstanceContextSpecification<RequestContextBuilder>
     {
-        protected override void Because()
+        protected override void EstablishContext()
         {
+            base.EstablishContext();
         }
 
         protected override RequestContextBuilder CreateSut()
         {
             return new RequestContextBuilder(this);
+        }
+    }
+
+    public class When_building_a_requestcontext : ConcernOfRequestContextBuilder
+    {
+        protected override void Because()
+        {
+            var a = Sut.Context;
         }
 
         [Observation]
@@ -75,5 +82,53 @@ namespace Xunit.Specs
             Sut.Request.ShouldBeTheSame(Sut.Context.Request);
             Sut.Server.ShouldBeTheSame(Sut.Server);
         }
+
+        [Observation]
+        public void Should_the_context_user_not_authenticated()
+        {
+            Sut.Context.User.Identity.IsAuthenticated.ShouldBeFalse();
+        }
+
+        [Observation]
+        public void Should_the_httpmethod_is_null()
+        {
+            Sut.Request.HttpMethod.ShouldBeNull();
+        }
     }
+
+    public class When_adding_the_role_administrator_to_request_context : ConcernOfRequestContextBuilder
+    {
+        protected override void Because()
+        {
+            Sut.Role("Administrator");
+        }
+
+        [Observation]
+        public void Should_the_context_user_is_authenticated()
+        {
+            Sut.Context.User.Identity.IsAuthenticated.ShouldBeTrue();
+        }
+
+        [Observation]
+        public void Should_the_contest_user_is_in_role_administrator()
+        {
+            Sut.Context.User.IsInRole("Administrator").ShouldBeTrue();
+        }
+    }
+
+    public class When_changing_the_httpmethod_to_post : ConcernOfRequestContextBuilder
+    {
+        protected override void Because()
+        {
+            Sut.HttpMethod("POST");
+        }
+
+
+        [Observation]
+        public void Should_the_httpmethod_in_request_is_post()
+        {
+            Sut.Request.HttpMethod.ShouldBeEqualTo("POST");
+        }
+    }
+
 }
