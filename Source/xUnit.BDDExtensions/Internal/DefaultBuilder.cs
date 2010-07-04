@@ -13,7 +13,7 @@
 // limitations under the License.
 // 
 using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace Xunit.Internal
 {
@@ -33,8 +33,15 @@ namespace Xunit.Internal
         /// </returns>
         public bool KnowsHowToBuild(Type type)
         {
-            return (type.IsAbstract);
-//            return (type.IsAbstract && !typeof(IEnumerable).IsAssignableFrom(type));
+            if (!type.IsAbstract)
+            {
+                return false;
+            }
+            if (!type.IsGenericType)
+            {
+                return true;
+            }
+            return type.GetGenericTypeDefinition() != typeof (IEnumerable<>);
         }
 
         /// <summary>
