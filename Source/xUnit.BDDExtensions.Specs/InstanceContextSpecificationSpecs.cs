@@ -14,6 +14,7 @@
 // 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Xunit;
 
@@ -181,8 +182,42 @@ namespace Xunit.Specs
             _dependency.ShouldBeTheSame(The<IDependency>());
             _dependency.ShouldBeTheSame(The<IDependency>());
         }
-
     }
+
+    [Concern(typeof(InstanceContextSpecification<>))]
+    public class When_a_mock_instance_of_an_abstract_collection : InstanceContextSpecification<object>
+    {
+        private AbstractTestCollection _instance;
+
+        protected override void Because()
+        {
+            _instance = The<AbstractTestCollection>();
+        }
+
+        [Observation]
+        public void Should_the_mocked_instancen_not_null()
+        {
+            _instance.ShouldNotBeNull();
+        }
+    }
+
+    [Concern(typeof(InstanceContextSpecification<>))]
+    public class When_a_mock_instance_of_an_generic_abstract_collection : InstanceContextSpecification<object>
+    {
+        private AbstractTestCollection<string> _instance;
+
+        protected override void Because()
+        {
+            _instance = The<AbstractTestCollection<string>>();
+        }
+
+        [Observation]
+        public void Should_the_mocked_instancen_not_null()
+        {
+            _instance.ShouldNotBeNull();
+        }
+    }
+
     [Concern(typeof(InstanceContextSpecification<>))]
     public class When_an_instance_with_two_dependencies_on_the_same_interface_type_is_resolved : InstanceContextSpecification<ClassWithTwoDependenciesOfTheSameType>
     {
@@ -199,6 +234,15 @@ namespace Xunit.Specs
 
     #region Test classes
 
+    public abstract class AbstractTestCollection : Collection<string>
+    {
+        
+    }
+
+    public abstract class AbstractTestCollection<T>: Collection<T>
+    {
+        
+    }
     public class DependencyConfiguration : IBehaviorConfig
     {
         public IDependencyAccessor Accessor;

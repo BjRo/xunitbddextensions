@@ -32,7 +32,7 @@ namespace Xunit.Internal
         /// </returns>
         public bool KnowsHowToBuild(Type type)
         {
-            return type.IsInterface &&
+            return type.IsAbstract &&
                    type.IsGenericType &&
                    type.GetGenericTypeDefinition() == typeof(IEnumerable<>);
         }
