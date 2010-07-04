@@ -27,7 +27,7 @@ namespace Xunit
             this ControllerActionInvokerBuilder invokerBuilder,
             string httpMethod)
         {
-            invokerBuilder.HttpMethod(httpMethod);
+            invokerBuilder.RequestContext.HttpMethod(httpMethod);
             return invokerBuilder;
         }
     }

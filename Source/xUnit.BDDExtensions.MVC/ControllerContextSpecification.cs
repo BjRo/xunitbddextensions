@@ -21,8 +21,9 @@ namespace Xunit
     public abstract class ControllerContextSpecification<T> : InstanceContextSpecification<T>
         where T : Controller
     {
-        protected ActionResult Result;
         private ControllerActionInvokerBuilder _invokerBuilder;
+       
+        protected ActionResult Result;
 
         protected ViewResult ViewResult
         {
@@ -59,10 +60,9 @@ namespace Xunit
             return (ActionResult) _invokerBuilder.Invoke();
         }
 
-
         protected ActionResult InvokePostAction<TResult>(Expression<Func<T, TResult>> expression)
         {
-            _invokerBuilder.Controller(Sut).Action(expression).HttpMethod("POST").AntiForgeryToken();
+            _invokerBuilder.Controller(Sut).Action(expression).RequestContext.HttpMethod("POST").AntiForgeryToken();
             return (ActionResult) _invokerBuilder.Invoke();
         }
     }

@@ -55,15 +55,15 @@ namespace Xunit
 
             foreach (var propertyInfo in properties)
             {
-                var formName = propertyInfo.Name;
+                var elementName = propertyInfo.Name;
 
                 if (!string.IsNullOrEmpty(parameterName))
                 {
-                    formName = parameterName + "." + formName;
+                    elementName = parameterName + "." + elementName;
                 }
                 
                 var value = propertyInfo.GetValue(model, null) ?? "";
-                context.Request.Form.Add(formName, value.ToString());
+                context.Request.Form.Add(elementName, value.ToString());
             }
 
             return context;
@@ -79,13 +79,13 @@ namespace Xunit
             {
                 context.Context.User = new GenericPrincipal(new GenericIdentity("AnUser"), new[] {role});
             }
-            
+
             return context;
         }
 
         public static IMockedRequestContext HttpMethod(this IMockedRequestContext context, string httpMethod)
         {
-            InstanceDictionary.Set(context, "HttpMethod", httpMethod);
+            InstanceDictionary.SetValue(context, "HttpMethod", httpMethod);
             SetHttpMethodCallback(context);
             
             return context;
@@ -99,7 +99,7 @@ namespace Xunit
             }
 
             context.Request.Stub(requestBase => requestBase.HttpMethod)
-                .WhenCalled(invocation => invocation.ReturnValue = InstanceDictionary.Get<string>(context, "HttpMethod"))
+                .WhenCalled(invocation => invocation.ReturnValue = InstanceDictionary.GetValue<string>(context, "HttpMethod"))
                 .Return(null).Repeat.Any();
         }
     }

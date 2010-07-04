@@ -14,21 +14,22 @@ namespace Xunit.Specs
 
         protected override void Because()
         {
-            Sut.Set(_instance, "Key", "wert1");
+            Sut.SetValue(_instance, "Key", "wert1");
         }
 
         [Observation]
         public void Should_be_able_to_retrieve_the_value_with_the_key_and_the_related_instance()
         {
-            Sut.Get<string>(_instance, "Key").ShouldBeEqualTo("wert1");
+            Sut.GetValue<string>(_instance, "Key").ShouldBeEqualTo("wert1");
         }
 
         [Observation]
         public void Should_not_be_able_to_retrieve_a_value_with_the_key_and_and_an_unrelated_instance()
         {
             var otherInstance = new object();
-
-            Sut.Get<string>(otherInstance, "Key").ShouldBeNull();
+            string value;
+            Sut.TryGetValue(otherInstance, "Key",out value).ShouldBeFalse();
+            value.ShouldBeNull();
         }
     }
 }

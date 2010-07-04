@@ -6,20 +6,32 @@ namespace Xunit.Internal
     {
         private readonly Dictionary<object, Dictionary<string, object>> _dictionaries =  new Dictionary<object, Dictionary<string, object>>();
 
-        public void Set<T>(object instance, string key, T value)
+        public void SetValue<T>(object instance, string key, T value)
         {
             GetInstanceDictionary(instance)[key] = value;
         }
 
-        public T Get<T>(object instance, string key)
+        public bool TryGetValue<T>(object instance, string key, out T value)
         {
+            object dictValue;
             var instanceDictionary = GetInstanceDictionary(instance);
+             if (instanceDictionary.TryGetValue(key, out dictValue))
+             {
+                 value = (T) dictValue;
+                 return true;
+             }
+            value = default(T);
+            return false;
+        }
 
-            object value;
-
-            instanceDictionary.TryGetValue(key, out value);
-
-            return value != null ? (T) value : default(T);
+        public T GetValue<T>(object instance, string key)
+        {
+            T value;
+            if (!TryGetValue(instance, key, out value))
+            {
+                throw new KeyNotFoundException();
+            }
+            return value;
         }
 
         private Dictionary<string, object> GetInstanceDictionary(object instance)
