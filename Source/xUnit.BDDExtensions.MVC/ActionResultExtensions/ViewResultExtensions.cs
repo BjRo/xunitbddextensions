@@ -20,7 +20,7 @@ namespace Xunit
     {
         public static T Model<T>(this ViewResult viewResult)
         {
-            return (T)viewResult.ViewData.Model;
+            return (T) viewResult.ViewData.Model;
         }
     }
 }

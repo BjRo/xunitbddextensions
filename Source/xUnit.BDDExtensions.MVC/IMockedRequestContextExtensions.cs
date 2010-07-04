@@ -14,15 +14,19 @@
 // 
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using Rhino.Mocks;
+using Xunit.Internal;
 
 namespace Xunit
 {
     public static class MockedRequestContextExtensions
     {
+        private static readonly InstanceDictionary InstanceDictionary = new InstanceDictionary();
+
         public static IMockedRequestContext AntiForgeryToken(this IMockedRequestContext context)
         {
             HttpContext.Current = new HttpContext(new HttpRequest("/", "http://localhost/", ""),
@@ -42,13 +46,6 @@ namespace Xunit
             return element.Attributes().Where(a => a.Name == name).Single().Value;
         }
 
-
-        public static IMockedRequestContext HttpMethod(this IMockedRequestContext context, string httpMethod)
-        {
-            context.Request.WhenToldTo(requestBase => requestBase.HttpMethod).Return(httpMethod);
-            return context;
-        }
-
         public static IMockedRequestContext SerializeModelToForm(this IMockedRequestContext context, object model,
                                                                  string parameterName)
         {
@@ -64,6 +61,38 @@ namespace Xunit
                 context.Request.Form.Add(formName, value.ToString());
             }
             return context;
+        }
+
+        public static IMockedRequestContext Role(this IMockedRequestContext context, string role)
+        {
+            if (string.IsNullOrEmpty(role))
+            {
+                context.Context.User = new GenericPrincipal(new GenericIdentity(""), null);
+            }
+            else
+            {
+                context.Context.User = new GenericPrincipal(new GenericIdentity("AnUser"), new[] {role});
+            }
+            return context;
+        }
+
+        public static IMockedRequestContext HttpMethod(this IMockedRequestContext context, string httpMethod)
+        {
+            InstanceDictionary.Set(context, "HttpMethod", httpMethod);
+            SetHttpMethodCallback(context);
+            return context;
+        }
+
+        private static void SetHttpMethodCallback(IMockedRequestContext context)
+        {
+            if (context.Request.HttpMethod != null)
+                return;
+
+            context.Request.Stub(requestBase => requestBase.HttpMethod)
+                .WhenCalled(
+                    invocation => invocation.ReturnValue = InstanceDictionary.Get<string>(context, "HttpMethod")
+                )
+                .Return(null).Repeat.Any();
         }
     }
 }

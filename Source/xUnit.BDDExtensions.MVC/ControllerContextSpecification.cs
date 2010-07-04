@@ -38,7 +38,6 @@ namespace Xunit
 
         protected virtual void PrepareRequestContext(IMockedRequestContext requestContext)
         {
-            
         }
 
         protected virtual ControllerActionInvokerBuilder CreateTestActionInvoker()
@@ -55,7 +54,7 @@ namespace Xunit
 
         protected ControllerActionInvokerBuilder InvokePostAction<TResult>(Expression<Func<T, TResult>> expression)
         {
-            _invokerBuilder.Controller(Sut).Action(expression).RequestContext.HttpMethod("POST").AntiForgeryToken();
+            _invokerBuilder.Controller(Sut).Action(expression).HttpMethod("POST").AntiForgeryToken();
             return _invokerBuilder;
         }
     }

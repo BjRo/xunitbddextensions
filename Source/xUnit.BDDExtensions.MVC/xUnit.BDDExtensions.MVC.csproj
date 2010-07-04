@@ -37,6 +37,9 @@
     <Reference Include="Rhino.Mocks">
       <HintPath>..\..\Lib\Rhino\Rhino.Mocks.dll</HintPath>
     </Reference>
+    <Reference Include="StructureMap.AutoMocking">
+      <HintPath>..\..\Lib\StructureMap\StructureMap.AutoMocking.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -64,7 +67,8 @@
     <Compile Include="ControllerContextSpecification.cs" />
     <Compile Include="ControllerActionInvokerBuilder.cs" />
     <Compile Include="ControllerActionInvokerBuilderExtensions.cs" />
-    <Compile Include="MvcExpressionHelper.cs" />
+    <Compile Include="Internal\InstanceDictionary.cs" />
+    <Compile Include="Internal\MvcExpressionHelper.cs" />
     <Compile Include="IMockedRequestContext.cs" />
     <Compile Include="IMockedRequestContextExtensions.cs" />
     <Compile Include="ITestActionInvoker.cs" />
@@ -86,6 +90,7 @@
       <Name>xUnit.BDDExtensions</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

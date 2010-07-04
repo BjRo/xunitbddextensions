@@ -22,11 +22,11 @@ namespace Xunit
             return invokerBuilder;
         }
 
-        public static ControllerActionInvokerBuilder HttpMethod(this ControllerActionInvokerBuilder invokerBuilder, string httpMethod)
+        public static ControllerActionInvokerBuilder HttpMethod(this ControllerActionInvokerBuilder invokerBuilder,
+                                                                string httpMethod)
         {
-            invokerBuilder.RequestContext.HttpMethod(httpMethod);
+            invokerBuilder.HttpMethod(httpMethod);
             return invokerBuilder;
         }
-
     }
 }

@@ -35,7 +35,8 @@ namespace Xunit
             ShouldRouteTo((RedirectToRouteResult) actionResult, action);
         }
 
-        public static void ShouldRouteTo<T>(this RedirectToRouteResult redirectToRouteResult, Expression<Action<T>> action)
+        public static void ShouldRouteTo<T>(this RedirectToRouteResult redirectToRouteResult,
+                                            Expression<Action<T>> action)
             where T : Controller
         {
             var actionDictionary = Microsoft.Web.Mvc.Internal.ExpressionHelper.GetRouteValuesFromExpression(action);

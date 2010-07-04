@@ -15,6 +15,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using Xunit.Internal;
 
 namespace Xunit
 {
@@ -27,7 +28,7 @@ namespace Xunit
 
         public ControllerActionInvokerBuilder(IDependencyAccessor dependencyAccessor, ITestActionInvoker actionInvoker)
         {
-            _contextBuilder=new RequestContextBuilder(dependencyAccessor);
+            _contextBuilder = new RequestContextBuilder(dependencyAccessor);
             _actionInvoker = actionInvoker;
         }
 
@@ -36,7 +37,8 @@ namespace Xunit
             get { return _contextBuilder; }
         }
 
-        public ControllerActionInvokerBuilder Action<T,TResult>(Expression<Func<T, TResult>> expression) where T:Controller
+        public ControllerActionInvokerBuilder Action<T, TResult>(Expression<Func<T, TResult>> expression)
+            where T : Controller
         {
             _actionExpression = expression;
             return this;
@@ -48,12 +50,12 @@ namespace Xunit
         }
 
         public object Execute()
-        {         
+        {
             ConvertParameterToFormCollection();
 
             var controllerContext = new ControllerContext(_contextBuilder, _controller);
             _controller.ControllerContext = controllerContext;
-            
+
             var actionName = MvcExpressionHelper.GetMemberName(_actionExpression);
 
             _contextBuilder.RouteData.Values["action"] = actionName;
@@ -75,14 +77,9 @@ namespace Xunit
 
             foreach (var parameterName in parameterNames)
             {
-                _contextBuilder.SerializeModelToForm(MvcExpressionHelper.GetParameterValue(_actionExpression, parameterName), parameterName);
+                _contextBuilder.SerializeModelToForm(
+                    MvcExpressionHelper.GetParameterValue(_actionExpression, parameterName), parameterName);
             }
-        }
-
-        public ControllerActionInvokerBuilder Role(string role)
-        {
-            _contextBuilder.Role(role);
-            return this;
         }
 
         public ControllerActionInvokerBuilder Controller(Controller controllerUnderTest)

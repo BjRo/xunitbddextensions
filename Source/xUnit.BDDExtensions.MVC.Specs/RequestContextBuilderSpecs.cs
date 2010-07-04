@@ -3,11 +3,6 @@ namespace Xunit.Specs
     [Concern(typeof (RequestContextBuilder))]
     public abstract class ConcernOfRequestContextBuilder : InstanceContextSpecification<RequestContextBuilder>
     {
-        protected override void EstablishContext()
-        {
-            base.EstablishContext();
-        }
-
         protected override RequestContextBuilder CreateSut()
         {
             return new RequestContextBuilder(this);
@@ -18,7 +13,6 @@ namespace Xunit.Specs
     {
         protected override void Because()
         {
-            var a = Sut.Context;
         }
 
         [Observation]
@@ -90,9 +84,9 @@ namespace Xunit.Specs
         }
 
         [Observation]
-        public void Should_the_httpmethod_is_null()
+        public void Should_the_httpmethod_is_get()
         {
-            Sut.Request.HttpMethod.ShouldBeNull();
+            Sut.Request.HttpMethod.ShouldBeEqualTo("GET");
         }
     }
 

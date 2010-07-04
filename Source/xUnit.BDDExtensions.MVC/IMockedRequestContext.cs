@@ -22,7 +22,7 @@ namespace Xunit
         HttpContextBase Context { get; }
         HttpRequestBase Request { get; }
         HttpServerUtilityBase Server { get; }
-        HttpResponseBase  Response { get; }
+        HttpResponseBase Response { get; }
         RouteData RouteData { get; }
     }
 }

@@ -16,7 +16,7 @@ using System.Web.Mvc;
 
 namespace Xunit
 {
-    public interface ITestActionInvoker  : IActionInvoker
+    public interface ITestActionInvoker : IActionInvoker
     {
         ActionResult Result { get; }
     }

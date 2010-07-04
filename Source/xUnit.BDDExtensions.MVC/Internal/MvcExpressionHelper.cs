@@ -18,7 +18,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Xunit
+namespace Xunit.Internal
 {
     internal static class MvcExpressionHelper
     {
@@ -30,7 +30,7 @@ namespace Xunit
 
         private static Expression GetLambdaBody(Expression expression)
         {
-            return ((LambdaExpression)expression).Body;
+            return ((LambdaExpression) expression).Body;
         }
 
         private static MemberInfo GetMemberInfoFromExpression(Expression expression)
@@ -62,7 +62,7 @@ namespace Xunit
 
         private static MethodCallExpression GetMethodCallExpression(Expression expression)
         {
-            if (expression  is LambdaExpression)
+            if (expression is LambdaExpression)
             {
                 expression = ((LambdaExpression) expression).Body;
             }
@@ -80,7 +80,7 @@ namespace Xunit
             for (var i = 0; i < names.Length; i++)
             {
                 var name = names[i];
-                if (name==parameterName)
+                if (name == parameterName)
                 {
                     return GetValue(methodCall, i);
                 }

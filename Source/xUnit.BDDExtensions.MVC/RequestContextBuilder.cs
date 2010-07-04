@@ -14,7 +14,6 @@
 // 
 
 using System.Collections.Specialized;
-using System.Security.Principal;
 using System.Web;
 using System.Web.Routing;
 using Rhino.Mocks;
@@ -31,7 +30,7 @@ namespace Xunit
         {
             get
             {
-                if (_context==null)
+                if (_context == null)
                 {
                     EnsureMockedContext();
                 }
@@ -69,6 +68,7 @@ namespace Xunit
         public RequestContextBuilder(IDependencyAccessor dependencyAccessor)
         {
             _dependencyAccessor = dependencyAccessor;
+            EnsureMockedContext();
         }
 
         private void EnsureMockedContext()
@@ -80,7 +80,8 @@ namespace Xunit
             CreateHttpContext();
             CreateCollectionsForContext();
             CreateRouteData();
-            Role("");
+            this.Role("");
+            this.HttpMethod("GET");
         }
 
         private void CreateHttpContext()
@@ -118,19 +119,6 @@ namespace Xunit
             RouteData = new RouteData();
             RouteData.Values["action"] = "a";
             RouteData.Values["controller"] = "a";
-        }
-
-        public RequestContextBuilder Role(string role)
-        {
-            if (string.IsNullOrEmpty(role))
-            {
-                Context.User = new GenericPrincipal(new GenericIdentity(""), null);
-            }
-            else
-            {
-                Context.User = new GenericPrincipal(new GenericIdentity("AnUser"), new[] {role});
-            }
-            return this;
         }
     }
 }
