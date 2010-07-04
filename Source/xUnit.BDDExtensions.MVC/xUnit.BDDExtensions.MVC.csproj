@@ -34,6 +34,9 @@
     <Reference Include="Microsoft.Web.Mvc">
       <HintPath>..\..\Lib\MVCFutures\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\..\Lib\Rhino\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -47,11 +50,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="xunit">
-      <HintPath>..\..\..\external\xUnit\xunit.dll</HintPath>
-    </Reference>
-    <Reference Include="xUnit.BDDExtensions">
-      <HintPath>..\..\..\external\xUnit\xUnit.BDDExtensions.dll</HintPath>
+    <Reference Include="xunit, Version=1.6.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\xUnit\xunit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -71,7 +72,20 @@
     <Compile Include="RequestContextBuilder.cs" />
     <Compile Include="TestControllerActionInvoker.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\xUnit.BDDExtensions.Assertions\xUnit.BDDExtensions.Assertions.csproj">
+      <Project>{DEE9E6A5-E4CA-475E-9B3A-314C7C0C8E59}</Project>
+      <Name>xUnit.BDDExtensions.Assertions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\xUnit.BDDExtensions.Mocking.RhinoMocks\xUnit.BDDExtensions.Mocking.RhinoMocks.csproj">
+      <Project>{BBF8D13E-313A-4A6F-B945-948252A655A7}</Project>
+      <Name>xUnit.BDDExtensions.Mocking.RhinoMocks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\xUnit.BDDExtensions\xUnit.BDDExtensions.csproj">
+      <Project>{01CCC787-B3E5-4D4F-917A-950E276EC3E0}</Project>
+      <Name>xUnit.BDDExtensions</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

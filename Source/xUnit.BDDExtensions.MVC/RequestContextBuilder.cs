@@ -21,7 +21,7 @@ using Rhino.Mocks;
 
 namespace Xunit
 {
-    internal class RequestContextBuilder : IMockedRequestContext
+    public class RequestContextBuilder : IMockedRequestContext
     {
         private readonly IDependencyAccessor _dependencyAccessor;
 
