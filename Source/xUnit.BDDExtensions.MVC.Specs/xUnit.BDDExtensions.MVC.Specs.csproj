@@ -49,7 +49,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FakeTestControllerActionInvoker.cs" />
     <Compile Include="InstanceDictionarySpecs.cs" />
     <Compile Include="MvcExpressionHelperSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

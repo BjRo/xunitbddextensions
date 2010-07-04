@@ -34,6 +34,7 @@ namespace Xunit
                 {
                     EnsureMockedContext();
                 }
+
                 return _context;
             }
         }

@@ -37,8 +37,7 @@ namespace Xunit
             get { return _contextBuilder; }
         }
 
-        public ControllerActionInvokerBuilder Action<T, TResult>(Expression<Func<T, TResult>> expression)
-            where T : Controller
+        public ControllerActionInvokerBuilder Action<T, TResult>(Expression<Func<T, TResult>> expression) where T : Controller
         {
             _actionExpression = expression;
             return this;
@@ -62,6 +61,7 @@ namespace Xunit
             _contextBuilder.RouteData.Values["controller"] = GetControllerName();
 
             _actionInvoker.InvokeAction(controllerContext, actionName);
+
             return _actionInvoker.Result;
         }
 
@@ -78,7 +78,8 @@ namespace Xunit
             foreach (var parameterName in parameterNames)
             {
                 _contextBuilder.SerializeModelToForm(
-                    MvcExpressionHelper.GetParameterValue(_actionExpression, parameterName), parameterName);
+                    MvcExpressionHelper.GetParameterValue(_actionExpression, parameterName),
+                    parameterName);
             }
         }
 

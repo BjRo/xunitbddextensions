@@ -43,23 +43,29 @@ namespace Xunit
         private static string GetValue(string xml, string name)
         {
             var element = XElement.Load(new StringReader(xml));
+
             return element.Attributes().Where(a => a.Name == name).Single().Value;
         }
 
-        public static IMockedRequestContext SerializeModelToForm(this IMockedRequestContext context, object model,
-                                                                 string parameterName)
+        public static IMockedRequestContext SerializeModelToForm(
+            this IMockedRequestContext context, object model,
+            string parameterName)
         {
             var properties = model.GetType().GetProperties();
+
             foreach (var propertyInfo in properties)
             {
                 var formName = propertyInfo.Name;
+
                 if (!string.IsNullOrEmpty(parameterName))
                 {
                     formName = parameterName + "." + formName;
                 }
+                
                 var value = propertyInfo.GetValue(model, null) ?? "";
                 context.Request.Form.Add(formName, value.ToString());
             }
+
             return context;
         }
 
@@ -73,6 +79,7 @@ namespace Xunit
             {
                 context.Context.User = new GenericPrincipal(new GenericIdentity("AnUser"), new[] {role});
             }
+            
             return context;
         }
 
@@ -80,18 +87,19 @@ namespace Xunit
         {
             InstanceDictionary.Set(context, "HttpMethod", httpMethod);
             SetHttpMethodCallback(context);
+            
             return context;
         }
 
         private static void SetHttpMethodCallback(IMockedRequestContext context)
         {
             if (context.Request.HttpMethod != null)
-                return;
+            {
+                return;                
+            }
 
             context.Request.Stub(requestBase => requestBase.HttpMethod)
-                .WhenCalled(
-                    invocation => invocation.ReturnValue = InstanceDictionary.Get<string>(context, "HttpMethod")
-                )
+                .WhenCalled(invocation => invocation.ReturnValue = InstanceDictionary.Get<string>(context, "HttpMethod"))
                 .Return(null).Repeat.Any();
         }
     }

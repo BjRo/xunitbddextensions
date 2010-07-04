@@ -32,6 +32,7 @@ namespace Xunit
         protected override void EstablishContext()
         {
             base.EstablishContext();
+
             _invokerBuilder = CreateTestActionInvoker();
             PrepareRequestContext(_invokerBuilder.RequestContext);
         }

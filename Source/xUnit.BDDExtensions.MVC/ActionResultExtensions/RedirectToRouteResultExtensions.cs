@@ -16,30 +16,42 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using Xunit.Internal;
 
 namespace Xunit
 {
     public static class RedirectToRouteResultExtensions
     {
-        public static void ShouldLinkTo<T>(this Expression<Action<T>> expected, Expression<Action<T>> action)
-            where T : Controller
+        public static void ShouldLinkTo<TController>(
+            this Expression<Action<TController>> expected, 
+            Expression<Action<TController>> controllerActionPointer) where TController : Controller
         {
+            Guard.AgainstArgumentNull(expected, "expected");
+            Guard.AgainstArgumentNull(controllerActionPointer, "controllerActionPointer");
+
             var expectedDictionary = Microsoft.Web.Mvc.Internal.ExpressionHelper.GetRouteValuesFromExpression(expected);
-            var actionDictionary = Microsoft.Web.Mvc.Internal.ExpressionHelper.GetRouteValuesFromExpression(action);
+            var actionDictionary = Microsoft.Web.Mvc.Internal.ExpressionHelper.GetRouteValuesFromExpression(controllerActionPointer);
             actionDictionary.ShouldOnlyContain(expectedDictionary.ToArray());
         }
 
-        public static void ShouldRouteTo<T>(this ActionResult actionResult, Expression<Action<T>> action)
-            where T : Controller
+        public static void ShouldRouteTo<TController>(
+            this ActionResult actionResult, 
+            Expression<Action<TController>> controllerActionPointer) where TController : Controller
         {
-            ShouldRouteTo((RedirectToRouteResult) actionResult, action);
+            Guard.AgainstArgumentNull(actionResult, "actionResult");
+            Guard.AgainstArgumentNull(controllerActionPointer, "controllerActionPointer");
+
+            ShouldRouteTo((RedirectToRouteResult) actionResult, controllerActionPointer);
         }
 
-        public static void ShouldRouteTo<T>(this RedirectToRouteResult redirectToRouteResult,
-                                            Expression<Action<T>> action)
-            where T : Controller
+        public static void ShouldRouteTo<TController>(
+            this RedirectToRouteResult redirectToRouteResult,
+            Expression<Action<TController>> controllerActionPointer) where TController : Controller
         {
-            var actionDictionary = Microsoft.Web.Mvc.Internal.ExpressionHelper.GetRouteValuesFromExpression(action);
+            Guard.AgainstArgumentNull(redirectToRouteResult, "redirectToRouteResult");
+            Guard.AgainstArgumentNull(controllerActionPointer, "controllerActionPointer");
+
+            var actionDictionary = Microsoft.Web.Mvc.Internal.ExpressionHelper.GetRouteValuesFromExpression(controllerActionPointer);
             actionDictionary.ShouldOnlyContain(redirectToRouteResult.RouteValues.ToArray());
         }
     }

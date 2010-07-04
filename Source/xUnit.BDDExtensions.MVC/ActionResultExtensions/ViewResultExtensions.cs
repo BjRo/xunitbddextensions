@@ -13,6 +13,7 @@
 // limitations under the License.
 // 
 using System.Web.Mvc;
+using Xunit.Internal;
 
 namespace Xunit
 {
@@ -20,7 +21,9 @@ namespace Xunit
     {
         public static T Model<T>(this ViewResult viewResult)
         {
-            return (T) viewResult.ViewData.Model;
+            Guard.AgainstArgumentNull(viewResult, "viewResult");
+
+            return (T)viewResult.ViewData.Model;
         }
     }
 }

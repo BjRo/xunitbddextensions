@@ -1,51 +1,34 @@
-using System;
 using Xunit.Internal;
 
 namespace Xunit.Specs
 {
     [Concern(typeof (InstanceDictionary))]
-    public class When_setting_values_for_an_instance : InstanceContextSpecification<InstanceDictionary>
+    public class When_setting_a_value_for_an_instance_in_the_dictionary : InstanceContextSpecification<InstanceDictionary>
     {
-        private object instance1;
-        private object instance2;
-
+        private object _instance;
+       
         protected override void EstablishContext()
         {
-            base.EstablishContext();
-            instance1 = new object();
-            instance2 = new object();
+            _instance = new object();
         }
 
         protected override void Because()
         {
-            Sut.Set(instance1, "Key", "wert1");
-            Sut.Set(instance2, "Key", "wert2");
-            Sut.Set(instance1, "Key2", "value1");
-            Sut.Set(instance2, "Key2", "value2");
+            Sut.Set(_instance, "Key", "wert1");
         }
 
         [Observation]
-        public void Should_key_of_instance1_has_wert1()
+        public void Should_be_able_to_retrieve_the_value_with_the_key_and_the_related_instance()
         {
-            Sut.Get<string>(instance1, "Key").ShouldBeEqualTo("wert1");
+            Sut.Get<string>(_instance, "Key").ShouldBeEqualTo("wert1");
         }
 
         [Observation]
-        public void Should_key_of_instance2_has_wert2()
+        public void Should_not_be_able_to_retrieve_a_value_with_the_key_and_and_an_unrelated_instance()
         {
-            Sut.Get<string>(instance2, "Key").ShouldBeEqualTo("wert2");
-        }
+            var otherInstance = new object();
 
-        [Observation]
-        public void Should_key2_of_instance1_has_value1()
-        {
-            Sut.Get<string>(instance1, "Key2").ShouldBeEqualTo("value1");
-        }
-
-        [Observation]
-        public void Should_key2_of_instance2_has_value2()
-        {
-            Sut.Get<string>(instance2, "Key2").ShouldBeEqualTo("value2");
+            Sut.Get<string>(otherInstance, "Key").ShouldBeNull();
         }
     }
 }

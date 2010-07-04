@@ -28,9 +28,16 @@ namespace Xunit.Internal
             return memberExpression.Name;
         }
 
-        private static Expression GetLambdaBody(Expression expression)
+        public static string[] GetParameterNames(Expression expression)
         {
-            return ((LambdaExpression) expression).Body;
+            var methodCall = GetMethodCallExpression(expression);
+
+            if (methodCall == null)
+            {
+                return new string[0];
+            }
+
+            return methodCall.Method.GetParameters().Select(p => p.Name).ToArray();
         }
 
         private static MemberInfo GetMemberInfoFromExpression(Expression expression)
@@ -39,25 +46,18 @@ namespace Xunit.Internal
             {
                 return GetMemberInfoFromExpression(((UnaryExpression) expression).Operand);
             }
+
             if (expression is MemberExpression)
             {
                 return ((MemberExpression) expression).Member;
             }
+
             if (expression is MethodCallExpression)
             {
                 return ((MethodCallExpression) expression).Method;
             }
-            throw new InvalidOperationException(string.Format("{0} not handled", expression.Type.Name));
-        }
 
-        public static string[] GetParameterNames(Expression expression)
-        {
-            var methodCall = GetMethodCallExpression(expression);
-            if (methodCall == null)
-            {
-                return new string[0];
-            }
-            return methodCall.Method.GetParameters().Select(p => p.Name).ToArray();
+            throw new InvalidOperationException(string.Format("{0} not handled", expression.Type.Name));
         }
 
         private static MethodCallExpression GetMethodCallExpression(Expression expression)
@@ -66,10 +66,12 @@ namespace Xunit.Internal
             {
                 expression = ((LambdaExpression) expression).Body;
             }
+
             if (expression is MethodCallExpression)
             {
                 return ((MethodCallExpression) expression);
             }
+
             return null;
         }
 
@@ -77,22 +79,29 @@ namespace Xunit.Internal
         {
             var methodCall = GetMethodCallExpression(expression);
             var names = GetParameterNames(methodCall);
+            
             for (var i = 0; i < names.Length; i++)
             {
                 var name = names[i];
+            
                 if (name == parameterName)
                 {
                     return GetValue(methodCall, i);
                 }
             }
+            
             throw new InvalidOperationException("unknown parameter");
         }
 
         private static object GetValue(MethodCallExpression methodCall, int index)
         {
             var argument = methodCall.Arguments[index];
+            
             if (argument is ConstantExpression)
-                return ((ConstantExpression) argument).Value;
+            {
+                return ((ConstantExpression)argument).Value;
+            }
+                
             return EvaluateExpression(argument);
         }
 
@@ -100,6 +109,11 @@ namespace Xunit.Internal
         {
             var lambda = Expression.Lambda(argument);
             return lambda.Compile().DynamicInvoke();
+        }
+
+        private static Expression GetLambdaBody(Expression expression)
+        {
+            return ((LambdaExpression) expression).Body;
         }
     }
 }

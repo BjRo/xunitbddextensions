@@ -16,14 +16,16 @@ namespace Xunit
 {
     public static class ControllerActionInvokerBuilderExtensions
     {
-        public static ControllerActionInvokerBuilder AntiForgeryToken(this ControllerActionInvokerBuilder invokerBuilder)
+        public static ControllerActionInvokerBuilder AntiForgeryToken(
+            this ControllerActionInvokerBuilder invokerBuilder)
         {
             invokerBuilder.RequestContext.AntiForgeryToken();
             return invokerBuilder;
         }
 
-        public static ControllerActionInvokerBuilder HttpMethod(this ControllerActionInvokerBuilder invokerBuilder,
-                                                                string httpMethod)
+        public static ControllerActionInvokerBuilder HttpMethod(
+            this ControllerActionInvokerBuilder invokerBuilder,
+            string httpMethod)
         {
             invokerBuilder.HttpMethod(httpMethod);
             return invokerBuilder;
