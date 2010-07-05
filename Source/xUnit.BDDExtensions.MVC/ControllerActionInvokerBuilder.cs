@@ -43,12 +43,7 @@ namespace Xunit
             return this;
         }
 
-        public static implicit operator ActionResult(ControllerActionInvokerBuilder builder)
-        {
-            return (ActionResult) builder.Invoke();
-        }
-
-        public object Invoke()
+        public object InvokeAction()
         {
             ConvertParameterToFormCollection();
 

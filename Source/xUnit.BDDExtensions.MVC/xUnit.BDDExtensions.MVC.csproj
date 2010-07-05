@@ -67,7 +67,7 @@
     <Compile Include="ControllerContextSpecification.cs" />
     <Compile Include="ControllerActionInvokerBuilder.cs" />
     <Compile Include="ControllerActionInvokerBuilderExtensions.cs" />
-    <Compile Include="Internal\InstanceDictionary.cs" />
+    <Compile Include="MockedRequestContextValueStore.cs" />
     <Compile Include="Internal\MvcExpressionHelper.cs" />
     <Compile Include="IMockedRequestContext.cs" />
     <Compile Include="IMockedRequestContextExtensions.cs" />

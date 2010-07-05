@@ -20,6 +20,9 @@ using System.Reflection;
 
 namespace Xunit.Internal
 {
+    /// <summary>
+    /// Analysis
+    /// </summary>
     internal static class MvcExpressionHelper
     {
         public static string GetMemberName(Expression expression)

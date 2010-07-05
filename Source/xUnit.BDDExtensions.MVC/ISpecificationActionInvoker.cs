@@ -16,6 +16,15 @@ using System.Web.Mvc;
 
 namespace Xunit
 {
+    /// <summary>
+    /// Interface for SpecificationActionInvoker for Running test. Create
+    /// your own if you have a custom ControllerActionInvoker.
+    ///  </summary>
+    /// <remarks>
+    /// Derive from your ControllerActionInvoker, implement this interface
+    /// and override InvokeActionResult(), within that you only safe the
+    /// ActionResult and don't invoke the ActionResult.
+    /// </remarks>
     public interface ISpecificationActionInvoker : IActionInvoker
     {
         ActionResult Result { get; }

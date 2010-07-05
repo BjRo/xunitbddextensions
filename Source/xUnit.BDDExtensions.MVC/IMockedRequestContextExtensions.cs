@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
+using System;
 using System.IO;
 using System.Linq;
 using System.Security.Principal;
@@ -25,8 +26,6 @@ namespace Xunit
 {
     public static class MockedRequestContextExtensions
     {
-        private static readonly InstanceDictionary InstanceDictionary = new InstanceDictionary();
-
         public static IMockedRequestContext AntiForgeryToken(this IMockedRequestContext context)
         {
             HttpContext.Current = new HttpContext(new HttpRequest("/", "http://localhost/", ""),
@@ -85,7 +84,7 @@ namespace Xunit
 
         public static IMockedRequestContext HttpMethod(this IMockedRequestContext context, string httpMethod)
         {
-            InstanceDictionary.SetValue(context, "HttpMethod", httpMethod);
+            context.SetValue("HttpMethod", httpMethod);
             SetHttpMethodCallback(context);
             
             return context;
@@ -99,8 +98,9 @@ namespace Xunit
             }
 
             context.Request.Stub(requestBase => requestBase.HttpMethod)
-                .WhenCalled(invocation => invocation.ReturnValue = InstanceDictionary.GetValue<string>(context, "HttpMethod"))
+                .WhenCalled(invocation => invocation.ReturnValue = context.GetValue<string>("HttpMethod"))
                 .Return(null).Repeat.Any();
         }
+
     }
 }
