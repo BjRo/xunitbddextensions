@@ -13,7 +13,6 @@
 // limitations under the License.
 // 
 using Xunit.Internal;
-using Xunit.Sdk;
 
 namespace Xunit
 {
@@ -24,7 +23,7 @@ namespace Xunit
         /// </summary>
         static ObservationAttribute()
         {
-            DefaultFabric.MockFactory = new RhinoMocksFactory();
+            FrameworkConfig.MockingEngine = new RhinoMockingEngine();
         }
     }
 }

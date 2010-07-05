@@ -22,7 +22,7 @@ namespace Xunit.Internal
     public class FabricContext : IFabricContext
     {
         private readonly Fabric _fabric;
-        private readonly IMockFactory _mockFactory;
+        private readonly IMockingEngine _mockingEngine;
         private readonly IContainer _container;
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Xunit.Internal
         /// <param name="typeToBuild">
         /// Specifies the type to build.
         /// </param>
-        /// <param name="mockFactory">
+        /// <param name="mockingEngine">
         /// Specifies the mock factory.
         /// </param>
         /// <param name="container">
@@ -45,14 +45,14 @@ namespace Xunit.Internal
         /// <param name="fabric">
         /// Specifies the fabric.
         /// </param>
-        public FabricContext(Type typeToBuild, IMockFactory mockFactory, IContainer container, Fabric fabric)
+        public FabricContext(Type typeToBuild, IMockingEngine mockingEngine, IContainer container, Fabric fabric)
         {
             Guard.AgainstArgumentNull(typeToBuild, "typeToBuild");
-            Guard.AgainstArgumentNull(mockFactory, "mockFactory");
+            Guard.AgainstArgumentNull(mockingEngine, "mockingEngine");
             Guard.AgainstArgumentNull(container, "container");
 
             TypeToBuild = typeToBuild;
-            _mockFactory = mockFactory;
+            _mockingEngine = mockingEngine;
             _container = container;
             _fabric = fabric;
         }
@@ -118,7 +118,7 @@ namespace Xunit.Internal
         /// </returns>
         public object CreateStub(Type interfaceType)
         {
-            return _mockFactory.Stub(interfaceType);
+            return _mockingEngine.Stub(interfaceType);
         }
 
         /// <summary>

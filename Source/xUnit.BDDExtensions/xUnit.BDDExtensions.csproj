@@ -81,13 +81,13 @@
     <Compile Include="Internal\FabricContext.cs" />
     <Compile Include="ConcernAttribute.cs" />
     <Compile Include="Internal\DefaultBuilder.cs" />
-    <Compile Include="Internal\DefaultFabric.cs" />
+    <Compile Include="Internal\FrameworkConfig.cs" />
     <Compile Include="Internal\EnumerableBuilder.cs" />
     <Compile Include="Internal\EnumerableExtensions.cs" />
     <Compile Include="Internal\Guard.cs" />
     <Compile Include="IBehaviorConfig.cs" />
     <Compile Include="IDependencyAccessor.cs" />
-    <Compile Include="IMockFactory.cs" />
+    <Compile Include="IMockingEngine.cs" />
     <Compile Include="InstanceContextSpecification.cs" />
     <Compile Include="Internal\IFabric.cs" />
     <Compile Include="Internal\IFabricContext.cs" />

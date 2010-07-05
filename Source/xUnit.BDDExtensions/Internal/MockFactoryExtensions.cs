@@ -19,7 +19,7 @@ using System.Linq;
 namespace Xunit.Internal
 {
     /// <summary>
-    /// A static extension class for the <see cref="IMockFactory"/> interface.
+    /// A static extension class for the <see cref="IMockingEngine"/> interface.
     /// </summary>
     public static class MockFactoryExtensions
     {
@@ -29,17 +29,17 @@ namespace Xunit.Internal
         /// <typeparam name="TInterfaceType">
         /// Specifies the interface type.
         /// </typeparam>
-        /// <param name="mockFactory">
+        /// <param name="mockingEngine">
         /// Specifies the factory for creating stub implementations on-the-fly.
         /// </param>
         /// <returns>
         /// A collection containing three stubs of the specified type.
         /// </returns>
-        public static IList<TInterfaceType> CreateStubCollectionOf<TInterfaceType>(this IMockFactory mockFactory) where TInterfaceType : class 
+        public static IList<TInterfaceType> CreateStubCollectionOf<TInterfaceType>(this IMockingEngine mockingEngine) where TInterfaceType : class 
         {
-            Guard.AgainstArgumentNull(mockFactory, "mockFactory");
+            Guard.AgainstArgumentNull(mockingEngine, "mockingEngine");
 
-           return Enumerable.Range(0, 3).Select(x => mockFactory.Stub<TInterfaceType>()).ToList();
+           return Enumerable.Range(0, 3).Select(x => mockingEngine.Stub<TInterfaceType>()).ToList();
         }
 
         /// <summary>
@@ -51,11 +51,11 @@ namespace Xunit.Internal
         /// <returns>
         /// The created stub instance.
         /// </returns>
-        public static T Stub<T>(this IMockFactory mockFactory) where T : class
+        public static T Stub<T>(this IMockingEngine mockingEngine) where T : class
         {
-            Guard.AgainstArgumentNull(mockFactory, "mockFactory");
+            Guard.AgainstArgumentNull(mockingEngine, "mockingEngine");
 
-            return (T) mockFactory.Stub(typeof (T));
+            return (T) mockingEngine.Stub(typeof (T));
         }
     }
 }

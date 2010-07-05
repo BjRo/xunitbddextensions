@@ -21,12 +21,12 @@ namespace Xunit.Internal
     /// A configuration endpoint for the <see cref="Fabric"/> which controls
     /// the internal processes of xunit.bddextensions.     
     /// </summary>
-    public class DefaultFabric
+    public class FrameworkConfig
     {
         /// <summary>
-        /// Gets or sets the <see cref="IMockFactory"/> which is used internally.
+        /// Gets or sets the <see cref="IMockingEngine"/> which is used internally.
         /// </summary>
-        public static IMockFactory MockFactory { get; set; }
+        public static IMockingEngine MockingEngine { get; set; }
 
         /// <summary>
         /// The set of default builders used inside xunit.bddextensions.
@@ -48,9 +48,9 @@ namespace Xunit.Internal
         /// <returns>
         /// A <see cref="IFabric"/>.
         /// </returns>
-        public static IFabric Create()
+        public static IFabric BuildFabric()
         {
-            return new Fabric(MockFactory, Builders, ConfigurationRules);
+            return new Fabric(MockingEngine, Builders, ConfigurationRules);
         }
     }
 }

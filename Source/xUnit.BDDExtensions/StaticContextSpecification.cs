@@ -23,14 +23,14 @@ namespace Xunit
     /// </summary>
     public abstract class StaticContextSpecification : ISpecification
     {
-        private readonly IMockFactory _mockFactory;
+        private readonly IMockingEngine _mockingEngine;
 
         /// <summary>
         /// Creates a new instance of the <see cref="StaticContextSpecification"/> class.
         /// </summary>
         protected StaticContextSpecification()
         {
-            _mockFactory = DefaultFabric.MockFactory;
+            _mockingEngine = FrameworkConfig.MockingEngine;
         }
 
         #region ISpecification Members
@@ -86,7 +86,7 @@ namespace Xunit
         /// </returns>
         protected TInterfaceType An<TInterfaceType>() where TInterfaceType : class
         {
-            return _mockFactory.Stub<TInterfaceType>();
+            return _mockingEngine.Stub<TInterfaceType>();
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Xunit
         /// </returns>
         protected IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
         {
-            return _mockFactory.CreateStubCollectionOf<TInterfaceType>();
+            return _mockingEngine.CreateStubCollectionOf<TInterfaceType>();
         }
     }
 }

@@ -25,18 +25,18 @@ namespace Xunit.Internal
     public sealed class AutoMockingContainer<TTargetClass> :
         AutoMocker<TTargetClass>,
         ServiceLocator,
-        IMockFactory where TTargetClass : class
+        IMockingEngine where TTargetClass : class
     {
         private readonly IFabric _fabric;
-        private readonly IMockFactory _mockFactory;
+        private readonly IMockingEngine _mockingEngine;
 
         /// <summary>
         ///   Initializes a new instance of the <see cref = "AutoMockingContainer{TTargetClass}" /> class.
         /// </summary>
         public AutoMockingContainer()
         {
-            _fabric = DefaultFabric.Create();
-            _mockFactory = DefaultFabric.MockFactory;
+            _fabric = FrameworkConfig.BuildFabric();
+            _mockingEngine = FrameworkConfig.MockingEngine;
             _serviceLocator = this;
             _container = new AutoMockedContainer(this);
         }
@@ -52,7 +52,7 @@ namespace Xunit.Internal
         /// </returns>
         public T Stub<T>() where T : class
         {
-            return _mockFactory.Stub<T>();
+            return _mockingEngine.Stub<T>();
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Xunit.Internal
         /// </returns>
         public object Stub(Type interfaceType)
         {
-            return _mockFactory.Stub(interfaceType);
+            return _mockingEngine.Stub(interfaceType);
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Xunit.Internal
         /// </returns>
         public T PartialMock<T>(params object[] args) where T : class
         {
-            return _mockFactory.PartialMock<T>(args);
+            return _mockingEngine.PartialMock<T>(args);
         }
     }
 }

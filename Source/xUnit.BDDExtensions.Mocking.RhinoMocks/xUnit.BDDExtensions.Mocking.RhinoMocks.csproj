@@ -70,7 +70,7 @@
     <Compile Include="PropertyStubs\IPropertyStubRule.cs" />
     <Compile Include="PropertyStubs\TerminalStubRule.cs" />
     <Compile Include="RhinoMocksExtensions.cs" />
-    <Compile Include="RhinoMocksFactory.cs" />
+    <Compile Include="RhinoMockingEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

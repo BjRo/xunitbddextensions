@@ -3,7 +3,7 @@ using Rhino.Mocks;
 
 namespace Xunit
 {
-    public class RhinoMocksFactory : IMockFactory
+    public class RhinoMockingEngine : IMockingEngine
     {
         public object Stub(Type interfaceType)
         {

@@ -19,7 +19,7 @@ namespace Xunit
     /// <summary>
     /// Interface to a mocking library. 
     /// </summary>
-    public interface IMockFactory
+    public interface IMockingEngine
     {
         /// <summary>
         /// Creates a stub of the type specified via <paramref name="interfaceType"/>.
