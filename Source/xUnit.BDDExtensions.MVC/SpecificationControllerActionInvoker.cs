@@ -16,7 +16,7 @@ using System.Web.Mvc;
 
 namespace Xunit
 {
-    public class TestControllerActionInvoker : ControllerActionInvoker, ITestActionInvoker
+    public class SpecificationControllerActionInvoker : ControllerActionInvoker, ISpecificationActionInvoker
     {
         public ActionResult Result { get; private set; }
 

@@ -89,7 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\GlobalAssemblyInfo.cs">
-      <Link>GlobalAssemblyInfo.cs</Link>
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Internal\AssemblyLoaderSpecs.cs" />
     <Compile Include="Internal\AssemblySpecs.cs" />
@@ -104,6 +104,7 @@
     <Compile Include="Internal\ObservationSpecs.cs" />
     <Compile Include="Internal\ReportEngineSpecs.cs" />
     <Compile Include="Internal\TestClasses.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xUnit.BDDExtensions.Assertions\xUnit.BDDExtensions.Assertions.csproj">
@@ -123,9 +124,7 @@
       <Name>xUnit.BDDExtensions</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>

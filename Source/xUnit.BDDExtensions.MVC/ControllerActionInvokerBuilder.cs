@@ -24,9 +24,9 @@ namespace Xunit
         private Expression _actionExpression;
         private Controller _controller;
         private readonly RequestContextBuilder _contextBuilder;
-        private readonly ITestActionInvoker _actionInvoker;
+        private readonly ISpecificationActionInvoker _actionInvoker;
 
-        public ControllerActionInvokerBuilder(IDependencyAccessor dependencyAccessor, ITestActionInvoker actionInvoker)
+        public ControllerActionInvokerBuilder(IDependencyAccessor dependencyAccessor, ISpecificationActionInvoker actionInvoker)
         {
             _contextBuilder = new RequestContextBuilder(dependencyAccessor);
             _actionInvoker = actionInvoker;
@@ -45,10 +45,10 @@ namespace Xunit
 
         public static implicit operator ActionResult(ControllerActionInvokerBuilder builder)
         {
-            return (ActionResult) builder.Execute();
+            return (ActionResult) builder.Invoke();
         }
 
-        public object Execute()
+        public object Invoke()
         {
             ConvertParameterToFormCollection();
 

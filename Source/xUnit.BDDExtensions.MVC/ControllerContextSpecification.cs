@@ -43,20 +43,27 @@ namespace Xunit
 
         protected virtual ControllerActionInvokerBuilder CreateTestActionInvoker()
         {
-            return new ControllerActionInvokerBuilder(this, new TestControllerActionInvoker());
+            return new ControllerActionInvokerBuilder(this, new SpecificationControllerActionInvoker());
         }
 
-        protected ControllerActionInvokerBuilder InvokeAction<TResult>(Expression<Func<T, TResult>> expression)
+        /// <summary>
+        /// Invokes an Controller-Action with all ActionFilters applied to them.
+        /// 
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        protected ActionResult InvokeAction<TResult>(Expression<Func<T, TResult>> expression)
         {
             _invokerBuilder.Controller(Sut).Action(expression);
-            return _invokerBuilder;
+            return (ActionResult) _invokerBuilder.Invoke();
         }
 
 
-        protected ControllerActionInvokerBuilder InvokePostAction<TResult>(Expression<Func<T, TResult>> expression)
+        protected ActionResult InvokePostAction<TResult>(Expression<Func<T, TResult>> expression)
         {
             _invokerBuilder.Controller(Sut).Action(expression).HttpMethod("POST").AntiForgeryToken();
-            return _invokerBuilder;
+            return (ActionResult) _invokerBuilder.Invoke();
         }
     }
 }

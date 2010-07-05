@@ -71,10 +71,10 @@
     <Compile Include="Internal\MvcExpressionHelper.cs" />
     <Compile Include="IMockedRequestContext.cs" />
     <Compile Include="IMockedRequestContextExtensions.cs" />
-    <Compile Include="ITestActionInvoker.cs" />
+    <Compile Include="ISpecificationActionInvoker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestContextBuilder.cs" />
-    <Compile Include="TestControllerActionInvoker.cs" />
+    <Compile Include="SpecificationControllerActionInvoker.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xUnit.BDDExtensions.Assertions\xUnit.BDDExtensions.Assertions.csproj">

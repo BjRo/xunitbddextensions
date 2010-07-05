@@ -41,16 +41,4 @@
     <Variables />
     <CustomProperties />
   </Template>
-  <Template uid="e6093903-e2f9-4063-a7c4-52f3bccaeb66" shortcut="ccs" description="" text="    [Concern(typeof($ConcernType$))]&#xD;&#xA;    public class When_$ContextName$ : ConcernOf$ConcernType$&#xD;&#xA;    {&#xD;&#xA;        protected override void EstablishContext()&#xD;&#xA;        {&#xD;&#xA;            $END$&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        protected override void Because()&#xD;&#xA;        {&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        [Observation]&#xD;&#xA;        public void Should_$Observation$()&#xD;&#xA;        {&#xD;&#xA;        }&#xD;&#xA;    }" reformat="True" shortenQualifiedReferences="True">
-    <Context>
-      <CSharpContext context="Everywhere" minimumLanguageVersion="2.0" />
-    </Context>
-    <Categories />
-    <Variables>
-      <Variable name="ConcernType" expression="" initialRange="0" />
-      <Variable name="ContextName" expression="" initialRange="0" />
-      <Variable name="Observation" expression="" initialRange="0" />
-    </Variables>
-    <CustomProperties />
-  </Template>
 </TemplatesExport>

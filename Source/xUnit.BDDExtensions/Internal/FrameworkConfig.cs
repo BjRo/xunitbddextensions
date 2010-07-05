@@ -33,8 +33,8 @@ namespace Xunit.Internal
         /// </summary>
         public static readonly IList<IBuilder> Builders = new List<IBuilder>
         {
-            new DefaultBuilder(),
-            new EnumerableBuilder()
+            new EnumerableBuilder(),
+            new DefaultBuilder()
         };
 
         /// <summary>

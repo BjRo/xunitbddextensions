@@ -15,24 +15,7 @@
       <Property key="ValidateFileName" value="False" />
     </CustomProperties>
   </Template>
-  <Template uid="64ff222d-34e6-416f-aaa7-94a653b66b99" shortcut="" description="InstanceContextSpecification" text="namespace $namespace$&#xD;&#xA;{&#xD;&#xA;    [Concern(typeof ($ConcernType$))]&#xD;&#xA;    public class When_$ContextName$ : InstanceContextSpecification&lt;$ConcernType$&gt;&#xD;&#xA;    {&#xD;&#xA;        protected override void EstablishContext()&#xD;&#xA;        {&#xD;&#xA;            $END$&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        protected override void Because()&#xD;&#xA;        {&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        [Observation]&#xD;&#xA;        public void Should_$ObservationName$()&#xD;&#xA;        {&#xD;&#xA;            &#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;}" reformat="True" shortenQualifiedReferences="True">
-    <Context>
-      <ProjectLanguageContext language="CSharp" />
-    </Context>
-    <Categories />
-    <Variables>
-      <Variable name="namespace" expression="fileDefaultNamespace()" initialRange="-1" />
-      <Variable name="ConcernType" expression="" initialRange="0" />
-      <Variable name="ContextName" expression="" initialRange="0" />
-      <Variable name="ObservationName" expression="" initialRange="0" />
-    </Variables>
-    <CustomProperties>
-      <Property key="FileName" value="File" />
-      <Property key="Extension" value="cs" />
-      <Property key="ValidateFileName" value="False" />
-    </CustomProperties>
-  </Template>
-  <Template uid="6e8f7435-95c1-4969-8587-24192cd98aef" shortcut="" description="StaticContextSpecification" text="namespace $namespace$&#xD;&#xA;{&#xD;&#xA;    [Concern(typeof ($ConcernType$))]&#xD;&#xA;    public class When_$ContextName$ : StaticContextSpecification&#xD;&#xA;    {&#xD;&#xA;        protected override void EstablishContext()&#xD;&#xA;        {&#xD;&#xA;            $END$&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        protected override void Because()&#xD;&#xA;        {&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        [Observation]&#xD;&#xA;        public void Should_$ObservationName$()&#xD;&#xA;        {&#xD;&#xA;            &#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;}" reformat="True" shortenQualifiedReferences="True">
+  <Template uid="6e8f7435-95c1-4969-8587-24192cd98aef" shortcut="" description="StaticContextSpecification" text="using xUnit;&#xD;&#xA;&#xD;&#xA;namespace $namespace$&#xD;&#xA;{&#xD;&#xA;    [Concern(typeof ($ConcernType$))]&#xD;&#xA;    public class When_$ContextName$ : StaticContextSpecification&#xD;&#xA;    {&#xD;&#xA;        protected override void EstablishContext()&#xD;&#xA;        {&#xD;&#xA;            $END$&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        protected override void Because()&#xD;&#xA;        {&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        [Observation]&#xD;&#xA;        public void Should_$ObservationName$()&#xD;&#xA;        {&#xD;&#xA;            &#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;}" reformat="True" shortenQualifiedReferences="True">
     <Context>
       <ProjectLanguageContext language="CSharp" />
     </Context>
@@ -47,6 +30,23 @@
       <Property key="FileName" value="File" />
       <Property key="Extension" value="cs" />
       <Property key="ValidateFileName" value="False" />
+    </CustomProperties>
+  </Template>
+  <Template uid="fcbb0b62-dca3-401c-ab9b-b2f22999c5b9" shortcut="" description="InstanceContextSpecification" text="using xUnit;&#xD;&#xA;&#xD;&#xA;namespace $namespace$&#xD;&#xA;{&#xD;&#xA;    [Concern(typeof ($ConcernType$))]&#xD;&#xA;    public class When_$ContextName$ : InstanceContextSpecification&lt;$ConcernType$&gt;&#xD;&#xA;    {&#xD;&#xA;        protected override void EstablishContext()&#xD;&#xA;        {&#xD;&#xA;            $END$&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        protected override void Because()&#xD;&#xA;        {&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        [Observation]&#xD;&#xA;        public void Should_$ObservationName$()&#xD;&#xA;        {&#xD;&#xA;            &#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;}" reformat="True" shortenQualifiedReferences="True">
+    <Context>
+      <CSharpContext context="Everywhere" minimumLanguageVersion="2.0" />
+    </Context>
+    <Categories />
+    <Variables>
+      <Variable name="namespace" expression="" initialRange="0" />
+      <Variable name="ConcernType" expression="" initialRange="0" />
+      <Variable name="ContextName" expression="" initialRange="0" />
+      <Variable name="ObservationName" expression="" initialRange="0" />
+    </Variables>
+    <CustomProperties>
+      <Property key="FileName" value="NewFile" />
+      <Property key="Extension" value="cs" />
+      <Property key="ValidateFileName" value="True" />
     </CustomProperties>
   </Template>
 </TemplatesExport>

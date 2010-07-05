@@ -4,7 +4,7 @@ properties {
   $build_dir = "$base_dir\Build" 
   $buildartifacts_dir = "$build_dir\" 
   $sln_file = "$base_dir\Source\xUnit.BDDExtensions.sln" 
-  $version = "1.0.2.12"
+  $version = "1.1.0.0"
   $tools_dir = "$base_dir\Tools"
   $release_dir = "$base_dir\Release"
 } 
@@ -21,12 +21,12 @@ task Init -depends Clean {
     
     Generate-Assembly-Info `
         -file "$base_dir\Source\GlobalAssemblyInfo.cs" `
-        -title "xUnit.BDDExtensions $version" `
+        -title "xUnit.BDDExtensions" `
         -description "A context specification framework based on xUnit.net" `
         -product "xUnit.BDDExtensions $version" `
         -version $version `
         -clsCompliant "false" `
-        -copyright "Copyright © Björn Rochel 2008-2010"
+        -copyright "Copyright © xUnit.NET BDD Extension Team 2008-2010"
         
     new-item $release_dir -itemType directory 
     new-item $buildartifacts_dir -itemType directory 
@@ -59,20 +59,19 @@ task Merge {
         Rhino.Mocks.dll `
         /out:xUnit.BDDExtensions.dll `
         "/internalize:$base_dir\ILMergeExcludes.txt" `
-        /t:library ``
+        /t:library  `
     }
 
     Remove-Item xUnit.BDDExtensions.MVC.Partial.dll -ErrorAction SilentlyContinue 
     Rename-Item $build_dir\xUnit.BDDExtensions.MVC.dll xUnit.BDDExtensions.MVC.Partial.dll
-    
-    
+        
 	exec {
     
      & $tools_dir\ILMerge\ILMerge.exe xUnit.BDDExtensions.MVC.Partial.dll `
         Microsoft.Web.MVC.dll `
         /out:xUnit.BDDExtensions.MVC.dll `
         "/internalize:$base_dir\ILMergeMVCExcludes.txt" `
-        /t:library ``
+        /t:library `
     }
 
     Remove-Item ReportGenerator.Partial.exe -ErrorAction SilentlyContinue 
@@ -84,7 +83,7 @@ task Merge {
         StructureMap.dll `
         NVelocity.dll `
         /out:ReportGenerator.exe `
-        /t:winexe ``
+        /t:winexe `
     }
      
     cd $old

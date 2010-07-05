@@ -1,16 +1,13 @@
 function Get-Git-Commit
 {
 	$gitLog = git log --oneline -1
-	$tmpString = $gitLog.Split('m') 
+	$gitLog = $gitLog.Split(' ') 
+	$tmpString = $gitLog[0].Split('m') 
 	$index = 0
 	if ($tmpString.Length -gt 2)
 	{
 		$index=1
-	} else 
-	{
-		$tmpString = $gitLog.Split(' ') 
-	}
-		
+	} 	
 	return $tmpString[$index].SubString(0,6)
 }
 function Generate-Assembly-Info
@@ -33,12 +30,11 @@ using System.Runtime.InteropServices;
 
 [assembly: CLSCompliantAttribute($clsCompliant )]
 [assembly: ComVisibleAttribute(false)]
-[assembly: AssemblyTitleAttribute(""$title"")]
 [assembly: AssemblyDescriptionAttribute(""$description"")]
-[assembly: AssemblyProductAttribute(""$product"")]
+[assembly: AssemblyProductAttribute(""$product ($commit)"")]
 [assembly: AssemblyCopyrightAttribute(""$copyright"")]
 [assembly: AssemblyVersionAttribute(""$version"")]
-[assembly: AssemblyInformationalVersionAttribute(""$version / $commit"")]
+[assembly: AssemblyInformationalVersionAttribute(""$version"")]
 [assembly: AssemblyFileVersionAttribute(""$version"")]
 [assembly: AssemblyDelaySignAttribute(false)]
 

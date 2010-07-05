@@ -2,8 +2,8 @@ using System.Web.Mvc;
 
 namespace Xunit.Specs
 {
-    [Concern(typeof (TestControllerActionInvoker))]
-    public class When_the_actionresult_is_invoked : InstanceContextSpecification<FakeTestControllerActionInvoker>
+    [Concern(typeof (SpecificationControllerActionInvoker))]
+    public class When_the_actionresult_is_invoked : InstanceContextSpecification<FakeSpecificationControllerActionInvoker>
     {
         private ActionResult _actionResult;
 
@@ -24,7 +24,7 @@ namespace Xunit.Specs
         }
     }
 
-    public class FakeTestControllerActionInvoker : TestControllerActionInvoker
+    public class FakeSpecificationControllerActionInvoker : SpecificationControllerActionInvoker
     {
         public void FakeInvokeActionResult(ControllerContext context, ActionResult result)
         {
