@@ -69,6 +69,7 @@
     <Compile Include="PropertyStubs\IPropertyAdapter.cs" />
     <Compile Include="PropertyStubs\IPropertyStubRule.cs" />
     <Compile Include="PropertyStubs\TerminalStubRule.cs" />
+    <Compile Include="RhinoMockingOptions.cs" />
     <Compile Include="RhinoMocksExtensions.cs" />
     <Compile Include="RhinoMockingEngine.cs" />
   </ItemGroup>

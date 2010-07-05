@@ -14,7 +14,6 @@
 // 
 using System;
 using Rhino.Mocks;
-using Rhino.Mocks.Interfaces;
 
 namespace Xunit
 {
@@ -41,48 +40,48 @@ namespace Xunit
             return new MethodCallOccurance<T>(dependency, action);
         }
 
-        /// <summary>
-        /// Configures the behavior of the dependency specified by <paramref name="dependency"/>.
-        /// </summary>
-        /// <typeparam name="T">
-        /// Specifies the type of the dependency.
-        /// </typeparam>
-        /// <typeparam name="R">
-        /// Specifies the type of the return type of the configured method
-        /// </typeparam>
-        /// <param name="dependency">
-        /// The dependency to configure behavior on.
-        /// </param>
-        /// <param name="func">
-        /// Configures the behavior.
-        /// </param>
-        /// <returns>
-        /// A <see cref="IMethodOptions{T}"/> for further configuration.
-        /// </returns>
-        public static IMethodOptions<R> WhenToldTo<T, R>(this T dependency, Function<T, R> func) where T : class
-        {
-            return dependency.Stub(func).Repeat.Any();
-        }
+        ///// <summary>
+        ///// Configures the behavior of the dependency specified by <paramref name="dependency"/>.
+        ///// </summary>
+        ///// <typeparam name="T">
+        ///// Specifies the type of the dependency.
+        ///// </typeparam>
+        ///// <typeparam name="R">
+        ///// Specifies the type of the return type of the configured method
+        ///// </typeparam>
+        ///// <param name="dependency">
+        ///// The dependency to configure behavior on.
+        ///// </param>
+        ///// <param name="func">
+        ///// Configures the behavior.
+        ///// </param>
+        ///// <returns>
+        ///// A <see cref="IMethodOptions{T}"/> for further configuration.
+        ///// </returns>
+        //public static IMethodOptions<R> WhenToldTo<T, R>(this T dependency, Function<T, R> func) where T : class
+        //{
+        //    return dependency.Stub(func).Repeat.Any();
+        //}
 
-        /// <summary>
-        /// Configures the behavior of the dependency specified by <paramref name="dependency"/>.
-        /// </summary>
-        /// <typeparam name="T">
-        /// Specifies the type of the dependency.
-        /// </typeparam>
-        /// <param name="dependency">
-        /// The dependency to configure behavior on.
-        /// </param>
-        /// <param name="func">
-        /// Configures the behavior. This must be a void method.
-        /// </param>
-        /// <returns>
-        /// A <see cref="IMethodOptions{R}"/> for further configuration.
-        /// </returns>
-        public static IMethodOptions<object> WhenToldTo<T>(this T dependency, Action<T> func) where T : class
-        {
-            return dependency.Stub(func).Repeat.Any();
-        }
+        ///// <summary>
+        ///// Configures the behavior of the dependency specified by <paramref name="dependency"/>.
+        ///// </summary>
+        ///// <typeparam name="T">
+        ///// Specifies the type of the dependency.
+        ///// </typeparam>
+        ///// <param name="dependency">
+        ///// The dependency to configure behavior on.
+        ///// </param>
+        ///// <param name="func">
+        ///// Configures the behavior. This must be a void method.
+        ///// </param>
+        ///// <returns>
+        ///// A <see cref="IMethodOptions{R}"/> for further configuration.
+        ///// </returns>
+        //public static IMethodOptions<object> WhenToldTo<T>(this T dependency, Action<T> func) where T : class
+        //{
+        //    return dependency.Stub(func).Repeat.Any();
+        //}
 
         /// <summary>
         /// Asserts that the action specified by <paramref name="action"/> was not called on the object specified by <paramref name="dependency"/>.

@@ -23,7 +23,7 @@ namespace Xunit
         /// </summary>
         static ObservationAttribute()
         {
-            FrameworkConfig.MockingEngine = new RhinoMockingEngine();
+            Framework.MockingEngine = new RhinoMockingEngine();
         }
     }
 }

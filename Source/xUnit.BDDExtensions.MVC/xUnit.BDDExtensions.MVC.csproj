@@ -34,12 +34,9 @@
     <Reference Include="Microsoft.Web.Mvc">
       <HintPath>..\..\Lib\MVCFutures\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Rhino.Mocks">
-      <HintPath>..\..\Lib\Rhino\Rhino.Mocks.dll</HintPath>
-    </Reference>
-    <Reference Include="StructureMap.AutoMocking">
-      <HintPath>..\..\Lib\StructureMap\StructureMap.AutoMocking.dll</HintPath>
-    </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL" />
+    <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL" />
+    <Reference Include="StructureMap.AutoMocking, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -80,10 +77,6 @@
     <ProjectReference Include="..\xUnit.BDDExtensions.Assertions\xUnit.BDDExtensions.Assertions.csproj">
       <Project>{DEE9E6A5-E4CA-475E-9B3A-314C7C0C8E59}</Project>
       <Name>xUnit.BDDExtensions.Assertions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\xUnit.BDDExtensions.Mocking.RhinoMocks\xUnit.BDDExtensions.Mocking.RhinoMocks.csproj">
-      <Project>{BBF8D13E-313A-4A6F-B945-948252A655A7}</Project>
-      <Name>xUnit.BDDExtensions.Mocking.RhinoMocks</Name>
     </ProjectReference>
     <ProjectReference Include="..\xUnit.BDDExtensions\xUnit.BDDExtensions.csproj">
       <Project>{01CCC787-B3E5-4D4F-917A-950E276EC3E0}</Project>
