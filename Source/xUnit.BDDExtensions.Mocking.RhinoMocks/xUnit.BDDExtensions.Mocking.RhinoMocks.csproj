@@ -58,7 +58,6 @@
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="EventRaiserExtensions.cs" />
-    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="MethodCallOccurance.cs" />
     <Compile Include="ObservationAttribute.cs" />
     <Compile Include="PropertyStubExtensions.cs" />
