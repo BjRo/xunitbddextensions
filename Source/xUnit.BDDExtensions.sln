@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.Asserti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.Mocking.RhinoMocks", "xUnit.BDDExtensions.Mocking.RhinoMocks\xUnit.BDDExtensions.Mocking.RhinoMocks.csproj", "{BBF8D13E-313A-4A6F-B945-948252A655A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.Mocking.Moq", "xUnit.BDDExtensions.Mocking.Moq\xUnit.BDDExtensions.Mocking.Moq.csproj", "{EA948E79-F988-4D6E-89CB-265AE8C7C22E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{BBF8D13E-313A-4A6F-B945-948252A655A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBF8D13E-313A-4A6F-B945-948252A655A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBF8D13E-313A-4A6F-B945-948252A655A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA948E79-F988-4D6E-89CB-265AE8C7C22E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA948E79-F988-4D6E-89CB-265AE8C7C22E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA948E79-F988-4D6E-89CB-265AE8C7C22E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA948E79-F988-4D6E-89CB-265AE8C7C22E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
