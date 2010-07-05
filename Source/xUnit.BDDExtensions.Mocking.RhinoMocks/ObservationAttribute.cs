@@ -1,4 +1,4 @@
-// Copyright 2010 Björn Rochel - http://www.bjro.de/ 
+// Copyright 2009 Björn Rochel - http://www.bjro.de/ 
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,18 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
+using Xunit.Internal;
+using Xunit.Sdk;
+
 namespace Xunit
 {
-    /// <summary>
-    /// Base class for specifications.
-    /// </summary>
-    public abstract class StaticContextSpecification : StaticContextSpecificationBase
+    public class ObservationAttribute : ObservationAttributeBase
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="StaticContextSpecification"/> class.
+        /// Initializes a new instance of the <see cref="ObservationAttribute"/> class.
         /// </summary>
-        protected StaticContextSpecification() : base(new RhinoMocksFactory())
+        static ObservationAttribute()
         {
+            DefaultFabric.MockFactory = new RhinoMocksFactory();
         }
     }
 }

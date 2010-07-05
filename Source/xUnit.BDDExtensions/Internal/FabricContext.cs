@@ -141,7 +141,7 @@ namespace Xunit.Internal
         /// </returns>
         public object ResolveByFabric(Type type)
         {
-            return _fabric.Build(type, _mockFactory, _container);
+            return _fabric.Build(type, _container);
         }
     }
 }

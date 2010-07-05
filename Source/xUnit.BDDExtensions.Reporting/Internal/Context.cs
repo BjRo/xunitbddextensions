@@ -116,7 +116,7 @@ namespace Xunit.Reporting.Internal
         {
             return type.IsMarkedWith<ConcernAttribute>() &&
                    type.Implements<ISpecification>() &&
-                   type.ContainsMethodsMarkedWith<ObservationAttribute>();
+                   type.ContainsMethodsMarkedWith<ObservationAttributeBase>();
         }
 
         /// <summary>

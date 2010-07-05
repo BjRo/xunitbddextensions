@@ -27,15 +27,16 @@ namespace Xunit.Internal
         ServiceLocator,
         IMockFactory where TTargetClass : class
     {
-        private readonly Fabric _fabric = new DefaultFabric();
+        private readonly IFabric _fabric;
         private readonly IMockFactory _mockFactory;
 
         /// <summary>
         ///   Initializes a new instance of the <see cref = "AutoMockingContainer{TTargetClass}" /> class.
         /// </summary>
-        public AutoMockingContainer(IMockFactory mockFactory)
+        public AutoMockingContainer()
         {
-            _mockFactory = mockFactory;
+            _fabric = DefaultFabric.Create();
+            _mockFactory = DefaultFabric.MockFactory;
             _serviceLocator = this;
             _container = new AutoMockedContainer(this);
         }
@@ -92,7 +93,7 @@ namespace Xunit.Internal
         /// </returns>
         public object Service(Type serviceType)
         {
-            return _fabric.Build(serviceType, _mockFactory, _container);
+            return _fabric.Build(serviceType, _container);
         }
 
         /// <summary>

@@ -15,7 +15,7 @@
 namespace Xunit
 {
     /// <summary>
-    /// Defines a modularization point for implementations of <see cref="InstanceContextSpecificationBase{TSystemUnderTest}"/>.
+    /// Defines a modularization point for implementations of <see cref="InstanceContextSpecification{TSystemUnderTest}"/>.
     /// </summary>
     public interface IBehaviorConfig
     {

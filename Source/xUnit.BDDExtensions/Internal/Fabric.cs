@@ -25,23 +25,23 @@ namespace Xunit.Internal
     /// </summary>
     public class Fabric : IFabric
     {
+        private readonly IMockFactory _mockFactory;
         private readonly IEnumerable<IBuilder> _builders;
         private readonly IEnumerable<IConfigurationRule> _configurationRules;
 
         /// <summary>
         /// Creates a new instance of the <see cref="Fabric"/> class.
         /// </summary>
-        /// <param name="builders">
-        /// A collection of all known builders.
-        /// </param>
-        /// <param name="configurationRules">
-        /// A set of rules for configuration of the produced instances.
-        /// </param>
-        public Fabric(IEnumerable<IBuilder> builders, IEnumerable<IConfigurationRule> configurationRules)
+        /// <param name="mockFactory">The mock factory.</param>
+        /// <param name="builders">A collection of all known builders.</param>
+        /// <param name="configurationRules">A set of rules for configuration of the produced instances.</param>
+        public Fabric(IMockFactory mockFactory, IEnumerable<IBuilder> builders, IEnumerable<IConfigurationRule> configurationRules)
         {
+            Guard.AgainstArgumentNull(mockFactory, "mockFactory");
             Guard.AgainstArgumentNull(builders, "builders");
             Guard.AgainstArgumentNull(configurationRules, "configurationRules");
 
+            _mockFactory = mockFactory;
             _builders = builders;
             _configurationRules = configurationRules;
         }
@@ -52,22 +52,18 @@ namespace Xunit.Internal
         /// <param name="typeToBuild">
         /// Specifies the type to be build.
         /// </param>
-        /// <param name="mockFactory">
-        /// Specifies a facade to a mocking framework.
-        /// </param>
         /// <param name="container">
         /// Specifies the automocking container.
         /// </param>
         /// <returns>
         /// The created instance.
         /// </returns>
-        public object Build(Type typeToBuild, IMockFactory mockFactory, IContainer container)
+        public object Build(Type typeToBuild, IContainer container)
         {
             Guard.AgainstArgumentNull(typeToBuild, "typeToBuild");
-            Guard.AgainstArgumentNull(mockFactory, "mockFactory");
             Guard.AgainstArgumentNull(container, "container");
 
-            var buildContext = new FabricContext(typeToBuild, mockFactory, container, this);
+            var buildContext = new FabricContext(typeToBuild, _mockFactory, container, this);
 
             var responsibleBuilder = _builders.FirstOrDefault(x => x.KnowsHowToBuild(buildContext.TypeToBuild));
 

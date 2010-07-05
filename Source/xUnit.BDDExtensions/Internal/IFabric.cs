@@ -29,15 +29,12 @@ namespace Xunit.Internal
         /// <param name="typeToBuild">
         /// Specifies the type to be build.
         /// </param>
-        /// <param name="mockFactory">
-        /// Specifies a facade to a mocking framework.
-        /// </param>
         /// <param name="container">
         /// Specifies the automocking container.
         /// </param>
         /// <returns>
         /// The created instance.
         /// </returns>
-        object Build(Type typeToBuild, IMockFactory mockFactory, IContainer container);
+        object Build(Type typeToBuild, IContainer container);
     }
 }

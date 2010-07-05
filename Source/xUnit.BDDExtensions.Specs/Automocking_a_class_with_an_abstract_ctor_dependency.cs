@@ -11,7 +11,7 @@ namespace Xunit.Specs
 
         protected override void EstablishContext()
         {
-            _autoMocker =  new AutoMockingContainer<TestClassWithAbstractClassDependency>(new RhinoMocksFactory());
+            _autoMocker =  new AutoMockingContainer<TestClassWithAbstractClassDependency>();
         }
 
         protected override void Because()

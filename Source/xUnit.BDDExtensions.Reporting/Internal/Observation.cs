@@ -50,7 +50,7 @@ namespace Xunit.Reporting.Internal
         public static IEnumerable<Observation> BuildAllFrom(Type specType)
         {
             return specType
-                .GetMethodsMarkedWith<ObservationAttribute>()
+                .GetMethodsMarkedWith<ObservationAttributeBase>()
                 .Select(method => new Observation(method.Name));
         }
 

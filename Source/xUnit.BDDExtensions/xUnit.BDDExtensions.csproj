@@ -83,21 +83,21 @@
     <Compile Include="Internal\DefaultBuilder.cs" />
     <Compile Include="Internal\DefaultFabric.cs" />
     <Compile Include="Internal\EnumerableBuilder.cs" />
-    <Compile Include="Internal\ExtensionMethods.cs" />
+    <Compile Include="Internal\EnumerableExtensions.cs" />
     <Compile Include="Internal\Guard.cs" />
     <Compile Include="IBehaviorConfig.cs" />
     <Compile Include="IDependencyAccessor.cs" />
     <Compile Include="IMockFactory.cs" />
-    <Compile Include="InstanceContextSpecificationBase.cs" />
+    <Compile Include="InstanceContextSpecification.cs" />
     <Compile Include="Internal\IFabric.cs" />
     <Compile Include="Internal\IFabricContext.cs" />
     <Compile Include="Internal\IConfigurationRule.cs" />
     <Compile Include="Internal\IBuilder.cs" />
     <Compile Include="Internal\Fabric.cs" />
-    <Compile Include="StaticContextSpecificationBase.cs" />
+    <Compile Include="ObservationAttributeBase.cs" />
+    <Compile Include="StaticContextSpecification.cs" />
     <Compile Include="Internal\MockFactoryExtensions.cs" />
     <Compile Include="ISpecification.cs" />
-    <Compile Include="ObservationAttribute.cs" />
     <Compile Include="SpecificationCommand.cs" />
   </ItemGroup>
   <ItemGroup>

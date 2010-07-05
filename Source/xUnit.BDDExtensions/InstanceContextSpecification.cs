@@ -25,22 +25,17 @@ namespace Xunit
     /// <typeparam name="TSystemUnderTest">
     /// Specifies the type of the system under test.
     /// </typeparam>
-    public abstract class InstanceContextSpecificationBase<TSystemUnderTest> : ISpecification, IDependencyAccessor where TSystemUnderTest : class
+    public abstract class InstanceContextSpecification<TSystemUnderTest> : ISpecification, IDependencyAccessor where TSystemUnderTest : class
     {
         private readonly AutoMockingContainer<TSystemUnderTest> _autoMockingContainer;
         private readonly List<IBehaviorConfig> _behaviors = new List<IBehaviorConfig>();
 
         /// <summary>
-        /// Creats a new instance of the <see cref="InstanceContextSpecificationBase{TSystemUnderTest}"/>.
+        /// Creats a new instance of the <see cref="InstanceContextSpecification{TSystemUnderTest}"/>.
         /// </summary>
-        /// <param name="mockFactory">
-        /// The auto stub container.
-        /// </param>
-        protected InstanceContextSpecificationBase(IMockFactory mockFactory)
+        protected InstanceContextSpecification()
         {
-            Guard.AgainstArgumentNull(mockFactory, "mockFactory");
-
-            _autoMockingContainer = new AutoMockingContainer<TSystemUnderTest>(mockFactory);
+            _autoMockingContainer = new AutoMockingContainer<TSystemUnderTest>();
         }
 
         /// <summary>

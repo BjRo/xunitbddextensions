@@ -21,24 +21,16 @@ namespace Xunit
     /// <summary>
     /// Base class for specifications.
     /// </summary>
-    public abstract class StaticContextSpecificationBase : ISpecification
+    public abstract class StaticContextSpecification : ISpecification
     {
         private readonly IMockFactory _mockFactory;
 
         /// <summary>
-        /// Creates a new instance of the <see cref="StaticContextSpecificationBase"/> class.
+        /// Creates a new instance of the <see cref="StaticContextSpecification"/> class.
         /// </summary>
-        /// <param name="mockFactory">
-        /// Specifies the stub engine used for creating dynamic stub instances on the fly.
-        /// </param>
-        protected StaticContextSpecificationBase(IMockFactory mockFactory)
+        protected StaticContextSpecification()
         {
-            if (mockFactory == null)
-            {
-                throw new ArgumentNullException("mockFactory");
-            }
-
-            _mockFactory = mockFactory;
+            _mockFactory = DefaultFabric.MockFactory;
         }
 
         #region ISpecification Members

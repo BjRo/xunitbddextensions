@@ -59,8 +59,8 @@
     </Compile>
     <Compile Include="EventRaiserExtensions.cs" />
     <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="InstanceContextSpecification.cs" />
     <Compile Include="MethodCallOccurance.cs" />
+    <Compile Include="ObservationAttribute.cs" />
     <Compile Include="PropertyStubExtensions.cs" />
     <Compile Include="PropertyStubs\CollectionPropertyStubRule.cs" />
     <Compile Include="PropertyStubs\DefaultPropertyStubRule.cs" />
@@ -71,7 +71,6 @@
     <Compile Include="PropertyStubs\TerminalStubRule.cs" />
     <Compile Include="RhinoMocksExtensions.cs" />
     <Compile Include="RhinoMocksFactory.cs" />
-    <Compile Include="StaticContextSpecification.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

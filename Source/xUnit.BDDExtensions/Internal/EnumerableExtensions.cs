@@ -20,7 +20,7 @@ namespace Xunit.Internal
     /// <summary>
     /// A container class for extensions on the <see cref="Type"/> class.
     /// </summary>
-    public static class ExtensionMethods
+    public static class EnumerableExtensions
     {
         /// <summary>
         /// Executes the action specified by <paramref name="action"/> on each element of the specified

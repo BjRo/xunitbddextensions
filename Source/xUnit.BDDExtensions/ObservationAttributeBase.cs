@@ -14,6 +14,7 @@
 // 
 using System.Collections.Generic;
 using System.Linq;
+using Xunit.Internal;
 using Xunit.Sdk;
 
 namespace Xunit
@@ -24,7 +25,7 @@ namespace Xunit
     /// is to decorate the original <see cref="ITestCommand"/> recieved from xUnit.net with a <see cref="SpecificationCommand"/>
     /// from xUnit.BDDExtensions.
     /// </summary>
-    public class ObservationAttribute : FactAttribute
+    public abstract class ObservationAttributeBase : FactAttribute
     {
         /// <summary>
         /// Creates all the test command for the method specified by <paramref name="method"/>.
@@ -33,7 +34,7 @@ namespace Xunit
         /// <returns>
         /// All test commands which should be executed for the particular test method.
         /// </returns>
-        protected override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
+        protected sealed override IEnumerable<ITestCommand> EnumerateTestCommands(IMethodInfo method)
         {
             return base.EnumerateTestCommands(method).Select(command => new SpecificationCommand(command, method)).Cast<ITestCommand>();
         }
