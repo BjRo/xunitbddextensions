@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
+
 using System;
 using System.Linq.Expressions;
 using System.Web.Mvc;
@@ -19,6 +20,10 @@ using Xunit.Internal;
 
 namespace Xunit
 {
+    /// <summary>
+    /// Creates a MockedRequestContext, serialize paramters to FormCollection and finally
+    /// invoke the the Action
+    /// </summary>
     public class ControllerActionInvokerBuilder
     {
         private Expression _actionExpression;

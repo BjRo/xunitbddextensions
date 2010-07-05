@@ -66,7 +66,6 @@
     <Compile Include="ActionResultExtensions\ViewResultExtensions.cs" />
     <Compile Include="ControllerContextSpecification.cs" />
     <Compile Include="ControllerActionInvokerBuilder.cs" />
-    <Compile Include="ControllerActionInvokerBuilderExtensions.cs" />
     <Compile Include="MockedRequestContextValueStore.cs" />
     <Compile Include="Internal\MvcExpressionHelper.cs" />
     <Compile Include="IMockedRequestContext.cs" />

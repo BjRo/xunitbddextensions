@@ -15,8 +15,6 @@
 using System;
 using System.Linq.Expressions;
 using System.Web.Mvc;
-using System.Web.Routing;
-using Xunit.Internal;
 
 namespace Xunit
 {

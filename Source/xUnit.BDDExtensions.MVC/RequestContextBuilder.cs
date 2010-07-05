@@ -20,6 +20,12 @@ using Rhino.Mocks;
 
 namespace Xunit
 {
+    /// <summary>
+    /// Builds a mocked Request Context which
+    /// there are several extensions method with daily needs of
+    /// an ASP.NET MVC Developer.
+    /// <see cref="IMockedRequestContext"/>
+    /// </summary>
     public class RequestContextBuilder : IMockedRequestContext
     {
         private readonly IDependencyAccessor _dependencyAccessor;
@@ -105,6 +111,7 @@ namespace Xunit
             Request.WhenToldTo(requestBase => requestBase.Headers).Return(new NameValueCollection());
             Request.WhenToldTo(requestBase => requestBase.Form).Return(new NameValueCollection());
             Request.WhenToldTo(requestBase => requestBase.QueryString).Return(new NameValueCollection());
+
             var cookiesCollection = new HttpCookieCollection();
             Request.WhenToldTo(requestBase => requestBase.Cookies).Return(cookiesCollection);
             Response.WhenToldTo(responseBase => responseBase.Cookies).Return(cookiesCollection);

@@ -1,3 +1,3 @@
 ﻿using System.Reflection;
 
-[assembly: AssemblyTitle("xUnit.BDDExtensions.Reporting.dll")]
+[assembly: AssemblyTitle("ReportGenerator.exe")]

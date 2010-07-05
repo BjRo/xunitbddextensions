@@ -26,6 +26,11 @@ namespace Xunit
 {
     public static class MockedRequestContextExtensions
     {
+        /// <summary>
+        /// Creates the AntiForgeryToken in the MockedRequestContext
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns>IMockedRequestContext for chaining</returns>
         public static IMockedRequestContext AntiForgeryToken(this IMockedRequestContext context)
         {
             HttpContext.Current = new HttpContext(new HttpRequest("/", "http://localhost/", ""),
@@ -33,24 +38,32 @@ namespace Xunit
             var viewContext = new ViewContext {HttpContext = context.Context};
             var htmlHelper = new HtmlHelper(viewContext, MockRepository.GenerateStub<IViewDataContainer>());
             var str = htmlHelper.AntiForgeryToken().ToHtmlString();
-            var name = GetValue(str, "name");
-            var value = GetValue(str, "value");
+            var name = GetXmlAttributeValue(str, "name");
+            var value = GetXmlAttributeValue(str, "value");
             context.Request.Form.Add(name, value);
             return context;
         }
 
-        private static string GetValue(string xml, string name)
+        private static string GetXmlAttributeValue(string xml, string name)
         {
             var element = XElement.Load(new StringReader(xml));
 
             return element.Attributes().Where(a => a.Name == name).Single().Value;
         }
 
+        /// <summary>
+        /// Serialize all public properties of a model instance to the FormCollection
+        /// of the IMockedRequestContext.Request
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="instance"></param>
+        /// <param name="parameterName"></param>
+        /// <returns></returns>
         public static IMockedRequestContext SerializeModelToForm(
-            this IMockedRequestContext context, object model,
+            this IMockedRequestContext context, object instance,
             string parameterName)
         {
-            var properties = model.GetType().GetProperties();
+            var properties = instance.GetType().GetProperties();
 
             foreach (var propertyInfo in properties)
             {
@@ -61,13 +74,20 @@ namespace Xunit
                     elementName = parameterName + "." + elementName;
                 }
                 
-                var value = propertyInfo.GetValue(model, null) ?? "";
+                var value = propertyInfo.GetValue(instance, null) ?? "";
                 context.Request.Form.Add(elementName, value.ToString());
             }
 
             return context;
         }
 
+        /// <summary>
+        /// Creates a IPrincipal which is in the given role. The created user ist
+        /// stored in IMockedRequestContext.Context.User
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
         public static IMockedRequestContext Role(this IMockedRequestContext context, string role)
         {
             if (string.IsNullOrEmpty(role))
@@ -82,11 +102,17 @@ namespace Xunit
             return context;
         }
 
+        /// <summary>
+        /// Set HttpMode in IMockedRequestContext.Request.HttpMode. This is used from the
+        /// ControllerActionInvoker to selecte the Action which is invoked.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="httpMethod"></param>
+        /// <returns></returns>
         public static IMockedRequestContext HttpMethod(this IMockedRequestContext context, string httpMethod)
         {
             context.SetValue("HttpMethod", httpMethod);
             SetHttpMethodCallback(context);
-            
             return context;
         }
 

@@ -16,6 +16,10 @@ using System.Web.Mvc;
 
 namespace Xunit
 {
+    /// <summary>
+    /// A ControllerActionInvoker which supress the invoking of the ActionResult, it simply
+    /// save the ActionResult so that it can used in the Test.
+    /// </summary>
     public class SpecificationControllerActionInvoker : ControllerActionInvoker, ISpecificationActionInvoker
     {
         public ActionResult Result { get; private set; }
