@@ -17,6 +17,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Principal;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using Rhino.Mocks;
@@ -26,6 +27,16 @@ namespace Xunit
 {
     public static class MockedRequestContextExtensions
     {
+        private class FakeViewDataContainer : IViewDataContainer
+        {
+            public FakeViewDataContainer()
+            {
+                ViewData = new ViewDataDictionary();
+            }
+
+            public ViewDataDictionary ViewData { get; set; }
+        }
+
         /// <summary>
         /// Creates the AntiForgeryToken in the MockedRequestContext
         /// </summary>
@@ -33,10 +44,11 @@ namespace Xunit
         /// <returns>IMockedRequestContext for chaining</returns>
         public static IMockedRequestContext AntiForgeryToken(this IMockedRequestContext context)
         {
-            HttpContext.Current = new HttpContext(new HttpRequest("/", "http://localhost/", ""),
-                                                  new HttpResponse(TextWriter.Null));
+            var httpRequest = new HttpRequest("/default.aspx", "http://localhost/default.aspx", "?a=1");
+            httpRequest.Browser=new HttpBrowserCapabilities();
+            HttpContext.Current = new HttpContext(httpRequest,new HttpResponse(TextWriter.Null));
             var viewContext = new ViewContext {HttpContext = context.Context};
-            var htmlHelper = new HtmlHelper(viewContext, MockRepository.GenerateStub<IViewDataContainer>());
+            var htmlHelper = new HtmlHelper(viewContext, new FakeViewDataContainer());
             var str = htmlHelper.AntiForgeryToken().ToHtmlString();
             var name = GetXmlAttributeValue(str, "name");
             var value = GetXmlAttributeValue(str, "value");
@@ -73,7 +85,7 @@ namespace Xunit
                 {
                     elementName = parameterName + "." + elementName;
                 }
-                
+
                 var value = propertyInfo.GetValue(instance, null) ?? "";
                 context.Request.Form.Add(elementName, value.ToString());
             }
@@ -120,13 +132,12 @@ namespace Xunit
         {
             if (context.Request.HttpMethod != null)
             {
-                return;                
+                return;
             }
 
             context.Request.Stub(requestBase => requestBase.HttpMethod)
                 .WhenCalled(invocation => invocation.ReturnValue = context.GetValue<string>("HttpMethod"))
                 .Return(null).Repeat.Any();
         }
-
     }
 }

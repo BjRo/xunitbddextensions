@@ -25,6 +25,9 @@ namespace Xunit
     public abstract class ControllerContextSpecification<T> : InstanceContextSpecification<T>
         where T : Controller
     {
+        public ControllerContextSpecification()
+        {
+        }
         private ControllerActionInvokerBuilder _invokerBuilder;
 
         protected override void EstablishContext()
@@ -82,7 +85,7 @@ namespace Xunit
 
         /// <summary>
         /// Invokes a Controller-Action with all ActionFilters applied to them.
-        /// It uses the POST-HttpMethod, with the AntiForgeryToken. Also is serialize given parameters to the FormCollection
+        /// It uses the POST-HttpMethod also is serialize given parameters to the FormCollection
         /// so that ModelBinding and Validation can executed.
         /// </summary>
         /// <remarks>
@@ -95,7 +98,7 @@ namespace Xunit
         /// <returns>The result of the Action</returns>
         protected TResult InvokePostAction<TResult>(Expression<Func<T, TResult>> expression)
         {
-            _invokerBuilder.Controller(Sut).Action(expression).RequestContext.HttpMethod("POST").AntiForgeryToken();
+            _invokerBuilder.Controller(Sut).Action(expression).RequestContext.HttpMethod("POST");
             return (TResult) _invokerBuilder.InvokeAction();
         }
     }

@@ -31,7 +31,8 @@ namespace Xunit
         private readonly RequestContextBuilder _contextBuilder;
         private readonly ISpecificationActionInvoker _actionInvoker;
 
-        public ControllerActionInvokerBuilder(IDependencyAccessor dependencyAccessor, ISpecificationActionInvoker actionInvoker)
+        public ControllerActionInvokerBuilder(IDependencyAccessor dependencyAccessor,
+                                              ISpecificationActionInvoker actionInvoker)
         {
             _contextBuilder = new RequestContextBuilder(dependencyAccessor);
             _actionInvoker = actionInvoker;
@@ -42,7 +43,8 @@ namespace Xunit
             get { return _contextBuilder; }
         }
 
-        public ControllerActionInvokerBuilder Action<T, TResult>(Expression<Func<T, TResult>> expression) where T : Controller
+        public ControllerActionInvokerBuilder Action<T, TResult>(Expression<Func<T, TResult>> expression)
+            where T : Controller
         {
             _actionExpression = expression;
             return this;
@@ -77,9 +79,22 @@ namespace Xunit
 
             foreach (var parameterName in parameterNames)
             {
-                _contextBuilder.SerializeModelToForm(
-                    MvcExpressionHelper.GetParameterValue(_actionExpression, parameterName),
-                    parameterName);
+                var parameterValue = MvcExpressionHelper.GetParameterValue(_actionExpression, parameterName);
+                _contextBuilder.SerializeModelToForm(parameterValue, parameterName);
+
+                SerializableToRouteData(parameterValue, parameterName);
+            }
+        }
+
+        private void SerializableToRouteData(object parameterValue, string parameterName)
+        {
+            if (parameterValue == null)
+            {
+                return;
+            }
+            if (parameterValue.GetType().IsPrimitive)
+            {
+                _contextBuilder.RouteData.Values[parameterName] = parameterValue;
             }
         }
 
