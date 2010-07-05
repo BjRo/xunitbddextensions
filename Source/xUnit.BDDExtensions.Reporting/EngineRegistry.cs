@@ -15,19 +15,19 @@
 using System;
 using System.Collections.Generic;
 using StructureMap.Configuration.DSL;
-using Xunit.Reporting.Core.Configuration;
-using Xunit.Reporting.Core.Generator;
+using Xunit.Reporting.Internal.Configuration;
+using Xunit.Reporting.Internal.Generator;
 
 namespace Xunit.Reporting
 {
     /// <summary>
-    /// A registry class for all initialization work, which can't be performed 
-    /// automatically by StructureMap.
+    ///   A registry class for all initialization work, which can't be performed 
+    ///   automatically by StructureMap.
     /// </summary>
     public class EngineRegistry : Registry
     {
         /// <summary>
-        /// Performs the configuration of the IoC
+        ///   Performs the configuration of the IoC
         /// </summary>
         public EngineRegistry()
         {
@@ -40,15 +40,16 @@ namespace Xunit.Reporting
 
             For<IArgumentMap>().Use(ctor => ctor.GetInstance<ArgumentMapFactory>().Create());
 
-            For<IReportGenerator>().MissingNamedInstanceIs.ConstructedBy(exp => exp.GetInstance<IReportGenerator>("Html"));
+            For<IReportGenerator>().MissingNamedInstanceIs.ConstructedBy(
+                exp => exp.GetInstance<IReportGenerator>("Html"));
 
             For<IReportGenerator>().Use(ctorExpression =>
-                {
-                    var properties = ctorExpression.GetInstance<IArguments>();
-                    var generator = properties.Get(ArgumentKeys.Generator);
-                    var nameOfTargetGenerator = string.IsNullOrEmpty(generator) ? "Html" : generator;
-                    return ctorExpression.GetInstance<IReportGenerator>(nameOfTargetGenerator);
-                });
+            {
+                var properties = ctorExpression.GetInstance<IArguments>();
+                var generator = properties.Get(ArgumentKeys.Generator);
+                var nameOfTargetGenerator = string.IsNullOrEmpty(generator) ? "Html" : generator;
+                return ctorExpression.GetInstance<IReportGenerator>(nameOfTargetGenerator);
+            });
 
             For<Func<IEnumerable<string>>>().Use(ctor => () => DropProcessName(Environment.GetCommandLineArgs()));
         }

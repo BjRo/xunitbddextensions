@@ -12,23 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
-using StructureMap;
-using Xunit.Reporting.Internal;
+using System;
+using System.IO;
 
-namespace Xunit.Reporting
+namespace Xunit.Reporting.Internal.Generator
 {
     /// <summary>
-    /// Entry to the report generator.
+    /// A simple abstraction for writing to a file.
     /// </summary>
-    public class Program
+    public interface IFileWriter
     {
         /// <summary>
-        /// Runs the generator
+        /// Writes the content supplied via <paramref name="contentWriter"/>
+        /// to the file specified via <see cref="fileName"/>.
         /// </summary>
-        public static void Main(string[] args)
-        {
-            var container = new Container(init => init.AddRegistry<EngineRegistry>());
-            container.GetInstance<IReportEngine>().Run();
-        }
+        /// <param name="fileName">
+        /// Specifies the filename to write to.
+        /// </param>
+        /// <param name="contentWriter">
+        /// Specifies the writer handler which is called
+        /// to fill the file with content.
+        /// </param>
+        void Write(string fileName, Action<TextWriter> contentWriter);
     }
 }

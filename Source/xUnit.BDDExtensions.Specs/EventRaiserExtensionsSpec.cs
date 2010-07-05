@@ -19,25 +19,25 @@ namespace Xunit.Specs
     [Concern(typeof(EventRaiserExtensions))]
     public class When_raising_an_event : StaticContextSpecification
     {
-        private bool wasRaised;
-        private IHaveEvent dependency;
+        private bool _wasRaised;
+        private IHaveEvent _dependency;
 
         protected override void EstablishContext()
         {
-            dependency = An<IHaveEvent>();
-            dependency.EventOccurred += (sender, e) => { wasRaised = true; };
+            _dependency = An<IHaveEvent>();
+            _dependency.EventOccurred += (sender, e) => { _wasRaised = true; };
         }
 
         protected override void Because()
         {
-            dependency.Event(x => x.EventOccurred += null)
+            _dependency.Event(x => x.EventOccurred += null)
                 .Raise(null, EventArgs.Empty);
         }
 
         [Observation]
         public void Should_raise_event()
         {
-            wasRaised.ShouldBeTrue();
+            _wasRaised.ShouldBeTrue();
         }
     }
 

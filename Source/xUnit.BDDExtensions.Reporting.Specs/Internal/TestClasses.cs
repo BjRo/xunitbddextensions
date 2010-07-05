@@ -12,23 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
-using StructureMap;
-using Xunit.Reporting.Internal;
-
-namespace Xunit.Reporting
+namespace Xunit.Reporting.Specs.Internal
 {
-    /// <summary>
-    /// Entry to the report generator.
-    /// </summary>
-    public class Program
+    [Concern(typeof(string))]
+    public class After_this__fake__specification_has_been_executed : StaticContextSpecification
     {
-        /// <summary>
-        /// Runs the generator
-        /// </summary>
-        public static void Main(string[] args)
+        protected override void Because()
         {
-            var container = new Container(init => init.AddRegistry<EngineRegistry>());
-            container.GetInstance<IReportEngine>().Run();
+        }
+
+        [Observation(Skip = "This is just an example for testing purposes")]
+        public void It_should_effectively_do__nothing__()
+        {
+        }
+    }
+
+    public class Foo_bar_derived_concern: After_this__fake__specification_has_been_executed
+    {
+        [Observation]
+        public void Just_for_nothing()
+        {
+            
         }
     }
 }

@@ -12,23 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
-using StructureMap;
-using Xunit.Reporting.Internal;
+using System.Collections.Generic;
 
-namespace Xunit.Reporting
+namespace Xunit.Reporting.Internal.Configuration
 {
     /// <summary>
-    /// Entry to the report generator.
+    /// A data container which maps an argument key to a collection of argument
+    /// values. 
     /// </summary>
-    public class Program
+    /// <remarks>
+    /// This class was only introduced to have a short cut for ommitting the angle brackets
+    /// of a generic <see cref="IDictionary{TKey,TValue}"/>.
+    /// </remarks>
+    public class ArgumentMap : Dictionary<string, ICollection<string>>, IArgumentMap
     {
-        /// <summary>
-        /// Runs the generator
-        /// </summary>
-        public static void Main(string[] args)
-        {
-            var container = new Container(init => init.AddRegistry<EngineRegistry>());
-            container.GetInstance<IReportEngine>().Run();
-        }
     }
 }

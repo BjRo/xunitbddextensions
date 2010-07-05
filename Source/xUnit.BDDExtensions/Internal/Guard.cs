@@ -34,5 +34,25 @@ namespace Xunit.Internal
                 throw new ArgumentNullException(argumentName);
             }
         }
+
+        /// <summary>
+        /// Checks whether the argument supplied by <paramref name="argument"/>
+        /// is <c>null</c> or an empty <see cref="string"/>.
+        /// </summary>
+        /// <param name="argument">The name.</param>
+        /// <param name="argumentName">Name of the argument.</param>
+        /// <exception cref="ArgumentException">
+        /// Thrown when <paramref name="argument"/> is <c>null</c> or an empty string.
+        /// </exception>
+        public static void AgainstNullOrEmptyString(string argument, string argumentName)
+        {
+            if (string.IsNullOrEmpty(argument))
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        "Argument {0} must not be null or an empty string",
+                        argumentName));
+            }
+        }
     }
 }

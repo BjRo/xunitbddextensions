@@ -20,48 +20,48 @@ namespace Xunit.Specs
     [Concern(typeof (SpecificationCommand))]
     public class When_a_specification_test_command_is_executed_and_the_test_object_does_not_implement_ISpecification : Specification_for_SpecificationCommand
     {
-        private Action invokation;
-        private object objectNotImplementingITestSpecification;
+        private Action _invokation;
+        private object _objectNotImplementingITestSpecification;
 
         protected override void EstablishContext()
         {
-            objectNotImplementingITestSpecification = new object();
+            _objectNotImplementingITestSpecification = new object();
         }
 
         protected override void Because()
         {
-            invokation = () => Sut.Execute(objectNotImplementingITestSpecification);
+            _invokation = () => Sut.Execute(_objectNotImplementingITestSpecification);
         }
 
         [Observation]
         public void Should_throw_an_invalid_operation_exception()
         {
-            invokation.ShouldThrowAn<InvalidOperationException>();
+            _invokation.ShouldThrowAn<InvalidOperationException>();
         }
     }
 
     [Concern(typeof (SpecificationCommand))]
     public class When_a_specification_test_command_is_executed_on_a_ITestSpecification_implementer : Specification_for_SpecificationCommand
     {
-        private MethodResult expectedTestResult;
-        private ITestCommand innerCommand;
-        private IMethodInfo methodInfo;
-        private MethodResult testResult;
+        private MethodResult _expectedTestResult;
+        private ITestCommand _innerCommand;
+        private IMethodInfo _methodInfo;
+        private MethodResult _testResult;
         private ISpecification _specification;
 
         protected override void EstablishContext()
         {
-            innerCommand = The<ITestCommand>();
-            methodInfo = The<IMethodInfo>();
+            _innerCommand = The<ITestCommand>();
+            _methodInfo = The<IMethodInfo>();
             _specification = An<ISpecification>();
-            expectedTestResult = CreateMethodResult();
+            _expectedTestResult = CreateMethodResult();
 
-            innerCommand.WhenToldTo(x => x.Execute(_specification)).Return(expectedTestResult);
+            _innerCommand.WhenToldTo(x => x.Execute(_specification)).Return(_expectedTestResult);
         }
 
         protected override void Because()
         {
-            testResult = Sut.Execute(_specification);
+            _testResult = Sut.Execute(_specification);
         }
 
         [Observation]
@@ -73,13 +73,13 @@ namespace Xunit.Specs
         [Observation]
         public void Should_pass_the_test_specification_to_the_inner_test_command()
         {
-            innerCommand.WasToldTo(x => x.Execute(_specification));
+            _innerCommand.WasToldTo(x => x.Execute(_specification));
         }
 
         [Observation]
         public void Should_return_the_test_result_from_the_inner_test_command()
         {
-            testResult.ShouldBeEqualTo(expectedTestResult);
+            _testResult.ShouldBeEqualTo(_expectedTestResult);
         }
 
         [Observation]

@@ -12,23 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
-using StructureMap;
-using Xunit.Reporting.Internal;
-
-namespace Xunit.Reporting
+namespace Xunit.Reporting.Internal.Configuration
 {
     /// <summary>
-    /// Entry to the report generator.
+    /// A factory for creating a one to many map for arguments.
     /// </summary>
-    public class Program
+    public interface IArgumentMapFactory
     {
         /// <summary>
-        /// Runs the generator
+        /// Creates an <see cref="IArgumentMap"/> instance.
         /// </summary>
-        public static void Main(string[] args)
-        {
-            var container = new Container(init => init.AddRegistry<EngineRegistry>());
-            container.GetInstance<IReportEngine>().Run();
-        }
+        /// <returns>
+        /// An <see cref="IArgumentMap"/> instance.
+        /// </returns>
+        IArgumentMap Create();
     }
 }

@@ -12,23 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
-using StructureMap;
-using Xunit.Reporting.Internal;
-
-namespace Xunit.Reporting
+namespace Xunit.Reporting.Internal
 {
     /// <summary>
-    /// Entry to the report generator.
+    /// Interface abstracting the report engine.
     /// </summary>
-    public class Program
+    public interface IReportEngine
     {
         /// <summary>
-        /// Runs the generator
+        /// Runs the report generation.
         /// </summary>
-        public static void Main(string[] args)
-        {
-            var container = new Container(init => init.AddRegistry<EngineRegistry>());
-            container.GetInstance<IReportEngine>().Run();
-        }
+        void Run();
     }
 }

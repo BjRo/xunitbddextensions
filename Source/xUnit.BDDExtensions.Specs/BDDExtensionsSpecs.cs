@@ -21,18 +21,18 @@ namespace Xunit.Specs.BDDExtensions
 {
     public abstract class Concern_for_BDDExtensions : StaticContextSpecification
     {
-        protected Action theAssertion;
+        protected Action TheAssertion;
     }
 
     [Concern(typeof (Xunit.BDDExtensions))]
     public class When_an__Exception__is_expected_to_be_thrown_and_is_actually_thrown :
         Concern_for_BDDExtensions
     {
-        private Action operationThatThrows;
+        private Action _operationThatThrows;
 
         protected override void EstablishContext()
         {
-            operationThatThrows = () =>
+            _operationThatThrows = () =>
             {
                 throw new InvalidOperationException();
             };
@@ -40,101 +40,101 @@ namespace Xunit.Specs.BDDExtensions
 
         protected override void Because()
         {
-            theAssertion = () => operationThatThrows.ShouldThrowAn<InvalidOperationException>();
+            TheAssertion = () => _operationThatThrows.ShouldThrowAn<InvalidOperationException>();
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
     [Concern(typeof (Xunit.BDDExtensions))]
     public class When_an_instance_is_expected_to_be__null__and_is_actually__null__ : Concern_for_BDDExtensions
     {
-        private object existingObject;
+        private object _existingObject;
 
         protected override void EstablishContext()
         {
-            existingObject = null;
+            _existingObject = null;
         }
 
         protected override void Because()
         {
-            theAssertion = () => existingObject.ShouldBeNull();
+            TheAssertion = () => _existingObject.ShouldBeNull();
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
     [Concern(typeof (Xunit.BDDExtensions))]
     public class When_an_instance_is_expected_to_be__null__but_it_is_not : Concern_for_BDDExtensions
     {
-        private object existingObject;
+        private object _existingObject;
 
         protected override void EstablishContext()
         {
-            existingObject = new object();
+            _existingObject = new object();
         }
 
         protected override void Because()
         {
-            theAssertion = () => existingObject.ShouldBeNull();
+            TheAssertion = () => _existingObject.ShouldBeNull();
         }
 
         [Observation]
         public void Should_throw_a__NullException__()
         {
-            theAssertion.ShouldThrowAn<NullException>();
+            TheAssertion.ShouldThrowAn<NullException>();
         }
     }
 
     [Concern(typeof (Xunit.BDDExtensions))]
     public class When_expecting_null_to_be_not__null__ : Concern_for_BDDExtensions
     {
-        private object existingObject;
+        private object _existingObject;
 
         protected override void EstablishContext()
         {
-            existingObject = null;
+            _existingObject = null;
         }
 
         protected override void Because()
         {
-            theAssertion = () => existingObject.ShouldNotBeNull();
+            TheAssertion = () => _existingObject.ShouldNotBeNull();
         }
 
         [Observation]
         public void Should_throw_an__NotNullException__()
         {
-            theAssertion.ShouldThrowAn<NotNullException>();
+            TheAssertion.ShouldThrowAn<NotNullException>();
         }
     }
 
     [Concern(typeof (Xunit.BDDExtensions))]
     public class When_an_instance_is_expected_to_be_not__null__ : Concern_for_BDDExtensions
     {
-        private object existingObject;
+        private object _existingObject;
 
         protected override void EstablishContext()
         {
-            existingObject = new object();
+            _existingObject = new object();
         }
 
         protected override void Because()
         {
-            theAssertion = () => existingObject.ShouldNotBeNull();
+            TheAssertion = () => _existingObject.ShouldNotBeNull();
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
@@ -142,24 +142,24 @@ namespace Xunit.Specs.BDDExtensions
     public class When_expecting_a_particular__Exception__to_be_thrown_and_no__Exception__was_thrown :
             Concern_for_BDDExtensions
     {
-        private Action operationNotThrowingAnException;
+        private Action _operationNotThrowingAnException;
 
         protected override void EstablishContext()
         {
-            operationNotThrowingAnException = () =>
+            _operationNotThrowingAnException = () =>
             {
             };
         }
 
         protected override void Because()
         {
-            theAssertion = () => operationNotThrowingAnException.ShouldThrowAn<ArgumentNullException>();
+            TheAssertion = () => _operationNotThrowingAnException.ShouldThrowAn<ArgumentNullException>();
         }
 
         [Observation]
         public void Should_throw_a__ThrowsException__()
         {
-            theAssertion.ShouldThrowAn<ThrowsException>();
+            TheAssertion.ShouldThrowAn<ThrowsException>();
         }
     }
 
@@ -167,11 +167,11 @@ namespace Xunit.Specs.BDDExtensions
     public class When_expecting_a_particular__Exception__to_be_thrown_and_a_different__Exception__was_thrown :
             Concern_for_BDDExtensions
     {
-        private Action operationThatThrowsADifferentException;
+        private Action _operationThatThrowsADifferentException;
 
         protected override void EstablishContext()
         {
-            operationThatThrowsADifferentException = () =>
+            _operationThatThrowsADifferentException = () =>
             {
                 throw new InvalidOperationException();
             };
@@ -179,13 +179,13 @@ namespace Xunit.Specs.BDDExtensions
 
         protected override void Because()
         {
-            theAssertion = () => operationThatThrowsADifferentException.ShouldThrowAn<ArgumentNullException>();
+            TheAssertion = () => _operationThatThrowsADifferentException.ShouldThrowAn<ArgumentNullException>();
         }
 
         [Observation]
         public void Should_throw_a__ThrowsException__()
         {
-            theAssertion.ShouldThrowAn<ThrowsException>();
+            TheAssertion.ShouldThrowAn<ThrowsException>();
         }
     }
 
@@ -194,13 +194,13 @@ namespace Xunit.Specs.BDDExtensions
     {
         protected override void Because()
         {
-            theAssertion = () => false.ShouldBeFalse();
+            TheAssertion = () => false.ShouldBeFalse();
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
@@ -209,13 +209,13 @@ namespace Xunit.Specs.BDDExtensions
     {
         protected override void Because()
         {
-            theAssertion = () => true.ShouldBeTrue();
+            TheAssertion = () => true.ShouldBeTrue();
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
@@ -224,13 +224,13 @@ namespace Xunit.Specs.BDDExtensions
     {
         protected override void Because()
         {
-            theAssertion = () => true.ShouldBeFalse();
+            TheAssertion = () => true.ShouldBeFalse();
         }
 
         [Observation]
         public void Should_throw_a__FalseException__()
         {
-            theAssertion.ShouldThrowAn<FalseException>();
+            TheAssertion.ShouldThrowAn<FalseException>();
         }
     }
 
@@ -239,13 +239,13 @@ namespace Xunit.Specs.BDDExtensions
     {
         protected override void Because()
         {
-            theAssertion = () => false.ShouldBeTrue();
+            TheAssertion = () => false.ShouldBeTrue();
         }
 
         [Observation]
         public void Should_throw_a__TrueException__()
         {
-            theAssertion.ShouldThrowAn<TrueException>();
+            TheAssertion.ShouldThrowAn<TrueException>();
         }
     }
 
@@ -253,30 +253,30 @@ namespace Xunit.Specs.BDDExtensions
     public class When_expecting_a_collection_to_contain_only_a_particular_set_of_items_and_a_different_set_is_present :
             Concern_for_BDDExtensions
     {
-        private string bar;
-        private List<string> collectionToTest;
-        private string foo;
+        private string _bar;
+        private List<string> _collectionToTest;
+        private string _foo;
 
         protected override void EstablishContext()
         {
-            foo = "foo";
-            bar = "bar";
-            collectionToTest = new List<string>
+            _foo = "foo";
+            _bar = "bar";
+            _collectionToTest = new List<string>
             {
-                foo,
-                bar
+                _foo,
+                _bar
             };
         }
 
         protected override void Because()
         {
-            theAssertion = () => collectionToTest.ShouldOnlyContain("SomethingDifferent");
+            TheAssertion = () => _collectionToTest.ShouldOnlyContain("SomethingDifferent");
         }
 
         [Observation]
         public void Should_throw_an__AssertException__()
         {
-            theAssertion.ShouldThrowAn<AssertException>();
+            TheAssertion.ShouldThrowAn<AssertException>();
         }
     }
 
@@ -284,33 +284,33 @@ namespace Xunit.Specs.BDDExtensions
     public class When_expecting_a_collection_to_contain_only_a_particular_set_of_items_and_more_are_present :
         Concern_for_BDDExtensions
     {
-        private string bar;
-        private List<string> collectionToTest;
-        private string foo;
-        private string unexpected;
+        private string _bar;
+        private List<string> _collectionToTest;
+        private string _foo;
+        private string _unexpected;
 
         protected override void EstablishContext()
         {
-            foo = "foo";
-            bar = "bar";
-            unexpected = "unexpected";
-            collectionToTest = new List<string>
+            _foo = "foo";
+            _bar = "bar";
+            _unexpected = "unexpected";
+            _collectionToTest = new List<string>
             {
-                foo,
-                bar,
-                unexpected
+                _foo,
+                _bar,
+                _unexpected
             };
         }
 
         protected override void Because()
         {
-            theAssertion = () => collectionToTest.ShouldOnlyContain(foo, bar);
+            TheAssertion = () => _collectionToTest.ShouldOnlyContain(_foo, _bar);
         }
 
         [Observation]
         public void Should_throw_an__AssertException__()
         {
-            theAssertion.ShouldThrowAn<AssertException>();
+            TheAssertion.ShouldThrowAn<AssertException>();
         }
     }
 
@@ -318,30 +318,30 @@ namespace Xunit.Specs.BDDExtensions
     public class When_expecting_a_collection_to_contain_only_the_items_it_actually_contains :
             Concern_for_BDDExtensions
     {
-        private string bar;
-        private List<string> collectionToTest;
-        private string foo;
+        private string _bar;
+        private List<string> _collectionToTest;
+        private string _foo;
 
         protected override void EstablishContext()
         {
-            foo = "foo";
-            bar = "bar";
-            collectionToTest = new List<string>
+            _foo = "foo";
+            _bar = "bar";
+            _collectionToTest = new List<string>
             {
-                foo,
-                bar
+                _foo,
+                _bar
             };
         }
 
         protected override void Because()
         {
-            theAssertion = () => collectionToTest.ShouldOnlyContain(foo, bar);
+            TheAssertion = () => _collectionToTest.ShouldOnlyContain(_foo, _bar);
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
@@ -349,30 +349,30 @@ namespace Xunit.Specs.BDDExtensions
     public class When_expecting_a_collection_to_contain_only_a_particular_set_in_a_particular_order_and_different_set_is_present :
             Concern_for_BDDExtensions
     {
-        private string bar;
-        private List<string> collectionToTest;
-        private string foo;
+        private string _bar;
+        private List<string> _collectionToTest;
+        private string _foo;
 
         protected override void EstablishContext()
         {
-            foo = "foo";
-            bar = "bar";
-            collectionToTest = new List<string>
+            _foo = "foo";
+            _bar = "bar";
+            _collectionToTest = new List<string>
             {
-                foo,
-                bar
+                _foo,
+                _bar
             };
         }
 
         protected override void Because()
         {
-            theAssertion = () => collectionToTest.ShouldOnlyContainInOrder("SomethingDifferent");
+            TheAssertion = () => _collectionToTest.ShouldOnlyContainInOrder("SomethingDifferent");
         }
 
         [Observation]
         public void Should_throw_an__AssertException__()
         {
-            theAssertion.ShouldThrowAn<AssertException>();
+            TheAssertion.ShouldThrowAn<AssertException>();
         }
     }
 
@@ -380,33 +380,33 @@ namespace Xunit.Specs.BDDExtensions
     public class When_expecting_a_collection_to_contain_only_a_particular_ordered_set_of_items_and_more_are_present :
             Concern_for_BDDExtensions
     {
-        private string bar;
-        private List<string> collectionToTest;
-        private string foo;
-        private string unexpected;
+        private string _bar;
+        private List<string> _collectionToTest;
+        private string _foo;
+        private string _unexpected;
 
         protected override void EstablishContext()
         {
-            foo = "foo";
-            bar = "bar";
-            unexpected = "unexpected";
-            collectionToTest = new List<string>
+            _foo = "foo";
+            _bar = "bar";
+            _unexpected = "unexpected";
+            _collectionToTest = new List<string>
             {
-                foo,
-                bar,
-                unexpected
+                _foo,
+                _bar,
+                _unexpected
             };
         }
 
         protected override void Because()
         {
-            theAssertion = () => collectionToTest.ShouldOnlyContainInOrder(foo, bar);
+            TheAssertion = () => _collectionToTest.ShouldOnlyContainInOrder(_foo, _bar);
         }
 
         [Observation]
         public void Should_throw_an__AssertException__()
         {
-            theAssertion.ShouldThrowAn<AssertException>();
+            TheAssertion.ShouldThrowAn<AssertException>();
         }
     }
 
@@ -414,30 +414,30 @@ namespace Xunit.Specs.BDDExtensions
     public class When_expecting_a_collection_to_contain_only_a_particular_ordered_set_of_items_ordering_does_not_match :
             Concern_for_BDDExtensions
     {
-        private string bar;
-        private List<string> collectionToTest;
-        private string foo;
+        private string _bar;
+        private List<string> _collectionToTest;
+        private string _foo;
 
         protected override void EstablishContext()
         {
-            foo = "foo";
-            bar = "bar";
-            collectionToTest = new List<string>
+            _foo = "foo";
+            _bar = "bar";
+            _collectionToTest = new List<string>
             {
-                foo,
-                bar
+                _foo,
+                _bar
             };
         }
 
         protected override void Because()
         {
-            theAssertion = () => collectionToTest.ShouldOnlyContainInOrder(bar, foo);
+            TheAssertion = () => _collectionToTest.ShouldOnlyContainInOrder(_bar, _foo);
         }
 
         [Observation]
         public void Should_throw_an__AssertException__()
         {
-            theAssertion.ShouldThrowAn<AssertException>();
+            TheAssertion.ShouldThrowAn<AssertException>();
         }
     }
 
@@ -445,30 +445,30 @@ namespace Xunit.Specs.BDDExtensions
     public class When_expecting_a_collection_to_contain_only_a_particular_ordered_set_of_items_on_a_set_that_matches_the_criteria :
             Concern_for_BDDExtensions
     {
-        private string bar;
-        private List<string> collectionToTest;
-        private string foo;
+        private string _bar;
+        private List<string> _collectionToTest;
+        private string _foo;
 
         protected override void EstablishContext()
         {
-            foo = "foo";
-            bar = "bar";
-            collectionToTest = new List<string>
+            _foo = "foo";
+            _bar = "bar";
+            _collectionToTest = new List<string>
             {
-                foo,
-                bar
+                _foo,
+                _bar
             };
         }
 
         protected override void Because()
         {
-            theAssertion = () => collectionToTest.ShouldOnlyContainInOrder(foo, bar);
+            TheAssertion = () => _collectionToTest.ShouldOnlyContainInOrder(_foo, _bar);
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
@@ -476,22 +476,22 @@ namespace Xunit.Specs.BDDExtensions
     public class When_an_instance_is_expected_to_be_of_an_unrelated__Type__ :
         Concern_for_BDDExtensions
     {
-        private ServiceContainer serviceContainer;
+        private ServiceContainer _serviceContainer;
 
         protected override void EstablishContext()
         {
-            serviceContainer = new ServiceContainer();
+            _serviceContainer = new ServiceContainer();
         }
 
         protected override void Because()
         {
-            theAssertion = () => serviceContainer.ShouldBeAnInstanceOf<bool>();
+            TheAssertion = () => _serviceContainer.ShouldBeAnInstanceOf<bool>();
         }
 
         [Observation]
         public void Should_throw_a__IsAssignableFromException__()
         {
-            theAssertion.ShouldThrowAn<IsAssignableFromException>();
+            TheAssertion.ShouldThrowAn<IsAssignableFromException>();
         }
     }
 
@@ -499,22 +499,22 @@ namespace Xunit.Specs.BDDExtensions
     public class When_an_instance_is_expected_to_assignable_to_a_related__Type__ :
         Concern_for_BDDExtensions
     {
-        private ServiceContainer serviceContainer;
+        private ServiceContainer _serviceContainer;
 
         protected override void EstablishContext()
         {
-            serviceContainer = new ServiceContainer();
+            _serviceContainer = new ServiceContainer();
         }
 
         protected override void Because()
         {
-            theAssertion = () => serviceContainer.ShouldBeAnInstanceOf<IServiceProvider>();
+            TheAssertion = () => _serviceContainer.ShouldBeAnInstanceOf<IServiceProvider>();
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
@@ -522,22 +522,22 @@ namespace Xunit.Specs.BDDExtensions
     public class When_expecting_an_instance_to_be_of_its_own__Type__ :
         Concern_for_BDDExtensions
     {
-        private ServiceContainer serviceContainer;
+        private ServiceContainer _serviceContainer;
 
         protected override void EstablishContext()
         {
-            serviceContainer = new ServiceContainer();
+            _serviceContainer = new ServiceContainer();
         }
 
         protected override void Because()
         {
-            theAssertion = () => serviceContainer.ShouldBeAnInstanceOf<ServiceContainer>();
+            TheAssertion = () => _serviceContainer.ShouldBeAnInstanceOf<ServiceContainer>();
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
@@ -546,13 +546,13 @@ namespace Xunit.Specs.BDDExtensions
     {
         protected override void Because()
         {
-            theAssertion = () => 1.ShouldBeGreaterThan(2);
+            TheAssertion = () => 1.ShouldBeGreaterThan(2);
         }
 
         [Observation]
         public void Should_throw_a__AssertException__()
         {
-            theAssertion.ShouldThrowAn<AssertException>();
+            TheAssertion.ShouldThrowAn<AssertException>();
         }
     }
 
@@ -561,13 +561,13 @@ namespace Xunit.Specs.BDDExtensions
     {
         protected override void Because()
         {
-            theAssertion = () => 2.ShouldBeGreaterThan(1);
+            TheAssertion = () => 2.ShouldBeGreaterThan(1);
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
@@ -576,13 +576,13 @@ namespace Xunit.Specs.BDDExtensions
     {
         protected override void Because()
         {
-            theAssertion = () => 2.ShouldBeGreaterThan(2);
+            TheAssertion = () => 2.ShouldBeGreaterThan(2);
         }
 
         [Observation]
         public void Should_throw_an__AssertException__()
         {
-            theAssertion.ShouldThrowAn<AssertException>();
+            TheAssertion.ShouldThrowAn<AssertException>();
         }
     }
 
@@ -590,27 +590,27 @@ namespace Xunit.Specs.BDDExtensions
     public class When_an_instance_is_expected_to_be_contained_in_a_collection_and_it_actually_is :
         Concern_for_BDDExtensions
     {
-        private List<string> collection;
-        private string item;
+        private List<string> _collection;
+        private string _item;
 
         protected override void EstablishContext()
         {
-            item = "Foo";
-            collection = new List<string>
+            _item = "Foo";
+            _collection = new List<string>
             {
-                item
+                _item
             };
         }
 
         protected override void Because()
         {
-            theAssertion = () => collection.ShouldContain(item);
+            TheAssertion = () => _collection.ShouldContain(_item);
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
@@ -618,24 +618,24 @@ namespace Xunit.Specs.BDDExtensions
     public class When_an_instance_is_expected_to_be_contained_in_a_collection_and_it_actually_is_not :
         Concern_for_BDDExtensions
     {
-        private List<string> collection;
-        private string item;
+        private List<string> _collection;
+        private string _item;
 
         protected override void EstablishContext()
         {
-            item = "Foo";
-            collection = new List<string>();
+            _item = "Foo";
+            _collection = new List<string>();
         }
 
         protected override void Because()
         {
-            theAssertion = () => collection.ShouldContain(item);
+            TheAssertion = () => _collection.ShouldContain(_item);
         }
 
         [Observation]
         public void Should_throw_a__ContainsException__()
         {
-            theAssertion.ShouldThrowAn<ContainsException>();
+            TheAssertion.ShouldThrowAn<ContainsException>();
         }
     }
 
@@ -643,46 +643,46 @@ namespace Xunit.Specs.BDDExtensions
     public class When_expecting_two_different_instances_to_be_equal :
         Concern_for_BDDExtensions
     {
-        private ServiceContainer otherObject;
-        private object someObject;
+        private ServiceContainer _otherObject;
+        private object _someObject;
 
         protected override void EstablishContext()
         {
-            someObject = new ServiceContainer();
-            otherObject = new ServiceContainer();
+            _someObject = new ServiceContainer();
+            _otherObject = new ServiceContainer();
         }
 
         protected override void Because()
         {
-            theAssertion = () => someObject.ShouldBeEqualTo(otherObject);
+            TheAssertion = () => _someObject.ShouldBeEqualTo(_otherObject);
         }
 
         [Observation]
         public void Should_throw_an__EqualException__()
         {
-            theAssertion.ShouldThrowAn<EqualException>();
+            TheAssertion.ShouldThrowAn<EqualException>();
         }
     }
 
     [Concern(typeof (Xunit.BDDExtensions))]
     public class When_expecting_an_instance_to_be_equal_to_itself : Concern_for_BDDExtensions
     {
-        private object someObject;
+        private object _someObject;
 
         protected override void EstablishContext()
         {
-            someObject = new ServiceContainer();
+            _someObject = new ServiceContainer();
         }
 
         protected override void Because()
         {
-            theAssertion = () => someObject.ShouldBeEqualTo(someObject);
+            TheAssertion = () => _someObject.ShouldBeEqualTo(_someObject);
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
@@ -690,46 +690,46 @@ namespace Xunit.Specs.BDDExtensions
     public class When_expecting_to_differnt_instances_not_to_be_equal :
         Concern_for_BDDExtensions
     {
-        private ServiceContainer otherObject;
-        private object someObject;
+        private ServiceContainer _otherObject;
+        private object _someObject;
 
         protected override void EstablishContext()
         {
-            someObject = new ServiceContainer();
-            otherObject = new ServiceContainer();
+            _someObject = new ServiceContainer();
+            _otherObject = new ServiceContainer();
         }
 
         protected override void Because()
         {
-            theAssertion = () => someObject.ShouldNotBeEqualTo(otherObject);
+            TheAssertion = () => _someObject.ShouldNotBeEqualTo(_otherObject);
         }
 
         [Observation]
         public void Should_not_throw_and__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
     [Concern(typeof (Xunit.BDDExtensions))]
     public class When_expecting_an_instance_not_to_be_equal_to_itself : Concern_for_BDDExtensions
     {
-        private object someObject;
+        private object _someObject;
 
         protected override void EstablishContext()
         {
-            someObject = new ServiceContainer();
+            _someObject = new ServiceContainer();
         }
 
         protected override void Because()
         {
-            theAssertion = () => someObject.ShouldNotBeEqualTo(someObject);
+            TheAssertion = () => _someObject.ShouldNotBeEqualTo(_someObject);
         }
 
         [Observation]
         public void Should_throw_an__NotEqualException__()
         {
-            theAssertion.ShouldThrowAn<NotEqualException>();
+            TheAssertion.ShouldThrowAn<NotEqualException>();
         }
     }
 
@@ -739,13 +739,13 @@ namespace Xunit.Specs.BDDExtensions
     {
         protected override void Because()
         {
-            theAssertion = () => "Foo".ShouldBeEqualIgnoringCase("Bar");
+            TheAssertion = () => "Foo".ShouldBeEqualIgnoringCase("Bar");
         }
 
         [Observation]
         public void Should_throw_an__EqualException__()
         {
-            theAssertion.ShouldThrowAn<EqualException>();
+            TheAssertion.ShouldThrowAn<EqualException>();
         }
     }
 
@@ -755,24 +755,24 @@ namespace Xunit.Specs.BDDExtensions
     {
         protected override void Because()
         {
-            theAssertion = () => "Foo".ShouldBeEqualIgnoringCase("Foo");
+            TheAssertion = () => "Foo".ShouldBeEqualIgnoringCase("Foo");
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
     [Concern(typeof (Xunit.BDDExtensions))]
     public class When_expecting_a_non_empty_collection_to_be_empty : Concern_for_BDDExtensions
     {
-        private ICollection<string> nonEmptyCollection;
+        private ICollection<string> _nonEmptyCollection;
 
         protected override void EstablishContext()
         {
-            nonEmptyCollection = new List<string>
+            _nonEmptyCollection = new List<string>
             {
                 "Foo",
                 "Bar"
@@ -781,46 +781,46 @@ namespace Xunit.Specs.BDDExtensions
 
         protected override void Because()
         {
-            theAssertion = () => nonEmptyCollection.ShouldBeEmpty();
+            TheAssertion = () => _nonEmptyCollection.ShouldBeEmpty();
         }
 
         [Observation]
         public void Should_throw_an__EmptyException__()
         {
-            theAssertion.ShouldThrowAn<EmptyException>();
+            TheAssertion.ShouldThrowAn<EmptyException>();
         }
     }
 
     [Concern(typeof (Xunit.BDDExtensions))]
     public class When_expecting_an_empty_collection_to_be_empty : Concern_for_BDDExtensions
     {
-        private ICollection<string> collection;
+        private ICollection<string> _collection;
 
         protected override void EstablishContext()
         {
-            collection = new List<string>();
+            _collection = new List<string>();
         }
 
         protected override void Because()
         {
-            theAssertion = () => collection.ShouldBeEmpty();
+            TheAssertion = () => _collection.ShouldBeEmpty();
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
     [Concern(typeof (Xunit.BDDExtensions))]
     public class When_expecting_a_non_empty_collection_to_contain_items : Concern_for_BDDExtensions
     {
-        private ICollection<string> collection;
+        private ICollection<string> _collection;
 
         protected override void EstablishContext()
         {
-            collection = new List<string>
+            _collection = new List<string>
             {
                 "Foo",
                 "Bar"
@@ -829,35 +829,35 @@ namespace Xunit.Specs.BDDExtensions
 
         protected override void Because()
         {
-            theAssertion = () => collection.ShouldNotBeEmpty();
+            TheAssertion = () => _collection.ShouldNotBeEmpty();
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
     [Concern(typeof (Xunit.BDDExtensions))]
     public class When_expecting_an_empty_collection_not_to_be_empty : Concern_for_BDDExtensions
     {
-        private ICollection<string> collection;
+        private ICollection<string> _collection;
 
         protected override void EstablishContext()
         {
-            collection = new List<string>();
+            _collection = new List<string>();
         }
 
         protected override void Because()
         {
-            theAssertion = () => collection.ShouldNotBeEmpty();
+            TheAssertion = () => _collection.ShouldNotBeEmpty();
         }
 
         [Observation]
         public void Should_throw_a__NotEmptyException__()
         {
-            theAssertion.ShouldThrowAn<NotEmptyException>();
+            TheAssertion.ShouldThrowAn<NotEmptyException>();
         }
     }
 
@@ -867,13 +867,13 @@ namespace Xunit.Specs.BDDExtensions
     {
         protected override void Because()
         {
-            theAssertion = () => "Foo".ShouldBeEqualIgnoringCase("fOO");
+            TheAssertion = () => "Foo".ShouldBeEqualIgnoringCase("fOO");
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            TheAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 }

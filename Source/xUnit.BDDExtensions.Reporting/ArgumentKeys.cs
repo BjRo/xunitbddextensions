@@ -13,26 +13,28 @@
 // limitations under the License.
 
 using System.Collections.Generic;
+using Xunit.Reporting.Internal.Configuration;
 
-namespace Xunit.Reporting.Core.Configuration
+namespace Xunit.Reporting
 {
     /// <summary>
-    /// Helper class containing argument keys.
+    ///   Helper class containing argument keys.
     /// </summary>
     public class ArgumentKeys
     {
         /// <summary>
-        /// Gets the argument key for the target assemblies.
+        ///   Gets the argument key for the target assemblies.
         /// </summary>
-        public static readonly ArgumentKey<IEnumerable<string>> TargetAssemblies = new CollectionArgumentKey<string>("assembly");
+        public static readonly ArgumentKey<IEnumerable<string>> TargetAssemblies =
+            new CollectionArgumentKey<string>("assembly");
 
         /// <summary>
-        /// Gets the argument key for the generator.
+        ///   Gets the argument key for the generator.
         /// </summary>
         public static readonly ArgumentKey<string> Generator = new SimpleArgumentKey<string>("generator");
 
         /// <summary>
-        /// Gets the argument key for the generator targetPath
+        ///   Gets the argument key for the generator targetPath
         /// </summary>
         public static ArgumentKey<string> TargetPath = new SimpleArgumentKey<string>("path");
     }

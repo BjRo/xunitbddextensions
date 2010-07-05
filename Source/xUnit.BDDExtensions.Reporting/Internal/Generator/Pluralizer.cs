@@ -12,23 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
-using StructureMap;
-using Xunit.Reporting.Internal;
-
-namespace Xunit.Reporting
+namespace Xunit.Reporting.Internal.Generator
 {
     /// <summary>
-    /// Entry to the report generator.
+    /// A simple helper class for pluralizing names.
     /// </summary>
-    public class Program
+    public class Pluralizer
     {
         /// <summary>
-        /// Runs the generator
+        /// Takes the name specified via <paramref name="name"/>
+        /// and appends an "s" to it in case the value 
+        /// specified via <paramref name="value"/> is greater than 1.
         /// </summary>
-        public static void Main(string[] args)
+        /// <param name="name">
+        /// Specifies the name to pluralize.
+        /// </param>
+        /// <param name="value">
+        /// Specifies the value to decide on.
+        /// </param>
+        /// <returns>
+        /// The formatted string.
+        /// </returns>
+        public string Pluralize(string name, int value)
         {
-            var container = new Container(init => init.AddRegistry<EngineRegistry>());
-            container.GetInstance<IReportEngine>().Run();
+            return value > 1 ? string.Concat(name, "s") : name;
         }
     }
 }

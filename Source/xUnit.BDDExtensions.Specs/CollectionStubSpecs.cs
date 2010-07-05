@@ -23,48 +23,48 @@ namespace Xunit.Specs
     [Concern(typeof(PropertyStubExtensions))]
     public class When_stubbing_properties_of_collection_types : StaticContextSpecification
     {
-        private IHaveCollectionsToStub mock;
+        private IHaveCollectionsToStub _mock;
 
         protected override void EstablishContext()
         {
-            mock = An<IHaveCollectionsToStub>();
+            _mock = An<IHaveCollectionsToStub>();
         }
 
         protected override void Because()
         {
-            mock.HasProperties();
+            _mock.HasProperties();
         }
 
         [Observation]
         public void Should_not_stub_concrete_collections()
         {
-            mock.ConcreteList.ShouldBeNull();
+            _mock.ConcreteList.ShouldBeNull();
         }
 
         [Observation]
         public void Should_stub_generic_collections_of_concrete_types_empty()
         {
-            mock.ListOfInt.Count.ShouldBeEqualTo(0);
+            _mock.ListOfInt.Count.ShouldBeEqualTo(0);
         }
 
         [Observation]
         public void Should_stub_generic_collections_of_interface_types_with_3_items()
         {
-            mock.ListOfInterface.Count.ShouldBeEqualTo(3);
+            _mock.ListOfInterface.Count.ShouldBeEqualTo(3);
         }
 
         [Observation]
         public void Should_stub_generic_collections_expandable()
         {
-            var oldCount = mock.ListOfInt.Count;
-            mock.ListOfInt.Add(4);
-            mock.ListOfInt.Count.ShouldBeGreaterThan(oldCount);
+            var oldCount = _mock.ListOfInt.Count;
+            _mock.ListOfInt.Add(4);
+            _mock.ListOfInt.Count.ShouldBeGreaterThan(oldCount);
         }
 
         [Observation]
         public void Should_not_stub_custom_derived_collections()
         {
-            mock.CustomList.ShouldBeNull();
+            _mock.CustomList.ShouldBeNull();
         }
     }
 

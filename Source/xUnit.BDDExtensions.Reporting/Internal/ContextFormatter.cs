@@ -12,23 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
-using StructureMap;
-using Xunit.Reporting.Internal;
-
-namespace Xunit.Reporting
+namespace Xunit.Reporting.Internal
 {
     /// <summary>
-    /// Entry to the report generator.
+    /// A specialized formatter containing all formatting rules for a <see cref="Context"/>.
     /// </summary>
-    public class Program
+    public class ContextFormatter : IFormatter
     {
+        #region IFormatter Members
+
         /// <summary>
-        /// Runs the generator
+        /// Formats the string supplied by <paramref name="content"/>.
         /// </summary>
-        public static void Main(string[] args)
+        /// <param name="content">Specifies the content to format.</param>
+        /// <returns>The formatted content.</returns>
+        public string Format(string content)
         {
-            var container = new Container(init => init.AddRegistry<EngineRegistry>());
-            container.GetInstance<IReportEngine>().Run();
+            return content
+                .ReplaceDoubleUnderscoresWithDoubleQuotes()
+                .ReplaceUnderscoresWithSpaces()
+                .CapitalizeFirstLetter()
+                .Trim();
         }
+
+        #endregion
     }
 }

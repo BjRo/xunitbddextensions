@@ -93,47 +93,46 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Core\Configuration\ArgumentMap.cs" />
+    <Compile Include="Internal\Configuration\ArgumentMap.cs" />
     <Compile Include="ArgumentKeys.cs" />
-    <Compile Include="Core\Assembly.cs" />
-    <Compile Include="Core\AssemblyLoader.cs" />
-    <Compile Include="Core\Configuration\ArgumentMapFactory.cs" />
-    <Compile Include="Core\Configuration\CollectionArgumentKey.cs" />
-    <Compile Include="Core\Configuration\IArgumentMap.cs" />
-    <Compile Include="Core\Configuration\IArgumentMapFactory.cs" />
-    <Compile Include="Core\Configuration\IArguments.cs" />
-    <Compile Include="Core\Configuration\Arguments.cs" />
-    <Compile Include="Core\Configuration\ArgumentKey.cs" />
-    <Compile Include="Core\Generator\DirectiveManagerProxy.cs" />
-    <Compile Include="Core\Generator\FileSystemHelper.cs" />
-    <Compile Include="Core\Generator\IFileSystemHelper.cs" />
-    <Compile Include="Core\Generator\Pluralizer.cs" />
-    <Compile Include="Core\Generator\FileWriter.cs" />
-    <Compile Include="Core\Generator\GeneratorConvensions.cs" />
-    <Compile Include="Core\Generator\HtmlReportGenerator.cs" />
-    <Compile Include="Core\Generator\IFileWriter.cs" />
-    <Compile Include="Core\Generator\IReportGenerator.cs" />
-    <Compile Include="Core\Generator\TextReportGenerator.cs" />
-    <Compile Include="Core\IModelBuilder.cs" />
-    <Compile Include="Core\IReport.cs" />
-    <Compile Include="Core\IReportEngine.cs" />
-    <Compile Include="Core\ObservationFormatter.cs" />
-    <Compile Include="Core\ReportEngine.cs" />
+    <Compile Include="Internal\Assembly.cs" />
+    <Compile Include="Internal\AssemblyLoader.cs" />
+    <Compile Include="Internal\Configuration\ArgumentMapFactory.cs" />
+    <Compile Include="Internal\Configuration\CollectionArgumentKey.cs" />
+    <Compile Include="Internal\Configuration\IArgumentMap.cs" />
+    <Compile Include="Internal\Configuration\IArgumentMapFactory.cs" />
+    <Compile Include="Internal\Configuration\IArguments.cs" />
+    <Compile Include="Internal\Configuration\Arguments.cs" />
+    <Compile Include="Internal\Configuration\ArgumentKey.cs" />
+    <Compile Include="Internal\Generator\DirectiveManagerProxy.cs" />
+    <Compile Include="Internal\Generator\FileSystemHelper.cs" />
+    <Compile Include="Internal\Generator\IFileSystemHelper.cs" />
+    <Compile Include="Internal\Generator\Pluralizer.cs" />
+    <Compile Include="Internal\Generator\FileWriter.cs" />
+    <Compile Include="Internal\Generator\GeneratorConvensions.cs" />
+    <Compile Include="Internal\Generator\HtmlReportGenerator.cs" />
+    <Compile Include="Internal\Generator\IFileWriter.cs" />
+    <Compile Include="Internal\Generator\IReportGenerator.cs" />
+    <Compile Include="Internal\Generator\TextReportGenerator.cs" />
+    <Compile Include="Internal\IModelBuilder.cs" />
+    <Compile Include="Internal\IReport.cs" />
+    <Compile Include="Internal\IReportEngine.cs" />
+    <Compile Include="Internal\ObservationFormatter.cs" />
+    <Compile Include="Internal\ReportEngine.cs" />
     <Compile Include="EngineRegistry.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Core\Require.cs" />
-    <Compile Include="Core\Configuration\SimpleArgumentKey.cs" />
-    <Compile Include="Core\Concern.cs" />
-    <Compile Include="Core\Context.cs" />
-    <Compile Include="Core\ContextFormatter.cs" />
-    <Compile Include="Core\ModelBuilder.cs" />
-    <Compile Include="Core\IAssembly.cs" />
-    <Compile Include="Core\IAssemblyLoader.cs" />
-    <Compile Include="Core\IFormatter.cs" />
-    <Compile Include="Core\Observation.cs" />
-    <Compile Include="Core\Report.cs" />
-    <Compile Include="Core\StringExtensions.cs" />
-    <Compile Include="Core\ReflectionExtensions.cs" />
+    <Compile Include="Internal\Configuration\SimpleArgumentKey.cs" />
+    <Compile Include="Internal\Concern.cs" />
+    <Compile Include="Internal\Context.cs" />
+    <Compile Include="Internal\ContextFormatter.cs" />
+    <Compile Include="Internal\ModelBuilder.cs" />
+    <Compile Include="Internal\IAssembly.cs" />
+    <Compile Include="Internal\IAssemblyLoader.cs" />
+    <Compile Include="Internal\IFormatter.cs" />
+    <Compile Include="Internal\Observation.cs" />
+    <Compile Include="Internal\Report.cs" />
+    <Compile Include="Internal\StringExtensions.cs" />
+    <Compile Include="Internal\ReflectionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xUnit.BDDExtensions\xUnit.BDDExtensions.csproj">
@@ -142,7 +141,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Core\Generator\HtmlTemplate.vm" />
+    <EmbeddedResource Include="Internal\Generator\HtmlTemplate.vm" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

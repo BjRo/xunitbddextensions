@@ -22,43 +22,43 @@ namespace Xunit.Specs
     [Concern(typeof (PropertyStubExtensions))]
     public class When_stubbing_properties : StaticContextSpecification
     {
-        private IHavePropertiesToStub mock;
+        private IHavePropertiesToStub _mock;
 
         protected override void EstablishContext()
         {
-            mock = An<IHavePropertiesToStub>();
+            _mock = An<IHavePropertiesToStub>();
         }
 
         protected override void Because()
         {
-            mock.HasProperties();
+            _mock.HasProperties();
         }
 
         [Observation]
         public void Should_have_stub_behavior()
         {
-            mock.PrimitiveProperty = "text";
+            _mock.PrimitiveProperty = "text";
 
-            mock.PrimitiveProperty.ShouldBeEqualTo("text");
+            _mock.PrimitiveProperty.ShouldBeEqualTo("text");
         }
 
         [Observation]
         public void Should_auto_mock_interface_type_properties()
         {
-            mock.Component.ShouldNotBeNull();
+            _mock.Component.ShouldNotBeNull();
         }
 
         [Observation]
         public void Interface_type_properties_should_have_stub_behavior()
         {
-            mock.Component.TextProperty = "text";
-            mock.Component.TextProperty.ShouldBeEqualTo("text");
+            _mock.Component.TextProperty = "text";
+            _mock.Component.TextProperty.ShouldBeEqualTo("text");
         }
 
         [Observation]
         public void Should_not_generate_stubs_for_properties_of_properties()
         {
-            mock.Component.Child.ShouldBeNull();
+            _mock.Component.Child.ShouldBeNull();
         }
     }
 

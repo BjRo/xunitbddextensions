@@ -22,24 +22,24 @@ namespace Xunit.Specs
     public class When_method_was_expected_to_be_called_and_it_actually_has_been_called :
         StaticContextSpecification
     {
-        private IServiceProvider dependency;
-        private Action theAssertion;
+        private IServiceProvider _dependency;
+        private Action _theAssertion;
 
         protected override void EstablishContext()
         {
-            dependency = An<IServiceProvider>();
-            dependency.GetService(typeof (ISite));
+            _dependency = An<IServiceProvider>();
+            _dependency.GetService(typeof (ISite));
         }
 
         protected override void Because()
         {
-            theAssertion = () => dependency.WasToldTo(x => x.GetService(typeof (ISite)));
+            _theAssertion = () => _dependency.WasToldTo(x => x.GetService(typeof (ISite)));
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            _theAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
@@ -47,23 +47,23 @@ namespace Xunit.Specs
     public class When_method_was_expected_to_be_called_and_it_actually_has_not_been_called :
         StaticContextSpecification
     {
-        private IServiceProvider dependency;
-        private Action theAssertion;
+        private IServiceProvider _dependency;
+        private Action _theAssertion;
 
         protected override void EstablishContext()
         {
-            dependency = An<IServiceProvider>();
+            _dependency = An<IServiceProvider>();
         }
 
         protected override void Because()
         {
-            theAssertion = () => dependency.WasToldTo(x => x.GetService(typeof (ISite)));
+            _theAssertion = () => _dependency.WasToldTo(x => x.GetService(typeof (ISite)));
         }
 
         [Observation]
         public void Should_throw_an__ExpectationViolationException__()
         {
-            theAssertion.ShouldThrowAn<ExpectationViolationException>();
+            _theAssertion.ShouldThrowAn<ExpectationViolationException>();
         }
     }
 
@@ -71,24 +71,24 @@ namespace Xunit.Specs
     public class When_a_method_was_not_expected_to_be_called_but_it_actually_was_ :
         StaticContextSpecification
     {
-        private IServiceProvider dependency;
-        private Action theAssertion;
+        private IServiceProvider _dependency;
+        private Action _theAssertion;
 
         protected override void EstablishContext()
         {
-            dependency = An<IServiceProvider>();
-            dependency.GetService(typeof (ISite));
+            _dependency = An<IServiceProvider>();
+            _dependency.GetService(typeof (ISite));
         }
 
         protected override void Because()
         {
-            theAssertion = () => dependency.WasNotToldTo(x => x.GetService(typeof (ISite)));
+            _theAssertion = () => _dependency.WasNotToldTo(x => x.GetService(typeof (ISite)));
         }
 
         [Observation]
         public void Should_throw_an__ExpectationViolationException__()
         {
-            theAssertion.ShouldThrowAn<ExpectationViolationException>();
+            _theAssertion.ShouldThrowAn<ExpectationViolationException>();
         }
     }
 
@@ -96,23 +96,23 @@ namespace Xunit.Specs
     public class When_a_method_was_not_expected_to_be_called_and_it_was_not_called :
         StaticContextSpecification
     {
-        private IServiceProvider dependency;
-        private Action theAssertion;
+        private IServiceProvider _dependency;
+        private Action _theAssertion;
 
         protected override void EstablishContext()
         {
-            dependency = An<IServiceProvider>();
+            _dependency = An<IServiceProvider>();
         }
 
         protected override void Because()
         {
-            theAssertion = () => dependency.WasNotToldTo(x => x.GetService(typeof (ISite)));
+            _theAssertion = () => _dependency.WasNotToldTo(x => x.GetService(typeof (ISite)));
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            _theAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
@@ -120,26 +120,26 @@ namespace Xunit.Specs
     public class When_setting_up_a_method_result_on_a_generated__Stub__ :
         StaticContextSpecification
     {
-        private IServiceProvider dependency;
-        private object methodInvokationResult;
-        private object recievedMethodResult;
+        private IServiceProvider _dependency;
+        private object _methodInvokationResult;
+        private object _recievedMethodResult;
 
         protected override void EstablishContext()
         {
-            dependency = An<IServiceProvider>();
-            methodInvokationResult = An<ISite>();
-            dependency.WhenToldTo(x => x.GetService(typeof (ISite))).Return(methodInvokationResult);
+            _dependency = An<IServiceProvider>();
+            _methodInvokationResult = An<ISite>();
+            _dependency.WhenToldTo(x => x.GetService(typeof (ISite))).Return(_methodInvokationResult);
         }
 
         protected override void Because()
         {
-            recievedMethodResult = dependency.GetService(typeof (ISite));
+            _recievedMethodResult = _dependency.GetService(typeof (ISite));
         }
 
         [Observation]
         public void Should_behave_like_it_has_been_configured()
         {
-            recievedMethodResult.ShouldBeEqualTo(methodInvokationResult);
+            _recievedMethodResult.ShouldBeEqualTo(_methodInvokationResult);
         }
     }
 
@@ -147,26 +147,26 @@ namespace Xunit.Specs
     public class When_setting_up_a_property_result_on_a_generated__Stub__ :
         StaticContextSpecification
     {
-        private ISite dependency;
-        private IContainer propertyResult;
-        private object recievedPropertyResult;
+        private ISite _dependency;
+        private IContainer _propertyResult;
+        private object _recievedPropertyResult;
 
         protected override void EstablishContext()
         {
-            dependency = An<ISite>();
-            propertyResult = An<IContainer>();
-            dependency.WhenToldTo(x => x.Container).Return(propertyResult);
+            _dependency = An<ISite>();
+            _propertyResult = An<IContainer>();
+            _dependency.WhenToldTo(x => x.Container).Return(_propertyResult);
         }
 
         protected override void Because()
         {
-            recievedPropertyResult = dependency.Container;
+            _recievedPropertyResult = _dependency.Container;
         }
 
         [Observation]
         public void Should_behave_like_it_has_been_configured()
         {
-            recievedPropertyResult.ShouldBeEqualTo(propertyResult);
+            _recievedPropertyResult.ShouldBeEqualTo(_propertyResult);
         }
     }
 
@@ -174,24 +174,24 @@ namespace Xunit.Specs
     public class When_configuring_an__Exception__to_be_thrown_when_an_interaction_is_executed :
             StaticContextSpecification
     {
-        private IServiceProvider dependency;
-        private Action theAssertion;
+        private IServiceProvider _dependency;
+        private Action _theAssertion;
 
         protected override void EstablishContext()
         {
-            dependency = An<IServiceProvider>();
-            dependency.WhenToldTo(x => x.GetService(typeof (ISite))).Throw(new InvalidOperationException());
+            _dependency = An<IServiceProvider>();
+            _dependency.WhenToldTo(x => x.GetService(typeof (ISite))).Throw(new InvalidOperationException());
         }
 
         protected override void Because()
         {
-            theAssertion = () => dependency.GetService(typeof (ISite));
+            _theAssertion = () => _dependency.GetService(typeof (ISite));
         }
 
         [Observation]
         public void Should_throw_the_configured__Exception__()
         {
-            theAssertion.ShouldThrowAn<InvalidOperationException>();
+            _theAssertion.ShouldThrowAn<InvalidOperationException>();
         }
     }
 
@@ -199,25 +199,25 @@ namespace Xunit.Specs
     public class When_a_method_is_expected_to_be_called_only_once_and_the_method_was_called_at_least_twice :
             StaticContextSpecification
     {
-        private IServiceProvider dependency;
-        private Action theAssertion;
+        private IServiceProvider _dependency;
+        private Action _theAssertion;
 
         protected override void EstablishContext()
         {
-            dependency = An<IServiceProvider>();
-            dependency.GetService(typeof (ISite));
-            dependency.GetService(typeof (ISite));
+            _dependency = An<IServiceProvider>();
+            _dependency.GetService(typeof (ISite));
+            _dependency.GetService(typeof (ISite));
         }
 
         protected override void Because()
         {
-            theAssertion = () => dependency.WasToldTo(x => x.GetService(typeof (ISite))).OnlyOnce();
+            _theAssertion = () => _dependency.WasToldTo(x => x.GetService(typeof (ISite))).OnlyOnce();
         }
 
         [Observation]
         public void Should_throw_an__ExpectationViolationException__()
         {
-            theAssertion.ShouldThrowAn<ExpectationViolationException>();
+            _theAssertion.ShouldThrowAn<ExpectationViolationException>();
         }
     }
 
@@ -225,25 +225,25 @@ namespace Xunit.Specs
     public class When_a_method_is_expected_to_be_called_twice_and_the_method_was_called_twice :
             StaticContextSpecification
     {
-        private IServiceProvider dependency;
-        private Action theAssertion;
+        private IServiceProvider _dependency;
+        private Action _theAssertion;
 
         protected override void EstablishContext()
         {
-            dependency = An<IServiceProvider>();
-            dependency.GetService(typeof (ISite));
-            dependency.GetService(typeof (ISite));
+            _dependency = An<IServiceProvider>();
+            _dependency.GetService(typeof (ISite));
+            _dependency.GetService(typeof (ISite));
         }
 
         protected override void Because()
         {
-            theAssertion = () => dependency.WasToldTo(x => x.GetService(typeof (ISite))).Twice();
+            _theAssertion = () => _dependency.WasToldTo(x => x.GetService(typeof (ISite))).Twice();
         }
 
         [Observation]
         public void Should_not_throw_an__Exception__()
         {
-            theAssertion.ShouldNotThrowAnyExceptions();
+            _theAssertion.ShouldNotThrowAnyExceptions();
         }
     }
 
@@ -251,25 +251,25 @@ namespace Xunit.Specs
     public class When_a_method_is_expected_to_be_called_more_often_than_it_actually_has_been_called :
             StaticContextSpecification
     {
-        private IServiceProvider dependency;
-        private Action theAssertion;
+        private IServiceProvider _dependency;
+        private Action _theAssertion;
 
         protected override void EstablishContext()
         {
-            dependency = An<IServiceProvider>();
-            dependency.GetService(typeof (ISite));
-            dependency.GetService(typeof (ISite));
+            _dependency = An<IServiceProvider>();
+            _dependency.GetService(typeof (ISite));
+            _dependency.GetService(typeof (ISite));
         }
 
         protected override void Because()
         {
-            theAssertion = () => dependency.WasToldTo(x => x.GetService(typeof (ISite))).Times(3);
+            _theAssertion = () => _dependency.WasToldTo(x => x.GetService(typeof (ISite))).Times(3);
         }
 
         [Observation]
         public void Should_throw_an__ExpectationViolationException__()
         {
-            theAssertion.ShouldThrowAn<ExpectationViolationException>();
+            _theAssertion.ShouldThrowAn<ExpectationViolationException>();
         }
     }
 }

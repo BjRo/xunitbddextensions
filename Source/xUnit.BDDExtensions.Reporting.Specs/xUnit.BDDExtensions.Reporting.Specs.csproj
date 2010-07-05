@@ -91,19 +91,19 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Core\AssemblyLoaderSpecs.cs" />
-    <Compile Include="Core\AssemblySpecs.cs" />
-    <Compile Include="Core\Configuration\ArgumentMapFactorySpecs.cs" />
-    <Compile Include="Core\Configuration\CollectionPropertyKeySpecs.cs" />
-    <Compile Include="Core\Configuration\ArgumentsSpecs.cs" />
-    <Compile Include="Core\Configuration\SimplePropertyKeySpecs.cs" />
-    <Compile Include="Core\ContextSpecs.cs" />
-    <Compile Include="Core\Generator\DirectiveManagerProxySpecs.cs" />
-    <Compile Include="Core\Generator\PluralizerSpecs.cs" />
-    <Compile Include="Core\ModelBuilderSpecs.cs" />
-    <Compile Include="Core\ObservationSpecs.cs" />
-    <Compile Include="Core\ReportEngineSpecs.cs" />
-    <Compile Include="Core\TestClasses.cs" />
+    <Compile Include="Internal\AssemblyLoaderSpecs.cs" />
+    <Compile Include="Internal\AssemblySpecs.cs" />
+    <Compile Include="Internal\Configuration\ArgumentMapFactorySpecs.cs" />
+    <Compile Include="Internal\Configuration\CollectionPropertyKeySpecs.cs" />
+    <Compile Include="Internal\Configuration\ArgumentsSpecs.cs" />
+    <Compile Include="Internal\Configuration\SimplePropertyKeySpecs.cs" />
+    <Compile Include="Internal\ContextSpecs.cs" />
+    <Compile Include="Internal\Generator\DirectiveManagerProxySpecs.cs" />
+    <Compile Include="Internal\Generator\PluralizerSpecs.cs" />
+    <Compile Include="Internal\ModelBuilderSpecs.cs" />
+    <Compile Include="Internal\ObservationSpecs.cs" />
+    <Compile Include="Internal\ReportEngineSpecs.cs" />
+    <Compile Include="Internal\TestClasses.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xUnit.BDDExtensions.Assertions\xUnit.BDDExtensions.Assertions.csproj">
