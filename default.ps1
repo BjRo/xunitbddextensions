@@ -33,7 +33,7 @@ task Init -depends Clean {
 } 
 
 task Compile -depends Init { 
-  exec { msbuild "/p:OutDir=$buildartifacts_dir" "/p:Platform=Any CPU" "$sln_file" }
+  exec { msbuild /t:rebuild "/p:OutDir=$buildartifacts_dir" "/p:Configuration=Release" "/p:Platform=Any CPU" "$sln_file" }
 } 
 
 task Test -depends Compile {
