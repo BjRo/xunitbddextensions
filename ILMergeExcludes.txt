@@ -11,3 +11,5 @@ Rhino.Mocks.Delegates.*
 Castle.Core.Interceptor.IProxyTargetAccessor
 Castle.DynamicProxy.AbstractInvocation
 Castle.DynamicProxy.Generators.AttributesToAvoidReplicating
+Xunit.*
+Xunit.PropertyStubs.*
