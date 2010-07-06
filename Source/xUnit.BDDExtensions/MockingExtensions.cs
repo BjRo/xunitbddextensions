@@ -14,53 +14,16 @@
 //
 using System;
 using System.Linq.Expressions;
-using Rhino.Mocks;
 using Xunit.Internal;
 
 namespace Xunit
 {
     /// <summary>
-    /// An implementation of <see cref="IMockingEngine"/>
-    /// using Rhino.Mocks.
+    /// A set of extension methods for setting up behavior on stubs in a fashion idependant 
+    /// to a particular mocking framework.
     /// </summary>
-    public class RhinoMockingEngine : IMockingEngine
+    public static class MockingExtensions
     {
-        /// <summary>
-        /// Creates a dependency of the type specified via <paramref name="interfaceType"/>.
-        /// </summary>
-        /// <param name="interfaceType">
-        /// Specifies the interface type to create a dependency for.
-        /// </param>
-        /// <returns>
-        /// The created dependency instance.
-        /// </returns>
-        public object Stub(Type interfaceType)
-        {
-            var stub = MockRepository.GenerateStub(interfaceType);
-            stub.Replay();
-            return stub;
-        }
-
-        /// <summary>
-        /// Creates a partial mock.
-        /// </summary>
-        /// <typeparam name="T">
-        /// Specifies the type of the partial mock. This needs to be 
-        /// an abstract base class.
-        /// </typeparam>
-        /// <param name="args">
-        /// Specifies the constructor parameters.
-        /// </param>
-        /// <returns>
-        /// The created instance.
-        /// </returns>
-        public T PartialMock<T>(params object[] args) where T : class
-        {
-            var mock = MockRepository.GenerateMock<T>(args);
-            mock.Replay();
-            return mock;
-        }
-
         /// <summary>
         ///   Configures the behavior of the dependency specified by <paramref name = "dependency" />.
         /// </summary>
@@ -79,15 +42,14 @@ namespace Xunit
         /// <returns>
         ///   A <see cref = "IMockingOptions{TReturn}" /> for further configuration.
         /// </returns>
-        public IMockingOptions<TReturnValue> ConfigureBehavior<TDependency, TReturnValue>(
-            TDependency dependency, 
+        public static IMockingOptions<TReturnValue> WhenToldTo<TDependency, TReturnValue>(
+            this TDependency dependency,
             Expression<Func<TDependency, TReturnValue>> func) where TDependency : class
         {
-            var compiledFunction = func.Compile();
+            Guard.AgainstArgumentNull(dependency, "dependency");
+            Guard.AgainstArgumentNull(func, "func");
 
-            Guard.AgainstArgumentNull(compiledFunction, "compiledFunction");
-
-            return new RhinoMockingOptions<TReturnValue>(dependency.Stub(f => compiledFunction(f)));
+            return Framework.MockingEngine.ConfigureBehavior(dependency, func);
         }
 
         /// <summary>
@@ -108,15 +70,14 @@ namespace Xunit
         /// <remarks>
         ///   This method is used for command, e.g. methods returning void.
         /// </remarks>
-        public IMockingOptions<object > ConfigureBehavior<TDependency>(
-            TDependency dependency, 
+        public static IMockingOptions<object> WhenToldTo<TDependency>(
+            this TDependency dependency,
             Expression<Action<TDependency>> func) where TDependency : class
         {
-            var compiledFunction = func.Compile();
+            Guard.AgainstArgumentNull(dependency, "dependency");
+            Guard.AgainstArgumentNull(func, "func");
 
-            Guard.AgainstArgumentNull(compiledFunction, "compiledFunction");
-
-            return new RhinoMockingOptions<object>(dependency.Stub(compiledFunction));
+            return Framework.MockingEngine.ConfigureBehavior(dependency, func);
         }
     }
 }

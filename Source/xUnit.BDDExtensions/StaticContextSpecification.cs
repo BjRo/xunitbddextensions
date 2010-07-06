@@ -30,7 +30,7 @@ namespace Xunit
         /// </summary>
         protected StaticContextSpecification()
         {
-            _mockingEngine = FrameworkConfig.MockingEngine;
+            _mockingEngine = Framework.MockingEngine;
         }
 
         #region ISpecification Members

@@ -13,6 +13,7 @@
 // limitations under the License.
 // 
 using System;
+using System.Linq.Expressions;
 using StructureMap.AutoMocking;
 
 namespace Xunit.Internal
@@ -35,8 +36,8 @@ namespace Xunit.Internal
         /// </summary>
         public AutoMockingContainer()
         {
-            _fabric = FrameworkConfig.BuildFabric();
-            _mockingEngine = FrameworkConfig.MockingEngine;
+            _fabric = Framework.BuildFabric();
+            _mockingEngine = Framework.MockingEngine;
             _serviceLocator = this;
             _container = new AutoMockedContainer(this);
         }
@@ -112,6 +113,20 @@ namespace Xunit.Internal
         public T PartialMock<T>(params object[] args) where T : class
         {
             return _mockingEngine.PartialMock<T>(args);
+        }
+
+        public IMockingOptions<TReturnValue> ConfigureBehavior<TDependency, TReturnValue>(
+            TDependency dependency, 
+            Expression<Func<TDependency, TReturnValue>> func) where TDependency : class
+        {
+            return _mockingEngine.ConfigureBehavior(dependency, func);
+        }
+
+        public IMockingOptions<object> ConfigureBehavior<TDependency>(
+            TDependency dependency, 
+            Expression<Action<TDependency>> func) where TDependency : class
+        {
+            return _mockingEngine.ConfigureBehavior(dependency, func);
         }
     }
 }

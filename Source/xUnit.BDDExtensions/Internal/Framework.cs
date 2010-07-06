@@ -21,7 +21,7 @@ namespace Xunit.Internal
     /// A configuration endpoint for the <see cref="Fabric"/> which controls
     /// the internal processes of xunit.bddextensions.     
     /// </summary>
-    public class FrameworkConfig
+    public class Framework
     {
         /// <summary>
         /// Gets or sets the <see cref="IMockingEngine"/> which is used internally.
