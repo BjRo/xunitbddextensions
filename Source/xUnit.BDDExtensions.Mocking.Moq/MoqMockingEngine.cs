@@ -22,7 +22,7 @@ namespace Xunit
     /// An implementation of <see cref="IMockingEngine"/>
     /// using Rhino.Mocks.
     /// </summary>
-    public class MoqMockingEngine : IMockingEngine
+    internal class MoqMockingEngine : IMockingEngine
     {
         /// <summary>
         /// Creates a dependency of the type specified via <paramref name="interfaceType"/>.
@@ -37,7 +37,7 @@ namespace Xunit
         {
             var closedMockType = typeof(Mock<>).MakeGenericType(interfaceType);
             var objectProperty = closedMockType.GetProperty("Object", closedMockType);
-            var instance = Activator.CreateInstance(interfaceType); 
+            var instance = Activator.CreateInstance(closedMockType); 
             return objectProperty.GetValue(instance, null);
         }
 

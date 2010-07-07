@@ -1,4 +1,4 @@
-// Copyright 2009 Björn Rochel - http://www.bjro.de/ 
+// Copyright 2010 xUnit.BDDExtensions
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +16,11 @@ using Xunit.Internal;
 
 namespace Xunit
 {
-    public class ObservationAttribute : ObservationAttributeBase
+    /// <summary>
+    /// A specialized <see cref="ObservationAttribute"/> for using 
+    /// Moq as the underlying mocking engine.
+    /// </summary>
+    public sealed class ObservationAttribute : ObservationAttributeBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ObservationAttribute"/> class.
