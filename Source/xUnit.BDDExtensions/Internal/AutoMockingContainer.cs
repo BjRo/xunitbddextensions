@@ -115,18 +115,40 @@ namespace Xunit.Internal
             return _mockingEngine.PartialMock<T>(args);
         }
 
-        public IMockingOptions<TReturnValue> ConfigureBehavior<TDependency, TReturnValue>(
+        /// <summary>
+        /// Configures the behavior of the dependency specified by <paramref name="dependency"/>.
+        /// </summary>
+        /// <typeparam name="TDependency">Specifies the type of the dependency.</typeparam>
+        /// <typeparam name="TReturnValue">Specifies the type of the return value.</typeparam>
+        /// <param name="dependency">The dependency to configure behavior on.</param>
+        /// <param name="func">Configures the behavior. This must be a void method.</param>
+        /// <returns>
+        /// A <see cref="IQueryOptions{TReturn}"/> for further configuration.
+        /// </returns>
+        public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TDependency, TReturnValue>(
             TDependency dependency, 
             Expression<Func<TDependency, TReturnValue>> func) where TDependency : class
         {
-            return _mockingEngine.ConfigureBehavior(dependency, func);
+            return _mockingEngine.SetUpQueryBehaviorFor(dependency, func);
         }
 
-        public IMockingOptions<object> ConfigureBehavior<TDependency>(
+        /// <summary>
+        /// Configures the behavior of the dependency specified by <paramref name="dependency"/>.
+        /// </summary>
+        /// <typeparam name="TDependency">Specifies the type of the dependency.</typeparam>
+        /// <param name="dependency">The dependency to configure behavior on.</param>
+        /// <param name="func">Configures the behavior. This must be a void method.</param>
+        /// <returns>
+        /// A <see cref="ICommandOptions"/> for further configuration.
+        /// </returns>
+        /// <remarks>
+        /// This method is used for command, e.g. methods returning void.
+        /// </remarks>
+        public ICommandOptions SetUpCommandBehaviorFor<TDependency>(
             TDependency dependency, 
             Expression<Action<TDependency>> func) where TDependency : class
         {
-            return _mockingEngine.ConfigureBehavior(dependency, func);
+            return _mockingEngine.SetUpCommandBehaviorFor(dependency, func);
         }
     }
 }

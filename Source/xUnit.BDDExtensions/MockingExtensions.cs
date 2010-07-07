@@ -40,16 +40,16 @@ namespace Xunit
         ///   Configures the behavior. This must be a void method.
         /// </param>
         /// <returns>
-        ///   A <see cref = "IMockingOptions{TReturn}" /> for further configuration.
+        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
         /// </returns>
-        public static IMockingOptions<TReturnValue> WhenToldTo<TDependency, TReturnValue>(
+        public static IQueryOptions<TReturnValue> WhenToldTo<TDependency, TReturnValue>(
             this TDependency dependency,
             Expression<Func<TDependency, TReturnValue>> func) where TDependency : class
         {
             Guard.AgainstArgumentNull(dependency, "dependency");
             Guard.AgainstArgumentNull(func, "func");
 
-            return Framework.MockingEngine.ConfigureBehavior(dependency, func);
+            return Framework.MockingEngine.SetUpQueryBehaviorFor(dependency, func);
         }
 
         /// <summary>
@@ -65,19 +65,19 @@ namespace Xunit
         ///   Configures the behavior. This must be a void method.
         /// </param>
         /// <returns>
-        ///   A <see cref = "IMockingOptions{Object}" /> for further configuration.
+        ///   A <see cref = "ICommandOptions" /> for further configuration.
         /// </returns>
         /// <remarks>
         ///   This method is used for command, e.g. methods returning void.
         /// </remarks>
-        public static IMockingOptions<object> WhenToldTo<TDependency>(
+        public static ICommandOptions WhenToldTo<TDependency>(
             this TDependency dependency,
             Expression<Action<TDependency>> func) where TDependency : class
         {
             Guard.AgainstArgumentNull(dependency, "dependency");
             Guard.AgainstArgumentNull(func, "func");
 
-            return Framework.MockingEngine.ConfigureBehavior(dependency, func);
+            return Framework.MockingEngine.SetUpCommandBehaviorFor(dependency, func);
         }
     }
 }

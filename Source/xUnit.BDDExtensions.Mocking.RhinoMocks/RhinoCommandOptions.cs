@@ -13,24 +13,23 @@
 // limitations under the License.
 // 
 using System;
-using Moq.Language.Flow;
+using Rhino.Mocks.Interfaces;
 using Xunit.Internal;
 
 namespace Xunit
 {
     /// <summary>
-    /// A <see cref="IQueryOptions{TReturn}"/> implementation for the Moq framework.
+    /// A <see cref="ICommandOptions"/> implementation for the Rhino.Mocks framework.
     /// </summary>
-    /// <typeparam name="TTarget">The type of the target.</typeparam>
-    internal class MoqCommandOptions<TTarget> : ICommandOptions where TTarget : class
+    internal class RhinoCommandOptions : ICommandOptions
     {
-        private readonly ISetup<TTarget> _methodOptions;
+        private readonly IMethodOptions<object> _methodOptions;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MoqCommandOptions{TTarget}"/> class.
+        /// Initializes a new instance of the <see cref="RhinoCommandOptions"/> class.
         /// </summary>
         /// <param name="methodOptions">The method options.</param>
-        public MoqCommandOptions(ISetup<TTarget> methodOptions)
+        public RhinoCommandOptions(IMethodOptions<object> methodOptions)
         {
             Guard.AgainstArgumentNull(methodOptions, "methodOptions");
 
@@ -41,13 +40,11 @@ namespace Xunit
         /// Configures that the invocation of the related behavior
         /// results in the specified <see cref="Exception"/> beeing thrown.
         /// </summary>
-        /// <param name="exception">
-        /// Specifies the exception which should be thrown when the 
-        /// behavior is invoked.
-        /// </param>
+        /// <param name="exception">Specifies the exception which should be thrown when the
+        /// behavior is invoked.</param>
         public void Throw(Exception exception)
         {
-            _methodOptions.Throws(exception);
+            _methodOptions.Throw(exception);
         }
     }
 }

@@ -77,9 +77,9 @@ namespace Xunit
         ///   Configures the behavior. This must be a void method.
         /// </param>
         /// <returns>
-        ///   A <see cref = "IMockingOptions{TReturn}" /> for further configuration.
+        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
         /// </returns>
-        public IMockingOptions<TReturnValue> ConfigureBehavior<TDependency, TReturnValue>(
+        public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TDependency, TReturnValue>(
             TDependency dependency, 
             Expression<Func<TDependency, TReturnValue>> func) where TDependency : class
         {
@@ -87,7 +87,7 @@ namespace Xunit
 
             Guard.AgainstArgumentNull(compiledFunction, "compiledFunction");
 
-            return new RhinoMockingOptions<TReturnValue>(dependency.Stub(f => compiledFunction(f)));
+            return new RhinoQueryOptions<TReturnValue>(dependency.Stub(f => compiledFunction(f)));
         }
 
         /// <summary>
@@ -103,12 +103,12 @@ namespace Xunit
         ///   Configures the behavior. This must be a void method.
         /// </param>
         /// <returns>
-        ///   A <see cref = "IMockingOptions{Object}" /> for further configuration.
+        ///   A <see cref = "ICommandOptions" /> for further configuration.
         /// </returns>
         /// <remarks>
         ///   This method is used for command, e.g. methods returning void.
         /// </remarks>
-        public IMockingOptions<object > ConfigureBehavior<TDependency>(
+        public ICommandOptions SetUpCommandBehaviorFor<TDependency>(
             TDependency dependency, 
             Expression<Action<TDependency>> func) where TDependency : class
         {
@@ -116,7 +116,7 @@ namespace Xunit
 
             Guard.AgainstArgumentNull(compiledFunction, "compiledFunction");
 
-            return new RhinoMockingOptions<object>(dependency.Stub(compiledFunction));
+            return new RhinoCommandOptions(dependency.Stub(compiledFunction));
         }
     }
 }

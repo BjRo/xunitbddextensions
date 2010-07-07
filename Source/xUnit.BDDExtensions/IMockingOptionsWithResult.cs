@@ -17,10 +17,13 @@ using System;
 namespace Xunit
 {
     /// <summary>
-    /// Defines a mock framework independant fluent interface for setting up behavior.
+    /// Defines a mock framework independent fluent interface for setting up behavior
+    /// for methods returning a result (queries).
     /// </summary>
-    /// <typeparam name="TReturn"></typeparam>
-    public interface IMockingOptions<TReturn>
+    /// <typeparam name="TReturn">
+    /// Specifies the return value of the behavior under configuration.
+    /// </typeparam>
+    public interface IQueryOptions<TReturn>
     {
         /// <summary>
         /// Sets up the return value of a behavior.
@@ -29,9 +32,9 @@ namespace Xunit
         /// Specifies the return value.
         /// </param>
         /// <returns>
-        /// A <see cref="IMockingOptions{TReturn}"/> for further configuration.
+        /// A <see cref="IQueryOptions{TReturn}"/> for further configuration.
         /// </returns>
-        IMockingOptions<TReturn> Return(TReturn returnValue);
+        IQueryOptions<TReturn> Return(TReturn returnValue);
 
         /// <summary>
         /// Configures that the invocation of the related behavior
@@ -42,8 +45,8 @@ namespace Xunit
         /// behavior is invoked.
         /// </param>
         /// <returns>
-        /// A <see cref="IMockingOptions{TReturn}"/> for further configuration.
+        /// A <see cref="IQueryOptions{TReturn}"/> for further configuration.
         /// </returns>
-        IMockingOptions<TReturn> Throw(Exception exception);
+        IQueryOptions<TReturn> Throw(Exception exception);
     }
 }

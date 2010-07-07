@@ -19,20 +19,20 @@ using Xunit.Internal;
 namespace Xunit
 {
     /// <summary>
-    /// A <see cref="IMockingOptions{TReturn}"/> implementation for Rhino.Mocks framework.
+    /// A <see cref="IQueryOptions{TReturn}"/> implementation for the Rhino.Mocks framework.
     /// </summary>
     /// <typeparam name="TReturnValue">
     /// Specifies the type of the return value.
     /// </typeparam>
-    internal class RhinoMockingOptions<TReturnValue> : IMockingOptions<TReturnValue>
+    internal class RhinoQueryOptions<TReturnValue> : IQueryOptions<TReturnValue>
     {
         private readonly IMethodOptions<TReturnValue> _methodOptions;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RhinoMockingOptions&lt;TReturnValue&gt;"/> class.
+        /// Initializes a new instance of the <see cref="RhinoQueryOptions{TReturnValue}"/> class.
         /// </summary>
         /// <param name="methodOptions">The method options.</param>
-        public RhinoMockingOptions(IMethodOptions<TReturnValue> methodOptions)
+        public RhinoQueryOptions(IMethodOptions<TReturnValue> methodOptions)
         {
             Guard.AgainstArgumentNull(methodOptions, "methodOptions");
 
@@ -46,9 +46,9 @@ namespace Xunit
         /// Specifies the return value.
         /// </param>
         /// <returns>
-        /// A <see cref="IMockingOptions{TReturn}"/> for further configuration.
+        /// A <see cref="IQueryOptions{TReturn}"/> for further configuration.
         /// </returns>
-        public IMockingOptions<TReturnValue> Return(TReturnValue returnValue)
+        public IQueryOptions<TReturnValue> Return(TReturnValue returnValue)
         {
             _methodOptions.Return(returnValue);
             return this;
@@ -63,9 +63,9 @@ namespace Xunit
         /// behavior is invoked.
         /// </param>
         /// <returns>
-        /// A <see cref="IMockingOptions{TReturn}"/> for further configuration.
+        /// A <see cref="IQueryOptions{TReturn}"/> for further configuration.
         /// </returns>
-        public IMockingOptions<TReturnValue> Throw(Exception exception)
+        public IQueryOptions<TReturnValue> Throw(Exception exception)
         {
             _methodOptions.Throw(exception);
             return this;

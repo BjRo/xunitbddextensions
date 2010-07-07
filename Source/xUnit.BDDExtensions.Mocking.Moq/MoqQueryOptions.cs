@@ -19,11 +19,11 @@ using Xunit.Internal;
 namespace Xunit
 {
     /// <summary>
-    /// A <see cref="IMockingOptions{TReturn}"/> implementation for the Moq framework.
+    /// A <see cref="IQueryOptions{TReturn}"/> implementation for the Moq framework.
     /// </summary>
     /// <typeparam name="TTarget">The type of the target.</typeparam>
     /// <typeparam name="TReturnValue">Specifies the type of the return value.</typeparam>
-    internal class MoqQueryOptions<TTarget, TReturnValue> : IMockingOptions<TReturnValue> where TTarget : class
+    internal class MoqQueryOptions<TTarget, TReturnValue> : IQueryOptions<TReturnValue> where TTarget : class
     {
         private readonly ISetup<TTarget, TReturnValue> _methodOptions;
 
@@ -45,9 +45,9 @@ namespace Xunit
         /// Specifies the return value.
         /// </param>
         /// <returns>
-        /// A <see cref="IMockingOptions{TReturn}"/> for further configuration.
+        /// A <see cref="IQueryOptions{TReturn}"/> for further configuration.
         /// </returns>
-        public IMockingOptions<TReturnValue> Return(TReturnValue returnValue)
+        public IQueryOptions<TReturnValue> Return(TReturnValue returnValue)
         {
             _methodOptions.Returns(returnValue);
             return this;
@@ -62,9 +62,9 @@ namespace Xunit
         /// behavior is invoked.
         /// </param>
         /// <returns>
-        /// A <see cref="IMockingOptions{TReturn}"/> for further configuration.
+        /// A <see cref="IQueryOptions{TReturn}"/> for further configuration.
         /// </returns>
-        public IMockingOptions<TReturnValue> Throw(Exception exception)
+        public IQueryOptions<TReturnValue> Throw(Exception exception)
         {
             _methodOptions.Throws(exception);
             return this;

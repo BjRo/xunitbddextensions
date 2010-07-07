@@ -13,30 +13,15 @@
 // limitations under the License.
 // 
 using System;
-using Moq.Language.Flow;
-using Xunit.Internal;
 
 namespace Xunit
 {
     /// <summary>
-    /// A <see cref="IQueryOptions{TReturn}"/> implementation for the Moq framework.
+    /// Defines a mock framework independent fluent interface for setting up behavior
+    /// for methods returning void (commands)
     /// </summary>
-    /// <typeparam name="TTarget">The type of the target.</typeparam>
-    internal class MoqCommandOptions<TTarget> : ICommandOptions where TTarget : class
+    public interface ICommandOptions
     {
-        private readonly ISetup<TTarget> _methodOptions;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MoqCommandOptions{TTarget}"/> class.
-        /// </summary>
-        /// <param name="methodOptions">The method options.</param>
-        public MoqCommandOptions(ISetup<TTarget> methodOptions)
-        {
-            Guard.AgainstArgumentNull(methodOptions, "methodOptions");
-
-            _methodOptions = methodOptions;
-        }
-
         /// <summary>
         /// Configures that the invocation of the related behavior
         /// results in the specified <see cref="Exception"/> beeing thrown.
@@ -45,9 +30,6 @@ namespace Xunit
         /// Specifies the exception which should be thrown when the 
         /// behavior is invoked.
         /// </param>
-        public void Throw(Exception exception)
-        {
-            _methodOptions.Throws(exception);
-        }
+        void Throw(Exception exception);
     }
 }
