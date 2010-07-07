@@ -38,6 +38,8 @@ task Compile -depends Init {
 
 task Test -depends Compile {
   exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Specs.dll }
+  exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Mocking.RhinoMocks.Specs.dll }
+  exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Mocking.Moq.Specs.dll }
   exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Reporting.Specs.dll }
   exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.MVC.Specs.dll }
 }

@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Xunit.Specs</RootNamespace>
-    <AssemblyName>xUnit.BBDExtensions.Mocking.RhinoMocks.Specs</AssemblyName>
+    <AssemblyName>xUnit.BDDExtensions.Mocking.RhinoMocks.Specs</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

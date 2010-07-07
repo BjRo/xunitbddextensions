@@ -26,7 +26,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.Mocking
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.Mocking.Moq.Specs", "xUnit.BDDExtensions.Mocking.Moq.Specs\xUnit.BDDExtensions.Mocking.Moq.Specs.csproj", "{5D9AC244-FC0B-475C-A999-AF6EAA55B4AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BBDExtensions.Mocking.RhinoMocks.Specs", "xUnit.BBDExtensions.Mocking.RhinoMocks.Specs\xUnit.BBDExtensions.Mocking.RhinoMocks.Specs.csproj", "{6514AE7C-D253-4B0B-BADF-6B86CF1E8228}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnit.BDDExtensions.Mocking.RhinoMocks.Specs", "xUnit.BDDExtensions.Mocking.RhinoMocks.Specs\xUnit.BDDExtensions.Mocking.RhinoMocks.Specs.csproj", "{6514AE7C-D253-4B0B-BADF-6B86CF1E8228}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
