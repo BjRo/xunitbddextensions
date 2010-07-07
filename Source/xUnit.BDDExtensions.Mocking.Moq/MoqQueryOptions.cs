@@ -53,6 +53,30 @@ namespace Xunit
             return this;
         }
 
+        public IQueryOptions<TReturnValue> Return(Func<TReturnValue> valueFunction)
+        {
+            _methodOptions.Returns(valueFunction);
+            return this;
+        }
+
+        public IQueryOptions<TReturnValue> Return<T>(Func<T, TReturnValue> valueFunction)
+        {
+            _methodOptions.Returns(valueFunction);
+            return this;
+        }
+
+        public IQueryOptions<TReturnValue> Return<T1, T2>(Func<T1, T2, TReturnValue> valueFunction)
+        {
+            _methodOptions.Returns(valueFunction);
+            return this;
+        }
+
+        public IQueryOptions<TReturnValue> Return<T1, T2, T3>(Func<T1, T2, T3, TReturnValue> valueFunction)
+        {
+            _methodOptions.Returns(valueFunction);
+            return this;
+        }
+
         /// <summary>
         /// Configures that the invocation of the related behavior
         /// results in the specified <see cref="Exception"/> beeing thrown.

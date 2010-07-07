@@ -16,7 +16,7 @@
 using System.Collections.Specialized;
 using System.Web;
 using System.Web.Routing;
-using Rhino.Mocks;
+using Xunit.Internal;
 
 namespace Xunit
 {
@@ -90,13 +90,12 @@ namespace Xunit
             _context = The<HttpContextBase>();
 
             _context.WhenToldTo(s => s.Request).Return(The<HttpRequestBase>());
-            _context.WhenToldTo(s => s.Server).Return(The<HttpServerUtilityBase>());
+            _context.WhenToldTo(s => s.Server).Return(The<FakeHttpServerUtility>());
             _context.WhenToldTo(s => s.Response).Return(The<HttpResponseBase>());
 
             Request.WhenToldTo(r => r.Files).Return(The<HttpFileCollectionBase>());
 
             Response.WhenToldTo(responseBase => responseBase.Cache).Return(The<HttpCachePolicyBase>());
-            Server.WhenToldTo(serverUtilityBase => serverUtilityBase.MapPath(Arg<string>.Is.Anything)).Return("/");
             Request.WhenToldTo(requestbase => requestbase.ApplicationPath).Return("/");
         }
 

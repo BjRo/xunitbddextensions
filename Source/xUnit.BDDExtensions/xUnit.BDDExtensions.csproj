@@ -78,7 +78,7 @@
     </Compile>
     <Compile Include="DefaultBehaviorConfig.cs" />
     <Compile Include="ICommandOptions.cs" />
-    <Compile Include="IMockingOptionsWithResult.cs" />
+    <Compile Include="IQueryOptions.cs" />
     <Compile Include="Internal\AutoMockingContainer.cs" />
     <Compile Include="Internal\FabricContext.cs" />
     <Compile Include="ConcernAttribute.cs" />

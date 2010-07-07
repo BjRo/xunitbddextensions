@@ -13,6 +13,7 @@
 // limitations under the License.
 // 
 using System;
+using Rhino.Mocks;
 using Rhino.Mocks.Interfaces;
 using Xunit.Internal;
 
@@ -54,6 +55,43 @@ namespace Xunit
             return this;
         }
 
+        public IQueryOptions<TReturnValue> Return(Func<TReturnValue> valueFunction)
+        {
+            return RepeatAny(invocation =>
+            {
+                invocation.ReturnValue = valueFunction();
+            });
+        }
+
+        public IQueryOptions<TReturnValue> Return<T>(Func<T, TReturnValue> valueFunction)
+        {
+            return RepeatAny(invocation =>
+            {
+                invocation.ReturnValue = valueFunction((T)invocation.Arguments[0]);
+            });
+        }
+
+        public IQueryOptions<TReturnValue> Return<T1, T2>(Func<T1, T2, TReturnValue> valueFunction)
+        {
+            return RepeatAny(invocation =>
+            {
+                invocation.ReturnValue = valueFunction(
+                    (T1)invocation.Arguments[0],
+                    (T2)invocation.Arguments[1]);
+            });
+        }
+
+        public IQueryOptions<TReturnValue> Return<T1, T2, T3>(Func<T1, T2, T3, TReturnValue> valueFunction)
+        {
+            return RepeatAny(invocation =>
+            {
+                invocation.ReturnValue = valueFunction(
+                    (T1) invocation.Arguments[0],
+                    (T2) invocation.Arguments[1],
+                    (T3) invocation.Arguments[2]);
+            });
+        }
+
         /// <summary>
         /// Configures that the invocation of the related behavior
         /// results in the specified <see cref="Exception"/> beeing thrown.
@@ -68,6 +106,13 @@ namespace Xunit
         public IQueryOptions<TReturnValue> Throw(Exception exception)
         {
             _methodOptions.Throw(exception);
+            return this;
+        }
+
+        private IQueryOptions<TReturnValue> RepeatAny(Action<MethodInvocation> invocationConfig)
+        {
+            _methodOptions.WhenCalled(invocationConfig).Return(default(TReturnValue)).Repeat.Any();
+
             return this;
         }
     }
