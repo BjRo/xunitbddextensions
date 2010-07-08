@@ -78,12 +78,15 @@
     </Compile>
     <Compile Include="DefaultBehaviorConfig.cs" />
     <Compile Include="ICommandOptions.cs" />
+    <Compile Include="Internal\ConfigurationExpression.cs" />
+    <Compile Include="Internal\ICore.cs" />
+    <Compile Include="Internal\NulloCore.cs" />
     <Compile Include="IQueryOptions.cs" />
     <Compile Include="Internal\AutoMockingContainer.cs" />
     <Compile Include="Internal\FabricContext.cs" />
     <Compile Include="ConcernAttribute.cs" />
     <Compile Include="Internal\DefaultBuilder.cs" />
-    <Compile Include="Internal\Framework.cs" />
+    <Compile Include="Internal\Core.cs" />
     <Compile Include="Internal\EnumerableBuilder.cs" />
     <Compile Include="Internal\EnumerableExtensions.cs" />
     <Compile Include="Internal\Guard.cs" />

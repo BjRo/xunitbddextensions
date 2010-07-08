@@ -12,22 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //  
-namespace Xunit.Reporting.Internal
+using System;
+using System.Collections.Generic;
+
+namespace Xunit.Internal
 {
     /// <summary>
-    ///   Interface for a formatter.
+    ///   A null implementation of the <see cref = "ICore" /> interface.
     /// </summary>
-    public interface IFormatter
+    internal class NulloCore : ICore
     {
-        /// <summary>
-        ///   Formats the string supplied by <paramref name = "content" />.
-        /// </summary>
-        /// <param name = "content">
-        ///   Specifies the content to format.
-        /// </param>
-        /// <returns>
-        ///   The formatted content.
-        /// </returns>
-        string Format(string content);
+        #region ICore Members
+
+        public IMockingEngine MockingEngine { get; set; }
+
+        public IEnumerable<IBuilder> Builders { get; set; }
+
+        public IEnumerable<IConfigurationRule> ConfigurationRules { get; set; }
+
+        public void EnsureConfigured()
+        {
+            throw new InvalidOperationException("xUnit.BDDExtensions was not configured !!!");
+        }
+
+        #endregion
     }
 }

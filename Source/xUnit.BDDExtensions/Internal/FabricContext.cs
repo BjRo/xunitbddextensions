@@ -1,17 +1,17 @@
-﻿// Copyright 2010 Björn Rochel - http://www.bjro.de/ 
-//  
+﻿// Copyright 2010 xUnit.BDDExtensions
+//   
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//  
-//      http://www.apache.org/licenses/LICENSE-2.0
-//  
+//   
+//       http://www.apache.org/licenses/LICENSE-2.0
+//   
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-// 
+//  
 using System;
 using System.Collections;
 using StructureMap;
@@ -19,31 +19,26 @@ using StructureMap.Query;
 
 namespace Xunit.Internal
 {
-    public class FabricContext : IFabricContext
+    internal class FabricContext : IFabricContext
     {
+        private readonly IContainer _container;
         private readonly Fabric _fabric;
         private readonly IMockingEngine _mockingEngine;
-        private readonly IContainer _container;
 
         /// <summary>
-        /// Gets the type which is build in the current operation.
+        ///   Creates a new instance of the <see cref = "FabricContext" /> class.
         /// </summary>
-        public Type TypeToBuild { get; private set; }
-
-        /// <summary>
-        /// Creates a new instance of the <see cref="FabricContext"/> class.
-        /// </summary>
-        /// <param name="typeToBuild">
-        /// Specifies the type to build.
+        /// <param name = "typeToBuild">
+        ///   Specifies the type to build.
         /// </param>
-        /// <param name="mockingEngine">
-        /// Specifies the mock factory.
+        /// <param name = "mockingEngine">
+        ///   Specifies the mock factory.
         /// </param>
-        /// <param name="container">
-        /// Specifies the container.
+        /// <param name = "container">
+        ///   Specifies the container.
         /// </param>
-        /// <param name="fabric">
-        /// Specifies the fabric.
+        /// <param name = "fabric">
+        ///   Specifies the fabric.
         /// </param>
         public FabricContext(Type typeToBuild, IMockingEngine mockingEngine, IContainer container, Fabric fabric)
         {
@@ -57,14 +52,21 @@ namespace Xunit.Internal
             _fabric = fabric;
         }
 
+        #region IFabricContext Members
+
         /// <summary>
-        /// Resolves an instance of the specified type from the underlying IoC container.
+        ///   Gets the type which is build in the current operation.
         /// </summary>
-        /// <param name="typeToResolveByContainer">
-        /// The type to resolve.
+        public Type TypeToBuild { get; private set; }
+
+        /// <summary>
+        ///   Resolves an instance of the specified type from the underlying IoC container.
+        /// </summary>
+        /// <param name = "typeToResolveByContainer">
+        ///   The type to resolve.
         /// </param>
         /// <returns>
-        /// The created instance.
+        ///   The created instance.
         /// </returns>
         public object ResolveInstanceFromContainer(Type typeToResolveByContainer)
         {
@@ -72,14 +74,14 @@ namespace Xunit.Internal
         }
 
         /// <summary>
-        /// Resolves a collection of the itemtype specified by <paramref name="itemType"/> 
-        /// from the underlying IoC container.
+        ///   Resolves a collection of the itemtype specified by <paramref name = "itemType" /> 
+        ///   from the underlying IoC container.
         /// </summary>
-        /// <param name="itemType">
-        /// Specifies the item type.
+        /// <param name = "itemType">
+        ///   Specifies the item type.
         /// </param>
         /// <returns>
-        /// The resolved collection from the IoC container.
+        ///   The resolved collection from the IoC container.
         /// </returns>
         public IEnumerable ResolveInstancesFromContainer(Type itemType)
         {
@@ -92,15 +94,15 @@ namespace Xunit.Internal
         }
 
         /// <summary>
-        /// Registers the existing instance specified by <paramref name="instance"/>
-        /// under the interface specified by <paramref name="interfaceType"/> at the underlying
-        /// IoC type.
+        ///   Registers the existing instance specified by <paramref name = "instance" />
+        ///   under the interface specified by <paramref name = "interfaceType" /> at the underlying
+        ///   IoC type.
         /// </summary>
-        /// <param name="interfaceType">
-        /// Specifies the interface type.
+        /// <param name = "interfaceType">
+        ///   Specifies the interface type.
         /// </param>
-        /// <param name="instance">
-        /// Specifies an existing instance.
+        /// <param name = "instance">
+        ///   Specifies an existing instance.
         /// </param>
         public void InjectExistingInstanceIntoContainer(Type interfaceType, object instance)
         {
@@ -108,13 +110,13 @@ namespace Xunit.Internal
         }
 
         /// <summary>
-        /// Creates a new stub of the specified interface type.
+        ///   Creates a new stub of the specified interface type.
         /// </summary>
-        /// <param name="interfaceType">
-        /// Specifies a type to create a stub for.
+        /// <param name = "interfaceType">
+        ///   Specifies a type to create a stub for.
         /// </param>
         /// <returns>
-        /// The created stub.
+        ///   The created stub.
         /// </returns>
         public object CreateStub(Type interfaceType)
         {
@@ -122,26 +124,31 @@ namespace Xunit.Internal
         }
 
         /// <summary>
-        /// Gives full access to the underlying model of the IoC container.
+        ///   Gives full access to the underlying model of the IoC container.
         /// </summary>
         public IModel ContainerModel
         {
-            get { return _container.Model; }
+            get
+            {
+                return _container.Model;
+            }
         }
 
         /// <summary>
-        /// Resolves the type specified by <paramref name="type"/>
-        /// with the root level fabric.
+        ///   Resolves the type specified by <paramref name = "type" />
+        ///   with the root level fabric.
         /// </summary>
-        /// <param name="type">
-        /// Specifies the type to resolve.
+        /// <param name = "type">
+        ///   Specifies the type to resolve.
         /// </param>
         /// <returns>
-        /// The resolved instance.
+        ///   The resolved instance.
         /// </returns>
         public object ResolveByFabric(Type type)
         {
             return _fabric.Build(type, _container);
         }
+
+        #endregion
     }
 }

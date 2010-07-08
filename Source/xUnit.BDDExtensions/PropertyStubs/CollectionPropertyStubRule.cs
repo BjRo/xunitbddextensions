@@ -53,7 +53,7 @@ namespace Xunit.PropertyStubs
         {
             Enumerable.Range(0, 3)
                 .Where(x => itemType.IsInterface)
-                .Select(x => Framework.MockingEngine.Stub(itemType))
+                .Select(x => Core.MockingEngine.Stub(itemType))
                 .ToList()
                 .ForEach(x => list.Add(x));
         }

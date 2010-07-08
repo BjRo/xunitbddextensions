@@ -12,33 +12,37 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //  
+using System;
 using System.Collections.Generic;
 
-namespace Xunit.Reporting.Internal
+namespace Xunit.Internal
 {
     /// <summary>
-    ///   A report abstraction.
+    /// Internal configuration interface for the core.
     /// </summary>
-    public interface IReport : IEnumerable<Concern>
+    internal interface ICore
     {
         /// <summary>
-        ///   Gets the name of the reflected assembly.
+        /// Gets the configured mocking engine.
         /// </summary>
-        string ReflectedAssembly { get; }
+        IMockingEngine MockingEngine { get; }
 
         /// <summary>
-        ///   Gets the total amount of concerns in this report model.
+        /// Gets a collection of all configured builders.
         /// </summary>
-        int TotalAmountOfConcerns { get; }
+        IEnumerable<IBuilder> Builders { get; }
 
         /// <summary>
-        ///   Gets the total amount of contexts in this report model.
+        /// Gets a collection of all configured configuration rules.
         /// </summary>
-        int TotalAmountOfContexts { get; }
+        IEnumerable<IConfigurationRule> ConfigurationRules { get; }
 
         /// <summary>
-        ///   Gets the total amount of observations in this report model.
+        /// Veryfies that the configuration is valid.
         /// </summary>
-        int TotalAmountOfObservations { get; }
+        /// <exception cref="InvalidOperationException">
+        /// Is thrown when the configuration is in an invalid state.
+        /// </exception>
+        void EnsureConfigured();
     }
 }

@@ -29,7 +29,7 @@ namespace Xunit
             HttpContext.Current = new HttpContext(new HttpRequest("/", "http://localhost/", ""),
                                                   new HttpResponse(TextWriter.Null));
             var viewContext = new ViewContext {HttpContext = context.Context};
-            var htmlHelper = new HtmlHelper(viewContext, Framework.MockingEngine.Stub<IViewDataContainer>());
+            var htmlHelper = new HtmlHelper(viewContext, Core.MockingEngine.Stub<IViewDataContainer>());
             var str = htmlHelper.AntiForgeryToken().ToHtmlString();
             var name = GetValue(str, "name");
             var value = GetValue(str, "value");

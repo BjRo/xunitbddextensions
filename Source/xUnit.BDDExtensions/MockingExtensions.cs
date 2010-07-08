@@ -1,17 +1,17 @@
-// Copyright 2010 xUnit.BDDExtensions 
-//  
+// Copyright 2010 xUnit.BDDExtensions
+//   
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//  
-//      http://www.apache.org/licenses/LICENSE-2.0
-//  
+//   
+//       http://www.apache.org/licenses/LICENSE-2.0
+//   
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+//  
 using System;
 using System.Linq.Expressions;
 using Xunit.Internal;
@@ -19,8 +19,8 @@ using Xunit.Internal;
 namespace Xunit
 {
     /// <summary>
-    /// A set of extension methods for setting up behavior on stubs in a fashion idependant 
-    /// to a particular mocking framework.
+    ///   A set of extension methods for setting up behavior on stubs in a fashion idependant 
+    ///   to a particular mocking framework.
     /// </summary>
     public static class MockingExtensions
     {
@@ -49,7 +49,7 @@ namespace Xunit
             Guard.AgainstArgumentNull(dependency, "dependency");
             Guard.AgainstArgumentNull(func, "func");
 
-            return Framework.MockingEngine.SetUpQueryBehaviorFor(dependency, func);
+            return Core.MockingEngine.SetUpQueryBehaviorFor(dependency, func);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Xunit
             Guard.AgainstArgumentNull(dependency, "dependency");
             Guard.AgainstArgumentNull(func, "func");
 
-            return Framework.MockingEngine.SetUpCommandBehaviorFor(dependency, func);
+            return Core.MockingEngine.SetUpCommandBehaviorFor(dependency, func);
         }
     }
 }
