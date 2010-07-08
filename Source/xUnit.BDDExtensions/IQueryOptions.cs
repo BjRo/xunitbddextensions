@@ -36,14 +36,80 @@ namespace Xunit
         /// </returns>
         IQueryOptions<TReturn> Return(TReturn returnValue);
 
+        /// <summary>
+        /// Configures that the function supplied by <paramref name="valueFunction"/>
+        /// will be used to evaluate the result value of a behavior.
+        /// </summary>
+        /// <param name="valueFunction">
+        /// Specifies the function which is called when the method is called.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IQueryOptions{TReturn}"/> for further configuration.
+        /// </returns>
+        /// <remarks>
+        /// Use this for configuring parameterless methods.
+        /// </remarks>
         IQueryOptions<TReturn> Return(Func<TReturn> valueFunction);
 
+        /// <summary>
+        /// Configures that the function supplied by <paramref name="valueFunction"/>
+        /// will be used to evaluate the result value of a behavior.
+        /// </summary>
+        /// <param name="valueFunction">
+        /// Specifies the function which is called when the method is called.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IQueryOptions{TReturn}"/> for further configuration.
+        /// </returns>
+        /// <remarks>
+        /// Use this for configuring methods with a single parameter.
+        /// </remarks>
         IQueryOptions<TReturn> Return<T>(Func<T, TReturn> valueFunction);
 
+        /// <summary>
+        /// Configures that the function supplied by <paramref name="valueFunction"/>
+        /// will be used to evaluate the result value of a behavior.
+        /// </summary>
+        /// <param name="valueFunction">
+        /// Specifies the function which is called when the method is called.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IQueryOptions{TReturn}"/> for further configuration.
+        /// </returns>
+        /// <remarks>
+        /// Use this for configuring methods with two parameters.
+        /// </remarks>
         IQueryOptions<TReturn> Return<T1, T2>(Func<T1, T2, TReturn> valueFunction);
 
+        /// <summary>
+        /// Configures that the function supplied by <paramref name="valueFunction"/>
+        /// will be used to evaluate the result value of a behavior.
+        /// </summary>
+        /// <param name="valueFunction">
+        /// Specifies the function which is called when the method is called.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IQueryOptions{TReturn}"/> for further configuration.
+        /// </returns>
+        /// <remarks>
+        /// Use this for configuring methods with three parameters.
+        /// </remarks>
         IQueryOptions<TReturn> Return<T1, T2, T3>(Func<T1, T2, T3, TReturn> valueFunction);
 
+        /// <summary>
+        /// Configures that the function supplied by <paramref name="valueFunction"/>
+        /// will be used to evaluate the result value of a behavior.
+        /// </summary>
+        /// <param name="valueFunction">
+        /// Specifies the function which is called when the method is called.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IQueryOptions{TReturn}"/> for further configuration.
+        /// </returns>
+        /// <remarks>
+        /// Use this for configuring methods with four parameters.
+        /// </remarks>
+        IQueryOptions<TReturn> Return<T1, T2, T3, T4>(Func<T1, T2, T3, T4, TReturn> valueFunction);
 
         /// <summary>
         /// Configures that the invocation of the related behavior

@@ -4,7 +4,7 @@ properties {
   $build_dir = "$base_dir\Build" 
   $buildartifacts_dir = "$build_dir\" 
   $sln_file = "$base_dir\Source\xUnit.BDDExtensions.sln" 
-  $version = "1.1.0.0"
+  $version = "1.5.0.0"
   $tools_dir = "$base_dir\Tools"
   $release_dir = "$base_dir\Release"
 } 
@@ -23,10 +23,10 @@ task Init -depends Clean {
         -file "$base_dir\Source\GlobalAssemblyInfo.cs" `
         -title "xUnit.BDDExtensions" `
         -description "A context specification framework based on xUnit.net" `
-        -product "xUnit.BDDExtensions $version" `
+        -product "xUnit.BDDExtensions $version (alpha)" `
         -version $version `
         -clsCompliant "false" `
-        -copyright "Copyright © xUnit.NET BDD Extension Team 2008-2010"
+        -copyright "Copyright © xUnit.NET BDDExtension Team 2008-2010"
         
     new-item $release_dir -itemType directory 
     new-item $buildartifacts_dir -itemType directory 

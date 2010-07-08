@@ -8,7 +8,7 @@
     <ProjectGuid>{5D9AC244-FC0B-475C-A999-AF6EAA55B4AC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>xUnit.BDDExtensions.Mocking.Moq.Specs</RootNamespace>
+    <RootNamespace>Xunit.Specs</RootNamespace>
     <AssemblyName>xUnit.BDDExtensions.Mocking.Moq.Specs</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -55,6 +55,7 @@
     <Compile Include="Setting_up_property_return_values_using_xunitbddextensions_api.cs" />
     <Compile Include="Setting_up_method_return_values_using_xunitbddextensions_api.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Using_value_functions_for_generating_return_values_using_xunitbddextensions_api.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xUnit.BDDExtensions.Assertions\xUnit.BDDExtensions.Assertions.csproj">
