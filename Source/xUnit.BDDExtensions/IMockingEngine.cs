@@ -1,4 +1,4 @@
-// Copyright 2010 Björn Rochel - http://www.bjro.de/ 
+// Copyright 2010 xUnit.BDDExtensions
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-// 
+//  
 using System;
 using System.Linq.Expressions;
 
@@ -61,12 +61,12 @@ namespace Xunit
         ///   The dependency to configure behavior on.
         /// </param>
         /// <param name = "func">
-        ///   Configures the behavior. This must be a void method.
+        ///   Expression to set up the behavior.
         /// </param>
         /// <returns>
-        ///   A <see cref = "IMockingOptions{TReturn}" /> for further configuration.
+        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
         /// </returns>
-        IMockingOptions<TReturnValue> ConfigureBehavior<TDependency, TReturnValue>(
+        IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TDependency, TReturnValue>(
             TDependency dependency, 
             Expression<Func<TDependency, TReturnValue>> func) where TDependency : class;
 
@@ -83,12 +83,12 @@ namespace Xunit
         ///   Configures the behavior. This must be a void method.
         /// </param>
         /// <returns>
-        ///   A <see cref = "IMockingOptions{Object}" /> for further configuration.
+        ///   A <see cref = "ICommandOptions" /> for further configuration.
         /// </returns>
         /// <remarks>
         ///   This method is used for command, e.g. methods returning void.
         /// </remarks>
-        IMockingOptions<object > ConfigureBehavior<TDependency>(
+        ICommandOptions SetUpCommandBehaviorFor<TDependency>(
             TDependency dependency,
             Expression<Action<TDependency>> func) where TDependency : class;
     }

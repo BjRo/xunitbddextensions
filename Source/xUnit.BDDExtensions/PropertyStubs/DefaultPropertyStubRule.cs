@@ -1,8 +1,4 @@
-﻿// Copyright 2009 
-//
-// Björn Rochel:     http://www.bjro.de/
-// Maxim Tansin
-// Sergey Shishkin:  http://shishkin.org/
+﻿// Copyright 2010 xUnit.BDDExtensions
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,16 +13,22 @@
 // limitations under the License.
 // 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections;
+using Xunit.Internal;
 
 namespace Xunit.PropertyStubs
 {
-    internal interface IPropertyAdapter
+    internal class DefaultPropertyStubRule : IPropertyStubRule
     {
-        Type PropertyType { get; }
+        public bool CanStub(Type propertyType)
+        {
+            return propertyType.IsInterface && !typeof(IEnumerable).IsAssignableFrom(propertyType);
+        }
 
-        void Stub(object propertyValue);
+        public void Stub(IPropertyAdapter property)
+        {
+            var stub = Core.MockingEngine.Stub(property.PropertyType);
+            property.Stub(stub);
+        }
     }
 }

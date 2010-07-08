@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
-using System;
 using System.IO;
 using System.Linq;
 using System.Security.Principal;
@@ -20,7 +19,6 @@ using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Xml.Linq;
-using Rhino.Mocks;
 using Xunit.Internal;
 
 namespace Xunit
@@ -48,7 +46,7 @@ namespace Xunit
             httpRequest.Browser=new HttpBrowserCapabilities();
             HttpContext.Current = new HttpContext(httpRequest,new HttpResponse(TextWriter.Null));
             var viewContext = new ViewContext {HttpContext = context.Context};
-            var htmlHelper = new HtmlHelper(viewContext, new FakeViewDataContainer());
+            var htmlHelper = new HtmlHelper(viewContext, Core.MockingEngine.Stub<IViewDataContainer>());
             var str = htmlHelper.AntiForgeryToken().ToHtmlString();
             var name = GetXmlAttributeValue(str, "name");
             var value = GetXmlAttributeValue(str, "value");
@@ -135,9 +133,9 @@ namespace Xunit
                 return;
             }
 
-            context.Request.Stub(requestBase => requestBase.HttpMethod)
-                .WhenCalled(invocation => invocation.ReturnValue = context.GetValue<string>("HttpMethod"))
-                .Return(null).Repeat.Any();
+            context.Request
+                .WhenToldTo(requestBase => requestBase.HttpMethod)
+                .Return(() => context.GetValue<string>("HttpMethod"));
         }
     }
 }

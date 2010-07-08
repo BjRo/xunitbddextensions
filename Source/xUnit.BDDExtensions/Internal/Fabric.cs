@@ -1,41 +1,44 @@
-// Copyright 2010 Björn Rochel - http://www.bjro.de/ 
-//  
+// Copyright 2010 xUnit.BDDExtensions
+//   
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//  
-//      http://www.apache.org/licenses/LICENSE-2.0
-//  
+//   
+//       http://www.apache.org/licenses/LICENSE-2.0
+//   
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+//  
 using System;
 using System.Collections.Generic;
-using StructureMap;
 using System.Linq;
+using StructureMap;
 
 namespace Xunit.Internal
 {
     /// <summary>
-    /// A fabric for creating a constructor dependency of the system under test
-    /// and applying some configuration rules to it.
+    ///   A fabric for creating a constructor dependency of the system under test
+    ///   and applying some configuration rules to it.
     /// </summary>
-    public class Fabric : IFabric
+    internal class Fabric : IFabric
     {
-        private readonly IMockingEngine _mockingEngine;
         private readonly IEnumerable<IBuilder> _builders;
         private readonly IEnumerable<IConfigurationRule> _configurationRules;
+        private readonly IMockingEngine _mockingEngine;
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Fabric"/> class.
+        ///   Creates a new instance of the <see cref = "Fabric" /> class.
         /// </summary>
-        /// <param name="mockingEngine">The mock factory.</param>
-        /// <param name="builders">A collection of all known builders.</param>
-        /// <param name="configurationRules">A set of rules for configuration of the produced instances.</param>
-        public Fabric(IMockingEngine mockingEngine, IEnumerable<IBuilder> builders, IEnumerable<IConfigurationRule> configurationRules)
+        /// <param name = "mockingEngine">The mock factory.</param>
+        /// <param name = "builders">A collection of all known builders.</param>
+        /// <param name = "configurationRules">A set of rules for configuration of the produced instances.</param>
+        public Fabric(
+            IMockingEngine mockingEngine, 
+            IEnumerable<IBuilder> builders,
+            IEnumerable<IConfigurationRule> configurationRules)
         {
             Guard.AgainstArgumentNull(mockingEngine, "mockingEngine");
             Guard.AgainstArgumentNull(builders, "builders");
@@ -46,17 +49,19 @@ namespace Xunit.Internal
             _configurationRules = configurationRules;
         }
 
+        #region IFabric Members
+
         /// <summary>
-        /// Builds a dependency.
+        ///   Builds a dependency.
         /// </summary>
-        /// <param name="typeToBuild">
-        /// Specifies the type to be build.
+        /// <param name = "typeToBuild">
+        ///   Specifies the type to be build.
         /// </param>
-        /// <param name="container">
-        /// Specifies the automocking container.
+        /// <param name = "container">
+        ///   Specifies the automocking container.
         /// </param>
         /// <returns>
-        /// The created instance.
+        ///   The created instance.
         /// </returns>
         public object Build(Type typeToBuild, IContainer container)
         {
@@ -71,7 +76,8 @@ namespace Xunit.Internal
             {
                 throw new InvalidOperationException(
                     string.Format("Unable to build ctor dependency of type {0}." + Environment.NewLine +
-                                 "Make sure to use only interfaces or abstract base classes in the constructor!", typeToBuild.FullName));
+                                  "Make sure to use only interfaces or abstract base classes in the constructor!",
+                                  typeToBuild.FullName));
             }
 
             var stub = responsibleBuilder.BuildFrom(buildContext);
@@ -80,7 +86,9 @@ namespace Xunit.Internal
 
             _configurationRules.Each(x => x.Configure(stub, buildContext));
 
-            return stub;               
+            return stub;
         }
+
+        #endregion
     }
 }

@@ -34,12 +34,8 @@
     <Reference Include="Microsoft.Web.Mvc">
       <HintPath>..\..\Lib\MVCFutures\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Rhino.Mocks">
-      <HintPath>..\..\Lib\Rhino\Rhino.Mocks.dll</HintPath>
-    </Reference>
-    <Reference Include="StructureMap.AutoMocking">
-      <HintPath>..\..\Lib\StructureMap\StructureMap.AutoMocking.dll</HintPath>
-    </Reference>
+    <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL" />
+    <Reference Include="StructureMap.AutoMocking, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -66,6 +62,7 @@
     <Compile Include="ActionResultExtensions\ViewResultExtensions.cs" />
     <Compile Include="ControllerContextSpecification.cs" />
     <Compile Include="ControllerActionInvokerBuilder.cs" />
+    <Compile Include="Internal\FakeHttpServerUtility.cs" />
     <Compile Include="MockedRequestContextValueStore.cs" />
     <Compile Include="Internal\MvcExpressionHelper.cs" />
     <Compile Include="IMockedRequestContext.cs" />

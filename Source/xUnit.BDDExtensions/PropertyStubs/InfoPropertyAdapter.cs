@@ -1,8 +1,4 @@
-﻿// Copyright 2009 
-//
-// Björn Rochel:     http://www.bjro.de/
-// Maxim Tansin
-// Sergey Shishkin:  http://shishkin.org/
+﻿// Copyright 2010 xUnit.BDDExtensions
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,26 +13,20 @@
 // limitations under the License.
 // 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-
-using Rhino.Mocks;
 
 namespace Xunit.PropertyStubs
 {
-    internal class InfoPropertyAdapter<TMock> : IPropertyAdapter
-        where TMock : class
+    internal class InfoPropertyAdapter<TMock> : IPropertyAdapter where TMock : class
     {
         private readonly TMock _mock;
         private readonly PropertyInfo _property;
 
         public InfoPropertyAdapter(TMock mock, PropertyInfo property)
         {
-            this._mock = mock;
-            this._property = property;
+            _mock = mock;
+            _property = property;
         }
 
         public Type PropertyType
@@ -48,9 +38,12 @@ namespace Xunit.PropertyStubs
         {
             var actionParameter = Expression.Parameter(typeof(TMock), "x");
             var propertyGetter = Expression.Property(actionParameter, _property);
-            var action = Expression.Lambda<Action<TMock>>(propertyGetter, actionParameter);
 
-            _mock.Stub(action.Compile()).Return(propertyValue);
+            var func = typeof(Func<,>).MakeGenericType(typeof (TMock), _property.PropertyType);
+            var lamda = Expression.Lambda(func, propertyGetter, actionParameter);
+            var compiledDelegate = lamda.Compile();
+
+            _mock.WhenToldTo(m => compiledDelegate.DynamicInvoke(m)).Return(propertyValue);
         }
     }
 }

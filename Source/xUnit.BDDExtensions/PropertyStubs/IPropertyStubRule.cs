@@ -1,8 +1,4 @@
-﻿// Copyright 2009 
-//
-// Björn Rochel:     http://www.bjro.de/
-// Maxim Tansin
-// Sergey Shishkin:  http://shishkin.org/
+﻿// Copyright 2010 xUnit.BDDExtensions
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,21 +13,13 @@
 // limitations under the License.
 // 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Xunit.PropertyStubs
 {
-    internal class TerminalPropertyStubRule : IPropertyStubRule
+    internal interface IPropertyStubRule
     {
-        public bool CanStub(Type propertyType)
-        {
-            return true;
-        }
+        bool CanStub(Type propertyType);
 
-        public void Stub(IPropertyAdapter property)
-        {
-        }
+        void Stub(IPropertyAdapter property);
     }
 }

@@ -8,8 +8,8 @@
     <ProjectGuid>{EA948E79-F988-4D6E-89CB-265AE8C7C22E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>xUnit.BDDExtensions.Mocking.Moq</RootNamespace>
-    <AssemblyName>Xunit</AssemblyName>
+    <RootNamespace>Xunit</RootNamespace>
+    <AssemblyName>xUnit.BDDExtensions.Mocking.Moq</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

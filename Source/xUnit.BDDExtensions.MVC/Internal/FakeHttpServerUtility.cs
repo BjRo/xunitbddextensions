@@ -1,8 +1,4 @@
-﻿// Copyright 2009 
-//
-// Björn Rochel:     http://www.bjro.de/
-// Maxim Tansin
-// Sergey Shishkin:  http://shishkin.org/
+﻿// Copyright 2010 xUnit.BDDExtensions
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,18 +11,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-// 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+//
+using System.Web;
 
-namespace Xunit.PropertyStubs
+namespace Xunit.Internal
 {
-    internal interface IPropertyStubRule
+    public abstract class FakeHttpServerUtility : HttpServerUtilityBase
     {
-        bool CanStub(Type propertyType);
-
-        void Stub(IPropertyAdapter property);
+        public override string MapPath(string path)
+        {
+            return "/";
+        }
     }
 }
