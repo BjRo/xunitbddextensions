@@ -1,8 +1,4 @@
-﻿// Copyright 2009 
-//
-// Björn Rochel:     http://www.bjro.de/
-// Maxim Tansin
-// Sergey Shishkin:  http://shishkin.org/
+﻿// Copyright 2010 xUnit.BDDExtensions
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,11 +13,7 @@
 // limitations under the License.
 // 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Rhino.Mocks;
+using System.Linq.Expressions;
 
 namespace Xunit.PropertyStubs
 {
@@ -30,12 +22,12 @@ namespace Xunit.PropertyStubs
         where TProperty : class
     {
         private readonly TMock _mock;
-        private readonly Function<TMock, TProperty> _accessor;
+        private readonly Expression<Func<TMock, TProperty>> _accessor;
 
-        public FuncPropertyAdapter(TMock mock, Function<TMock, TProperty> accessor)
+        public FuncPropertyAdapter(TMock mock, Expression<Func<TMock, TProperty>> accessor)
         {
-            this._mock = mock;
-            this._accessor = accessor;
+            _mock = mock;
+            _accessor = accessor;
         }
 
         public Type PropertyType
@@ -45,7 +37,7 @@ namespace Xunit.PropertyStubs
 
         public void Stub(object propertyValue)
         {
-            _mock.Stub(_accessor).Return((TProperty)propertyValue);
+            _mock.WhenToldTo(_accessor).Return((TProperty)propertyValue);
         }
     }
 }

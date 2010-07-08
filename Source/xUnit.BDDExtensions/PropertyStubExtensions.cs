@@ -1,8 +1,4 @@
-// Copyright 2009 
-//
-// Björn Rochel:     http://www.bjro.de/
-// Maxim Tansin
-// Sergey Shishkin:  http://shishkin.org/
+// Copyright 2010 xUnit.BDDExtensions
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,11 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // 
+using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
-
-using Rhino.Mocks;
-
 using Xunit.PropertyStubs;
 
 namespace Xunit
@@ -36,7 +31,7 @@ namespace Xunit
 
         public static TMock Has<TMock, TProperty>(
             this TMock mock,
-            Function<TMock, TProperty> propertySelector)
+            Expression<Func<TMock, TProperty>> propertySelector)
             where TMock : class
             where TProperty : class
         {

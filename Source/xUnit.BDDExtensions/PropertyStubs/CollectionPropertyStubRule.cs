@@ -1,8 +1,4 @@
-﻿// Copyright 2009 
-//
-// Björn Rochel:     http://www.bjro.de/
-// Maxim Tansin
-// Sergey Shishkin:  http://shishkin.org/
+﻿// Copyright 2010 xUnit.BDDExtensions
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,9 +16,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using Rhino.Mocks;
+using Xunit.Internal;
 
 namespace Xunit.PropertyStubs
 {
@@ -59,7 +53,7 @@ namespace Xunit.PropertyStubs
         {
             Enumerable.Range(0, 3)
                 .Where(x => itemType.IsInterface)
-                .Select(x => MockRepository.GenerateStub(itemType))
+                .Select(x => Framework.MockingEngine.Stub(itemType))
                 .ToList()
                 .ForEach(x => list.Add(x));
         }

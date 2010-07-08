@@ -1,8 +1,4 @@
-﻿// Copyright 2009 
-//
-// Björn Rochel:     http://www.bjro.de/
-// Maxim Tansin
-// Sergey Shishkin:  http://shishkin.org/
+﻿// Copyright 2010 xUnit.BDDExtensions
 //  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,11 +14,7 @@
 // 
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Rhino.Mocks;
+using Xunit.Internal;
 
 namespace Xunit.PropertyStubs
 {
@@ -30,13 +22,12 @@ namespace Xunit.PropertyStubs
     {
         public bool CanStub(Type propertyType)
         {
-            return propertyType.IsInterface
-                && !typeof(IEnumerable).IsAssignableFrom(propertyType);
+            return propertyType.IsInterface && !typeof(IEnumerable).IsAssignableFrom(propertyType);
         }
 
         public void Stub(IPropertyAdapter property)
         {
-            var stub = MockRepository.GenerateStub(property.PropertyType);
+            var stub = Framework.MockingEngine.Stub(property.PropertyType);
             property.Stub(stub);
         }
     }
