@@ -32,6 +32,54 @@ namespace Xunit
         /// </param>
         void Throw(Exception exception);
 
+        /// <summary>
+        /// Configures that the invocation of the related behavior
+        /// results in a callback.
+        /// </summary>
+        /// <param name="action">
+        /// Specifies the Action which should be called when the
+        /// behavior is invoked
+        /// </param>
         void Callback(Action action);
+
+        /// <summary>
+        /// Configures that the invocation of the related behavior
+        /// results in a callback.
+        /// </summary>
+        /// <param name="action">
+        /// Specifies the Action which should be called when the
+        /// behavior is invoked
+        /// </param>
+        void Callback<T1>(Action<T1> action);
+
+        /// <summary>
+        /// Configures that the invocation of the related behavior
+        /// results in a callback.
+        /// </summary>
+        /// <param name="action">
+        /// Specifies the Action which should be called when the
+        /// behavior is invoked
+        /// </param>
+        void Callback<T1, T2>(Action<T1, T2> action);
+
+        /// <summary>
+        /// Configures that the invocation of the related behavior
+        /// results in a callback.
+        /// </summary>
+        /// <param name="action">
+        /// Specifies the Action which should be called when the
+        /// behavior is invoked
+        /// </param>
+        void Callback<T1, T2, T3>(Action<T1, T2, T3> action);
+
+        /// <summary>
+        /// Configures that the invocation of the related behavior
+        /// results in a callback.
+        /// </summary>
+        /// <param name="action">
+        /// Specifies the Action which should be called when the
+        /// behavior is invoked
+        /// </param>
+        void Callback<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action);
     }
 }

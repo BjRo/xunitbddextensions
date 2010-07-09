@@ -52,7 +52,67 @@ namespace Xunit
             _methodOptions.Throws(exception);
         }
 
+        /// <summary>
+        /// Configures that the invocation of the related behavior
+        /// results in a callback.
+        /// </summary>
+        /// <param name="action">
+        /// Specifies the Action which should be called when the
+        /// behavior is invoked
+        /// </param>
         public void Callback(Action action)
+        {
+            _methodOptions.Callback(action);
+        }
+
+        /// <summary>
+        /// Configures that the invocation of the related behavior
+        /// results in a callback.
+        /// </summary>
+        /// <param name="action">
+        /// Specifies the Action which should be called when the
+        /// behavior is invoked
+        /// </param>
+        public void Callback<T1>(Action<T1> action)
+        {
+            _methodOptions.Callback(action);
+        }
+
+        /// <summary>
+        /// Configures that the invocation of the related behavior
+        /// results in a callback.
+        /// </summary>
+        /// <param name="action">
+        /// Specifies the Action which should be called when the
+        /// behavior is invoked
+        /// </param>
+        public void Callback<T1, T2>(Action<T1, T2> action)
+        {
+            _methodOptions.Callback(action);
+        }
+
+        /// <summary>
+        /// Configures that the invocation of the related behavior
+        /// results in a callback.
+        /// </summary>
+        /// <param name="action">
+        /// Specifies the Action which should be called when the
+        /// behavior is invoked
+        /// </param>
+        public void Callback<T1, T2, T3>(Action<T1, T2, T3> action)
+        {
+            _methodOptions.Callback(action);
+        }
+
+        /// <summary>
+        /// Configures that the invocation of the related behavior
+        /// results in a callback.
+        /// </summary>
+        /// <param name="action">
+        /// Specifies the Action which should be called when the
+        /// behavior is invoked
+        /// </param>
+        public void Callback<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action)
         {
             _methodOptions.Callback(action);
         }
