@@ -102,9 +102,12 @@ task Release -depends Test, Merge, Docu {
       & $tools_dir\Zip\zip.exe -9 -A -j `
         $release_dir\xUnit.BDDExtensions.$version.zip `
         $build_dir\xUnit.BDDExtensions.dll `
+        $build_dir\xUnit.BDDExtensions.xml `
         $build_dir\xUnit.BDDExtensions.MVC.dll `
+        $build_dir\xUnit.BDDExtensions.MVC.xml `
         $build_dir\ReportGenerator.exe `
         $build_dir\xunit.dll `
+        $build_dir\xunit.xml `
         License.txt `
         acknowledgements.txt    
     }
