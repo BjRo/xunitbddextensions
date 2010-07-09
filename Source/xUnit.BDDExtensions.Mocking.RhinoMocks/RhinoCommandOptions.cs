@@ -49,6 +49,15 @@ namespace Xunit
             _methodOptions.Throw(exception);
         }
 
+        public void Callback(Action action)
+        {
+            _methodOptions.Callback(() =>
+                                        {
+                                            action();
+                                            return true;
+                                        });
+        }
+
         #endregion
     }
 }

@@ -31,5 +31,7 @@ namespace Xunit
         ///   behavior is invoked.
         /// </param>
         void Throw(Exception exception);
+
+        void Callback(Action action);
     }
 }
