@@ -60,10 +60,10 @@ namespace Xunit
         public void Callback(Action action)
         {
             _methodOptions.Callback(() =>
-                                        {
-                                            action();
-                                            return true;
-                                        });
+            {
+                action();
+                return true;
+            });
         }
 
         /// <summary>
@@ -77,10 +77,10 @@ namespace Xunit
         public void Callback<T1>(Action<T1> action)
         {
             _methodOptions.Callback<T1>(p1 =>
-                                            {
-                                                action(p1);
-                                                return true;
-                                            });
+            {
+                action(p1);
+                return true;
+            });
         }
 
         /// <summary>
@@ -94,10 +94,10 @@ namespace Xunit
         public void Callback<T1, T2>(Action<T1, T2> action)
         {
             _methodOptions.Callback<T1, T2>((p1, p2) =>
-                                                {
-                                                    action(p1, p2);
-                                                    return true;
-                                                });
+            {
+                action(p1, p2);
+                return true;
+            });
         }
 
         /// <summary>
@@ -111,19 +111,19 @@ namespace Xunit
         public void Callback<T1, T2, T3>(Action<T1, T2, T3> action)
         {
             _methodOptions.Callback<T1, T2, T3>((p1, p2, p3) =>
-                                                    {
-                                                        action(p1, p2, p3);
-                                                        return true;
-                                                    });
+            {
+                action(p1, p2, p3);
+                return true;
+            });
         }
 
-        public void Callback<T1, T2, T3, T4>(Action<T1, T2, T3,T4> action)
+        public void Callback<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action)
         {
             _methodOptions.Callback<T1, T2, T3, T4>((p1, p2, p3, p4) =>
-                                                        {
-                                                            action(p1, p2, p3, p4);
-                                                            return true;
-                                                        });
+            {
+                action(p1, p2, p3, p4);
+                return true;
+            });
         }
 
         #endregion

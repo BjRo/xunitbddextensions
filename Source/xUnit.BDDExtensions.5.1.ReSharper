@@ -5,6 +5,8 @@
     <Sharing>SOLUTION</Sharing>
     <CSharp>
       <FormatSettings>
+        <ANONYMOUS_METHOD_DECLARATION_BRACES>NEXT_LINE</ANONYMOUS_METHOD_DECLARATION_BRACES>
+        <INDENT_ANONYMOUS_METHOD_BLOCK>False</INDENT_ANONYMOUS_METHOD_BLOCK>
         <MODIFIERS_ORDER IsNull="False">
           <Item>public</Item>
           <Item>protected</Item>
