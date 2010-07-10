@@ -78,7 +78,7 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DefaultBehaviorConfig.cs" />
+    <Compile Include="BehaviorConfigBase.cs" />
     <Compile Include="ICommandOptions.cs" />
     <Compile Include="Internal\ConfigurationExpression.cs" />
     <Compile Include="Internal\ICore.cs" />

@@ -129,7 +129,7 @@ namespace Xunit
         /// </summary>
         void ISpecification.Cleanup()
         {
-            _behaviors.ForEach(x => x.Cleanup(this));
+            _behaviors.ForEach(x => x.Cleanup(Sut));
             _behaviors.Clear();
             AfterEachObservation();
         }
