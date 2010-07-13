@@ -93,10 +93,7 @@
       <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="EnumMember" />
       <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="Other" />
       <UserRule Inspect="True" Prefix="" Suffix="" Style="Aa_bb" StaticnessKind="Static, Instance" AccessRight="Public" Description="BDD Style">
-        <ElementKinds>
-          <Kind Name="xunit.bddextension.observation" />
-          <Kind Name="xunit.bddextension.concern" />
-        </ElementKinds>
+        <ElementKinds />
       </UserRule>
     </Naming2>
   </CodeStyleSettings>
