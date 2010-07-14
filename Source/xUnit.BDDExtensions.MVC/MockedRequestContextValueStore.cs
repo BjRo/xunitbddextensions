@@ -28,7 +28,7 @@ namespace Xunit
         private static readonly object DictionariesLock = new object();
 
         /// <summary>
-        /// Set a value for 
+        /// Set a value for with the given key in the ContextValueStore
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="context"></param>
@@ -39,6 +39,14 @@ namespace Xunit
             GetContextDictionary(context)[key] = value;
         }
 
+        ///<summary>
+        /// Try to get a value of the ContextValueStore
+        ///</summary>
+        ///<param name="context"></param>
+        ///<param name="key"></param>
+        ///<param name="value"></param>
+        ///<typeparam name="T"></typeparam>
+        ///<returns></returns>
         public static bool TryGetValue<T>(this IMockedRequestContext context, string key, out T value)
         {
             object dictValue;

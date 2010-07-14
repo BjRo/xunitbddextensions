@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //  
+using Xunit.Internal;
+
 namespace Xunit.Specs
 {
     [Concern(typeof (RequestContextBuilder))]

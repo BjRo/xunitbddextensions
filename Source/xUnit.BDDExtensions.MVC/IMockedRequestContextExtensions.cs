@@ -23,6 +23,9 @@ using Xunit.Internal;
 
 namespace Xunit
 {
+    ///<summary>
+    /// Extension Methodes for the <see cref="IMockedRequestContext"/>
+    ///</summary>
     public static class MockedRequestContextExtensions
     {
         private class FakeViewDataContainer : IViewDataContainer
@@ -39,7 +42,7 @@ namespace Xunit
         /// Creates the AntiForgeryToken in the MockedRequestContext
         /// </summary>
         /// <param name="context"></param>
-        /// <returns>IMockedRequestContext for chaining</returns>
+        /// <returns>IMockedRequestContext for method chaining</returns>
         public static IMockedRequestContext AntiForgeryToken(this IMockedRequestContext context)
         {
             var httpRequest = new HttpRequest("/default.aspx", "http://localhost/default.aspx", "?a=1");
@@ -68,7 +71,7 @@ namespace Xunit
         /// <param name="context"></param>
         /// <param name="instance"></param>
         /// <param name="parameterName"></param>
-        /// <returns></returns>
+        /// <returns>IMockedRequestContext for method chaining</returns>
         public static IMockedRequestContext SerializeModelToForm(
             this IMockedRequestContext context, object instance,
             string parameterName)
@@ -96,8 +99,8 @@ namespace Xunit
         /// stored in IMockedRequestContext.Context.User
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="role"></param>
-        /// <returns></returns>
+        /// <param name="role">Name of the Role</param>
+        /// <returns>IMockedRequestContext for method chaining</returns>
         public static IMockedRequestContext Role(this IMockedRequestContext context, string role)
         {
             if (string.IsNullOrEmpty(role))
@@ -118,7 +121,7 @@ namespace Xunit
         /// </summary>
         /// <param name="context"></param>
         /// <param name="httpMethod"></param>
-        /// <returns></returns>
+        /// <returns>IMockedRequestContext for method chaining</returns>
         public static IMockedRequestContext HttpMethod(this IMockedRequestContext context, string httpMethod)
         {
             context.SetValue("HttpMethod", httpMethod);

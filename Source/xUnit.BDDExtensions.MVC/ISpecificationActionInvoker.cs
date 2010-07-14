@@ -28,6 +28,9 @@ namespace Xunit
     /// </remarks>
     public interface ISpecificationActionInvoker : IActionInvoker
     {
+        ///<summary>
+        /// The ActionResult which is return by the invoked action
+        ///</summary>
         ActionResult Result { get; }
     }
 }

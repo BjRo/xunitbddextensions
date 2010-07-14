@@ -18,12 +18,34 @@ using System.Web.Routing;
 
 namespace Xunit
 {
+    ///<summary>
+    /// The mocked Request Context, used by <see cref="ControllerActionInvokerBuilder"/>
+    ///</summary>
     public interface IMockedRequestContext
     {
+        ///<summary>
+        /// The mocked HttpContext
+        ///</summary>
         HttpContextBase Context { get; }
+
+        ///<summary>
+        /// The mocked HttpRequest
+        ///</summary>
         HttpRequestBase Request { get; }
+
+        ///<summary>
+        /// The mocked HttpServerUtility
+        ///</summary>
         HttpServerUtilityBase Server { get; }
+
+        ///<summary>
+        /// The mocked HttpResponse
+        ///</summary>
         HttpResponseBase Response { get; }
+
+        ///<summary>
+        /// The RouteData
+        ///</summary>
         RouteData RouteData { get; }
     }
 }

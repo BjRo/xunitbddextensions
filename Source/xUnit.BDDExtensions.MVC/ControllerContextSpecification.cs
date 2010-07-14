@@ -26,9 +26,10 @@ namespace Xunit
     public abstract class ControllerContextSpecification<T> : InstanceContextSpecification<T>
         where T : Controller
     {
-        public ControllerContextSpecification()
+        protected ControllerContextSpecification()
         {
         }
+
         private ControllerActionInvokerBuilder _invokerBuilder;
 
         protected override void EstablishContext()
@@ -74,13 +75,13 @@ namespace Xunit
         /// If you wan't the modified the RequestContext, you have to override the <see cref="PrepareRequestContext"/>
         /// to add the AntiForgeryToken or a UserRole for the Action.
         /// </remarks>
-        /// <see cref="InvokePostAction(Expression expression)"/>
+        /// <see cref="InvokePostAction"/>
         /// <typeparam name="TResult">Result Type of the Action</typeparam>
-        /// <param name="expression">The expression with of the Controller-Action</param>
+        /// <param name="controllerAction">The expression with of the Controller-Action</param>
         /// <returns>The result of the Action</returns>
-        protected TResult InvokeAction<TResult>(Expression<Func<T, TResult>> expression)
+        protected TResult InvokeAction<TResult>(Expression<Func<T, TResult>> controllerAction)
         {
-            _invokerBuilder.Controller(Sut).Action(expression);
+            _invokerBuilder.SetControllerUnderTest(Sut).Action(controllerAction);
             return (TResult) _invokerBuilder.InvokeAction();
         }
 
@@ -93,13 +94,13 @@ namespace Xunit
         /// If you wan't the modified the RequestContext, you have to override the <see cref="PrepareRequestContext"/>
         /// to add the AntiForgeryToken or a UserRole for the Action.
         /// </remarks>
-        /// <see cref="InvokeAction(Expression expression)"/>
+        /// <see cref="InvokeAction(Expression)" />
         /// <typeparam name="TResult">Result Type of the Action</typeparam>
-        /// <param name="expression">The expression with of the Controller-Action</param>
+        /// <param name="controllerAction">The expression with of the Controller-Action</param>
         /// <returns>The result of the Action</returns>
-        protected TResult InvokePostAction<TResult>(Expression<Func<T, TResult>> expression)
+        protected TResult InvokePostAction<TResult>(Expression<Func<T, TResult>> controllerAction)
         {
-            _invokerBuilder.Controller(Sut).Action(expression).RequestContext.HttpMethod("POST");
+            _invokerBuilder.SetControllerUnderTest(Sut).Action(controllerAction).RequestContext.HttpMethod("POST");
             return (TResult) _invokerBuilder.InvokeAction();
         }
     }

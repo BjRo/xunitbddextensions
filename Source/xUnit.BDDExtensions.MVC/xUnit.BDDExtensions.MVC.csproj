@@ -73,7 +73,7 @@
     <Compile Include="IMockedRequestContextExtensions.cs" />
     <Compile Include="ISpecificationActionInvoker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestContextBuilder.cs" />
+    <Compile Include="Internal\RequestContextBuilder.cs" />
     <Compile Include="SpecificationControllerActionInvoker.cs" />
   </ItemGroup>
   <ItemGroup>

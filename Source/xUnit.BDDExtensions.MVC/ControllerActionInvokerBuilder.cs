@@ -31,6 +31,12 @@ namespace Xunit
         private readonly RequestContextBuilder _contextBuilder;
         private readonly ISpecificationActionInvoker _actionInvoker;
 
+        ///<summary>
+        /// Creates a Controller ActionInvoker which kann be usesd for Test
+        /// <see cref="ISpecificationActionInvoker"/>
+        ///</summary>
+        ///<param name="dependencyAccessor">The dependency Accessor from the mocking framework</param>
+        ///<param name="actionInvoker">A Custom Controller Action for the test Invoker which overides the implementation</param>
         public ControllerActionInvokerBuilder(IDependencyAccessor dependencyAccessor,
                                               ISpecificationActionInvoker actionInvoker)
         {
@@ -38,18 +44,34 @@ namespace Xunit
             _actionInvoker = actionInvoker;
         }
 
+        /// <summary>
+        /// The Mocked Request Context
+        /// if you need customize the RequestContext, then you should set here
+        /// the expectations                                                                                        
+        /// </summary>
         public IMockedRequestContext RequestContext
         {
             get { return _contextBuilder; }
         }
 
-        public ControllerActionInvokerBuilder Action<T, TResult>(Expression<Func<T, TResult>> expression)
+        ///<summary>
+        /// Set the Action which should be used by <see cref="InvokeAction"/>    
+        ///</summary>
+        ///<param name="controllerAction">expression of the action</param>
+        ///<typeparam name="T">Type of Controller</typeparam>
+        ///<typeparam name="TResult">Type of the Action-Result</typeparam>
+        ///<returns>ControllerActionInvokerBuilder for methode chaining</returns>
+        public ControllerActionInvokerBuilder Action<T, TResult>(Expression<Func<T, TResult>> controllerAction)
             where T : Controller
         {
-            _actionExpression = expression;
+            _actionExpression = controllerAction;
             return this;
         }
 
+        ///<summary>
+        /// Invokes the given Action <see cref="Action"/>
+        ///</summary>
+        ///<returns>The Result of the Action</returns>
         public object InvokeAction()
         {
             ConvertParameterToFormCollection();
@@ -98,7 +120,12 @@ namespace Xunit
             }
         }
 
-        public ControllerActionInvokerBuilder Controller(Controller controllerUnderTest)
+        ///<summary>
+        /// Sets the instance of the controller under test.
+        ///</summary>
+        ///<param name="controllerUnderTest"></param>
+        ///<returns>instance of ControllerActionInvokerBuilder for method chaing</returns>
+        public ControllerActionInvokerBuilder SetControllerUnderTest(Controller controllerUnderTest)
         {
             _controller = controllerUnderTest;
             return this;

@@ -18,8 +18,17 @@ using Xunit.Internal;
 
 namespace Xunit
 {
+    /// <summary>
+    /// Extension Methods for ViewResult
+    /// </summary>
     public static class ViewResultExtensions
     {
+        ///<summary>
+        /// Gets the typed model from the ViewResult
+        ///</summary>
+        ///<param name="viewResult">A ViewResult</param>
+        ///<typeparam name="T">Type of the model</typeparam>
+        ///<returns></returns>
         public static T Model<T>(this ViewResult viewResult)
         {
             Guard.AgainstArgumentNull(viewResult, "viewResult");

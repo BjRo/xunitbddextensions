@@ -20,7 +20,7 @@ using System.Reflection;
 namespace Xunit.Internal
 {
     /// <summary>
-    /// Analysis
+    /// Analysis of Expression
     /// </summary>
     internal static class MvcExpressionHelper
     {
