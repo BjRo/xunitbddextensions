@@ -49,13 +49,99 @@ namespace Xunit
             _methodOptions.Throw(exception);
         }
 
-        public void Callback(Action action)
+        /// <summary>
+        ///   Configures that the function supplied by <paramref name = "callback" />
+        ///   will be called when the method under configuration is called.
+        /// </summary>
+        /// <param name = "callback">
+        ///   Specifies the function which is called when the method under configuration is called.
+        /// </param>
+        /// <remarks>
+        ///   Use this overload when you're not interested in the parameters.
+        /// </remarks>
+        public void Callback(Action callback)
         {
             _methodOptions.Callback(() =>
-                                        {
-                                            action();
-                                            return true;
-                                        });
+            {
+                callback();
+                return true;
+            });
+        }
+
+        /// <summary>
+        ///   Configures that the function supplied by <paramref name = "callback" />
+        ///   will be called when the method under configuration is called.
+        /// </summary>
+        /// <param name = "callback">
+        ///   Specifies the function which is called when the method under configuration is called.
+        /// </param>
+        /// <remarks>
+        ///   Use this for callbacks on methods with a single parameter.
+        /// </remarks>
+        public void Callback<T>(Action<T> callback)
+        {
+            _methodOptions.Callback<T>(p =>
+            {
+                callback(p);
+                return true;
+            });
+        }
+
+        /// <summary>
+        ///   Configures that the function supplied by <paramref name = "callback" />
+        ///   will be called when the method under configuration is called.
+        /// </summary>
+        /// <param name = "callback">
+        ///   Specifies the function which is called when the method under configuration is called.
+        /// </param>
+        /// <remarks>
+        ///   Use this for callbacks on methods with two parameters.
+        /// </remarks>
+        public void Callback<T1, T2>(Action<T1, T2> callback)
+        {
+            _methodOptions.Callback<T1, T2>((p1,p2) =>
+            {
+                callback(p1, p2);
+                return true;
+            });
+        }
+
+        /// <summary>
+        ///   Configures that the function supplied by <paramref name = "callback" />
+        ///   will be called when the method under configuration is called.
+        /// </summary>
+        /// <param name = "callback">
+        ///   Specifies the function which is called when the method under configuration is called.
+        /// </param>
+        /// <remarks>
+        ///   Use this for callbacks on methods with three parameters.
+        /// </remarks>
+        public void Callback<T1, T2, T3>(Action<T1, T2, T3> callback)
+        {
+            _methodOptions.Callback<T1, T2, T3>((p1, p2, p3) =>
+            {
+                callback(p1, p2, p3);
+                return true;
+            });
+        }
+
+        /// <summary>
+        ///   Configures that the function supplied by <paramref name = "callback" />
+        ///   will be called when the method under configuration is called.
+        /// </summary>
+        /// <param name = "callback">
+        ///   Specifies the function which is called when the method under configuration is called.
+        /// </param>
+        /// <remarks>
+        ///   Use this for callbacks on methods with four parameters.
+        /// </remarks>
+        public void Callback<T1, T2, T3, T4>(Action<T1, T2, T3, T4> callback)
+        {
+            _methodOptions.Callback<T1, T2, T3, T4>((p1, p2, p3, p4) =>
+            {
+                callback(p1, p2, p3, p4);
+                return true;
+            });
         }
 
         #endregion

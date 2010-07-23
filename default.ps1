@@ -4,7 +4,7 @@ properties {
   $build_dir = "$base_dir\Build" 
   $buildartifacts_dir = "$build_dir\" 
   $sln_file = "$base_dir\Source\xUnit.BDDExtensions.sln" 
-  $version = "1.5.0.0"
+  $version = "1.5.0.1"
   $tools_dir = "$base_dir\Tools"
   $release_dir = "$base_dir\Release"
 } 
