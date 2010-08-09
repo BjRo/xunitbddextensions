@@ -54,14 +54,6 @@ namespace Xunit.Specs
         }
 
         [Observation]
-        public void Should_stub_generic_collections_expandable()
-        {
-            var oldCount = _mock.ListOfInt.Count;
-            _mock.ListOfInt.Add(4);
-            _mock.ListOfInt.Count.ShouldBeGreaterThan(oldCount);
-        }
-
-        [Observation]
         public void Should_not_stub_custom_derived_collections()
         {
             _mock.CustomList.ShouldBeNull();

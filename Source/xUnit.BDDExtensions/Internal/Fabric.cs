@@ -75,8 +75,8 @@ namespace Xunit.Internal
             if (responsibleBuilder == null)
             {
                 throw new InvalidOperationException(
-                    string.Format("Unable to build ctor dependency of type {0}." + Environment.NewLine +
-                                  "Make sure to use only interfaces or abstract base classes in the constructor!",
+                    string.Format("Unable to build dependency of type {0}." + Environment.NewLine +
+                                  "Make sure to use only interfaces or abstract base classes for dependencies!",
                                   typeToBuild.FullName));
             }
 

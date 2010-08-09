@@ -94,7 +94,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyStubExtensionsSpecs.cs" />
     <Compile Include="RhinoMocksExtensionsSpec.cs" />
-    <Compile Include="SpecificationCommandSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xUnit.BDDExtensions.Assertions\xUnit.BDDExtensions.Assertions.csproj">

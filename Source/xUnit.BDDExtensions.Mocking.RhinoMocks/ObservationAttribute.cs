@@ -12,22 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //  
+using System;
 using Xunit.Internal;
 
 namespace Xunit
 {
     /// <summary>
-    ///   A specialized <see cref = "ObservationAttribute" /> for using 
+    ///   A specialized <see cref = "FactAttribute" /> which configures  
     ///   RhinoMocks as the underlying mocking engine.
     /// </summary>
-    public sealed class ObservationAttribute : ObservationAttributeBase
+    public sealed class ObservationAttribute : FactAttribute, IConfigurationEndpoint
     {
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "ObservationAttribute" /> class.
-        /// </summary>
-        static ObservationAttribute()
+        public void Configure()
         {
-            Core.Configure(cfg => cfg.MockingEngineIs<RhinoMockingEngine>());
+            Core.Configure(cfg => cfg.MockingEngineIs<RhinoMockingEngine>());            
         }
     }
 }

@@ -59,9 +59,9 @@ namespace Xunit
             return new ControllerActionInvokerBuilder(this, new SpecificationControllerActionInvoker());
         }
 
-        protected override void AfterEachObservation()
+        protected override void AfterTheSpecification()
         {
-            base.AfterEachObservation();
+            base.AfterTheSpecification();
             MockedRequestContextValueStore.RemoveDictionary(_invokerBuilder.RequestContext);
         }
 

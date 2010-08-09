@@ -83,6 +83,7 @@ namespace Xunit.Internal
         internal static IFabric BuildFabric()
         {
             _core.EnsureConfigured();
+
             return new Fabric(MockingEngine, Builders, ConfigurationRules);
         }
     }

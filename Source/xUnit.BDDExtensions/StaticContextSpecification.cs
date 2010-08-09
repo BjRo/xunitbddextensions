@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //  
+using System;
 using System.Collections.Generic;
 using Xunit.Internal;
 
@@ -20,7 +21,8 @@ namespace Xunit
     /// <summary>
     ///   Base class for specifications.
     /// </summary>
-    public abstract class StaticContextSpecification : ISpecification
+    [RunWith(typeof(XbxRunner))]
+    public abstract class StaticContextSpecification : IContextSpecification
     {
         private readonly IMockingEngine _mockingEngine;
 
@@ -37,7 +39,7 @@ namespace Xunit
         /// <summary>
         ///   Initializes the specification class.
         /// </summary>
-        void ISpecification.Initialize()
+        void IContextSpecification.InitializeContext()
         {
             EstablishContext();
             Because();
@@ -46,9 +48,10 @@ namespace Xunit
         /// <summary>
         ///   Cleans up the specification class.
         /// </summary>
-        void ISpecification.Cleanup()
+        void IContextSpecification.CleanupSpecification()
         {
             AfterEachObservation();
+            AfterTheSpecification();
         }
 
         #endregion
@@ -67,10 +70,15 @@ namespace Xunit
         /// </summary>
         protected abstract void Because();
 
+        [Obsolete("EstablishContext and Because are now executed once for all observations which renders this method useless. Use AfterTheSpecification instead.")]
+        protected virtual void AfterEachObservation()
+        {
+        }
+
         /// <summary>
         ///   Is called after each observation. Can be used for cleanup.
         /// </summary>
-        protected virtual void AfterEachObservation()
+        protected virtual void AfterTheSpecification()
         {
         }
 

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //  
+using System;
 using System.Collections.Generic;
 using Xunit.Internal;
 
@@ -24,24 +25,17 @@ namespace Xunit
     /// <typeparam name = "TSystemUnderTest">
     ///   Specifies the type of the system under test.
     /// </typeparam>
-    public abstract class InstanceContextSpecification<TSystemUnderTest> : ISpecification, IDependencyAccessor
+    [RunWith(typeof(XbxRunner))]
+    public abstract class InstanceContextSpecification<TSystemUnderTest> : IContextSpecification, IDependencyAccessor
         where TSystemUnderTest : class
     {
-        private readonly AutoMockingContainer<TSystemUnderTest> _autoMockingContainer;
+        private readonly AutoMockingContainer<TSystemUnderTest> _autoMockingContainer = new AutoMockingContainer<TSystemUnderTest>();
         private readonly List<IBehaviorConfig> _behaviors = new List<IBehaviorConfig>();
-
-        /// <summary>
-        ///   Creats a new instance of the <see cref = "InstanceContextSpecification{TSystemUnderTest}" />.
-        /// </summary>
-        protected InstanceContextSpecification()
-        {
-            _autoMockingContainer = new AutoMockingContainer<TSystemUnderTest>();
-        }
 
         /// <summary>
         ///   Gets the system under test. This is the actual class under test.
         /// </summary>
-        protected TSystemUnderTest Sut { get; private set; }
+        protected static TSystemUnderTest Sut { get; private set; }
 
         #region IDependencyAccessor Members
 
@@ -114,7 +108,7 @@ namespace Xunit
         /// <summary>
         ///   Initializes the specification class.
         /// </summary>
-        void ISpecification.Initialize()
+        void IContextSpecification.InitializeContext()
         {
             EstablishContext();
             _behaviors.ForEach(x => x.EstablishContext(this));
@@ -127,11 +121,11 @@ namespace Xunit
         /// <summary>
         ///   Cleans up the specification class.
         /// </summary>
-        void ISpecification.Cleanup()
+        void IContextSpecification.CleanupSpecification()
         {
             _behaviors.ForEach(x => x.Cleanup(this));
             _behaviors.Clear();
-            AfterEachObservation();
+            AfterTheSpecification();
         }
 
         #endregion
@@ -170,10 +164,15 @@ namespace Xunit
         /// </summary>
         protected abstract void Because();
 
+        [Obsolete("EstablishContext and Because are now executed once for all observations which renders this method useless. Use AfterTheSpecification instead.")]
+        protected virtual void AfterEachObservation()
+        {
+        }
+
         /// <summary>
         ///   Is called after each observation. Can be used for cleanup.
         /// </summary>
-        protected virtual void AfterEachObservation()
+        protected virtual void AfterTheSpecification()
         {
         }
 

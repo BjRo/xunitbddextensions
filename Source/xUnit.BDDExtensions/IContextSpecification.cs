@@ -12,22 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //  
+using Xunit.Internal;
+
 namespace Xunit
 {
     /// <summary>
-    ///   Interface used by the <see cref = "SpecificationCommand" /> to execute logic before
-    ///   and after the execution of an xUnit.net test method.
+    ///   Interface used by the <see cref = "XbxRunner" /> to execute <see cref="StaticContextSpecification"/>
+    ///   and <see cref="InstanceContextSpecification{T}"/> derivates.
     /// </summary>
-    public interface ISpecification
+    public interface IContextSpecification
     {
         /// <summary>
-        ///   Initializes the specification class.
+        /// Is used to intialize the context specification. This method is called once before
+        /// all the methods marked with the observation methods are run.
         /// </summary>
-        void Initialize();
+        void InitializeContext();
 
         /// <summary>
-        ///   Cleans up the specification class.
+        /// Is called after all observation methods are run.
         /// </summary>
-        void Cleanup();
+        void CleanupSpecification();
     }
 }
