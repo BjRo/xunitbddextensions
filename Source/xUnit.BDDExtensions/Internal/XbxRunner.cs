@@ -64,9 +64,9 @@ namespace Xunit.Internal
         {
             try
             {
-                Bootstrap();
+                _observationMethods = EnumerateTestMethods();
 
-                _observationMethods = TypeUtility.GetTestMethods(_typeUnderTest);
+                Bootstrap();
 
                 _contextSpec = (IContextSpecification)Activator.CreateInstance(_typeUnderTest.Type);
                 _contextSpec.InitializeContext();
@@ -139,7 +139,7 @@ namespace Xunit.Internal
         /// <returns>The test methods</returns>
         public IEnumerable<IMethodInfo> EnumerateTestMethods()
         {
-            return _observationMethods;
+            return _observationMethods ?? (_observationMethods = TypeUtility.GetTestMethods(TypeUnderTest));
         }
 
         /// <summary>

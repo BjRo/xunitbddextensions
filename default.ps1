@@ -38,8 +38,7 @@ task Compile -depends Init {
 
 task Test -depends Compile {
   exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Specs.dll }
-  exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Mocking.RhinoMocks.Specs.dll }
-  exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Mocking.Moq.Specs.dll }
+  exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Faking.Moq.Specs.dll }
   exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Reporting.Specs.dll }
   exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.MVC.Specs.dll }
 }
@@ -55,7 +54,6 @@ task Merge {
     
      & $tools_dir\ILMerge\ILMerge.exe xUnit.BDDExtensions.Partial.dll `
         xUnit.BDDExtensions.Assertions.dll `
-        xUnit.BDDExtensions.Mocking.RhinoMocks.dll `
         StructureMap.dll `
         StructureMap.AutoMocking.dll `
         Rhino.Mocks.dll `
