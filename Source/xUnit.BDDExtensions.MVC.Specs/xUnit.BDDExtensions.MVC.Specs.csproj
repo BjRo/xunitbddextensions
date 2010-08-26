@@ -66,10 +66,6 @@
       <Project>{DEE9E6A5-E4CA-475E-9B3A-314C7C0C8E59}</Project>
       <Name>xUnit.BDDExtensions.Assertions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\xUnit.BDDExtensions.Mocking.RhinoMocks\xUnit.BDDExtensions.Mocking.RhinoMocks.csproj">
-      <Project>{BBF8D13E-313A-4A6F-B945-948252A655A7}</Project>
-      <Name>xUnit.BDDExtensions.Mocking.RhinoMocks</Name>
-    </ProjectReference>
     <ProjectReference Include="..\xUnit.BDDExtensions.MVC\xUnit.BDDExtensions.MVC.csproj">
       <Project>{03064663-AC5C-4C0A-9E53-FD6C35A0D355}</Project>
       <Name>xUnit.BDDExtensions.MVC</Name>

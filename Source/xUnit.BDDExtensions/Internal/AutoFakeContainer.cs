@@ -24,26 +24,30 @@ namespace Xunit.Internal
     ///   found in the constructor of the type specified via <typeparamref name = "TTargetClass" />.
     /// </summary>
     /// <typeparam name = "TTargetClass">The concrete class being tested</typeparam>
-    public sealed class AutoMockingContainer<TTargetClass> :
+    public sealed class AutoFakeContainer<TTargetClass> :
         AutoMocker<TTargetClass>,
         ServiceLocator,
-        IMockingEngine where TTargetClass : class
+        IFakeEngine where TTargetClass : class
     {
         private readonly IFabric _fabric;
-        private readonly IMockingEngine _mockingEngine;
+        private readonly IFakeEngine _fakeEngine;
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref = "AutoMockingContainer{TTargetClass}" /> class.
+        ///   Initializes a new instance of the <see cref = "AutoFakeContainer{TTargetClass}" /> class.
         /// </summary>
-        public AutoMockingContainer()
+        public AutoFakeContainer() : this(RunnerConfiguration.Instance)
         {
-            _fabric = Core.BuildFabric();
-            _mockingEngine = Core.MockingEngine;
+        }
+
+        public AutoFakeContainer(IRunnerConfiguration runnerConfiguration)
+        {
+            _fabric = new Fabric(runnerConfiguration.FakeEngine, runnerConfiguration.Builders, runnerConfiguration.ConfigurationRules);
+            _fakeEngine = runnerConfiguration.FakeEngine;
             _serviceLocator = this;
             _container = new AutoMockedContainer(this);
         }
 
-        #region IMockingEngine Members
+        #region IFakeEngine Members
 
         /// <summary>
         ///   Creates a stub of the type specified via <paramref name = "interfaceType" />.
@@ -56,7 +60,7 @@ namespace Xunit.Internal
         /// </returns>
         public object Stub(Type interfaceType)
         {
-            return _mockingEngine.Stub(interfaceType);
+            return _fakeEngine.Stub(interfaceType);
         }
 
         /// <summary>
@@ -73,7 +77,7 @@ namespace Xunit.Internal
             TDependency dependency,
             Expression<Func<TDependency, TReturnValue>> func) where TDependency : class
         {
-            return _mockingEngine.SetUpQueryBehaviorFor(dependency, func);
+            return _fakeEngine.SetUpQueryBehaviorFor(dependency, func);
         }
 
         /// <summary>
@@ -92,7 +96,7 @@ namespace Xunit.Internal
             TDependency dependency,
             Expression<Action<TDependency>> func) where TDependency : class
         {
-            return _mockingEngine.SetUpCommandBehaviorFor(dependency, func);
+            return _fakeEngine.SetUpCommandBehaviorFor(dependency, func);
         }
 
         #endregion
@@ -111,7 +115,7 @@ namespace Xunit.Internal
         /// </returns>
         public T Service<T>() where T : class
         {
-            return (T) Service(typeof (T));
+            return (T)Service(typeof(T));
         }
 
         /// <summary>
@@ -141,7 +145,7 @@ namespace Xunit.Internal
         /// </returns>
         public T PartialMock<T>(params object[] args) where T : class
         {
-            return _mockingEngine.PartialMock<T>(args);
+            return _fakeEngine.PartialMock<T>(args);
         }
 
         #endregion
@@ -157,7 +161,7 @@ namespace Xunit.Internal
         /// </returns>
         public T Stub<T>() where T : class
         {
-            return _mockingEngine.Stub<T>();
+            return _fakeEngine.Stub<T>();
         }
     }
 }

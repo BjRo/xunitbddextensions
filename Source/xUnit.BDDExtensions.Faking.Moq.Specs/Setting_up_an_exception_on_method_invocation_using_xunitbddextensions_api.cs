@@ -1,6 +1,6 @@
 using System;
 using System.ComponentModel;
-using Xunit;
+
 namespace Xunit.Specs
 {
     [Concern(typeof(MockingExtensions))]

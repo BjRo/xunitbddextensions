@@ -1,17 +1,16 @@
-using System;
 using Xunit.Internal;
 
 namespace Xunit.Specs
 {
-    [Concern(typeof(AutoMockingContainer<>))]
+    [Concern(typeof(AutoFakeContainer<>))]
     public class When_trying_to_build_a_class_under_test_that_has_a_ctor_dependency_on_an_abstract_class : StaticContextSpecification
     {
         private TestClassWithAbstractClassDependency _instance;
-        private AutoMockingContainer<TestClassWithAbstractClassDependency> _autoMocker;
+        private AutoFakeContainer<TestClassWithAbstractClassDependency> _autoMocker;
 
         protected override void EstablishContext()
         {
-            _autoMocker =  new AutoMockingContainer<TestClassWithAbstractClassDependency>();
+            _autoMocker =  new AutoFakeContainer<TestClassWithAbstractClassDependency>();
         }
 
         protected override void Because()

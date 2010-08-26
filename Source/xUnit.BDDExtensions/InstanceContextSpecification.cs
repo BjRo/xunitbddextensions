@@ -26,10 +26,12 @@ namespace Xunit
     ///   Specifies the type of the system under test.
     /// </typeparam>
     [RunWith(typeof(XbxRunner))]
-    public abstract class InstanceContextSpecification<TSystemUnderTest> : IContextSpecification, IDependencyAccessor
+    public abstract class InstanceContextSpecification<TSystemUnderTest> : 
+        IContextSpecification, 
+        IDependencyAccessor
         where TSystemUnderTest : class
     {
-        private readonly AutoMockingContainer<TSystemUnderTest> _autoMockingContainer = new AutoMockingContainer<TSystemUnderTest>();
+        private readonly AutoFakeContainer<TSystemUnderTest> _autoFakeContainer = new AutoFakeContainer<TSystemUnderTest>();
         private readonly List<IBehaviorConfig> _behaviors = new List<IBehaviorConfig>();
 
         /// <summary>
@@ -55,7 +57,7 @@ namespace Xunit
         /// </returns>
         public TInterfaceType The<TInterfaceType>() where TInterfaceType : class
         {
-            return _autoMockingContainer.Get<TInterfaceType>();
+            return _autoFakeContainer.Get<TInterfaceType>();
         }
 
         /// <summary>
@@ -69,7 +71,7 @@ namespace Xunit
         /// </returns>
         public TInterfaceType An<TInterfaceType>() where TInterfaceType : class
         {
-            return _autoMockingContainer.Stub<TInterfaceType>();
+            return _autoFakeContainer.Stub<TInterfaceType>();
         }
 
         /// <summary>
@@ -83,7 +85,7 @@ namespace Xunit
         /// </returns>
         public IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
         {
-            return _autoMockingContainer.CreateStubCollectionOf<TInterfaceType>();
+            return _autoFakeContainer.CreateStubCollectionOf<TInterfaceType>();
         }
 
         /// <summary>
@@ -98,7 +100,7 @@ namespace Xunit
         /// </param>
         public void Use<TInterfaceType>(TInterfaceType instance) where TInterfaceType : class
         {
-            _autoMockingContainer.Inject(typeof (TInterfaceType), instance);
+            _autoFakeContainer.Inject(typeof (TInterfaceType), instance);
         }
 
         #endregion
@@ -146,7 +148,7 @@ namespace Xunit
         /// </returns>
         protected virtual TSystemUnderTest CreateSut()
         {
-            return _autoMockingContainer.ClassUnderTest;
+            return _autoFakeContainer.ClassUnderTest;
         }
 
         /// <summary>

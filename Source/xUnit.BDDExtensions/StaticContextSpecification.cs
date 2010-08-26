@@ -24,14 +24,14 @@ namespace Xunit
     [RunWith(typeof(XbxRunner))]
     public abstract class StaticContextSpecification : IContextSpecification
     {
-        private readonly IMockingEngine _mockingEngine;
+        private readonly IFakeEngine _fakeEngine;
 
         /// <summary>
         ///   Creates a new instance of the <see cref = "StaticContextSpecification" /> class.
         /// </summary>
         protected StaticContextSpecification()
         {
-            _mockingEngine = Core.MockingEngine;
+            _fakeEngine = RunnerConfiguration.FakeEngine;
         }
 
         #region ISpecification Members
@@ -93,7 +93,7 @@ namespace Xunit
         /// </returns>
         protected TInterfaceType An<TInterfaceType>() where TInterfaceType : class
         {
-            return _mockingEngine.Stub<TInterfaceType>();
+            return _fakeEngine.Stub<TInterfaceType>();
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Xunit
         /// </returns>
         protected IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
         {
-            return _mockingEngine.CreateStubCollectionOf<TInterfaceType>();
+            return _fakeEngine.CreateStubCollectionOf<TInterfaceType>();
         }
     }
 }

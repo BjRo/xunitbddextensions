@@ -23,7 +23,7 @@ namespace Xunit.Internal
     {
         private readonly IContainer _container;
         private readonly Fabric _fabric;
-        private readonly IMockingEngine _mockingEngine;
+        private readonly IFakeEngine _fakeEngine;
 
         /// <summary>
         ///   Creates a new instance of the <see cref = "FabricContext" /> class.
@@ -31,7 +31,7 @@ namespace Xunit.Internal
         /// <param name = "typeToBuild">
         ///   Specifies the type to build.
         /// </param>
-        /// <param name = "mockingEngine">
+        /// <param name = "fakeEngine">
         ///   Specifies the mock factory.
         /// </param>
         /// <param name = "container">
@@ -40,14 +40,14 @@ namespace Xunit.Internal
         /// <param name = "fabric">
         ///   Specifies the fabric.
         /// </param>
-        public FabricContext(Type typeToBuild, IMockingEngine mockingEngine, IContainer container, Fabric fabric)
+        public FabricContext(Type typeToBuild, IFakeEngine fakeEngine, IContainer container, Fabric fabric)
         {
             Guard.AgainstArgumentNull(typeToBuild, "typeToBuild");
-            Guard.AgainstArgumentNull(mockingEngine, "mockingEngine");
+            Guard.AgainstArgumentNull(fakeEngine, "FakeEngine");
             Guard.AgainstArgumentNull(container, "container");
 
             TypeToBuild = typeToBuild;
-            _mockingEngine = mockingEngine;
+            _fakeEngine = fakeEngine;
             _container = container;
             _fabric = fabric;
         }
@@ -120,7 +120,7 @@ namespace Xunit.Internal
         /// </returns>
         public object CreateStub(Type interfaceType)
         {
-            return _mockingEngine.Stub(interfaceType);
+            return _fakeEngine.Stub(interfaceType);
         }
 
         /// <summary>

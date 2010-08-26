@@ -14,17 +14,17 @@
 //  
 using System;
 using System.Linq.Expressions;
-using Moq;
+using Rhino.Mocks;
 
-namespace Xunit
+namespace Xunit.Internal
 {
     /// <summary>
-    ///   An implementation of <see cref = "IMockingEngine" />
+    ///   An implementation of <see cref = "IFakeEngine" />
     ///   using Rhino.Mocks.
     /// </summary>
-    internal class MoqMockingEngine : IMockingEngine
+    internal class RhinoFakeEngine : IFakeEngine
     {
-        #region IMockingEngine Members
+        #region IFakeEngine Members
 
         /// <summary>
         ///   Creates a dependency of the type specified via <paramref name = "interfaceType" />.
@@ -37,10 +37,9 @@ namespace Xunit
         /// </returns>
         public object Stub(Type interfaceType)
         {
-            var closedMockType = typeof (Mock<>).MakeGenericType(interfaceType);
-            var objectProperty = closedMockType.GetProperty("Object", closedMockType);
-            var instance = Activator.CreateInstance(closedMockType);
-            return objectProperty.GetValue(instance, null);
+            var stub = MockRepository.GenerateStub(interfaceType);
+            stub.Replay();
+            return stub;
         }
 
         /// <summary>
@@ -58,19 +57,9 @@ namespace Xunit
         /// </returns>
         public T PartialMock<T>(params object[] args) where T : class
         {
-            var closedMockType = typeof (Mock<>).MakeGenericType(typeof (T));
-            var callBaseProperty = closedMockType.GetProperty("CallBase", typeof (bool));
-            var objectProperty = closedMockType.GetProperty("Object", typeof (T));
-            var constructor = closedMockType.GetConstructor(new[]
-            {
-                typeof (object[])
-            });
-            var instance = constructor.Invoke(new[]
-            {
-                args
-            });
-            callBaseProperty.SetValue(instance, true, null);
-            return objectProperty.GetValue(instance, null) as T;
+            var mock = MockRepository.GenerateMock<T>(args);
+            mock.Replay();
+            return mock;
         }
 
         /// <summary>
@@ -95,9 +84,11 @@ namespace Xunit
             TDependency dependency,
             Expression<Func<TDependency, TReturnValue>> func) where TDependency : class
         {
-            var mock = Mock.Get(dependency);
+            var compiledFunction = func.Compile();
 
-            return new MoqQueryOptions<TDependency, TReturnValue>(mock.Setup(func));
+            Guard.AgainstArgumentNull(compiledFunction, "compiledFunction");
+
+            return new RhinoQueryOptions<TReturnValue>(dependency.Stub(f => compiledFunction(f)));
         }
 
         /// <summary>
@@ -122,9 +113,11 @@ namespace Xunit
             TDependency dependency,
             Expression<Action<TDependency>> func) where TDependency : class
         {
-            var mock = Mock.Get(dependency);
+            var compiledFunction = func.Compile();
 
-            return new MoqCommandOptions<TDependency>(mock.Setup(func));
+            Guard.AgainstArgumentNull(compiledFunction, "compiledFunction");
+
+            return new RhinoCommandOptions(dependency.Stub(compiledFunction));
         }
 
         #endregion

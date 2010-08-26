@@ -20,7 +20,7 @@ namespace Xunit
     /// <summary>
     /// Interface to a mocking library. 
     /// </summary>
-    public interface IMockingEngine
+    public interface IFakeEngine
     {
         /// <summary>
         /// Creates a dependency of the type specified via <paramref name="interfaceType"/>.

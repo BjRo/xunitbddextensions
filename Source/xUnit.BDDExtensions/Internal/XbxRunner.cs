@@ -29,33 +29,8 @@ namespace Xunit.Internal
         private IContextSpecification _contextSpec;
         private Exception _initializationException;
         private IEnumerable<IMethodInfo> _observationMethods;
-        private Random _randomizer;
+        private Random _randomizer = new Random();
         private ITypeInfo _typeUnderTest;
-
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "XbxRunner" /> class.
-        /// </summary>
-        public XbxRunner() : this((ITypeInfo) null)
-        {
-        }
-
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "XbxRunner" /> class.
-        /// </summary>
-        /// <param name = "typeUnderTest">The type under test.</param>
-        public XbxRunner(Type typeUnderTest) : this(Reflector.Wrap(typeUnderTest))
-        {
-        }
-
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "XbxRunner" /> class.
-        /// </summary>
-        /// <param name = "typeUnderTest">The type under test.</param>
-        public XbxRunner(ITypeInfo typeUnderTest)
-        {
-            _randomizer = new Random();
-            TypeUnderTest = typeUnderTest;
-        }
 
         /// <summary>
         ///   Gets or sets the randomizer.
@@ -89,11 +64,11 @@ namespace Xunit.Internal
         {
             try
             {
-                _observationMethods = TypeUtility.GetTestMethods(_typeUnderTest);
-
                 Bootstrap();
 
-                _contextSpec = (IContextSpecification) Activator.CreateInstance(_typeUnderTest.Type);
+                _observationMethods = TypeUtility.GetTestMethods(_typeUnderTest);
+
+                _contextSpec = (IContextSpecification)Activator.CreateInstance(_typeUnderTest.Type);
                 _contextSpec.InitializeContext();
             }
             catch (Exception exception)
@@ -199,21 +174,17 @@ namespace Xunit.Internal
 
         #endregion
 
-        /// <summary>
-        /// This method feels a bit hacky, but currently the only external point
-        /// I see from which I can modify internals without breaking existing
-        /// code is using the obervation attributes as a configuration endpoint.
-        /// 
-        /// --Feel free to suggest options--
-        /// </summary>
         private void Bootstrap()
         {
-            _observationMethods
-                .SelectMany(x => x.GetCustomAttributes(typeof(FactAttribute)))
-                .Select(x => x.GetInstance<FactAttribute>())
-                .Take(1)
-                .Cast<IConfigurationEndpoint>()
-                .Each(x => x.Configure());
+            var currentSpecType = TypeUnderTest.Type;
+            var currentSpecAssembly = currentSpecType.Assembly;
+
+            currentSpecType
+                .GetCustomAttributes(typeof(XbxRunnerConfigurationAttribute), false)
+                .AlternativeIfNullOrEmpty(() => currentSpecAssembly.GetCustomAttributes(typeof(XbxRunnerConfigurationAttribute), true))
+                .Cast<XbxRunnerConfigurationAttribute>()
+                .FirstOrCustomDefaultValue(XbxRunnerConfigurationAttribute.DefaultConfiguration)
+                .Configure(RunnerConfiguration.Instance);
         }
     }
 }

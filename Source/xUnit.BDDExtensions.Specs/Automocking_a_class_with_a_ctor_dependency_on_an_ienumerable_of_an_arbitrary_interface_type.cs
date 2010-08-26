@@ -4,16 +4,16 @@ using Xunit.Internal;
 
 namespace Xunit.Specs
 {
-    [Concern(typeof(AutoMockingContainer<>))]
+    [Concern(typeof(AutoFakeContainer<>))]
     public class When_trying_to_build_a_class_under_test_that_has_a_ctor_dependency_on_a_generic_collections_of_interface_types
         : StaticContextSpecification
     {
-        private AutoMockingContainer<TestClassWithGenericCollectionOfInterfaceTypes> _autoMocker;
+        private AutoFakeContainer<TestClassWithGenericCollectionOfInterfaceTypes> _autoMocker;
         private TestClassWithGenericCollectionOfInterfaceTypes _instance;
 
         protected override void EstablishContext()
         {
-            _autoMocker = new AutoMockingContainer<TestClassWithGenericCollectionOfInterfaceTypes>();
+            _autoMocker = new AutoFakeContainer<TestClassWithGenericCollectionOfInterfaceTypes>();
         }
 
         protected override void Because()

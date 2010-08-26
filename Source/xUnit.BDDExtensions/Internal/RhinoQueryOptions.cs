@@ -15,9 +15,8 @@
 using System;
 using Rhino.Mocks;
 using Rhino.Mocks.Interfaces;
-using Xunit.Internal;
 
-namespace Xunit
+namespace Xunit.Internal
 {
     /// <summary>
     ///   A <see cref = "IQueryOptions{TReturn}" /> implementation for the Rhino.Mocks framework.

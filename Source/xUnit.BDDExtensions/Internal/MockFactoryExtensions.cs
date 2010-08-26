@@ -18,7 +18,7 @@ using System.Linq;
 namespace Xunit.Internal
 {
     /// <summary>
-    ///   A static extension class for the <see cref = "IMockingEngine" /> interface.
+    ///   A static extension class for the <see cref = "IFakeEngine" /> interface.
     /// </summary>
     public static class MockFactoryExtensions
     {
@@ -28,18 +28,18 @@ namespace Xunit.Internal
         /// <typeparam name = "TInterfaceType">
         ///   Specifies the interface type.
         /// </typeparam>
-        /// <param name = "mockingEngine">
+        /// <param name = "fakeEngine">
         ///   Specifies the factory for creating stub implementations on-the-fly.
         /// </param>
         /// <returns>
         ///   A collection containing three stubs of the specified type.
         /// </returns>
-        public static IList<TInterfaceType> CreateStubCollectionOf<TInterfaceType>(this IMockingEngine mockingEngine)
+        public static IList<TInterfaceType> CreateStubCollectionOf<TInterfaceType>(this IFakeEngine fakeEngine)
             where TInterfaceType : class
         {
-            Guard.AgainstArgumentNull(mockingEngine, "mockingEngine");
+            Guard.AgainstArgumentNull(fakeEngine, "FakeEngine");
 
-            return Enumerable.Range(0, 3).Select(x => mockingEngine.Stub<TInterfaceType>()).ToList();
+            return Enumerable.Range(0, 3).Select(x => fakeEngine.Stub<TInterfaceType>()).ToList();
         }
 
         /// <summary>
@@ -51,11 +51,11 @@ namespace Xunit.Internal
         /// <returns>
         ///   The created stub instance.
         /// </returns>
-        public static T Stub<T>(this IMockingEngine mockingEngine) where T : class
+        public static T Stub<T>(this IFakeEngine fakeEngine) where T : class
         {
-            Guard.AgainstArgumentNull(mockingEngine, "mockingEngine");
+            Guard.AgainstArgumentNull(fakeEngine, "FakeEngine");
 
-            return (T) mockingEngine.Stub(typeof (T));
+            return (T) fakeEngine.Stub(typeof (T));
         }
     }
 }

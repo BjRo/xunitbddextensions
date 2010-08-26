@@ -27,24 +27,24 @@ namespace Xunit.Internal
     {
         private readonly IEnumerable<IBuilder> _builders;
         private readonly IEnumerable<IConfigurationRule> _configurationRules;
-        private readonly IMockingEngine _mockingEngine;
+        private readonly IFakeEngine _fakeEngine;
 
         /// <summary>
         ///   Creates a new instance of the <see cref = "Fabric" /> class.
         /// </summary>
-        /// <param name = "mockingEngine">The mock factory.</param>
+        /// <param name = "fakeEngine">The mock factory.</param>
         /// <param name = "builders">A collection of all known builders.</param>
         /// <param name = "configurationRules">A set of rules for configuration of the produced instances.</param>
         public Fabric(
-            IMockingEngine mockingEngine, 
+            IFakeEngine fakeEngine, 
             IEnumerable<IBuilder> builders,
             IEnumerable<IConfigurationRule> configurationRules)
         {
-            Guard.AgainstArgumentNull(mockingEngine, "mockingEngine");
+            Guard.AgainstArgumentNull(fakeEngine, "FakeEngine");
             Guard.AgainstArgumentNull(builders, "builders");
             Guard.AgainstArgumentNull(configurationRules, "configurationRules");
 
-            _mockingEngine = mockingEngine;
+            _fakeEngine = fakeEngine;
             _builders = builders;
             _configurationRules = configurationRules;
         }
@@ -68,7 +68,7 @@ namespace Xunit.Internal
             Guard.AgainstArgumentNull(typeToBuild, "typeToBuild");
             Guard.AgainstArgumentNull(container, "container");
 
-            var buildContext = new FabricContext(typeToBuild, _mockingEngine, container, this);
+            var buildContext = new FabricContext(typeToBuild, _fakeEngine, container, this);
 
             var responsibleBuilder = _builders.FirstOrDefault(x => x.KnowsHowToBuild(buildContext.TypeToBuild));
 

@@ -14,9 +14,8 @@
 //  
 using System;
 using Rhino.Mocks.Interfaces;
-using Xunit.Internal;
 
-namespace Xunit
+namespace Xunit.Internal
 {
     /// <summary>
     ///   A <see cref = "ICommandOptions" /> implementation for the Rhino.Mocks framework.

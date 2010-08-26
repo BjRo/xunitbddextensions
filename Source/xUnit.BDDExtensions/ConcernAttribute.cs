@@ -17,7 +17,8 @@ using System;
 namespace Xunit
 {
     /// <summary>
-    /// A concern. This attribute marks a specification to be related to a particular type.
+    /// A concern. This attribute marks a specification to be related to a particular type or
+    /// scenario.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class ConcernAttribute : TraitAttribute

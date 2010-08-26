@@ -13,28 +13,11 @@
 // limitations under the License.
 //  
 using System;
-using System.Collections.Generic;
 
-namespace Xunit.Internal
+namespace Xunit
 {
-    /// <summary>
-    ///   A null implementation of the <see cref = "ICore" /> interface.
-    /// </summary>
-    internal class NulloCore : ICore
+    //TODO: Document me!
+    public class ObservationAttribute : FactAttribute
     {
-        #region ICore Members
-
-        public IMockingEngine MockingEngine { get; set; }
-
-        public IEnumerable<IBuilder> Builders { get; set; }
-
-        public IEnumerable<IConfigurationRule> ConfigurationRules { get; set; }
-
-        public void EnsureConfigured()
-        {
-            throw new InvalidOperationException("xUnit.BDDExtensions was not configured !!!");
-        }
-
-        #endregion
     }
 }

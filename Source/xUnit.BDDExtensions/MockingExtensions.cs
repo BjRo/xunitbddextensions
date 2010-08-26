@@ -49,7 +49,7 @@ namespace Xunit
             Guard.AgainstArgumentNull(dependency, "dependency");
             Guard.AgainstArgumentNull(func, "func");
 
-            return Core.MockingEngine.SetUpQueryBehaviorFor(dependency, func);
+            return RunnerConfiguration.FakeEngine.SetUpQueryBehaviorFor(dependency, func);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Xunit
             Guard.AgainstArgumentNull(dependency, "dependency");
             Guard.AgainstArgumentNull(func, "func");
 
-            return Core.MockingEngine.SetUpCommandBehaviorFor(dependency, func);
+            return RunnerConfiguration.FakeEngine.SetUpCommandBehaviorFor(dependency, func);
         }
     }
 }
