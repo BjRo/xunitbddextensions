@@ -85,7 +85,6 @@
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Automocking_a_class_with_an_abstract_ctor_dependency.cs" />
-    <Compile Include="Automocking_a_class_with_a_ctor_dependency_on_an_ienumerable_of_an_arbitrary_interface_type.cs" />
     <Compile Include="CollectionStubSpecs.cs" />
     <Compile Include="EventRaiserExtensionsSpec.cs" />
     <Compile Include="InstanceContextSpecificationSpecs.cs" />
