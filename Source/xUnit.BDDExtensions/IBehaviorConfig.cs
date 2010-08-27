@@ -26,7 +26,7 @@ namespace Xunit
         /// <param name = "accessor">
         ///   Specifies the accessor for accessing dependencies of the SUT.
         /// </param>
-        void EstablishContext(IDependencyAccessor accessor);
+        void EstablishContext(IFakeAccessor accessor);
 
         /// <summary>
         ///   Does some preparation of the sut itself (e.g. adding some elements to container like structures)

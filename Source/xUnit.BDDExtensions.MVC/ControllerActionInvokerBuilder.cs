@@ -31,10 +31,10 @@ namespace Xunit
         private readonly RequestContextBuilder _contextBuilder;
         private readonly ISpecificationActionInvoker _actionInvoker;
 
-        public ControllerActionInvokerBuilder(IDependencyAccessor dependencyAccessor,
+        public ControllerActionInvokerBuilder(IFakeAccessor fakeAccessor,
                                               ISpecificationActionInvoker actionInvoker)
         {
-            _contextBuilder = new RequestContextBuilder(dependencyAccessor);
+            _contextBuilder = new RequestContextBuilder(fakeAccessor);
             _actionInvoker = actionInvoker;
         }
 

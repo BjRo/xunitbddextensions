@@ -1,88 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using Xunit.Internal;
+﻿//  Copyright 2010 xUnit.BDDExtensions
+//    
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License. 
+//  You may obtain a copy of the License at
+//    
+//        http://www.apache.org/licenses/LICENSE-2.0
+//    
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+//  implied. See the License for the specific language governing permissions and
+//  limitations under the License.  
+//  
+using System;
 
 namespace Xunit
 {
+    /// <summary>
+    /// Represents the internal configuration. 
+    /// This is accessible using the <see cref="RunnerConfigurationAttribute"/>.
+    /// </summary>
     public interface IRunnerConfiguration
     {
-        IEnumerable<IBuilder> Builders { get; }
-
-        IEnumerable<IConfigurationRule> ConfigurationRules { get; }
-
+        /// <summary>
+        /// Gets the currently active <see cref="IFakeEngine"/>.
+        /// </summary>
         IFakeEngine FakeEngine { get; }
 
         /// <summary>
-        /// Adds a builder to the xUnit.BDDExtensions build chain.
-        /// A builder is a class which is used by the xUnit.BDDExtensions
-        /// core in order to build a dependency of a class under specification
-        /// in the automocking container.
+        ///   Specifies the fake engine to be used.
         /// </summary>
-        /// <param name="externalBuilder">
-        /// Specifies the external builder.
+        /// <param name = "fakeEngine">
+        ///   The fake engine.
         /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown when <paramref name="externalBuilder"/> is <c>null</c>.
-        /// </exception>
-        void AddBuilder(IBuilder externalBuilder);
-
-        /// <summary>
-        /// Adds a builder to the xUnit.BDDExtensions build chain.
-        /// A builder is a class which is used by the xUnit.BDDExtensions
-        /// core in order to build a dependency of a class under specification
-        /// in the automocking container.
-        /// </summary>
-        /// <typeparam name="TBuilder">
-        /// Specifies the type of the external builder.
-        /// </typeparam>
-        void AddBuilder<TBuilder>() where TBuilder : IBuilder, new();
-
-        /// <summary>
-        /// Adds a configuration rule to xUnit.BDDExtensions.
-        /// A configuration rule is applied to a dependency of a class under
-        /// specification after it has been created by a builder. A <see cref="IConfigurationRule"/>
-        /// can be used to apply mocking configuration as part of the build process
-        /// of the class under specification.
-        /// </summary>
-        /// <typeparam name="TConfigurationRule">
-        /// Specifies the type of the configuration rule.
-        /// </typeparam>
-        void AddConfigurationRule<TConfigurationRule>() where TConfigurationRule : IConfigurationRule, new();
-
-        /// <summary>
-        /// Adds a configuration rule to xUnit.BDDExtensions.
-        /// A configuration rule is applied to a dependency of a class under
-        /// specification after it has been created by a builder. A <see cref="IConfigurationRule"/>
-        /// can be used to apply mocking configuration as part of the build process
-        /// of the class under specification.
-        /// </summary>
-        /// <param name="externalRule">
-        /// Specifies the external configuration rule.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown when the supplied configuration rule is <c>null</c>.
-        /// </exception>
-        void AddConfigurationRule(IConfigurationRule externalRule);
-
-        /// <summary>
-        /// Configures the mocking engine to be used.
-        /// </summary>
-        /// <typeparam name="TFakeEngine">
-        /// Specifies the type of the mocking engine.
-        /// </typeparam>
-        void FakeEngineIs<TFakeEngine>() where TFakeEngine : IFakeEngine, new();
-
-        /// <summary>
-        /// Specifies the mocking engine to be used.
-        /// </summary>
-        /// <param name="fakeEngine">
-        /// The mocking engine.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown when <paramref name="fakeEngine"/> is <c>null</c>.
+        /// <exception cref = "ArgumentNullException">
+        ///   Thrown when <paramref name = "fakeEngine" /> is <c>null</c>.
         /// </exception>
         void FakeEngineIs(IFakeEngine fakeEngine);
 
+        /// <summary>
+        /// Specifies the fake engine type to be used for faking.
+        /// This must be a type that implements <see cref="IFakeEngine"/>
+        /// and has a parameterless public constructor.
+        /// </summary>
+        /// <param name="fakeEngineType">Type of the fake engine.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when <paramref name="fakeEngineType"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// </exception>
         void FakeEngineIs(Type fakeEngineType);
     }
 }

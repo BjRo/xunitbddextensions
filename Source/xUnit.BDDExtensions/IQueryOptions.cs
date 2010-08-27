@@ -17,7 +17,7 @@ using System;
 namespace Xunit
 {
     /// <summary>
-    ///   Defines a mock framework independent fluent interface for setting up behavior
+    ///   Defines a fake framework independent fluent interface for setting up behavior
     ///   for methods returning a result (queries).
     /// </summary>
     /// <typeparam name = "TReturn">
@@ -31,10 +31,7 @@ namespace Xunit
         /// <param name = "returnValue">
         ///   Specifies the return value.
         /// </param>
-        /// <returns>
-        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
-        /// </returns>
-        IQueryOptions<TReturn> Return(TReturn returnValue);
+        void Return(TReturn returnValue);
 
         /// <summary>
         ///   Configures that the function supplied by <paramref name = "valueFunction" />
@@ -43,13 +40,10 @@ namespace Xunit
         /// <param name = "valueFunction">
         ///   Specifies the function which is called when the method is called.
         /// </param>
-        /// <returns>
-        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
-        /// </returns>
         /// <remarks>
         ///   Use this for configuring parameterless methods.
         /// </remarks>
-        IQueryOptions<TReturn> Return(Func<TReturn> valueFunction);
+        void Return(Func<TReturn> valueFunction);
 
         /// <summary>
         ///   Configures that the function supplied by <paramref name = "valueFunction" />
@@ -58,13 +52,10 @@ namespace Xunit
         /// <param name = "valueFunction">
         ///   Specifies the function which is called when the method is called.
         /// </param>
-        /// <returns>
-        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
-        /// </returns>
         /// <remarks>
         ///   Use this for configuring methods with a single parameter.
         /// </remarks>
-        IQueryOptions<TReturn> Return<T>(Func<T, TReturn> valueFunction);
+        void Return<T>(Func<T, TReturn> valueFunction);
 
         /// <summary>
         ///   Configures that the function supplied by <paramref name = "valueFunction" />
@@ -73,13 +64,10 @@ namespace Xunit
         /// <param name = "valueFunction">
         ///   Specifies the function which is called when the method is called.
         /// </param>
-        /// <returns>
-        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
-        /// </returns>
         /// <remarks>
         ///   Use this for configuring methods with two parameters.
         /// </remarks>
-        IQueryOptions<TReturn> Return<T1, T2>(Func<T1, T2, TReturn> valueFunction);
+        void Return<T1, T2>(Func<T1, T2, TReturn> valueFunction);
 
         /// <summary>
         ///   Configures that the function supplied by <paramref name = "valueFunction" />
@@ -88,13 +76,10 @@ namespace Xunit
         /// <param name = "valueFunction">
         ///   Specifies the function which is called when the method is called.
         /// </param>
-        /// <returns>
-        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
-        /// </returns>
         /// <remarks>
         ///   Use this for configuring methods with three parameters.
         /// </remarks>
-        IQueryOptions<TReturn> Return<T1, T2, T3>(Func<T1, T2, T3, TReturn> valueFunction);
+        void Return<T1, T2, T3>(Func<T1, T2, T3, TReturn> valueFunction);
 
         /// <summary>
         ///   Configures that the function supplied by <paramref name = "valueFunction" />
@@ -103,13 +88,10 @@ namespace Xunit
         /// <param name = "valueFunction">
         ///   Specifies the function which is called when the method is called.
         /// </param>
-        /// <returns>
-        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
-        /// </returns>
         /// <remarks>
         ///   Use this for configuring methods with four parameters.
         /// </remarks>
-        IQueryOptions<TReturn> Return<T1, T2, T3, T4>(Func<T1, T2, T3, T4, TReturn> valueFunction);
+        void Return<T1, T2, T3, T4>(Func<T1, T2, T3, T4, TReturn> valueFunction);
 
         /// <summary>
         ///   Configures that the invocation of the related behavior
@@ -119,9 +101,6 @@ namespace Xunit
         ///   Specifies the exception which should be thrown when the 
         ///   behavior is invoked.
         /// </param>
-        /// <returns>
-        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
-        /// </returns>
-        IQueryOptions<TReturn> Throw(Exception exception);
+        void Throw(Exception exception);
     }
 }

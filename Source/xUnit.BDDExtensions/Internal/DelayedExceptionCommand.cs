@@ -11,17 +11,25 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//  
+// 
+
+using System;
+using Xunit.Sdk;
+
 namespace Xunit.Internal
 {
-    /// <summary>
-    ///   A configuration rule which can be applied to a created instance.
-    /// </summary>
-    public interface IConfigurationRule
+    public class DelayedExceptionCommand : TestCommand
     {
-        /// <summary>
-        ///   Configures the instance.
-        /// </summary>
-        void Configure(object instance, IFabricContext context);
+        private readonly Exception _ex;
+
+        public DelayedExceptionCommand(Exception ex, IMethodInfo method) : base(method, MethodUtility.GetDisplayName(method), 0)
+        {
+            _ex = ex;
+        }
+
+        public override MethodResult Execute(object testClass)
+        {
+            return new FailedResult(testMethod, _ex, DisplayName);
+        }
     }
 }

@@ -48,7 +48,7 @@ namespace Xunit.Specs
     public class When_a_behavior_configuration_is_used_to_setup_behaviors : InstanceContextSpecification<ClassWithGenericEnumerableDependency>
     {
         private DependencyConfiguration _configuration;
-        private IDependencyAccessor _accessor;
+        private IFakeAccessor _accessor;
 
         protected override void EstablishContext()
         {
@@ -79,43 +79,6 @@ namespace Xunit.Specs
         }
     }
 
-    [Concern(typeof(InstanceContextSpecification<>))]
-    public class When_an_instance_with_a_dependency_on_a_generic__IEnumerable__is_resolved_and_the_item_type_can_be_stubbed : InstanceContextSpecification<ClassWithGenericEnumerableDependency>
-    {
-        private IEnumerable<IDependency> _dependencies;
-        private IEnumerable<IDependency> _injectedDependencies;
-
-        protected override void EstablishContext()
-        {
-            _dependencies = The<IEnumerable<IDependency>>();
-        }
-
-        protected override void Because()
-        {
-            _injectedDependencies = Sut.Dependencies;
-        }
-
-        [Observation]
-        public void Should_prefill_the_enumerable_with_three_stubs()
-        {
-            Sut.Dependencies.Count().ShouldBeEqualTo(3);
-        }
-
-        [Observation]
-        public void Should_inject_the_stubs_into_the_SUT_that_where_returned_by_the_THE_call()
-        {
-            foreach (var dependency in _dependencies)
-            {
-                _injectedDependencies.ShouldContain(dependency);
-            }
-        }
-
-        [Observation]
-        public void Should_match_the_items_but_not_the_collection()
-        {
-            _injectedDependencies.ShouldNotBeTheSame(_dependencies);
-        }
-    }
 
     [Concern(typeof(InstanceContextSpecification<>))]
     public class When_an_instance_with_a_dependency_on_a_generic__IEnumerable__is_resolved_and_the_item_type_cannot_be_stubbed : InstanceContextSpecification<ClassWithGenericEnumerableWhoseItemTypeIsNotAnInterface>
@@ -245,9 +208,9 @@ namespace Xunit.Specs
     }
     public class DependencyConfiguration : IBehaviorConfig
     {
-        public IDependencyAccessor Accessor;
+        public IFakeAccessor Accessor;
 
-        public void EstablishContext(IDependencyAccessor acessor)
+        public void EstablishContext(IFakeAccessor acessor)
         {
             Accessor = acessor;
         }

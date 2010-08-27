@@ -17,31 +17,31 @@ using System.Collections.Generic;
 namespace Xunit
 {
     /// <summary>
-    /// Accessor interface for dependencies created and managed by mockframework / automocking container.
+    /// Accessor interface for dependencies created and managed by fake framework / auto fake container.
     /// </summary>
-    public interface IDependencyAccessor
+    public interface IFakeAccessor
     {
         /// <summary>
-        /// Creates a dependency of the type specified by <typeparamref name="TInterfaceType"/>.
+        /// Creates a fake of the type specified by <typeparamref name="TInterfaceType"/>.
         /// </summary>
         /// <typeparam name="TInterfaceType">
-        /// The type to create a dependency for. (Should be an interface)
+        /// The type to create a fake for. (Should be an interface or an abstract class)
         /// </typeparam>
         /// <returns>
-        /// An newly created instance implementing <typeparamref name="TInterfaceType"/>.
+        /// An newly created fake implementing <typeparamref name="TInterfaceType"/>.
         /// </returns>
         TInterfaceType An<TInterfaceType>() where TInterfaceType : class;
 
         /// <summary>
-        /// Creates a dependency of the type specified by <typeparamref name="TInterfaceType"/>.
+        /// Creates a fake of the type specified by <typeparamref name="TInterfaceType"/>.
         /// This method reuses existing instances. If an instance of <typeparamref name="TInterfaceType"/>
         /// was already requested it's returned here. (You can say this is kind of a singleton behavior)
         /// 
-        /// Besides that, you can obtain a reference to automatically injected stubs with this 
+        /// Besides that, you can obtain a reference to automatically injected fakes with this 
         /// method.
         /// </summary>
         /// <typeparam name="TInterfaceType">
-        /// The type to create a dependency for. (Should be an interface)
+        /// The type to create a fake for. (Should be an interface or an abstract class)
         /// </typeparam>
         /// <returns>
         /// An instance implementing <see cref="TInterfaceType"/>.
@@ -49,16 +49,16 @@ namespace Xunit
         TInterfaceType The<TInterfaceType>() where TInterfaceType : class;
 
         /// <summary>
-        /// Creates a list of dependencies of the type specified by <typeparamref name="TInterfaceType"/>.
+        /// Creates a list containing 3 fake instances of the type specified 
+        /// via <typeparamref name="TInterfaceType"/>.
         /// </summary>
         /// <typeparam name="TInterfaceType">
-        /// Specifies the dependency type. (Should be an interface).
+        /// Specifies the item type of the list. This should be an interface or an abstract class.
         /// </typeparam>
         /// <returns>
-        /// An newly created instance implementing <typeparamref name="TInterfaceType"/>.
+        /// An <see cref="IList{T}"/>.
         /// </returns>
         IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class;
-
 
         /// <summary>
         /// Uses the instance supplied by <paramref name="instance"/> during the 

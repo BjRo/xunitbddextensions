@@ -3,8 +3,8 @@ using System;
 namespace Xunit
 {
     /// <summary>
-    ///   Defines a mock framework independent fluent interface for setting up behavior
-    ///   for methods Callbacking void (commands)
+    ///   Defines a fake framework independent fluent interface for setting up behavior
+    ///   for methods returning void (commands)
     /// </summary>
     public interface ICommandOptions
     {

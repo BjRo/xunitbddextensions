@@ -82,26 +82,18 @@
     <Compile Include="DefaultBehaviorConfig.cs" />
     <Compile Include="EventRaiserExtensions.cs" />
     <Compile Include="ICommandOptions.cs" />
-    <Compile Include="IConfigurationEndpoint.cs" />
-    <Compile Include="Internal\ExceptionCommand.cs" />
+    <Compile Include="Internal\DelayedExceptionCommand.cs" />
+    <Compile Include="FakeEngineExtensions.cs" />
     <Compile Include="Internal\XbxRunner.cs" />
     <Compile Include="IQueryOptions.cs" />
     <Compile Include="Internal\AutoFakeContainer.cs" />
-    <Compile Include="Internal\FabricContext.cs" />
     <Compile Include="ConcernAttribute.cs" />
-    <Compile Include="Internal\DefaultBuilder.cs" />
-    <Compile Include="Internal\EnumerableBuilder.cs" />
     <Compile Include="Internal\EnumerableExtensions.cs" />
     <Compile Include="Internal\Guard.cs" />
     <Compile Include="IBehaviorConfig.cs" />
-    <Compile Include="IDependencyAccessor.cs" />
+    <Compile Include="IFakeAccessor.cs" />
     <Compile Include="IFakeEngine.cs" />
     <Compile Include="InstanceContextSpecification.cs" />
-    <Compile Include="Internal\IFabric.cs" />
-    <Compile Include="Internal\IFabricContext.cs" />
-    <Compile Include="Internal\IConfigurationRule.cs" />
-    <Compile Include="Internal\IBuilder.cs" />
-    <Compile Include="Internal\Fabric.cs" />
     <Compile Include="IRunnerConfiguration.cs" />
     <Compile Include="RunnerConfiguration.cs" />
     <Compile Include="MethodCallOccurance.cs" />
@@ -121,9 +113,8 @@
     <Compile Include="RhinoMocksExtensions.cs" />
     <Compile Include="Internal\RhinoQueryOptions.cs" />
     <Compile Include="StaticContextSpecification.cs" />
-    <Compile Include="Internal\MockFactoryExtensions.cs" />
     <Compile Include="IContextSpecification.cs" />
-    <Compile Include="XbxRunnerConfigurationAttribute.cs" />
+    <Compile Include="RunnerConfigurationAttribute.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

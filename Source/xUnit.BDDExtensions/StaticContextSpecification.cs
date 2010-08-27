@@ -19,7 +19,7 @@ using Xunit.Internal;
 namespace Xunit
 {
     /// <summary>
-    ///   Base class for specifications.
+    ///   A context specification which just provides the basic framework / template (without auto-faking).
     /// </summary>
     [RunWith(typeof(XbxRunner))]
     public abstract class StaticContextSpecification : IContextSpecification
@@ -83,31 +83,33 @@ namespace Xunit
         }
 
         /// <summary>
-        ///   Creates a dependency of the type specified by <typeparamref name = "TInterfaceType" />.
+        /// Creates a list containing 3 fake instances of the type specified 
+        /// via <typeparamref name="TInterfaceType"/>.
         /// </summary>
-        /// <typeparam name = "TInterfaceType">
-        ///   The type to create a dependency for. (Should be an interface)
+        /// <typeparam name="TInterfaceType">
+        /// Specifies the item type of the list. This should be an interface or an abstract class.
         /// </typeparam>
         /// <returns>
-        ///   An newly created instance implementing <typeparamref name = "TInterfaceType" />.
+        /// An <see cref="IList{T}"/>.
         /// </returns>
         protected TInterfaceType An<TInterfaceType>() where TInterfaceType : class
         {
-            return _fakeEngine.Stub<TInterfaceType>();
+            return (TInterfaceType)_fakeEngine.Stub(typeof(TInterfaceType));
         }
 
         /// <summary>
-        ///   Creates a list of dependencies of the type specified by <typeparamref name = "TInterfaceType" />.
+        /// Creates a list containing 3 fake instances of the type specified 
+        /// via <typeparamref name="TInterfaceType"/>.
         /// </summary>
-        /// <typeparam name = "TInterfaceType">
-        ///   Specifies the dependency type. (Should be an interface).
+        /// <typeparam name="TInterfaceType">
+        /// Specifies the item type of the list. This should be an interface or an abstract class.
         /// </typeparam>
         /// <returns>
-        ///   An newly created instance implementing <typeparamref name = "TInterfaceType" />.
+        /// An <see cref="IList{T}"/>.
         /// </returns>
         protected IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
         {
-            return _fakeEngine.CreateStubCollectionOf<TInterfaceType>();
+            return _fakeEngine.CreateFakeCollectionOf<TInterfaceType>();
         }
     }
 }

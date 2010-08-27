@@ -18,20 +18,10 @@ using Rhino.Mocks.Interfaces;
 
 namespace Xunit.Internal
 {
-    /// <summary>
-    ///   A <see cref = "IQueryOptions{TReturn}" /> implementation for the Rhino.Mocks framework.
-    /// </summary>
-    /// <typeparam name = "TReturnValue">
-    ///   Specifies the type of the return value.
-    /// </typeparam>
-    internal class RhinoQueryOptions<TReturnValue> : IQueryOptions<TReturnValue>
+    public class RhinoQueryOptions<TReturnValue> : IQueryOptions<TReturnValue>
     {
         private readonly IMethodOptions<TReturnValue> _methodOptions;
 
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "RhinoQueryOptions{TReturnValue}" /> class.
-        /// </summary>
-        /// <param name = "methodOptions">The method options.</param>
         public RhinoQueryOptions(IMethodOptions<TReturnValue> methodOptions)
         {
             Guard.AgainstArgumentNull(methodOptions, "methodOptions");
@@ -39,75 +29,26 @@ namespace Xunit.Internal
             _methodOptions = methodOptions;
         }
 
-        #region IQueryOptions<TReturnValue> Members
+        #region void Members
 
-        /// <summary>
-        ///   Sets up the return value of a behavior.
-        /// </summary>
-        /// <param name = "returnValue">
-        ///   Specifies the return value.
-        /// </param>
-        /// <returns>
-        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
-        /// </returns>
-        public IQueryOptions<TReturnValue> Return(TReturnValue returnValue)
+        public void Return(TReturnValue returnValue)
         {
             _methodOptions.Return(returnValue);
-            return this;
         }
 
-        /// <summary>
-        ///   Configures that the function supplied by <paramref name = "valueFunction" />
-        ///   will be used to evaluate the result value of a behavior.
-        /// </summary>
-        /// <param name = "valueFunction">
-        ///   Specifies the function which is called when the method is called.
-        /// </param>
-        /// <returns>
-        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
-        /// </returns>
-        /// <remarks>
-        ///   Use this for configuring parameterless methods.
-        /// </remarks>
-        public IQueryOptions<TReturnValue> Return(Func<TReturnValue> valueFunction)
+        public void Return(Func<TReturnValue> valueFunction)
         {
-            return RepeatAny(invocation => { invocation.ReturnValue = valueFunction(); });
+            RepeatAny(invocation => { invocation.ReturnValue = valueFunction(); });
         }
 
-        /// <summary>
-        ///   Configures that the function supplied by <paramref name = "valueFunction" />
-        ///   will be used to evaluate the result value of a behavior.
-        /// </summary>
-        /// <param name = "valueFunction">
-        ///   Specifies the function which is called when the method is called.
-        /// </param>
-        /// <returns>
-        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
-        /// </returns>
-        /// <remarks>
-        ///   Use this for configuring methods with a single parameter.
-        /// </remarks>
-        public IQueryOptions<TReturnValue> Return<T>(Func<T, TReturnValue> valueFunction)
+        public void Return<T>(Func<T, TReturnValue> valueFunction)
         {
-            return RepeatAny(invocation => { invocation.ReturnValue = valueFunction((T) invocation.Arguments[0]); });
+            RepeatAny(invocation => { invocation.ReturnValue = valueFunction((T) invocation.Arguments[0]); });
         }
 
-        /// <summary>
-        ///   Configures that the function supplied by <paramref name = "valueFunction" />
-        ///   will be used to evaluate the result value of a behavior.
-        /// </summary>
-        /// <param name = "valueFunction">
-        ///   Specifies the function which is called when the method is called.
-        /// </param>
-        /// <returns>
-        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
-        /// </returns>
-        /// <remarks>
-        ///   Use this for configuring methods with two parameters.
-        /// </remarks>
-        public IQueryOptions<TReturnValue> Return<T1, T2>(Func<T1, T2, TReturnValue> valueFunction)
+        public void Return<T1, T2>(Func<T1, T2, TReturnValue> valueFunction)
         {
-            return RepeatAny(invocation =>
+            RepeatAny(invocation =>
             {
                 invocation.ReturnValue = valueFunction(
                     (T1) invocation.Arguments[0],
@@ -115,22 +56,9 @@ namespace Xunit.Internal
             });
         }
 
-        /// <summary>
-        ///   Configures that the function supplied by <paramref name = "valueFunction" />
-        ///   will be used to evaluate the result value of a behavior.
-        /// </summary>
-        /// <param name = "valueFunction">
-        ///   Specifies the function which is called when the method is called.
-        /// </param>
-        /// <returns>
-        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
-        /// </returns>
-        /// <remarks>
-        ///   Use this for configuring methods with three parameters.
-        /// </remarks>
-        public IQueryOptions<TReturnValue> Return<T1, T2, T3>(Func<T1, T2, T3, TReturnValue> valueFunction)
+        public void Return<T1, T2, T3>(Func<T1, T2, T3, TReturnValue> valueFunction)
         {
-            return RepeatAny(invocation =>
+            RepeatAny(invocation =>
             {
                 invocation.ReturnValue = valueFunction(
                     (T1) invocation.Arguments[0],
@@ -139,22 +67,9 @@ namespace Xunit.Internal
             });
         }
 
-        /// <summary>
-        ///   Configures that the function supplied by <paramref name = "valueFunction" />
-        ///   will be used to evaluate the result value of a behavior.
-        /// </summary>
-        /// <param name = "valueFunction">
-        ///   Specifies the function which is called when the method is called.
-        /// </param>
-        /// <returns>
-        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
-        /// </returns>
-        /// <remarks>
-        ///   Use this for configuring methods with four parameters.
-        /// </remarks>
-        public IQueryOptions<TReturnValue> Return<T1, T2, T3, T4>(Func<T1, T2, T3, T4, TReturnValue> valueFunction)
+        public void Return<T1, T2, T3, T4>(Func<T1, T2, T3, T4, TReturnValue> valueFunction)
         {
-            return RepeatAny(invocation =>
+            RepeatAny(invocation =>
             {
                 invocation.ReturnValue = valueFunction(
                     (T1) invocation.Arguments[0],
@@ -164,30 +79,16 @@ namespace Xunit.Internal
             });
         }
 
-        /// <summary>
-        ///   Configures that the invocation of the related behavior
-        ///   results in the specified <see cref = "Exception" /> beeing thrown.
-        /// </summary>
-        /// <param name = "exception">
-        ///   Specifies the exception which should be thrown when the 
-        ///   behavior is invoked.
-        /// </param>
-        /// <returns>
-        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
-        /// </returns>
-        public IQueryOptions<TReturnValue> Throw(Exception exception)
+        public void Throw(Exception exception)
         {
             _methodOptions.Throw(exception);
-            return this;
         }
 
         #endregion
 
-        private IQueryOptions<TReturnValue> RepeatAny(Action<MethodInvocation> invocationConfig)
+        private void RepeatAny(Action<MethodInvocation> invocationConfig)
         {
             _methodOptions.WhenCalled(invocationConfig).Return(default(TReturnValue)).Repeat.Any();
-
-            return this;
         }
     }
 }

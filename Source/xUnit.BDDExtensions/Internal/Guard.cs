@@ -16,17 +16,8 @@ using System;
 
 namespace Xunit.Internal
 {
-    /// <summary>
-    ///   A helper class for argument checking.
-    /// </summary>
     public static class Guard
     {
-        /// <summary>
-        ///   Throws an <see cref = "ArgumentNullException" /> in case the 
-        ///   argument specified via <paramref name = "argument" /> is <c>null</c>.
-        /// </summary>
-        /// <param name = "argument">Specifies the argument</param>
-        /// <param name = "argumentName">Specifies the arguments name.</param>
         public static void AgainstArgumentNull(object argument, string argumentName)
         {
             if (argument == null)
@@ -35,15 +26,6 @@ namespace Xunit.Internal
             }
         }
 
-        /// <summary>
-        ///   Checks whether the argument supplied by <paramref name = "argument" />
-        ///   is <c>null</c> or an empty <see cref = "string" />.
-        /// </summary>
-        /// <param name = "argument">The name.</param>
-        /// <param name = "argumentName">Name of the argument.</param>
-        /// <exception cref = "ArgumentException">
-        ///   Thrown when <paramref name = "argument" /> is <c>null</c> or an empty string.
-        /// </exception>
         public static void AgainstNullOrEmptyString(string argument, string argumentName)
         {
             if (string.IsNullOrEmpty(argument))
@@ -55,7 +37,6 @@ namespace Xunit.Internal
             }
         }
 
-        //TODO: Document me!!!
         public static void ArgumentAssignableTo(Type argument, Type assignmentTargetType)
         {
             if (!assignmentTargetType.IsAssignableFrom(argument))

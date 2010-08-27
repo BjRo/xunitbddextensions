@@ -26,15 +26,6 @@ namespace Xunit
     {
         #region IFakeEngine Members
 
-        /// <summary>
-        ///   Creates a dependency of the type specified via <paramref name = "interfaceType" />.
-        /// </summary>
-        /// <param name = "interfaceType">
-        ///   Specifies the interface type to create a dependency for.
-        /// </param>
-        /// <returns>
-        ///   The created dependency instance.
-        /// </returns>
         public object Stub(Type interfaceType)
         {
             var closedMockType = typeof (Mock<>).MakeGenericType(interfaceType);
@@ -43,19 +34,6 @@ namespace Xunit
             return objectProperty.GetValue(instance, null);
         }
 
-        /// <summary>
-        ///   Creates a partial mock.
-        /// </summary>
-        /// <typeparam name = "T">
-        ///   Specifies the type of the partial mock. This needs to be 
-        ///   an abstract base class.
-        /// </typeparam>
-        /// <param name = "args">
-        ///   Specifies the constructor parameters.
-        /// </param>
-        /// <returns>
-        ///   The created instance.
-        /// </returns>
         public T PartialMock<T>(params object[] args) where T : class
         {
             var closedMockType = typeof (Mock<>).MakeGenericType(typeof (T));
@@ -73,24 +51,6 @@ namespace Xunit
             return objectProperty.GetValue(instance, null) as T;
         }
 
-        /// <summary>
-        ///   Configures the behavior of the dependency specified by <paramref name = "dependency" />.
-        /// </summary>
-        /// <typeparam name = "TDependency">
-        ///   Specifies the type of the dependency.
-        /// </typeparam>
-        /// <typeparam name = "TReturnValue">
-        ///   Specifies the type of the return value.
-        /// </typeparam>
-        /// <param name = "dependency">
-        ///   The dependency to configure behavior on.
-        /// </param>
-        /// <param name = "func">
-        ///   Configures the behavior. This must be a void method.
-        /// </param>
-        /// <returns>
-        ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
-        /// </returns>
         public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TDependency, TReturnValue>(
             TDependency dependency,
             Expression<Func<TDependency, TReturnValue>> func) where TDependency : class
@@ -100,24 +60,6 @@ namespace Xunit
             return new MoqQueryOptions<TDependency, TReturnValue>(mock.Setup(func));
         }
 
-        /// <summary>
-        ///   Configures the behavior of the dependency specified by <paramref name = "dependency" />.
-        /// </summary>
-        /// <typeparam name = "TDependency">
-        ///   Specifies the type of the dependency.
-        /// </typeparam>
-        /// <param name = "dependency">
-        ///   The dependency to configure behavior on.
-        /// </param>
-        /// <param name = "func">
-        ///   Configures the behavior. This must be a void method.
-        /// </param>
-        /// <returns>
-        ///   A <see cref = "ICommandOptions" /> for further configuration.
-        /// </returns>
-        /// <remarks>
-        ///   This method is used for command, e.g. methods returning void.
-        /// </remarks>
         public ICommandOptions SetUpCommandBehaviorFor<TDependency>(
             TDependency dependency,
             Expression<Action<TDependency>> func) where TDependency : class

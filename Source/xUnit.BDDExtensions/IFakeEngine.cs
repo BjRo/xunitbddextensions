@@ -18,7 +18,7 @@ using System.Linq.Expressions;
 namespace Xunit
 {
     /// <summary>
-    /// Interface to a mocking library. 
+    /// Interface to a fake framework. 
     /// </summary>
     public interface IFakeEngine
     {

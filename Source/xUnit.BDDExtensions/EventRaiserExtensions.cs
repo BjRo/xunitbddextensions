@@ -18,6 +18,7 @@ using Rhino.Mocks.Interfaces;
 
 namespace Xunit
 {
+    //TODO: What todo with this?
     public static class EventRaiserExtensions
     {
         public static IEventRaiser Event<T>(this T dependency, Action<T> eventSubscription) where T : class

@@ -17,17 +17,10 @@ using Rhino.Mocks.Interfaces;
 
 namespace Xunit.Internal
 {
-    /// <summary>
-    ///   A <see cref = "ICommandOptions" /> implementation for the Rhino.Mocks framework.
-    /// </summary>
-    internal class RhinoCommandOptions : ICommandOptions
+    public class RhinoCommandOptions : ICommandOptions
     {
         private readonly IMethodOptions<object> _methodOptions;
 
-        /// <summary>
-        ///   Initializes a new instance of the <see cref = "RhinoCommandOptions" /> class.
-        /// </summary>
-        /// <param name = "methodOptions">The method options.</param>
         public RhinoCommandOptions(IMethodOptions<object> methodOptions)
         {
             Guard.AgainstArgumentNull(methodOptions, "methodOptions");
@@ -37,27 +30,11 @@ namespace Xunit.Internal
 
         #region ICommandOptions Members
 
-        /// <summary>
-        ///   Configures that the invocation of the related behavior
-        ///   results in the specified <see cref = "Exception" /> beeing thrown.
-        /// </summary>
-        /// <param name = "exception">Specifies the exception which should be thrown when the
-        ///   behavior is invoked.</param>
         public void Throw(Exception exception)
         {
             _methodOptions.Throw(exception);
         }
 
-        /// <summary>
-        ///   Configures that the function supplied by <paramref name = "callback" />
-        ///   will be called when the method under configuration is called.
-        /// </summary>
-        /// <param name = "callback">
-        ///   Specifies the function which is called when the method under configuration is called.
-        /// </param>
-        /// <remarks>
-        ///   Use this overload when you're not interested in the parameters.
-        /// </remarks>
         public void Callback(Action callback)
         {
             _methodOptions.Callback(() =>
@@ -67,16 +44,6 @@ namespace Xunit.Internal
             });
         }
 
-        /// <summary>
-        ///   Configures that the function supplied by <paramref name = "callback" />
-        ///   will be called when the method under configuration is called.
-        /// </summary>
-        /// <param name = "callback">
-        ///   Specifies the function which is called when the method under configuration is called.
-        /// </param>
-        /// <remarks>
-        ///   Use this for callbacks on methods with a single parameter.
-        /// </remarks>
         public void Callback<T>(Action<T> callback)
         {
             _methodOptions.Callback<T>(p =>
@@ -86,16 +53,6 @@ namespace Xunit.Internal
             });
         }
 
-        /// <summary>
-        ///   Configures that the function supplied by <paramref name = "callback" />
-        ///   will be called when the method under configuration is called.
-        /// </summary>
-        /// <param name = "callback">
-        ///   Specifies the function which is called when the method under configuration is called.
-        /// </param>
-        /// <remarks>
-        ///   Use this for callbacks on methods with two parameters.
-        /// </remarks>
         public void Callback<T1, T2>(Action<T1, T2> callback)
         {
             _methodOptions.Callback<T1, T2>((p1,p2) =>
@@ -105,16 +62,6 @@ namespace Xunit.Internal
             });
         }
 
-        /// <summary>
-        ///   Configures that the function supplied by <paramref name = "callback" />
-        ///   will be called when the method under configuration is called.
-        /// </summary>
-        /// <param name = "callback">
-        ///   Specifies the function which is called when the method under configuration is called.
-        /// </param>
-        /// <remarks>
-        ///   Use this for callbacks on methods with three parameters.
-        /// </remarks>
         public void Callback<T1, T2, T3>(Action<T1, T2, T3> callback)
         {
             _methodOptions.Callback<T1, T2, T3>((p1, p2, p3) =>
@@ -124,16 +71,6 @@ namespace Xunit.Internal
             });
         }
 
-        /// <summary>
-        ///   Configures that the function supplied by <paramref name = "callback" />
-        ///   will be called when the method under configuration is called.
-        /// </summary>
-        /// <param name = "callback">
-        ///   Specifies the function which is called when the method under configuration is called.
-        /// </param>
-        /// <remarks>
-        ///   Use this for callbacks on methods with four parameters.
-        /// </remarks>
         public void Callback<T1, T2, T3, T4>(Action<T1, T2, T3, T4> callback)
         {
             _methodOptions.Callback<T1, T2, T3, T4>((p1, p2, p3, p4) =>

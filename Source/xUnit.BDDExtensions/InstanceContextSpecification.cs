@@ -1,16 +1,16 @@
-// Copyright 2010 xUnit.BDDExtensions
-//   
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//   
-//       http://www.apache.org/licenses/LICENSE-2.0
-//   
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+//  Copyright 2010 xUnit.BDDExtensions
+//    
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License. 
+//  You may obtain a copy of the License at
+//    
+//        http://www.apache.org/licenses/LICENSE-2.0
+//    
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+//  implied. See the License for the specific language governing permissions and
+//  limitations under the License.  
 //  
 using System;
 using System.Collections.Generic;
@@ -19,19 +19,20 @@ using Xunit.Internal;
 namespace Xunit
 {
     /// <summary>
-    ///   Specification that contains a hook for newing up the system under test after the context
-    ///   has been established.
+    ///   Context specification type which uses a combination of inversion-of-control and a fake framework
+    ///   to automatically create the system under test using constructor injection. All fakable ctor dependencies
+    ///   will be created by the fake framework.
     /// </summary>
-    /// <typeparam name = "TSystemUnderTest">
-    ///   Specifies the type of the system under test.
-    /// </typeparam>
-    [RunWith(typeof(XbxRunner))]
-    public abstract class InstanceContextSpecification<TSystemUnderTest> : 
-        IContextSpecification, 
-        IDependencyAccessor
+    /// <typeparam name = "TSystemUnderTest">Specifies the type of the system under test.</typeparam>
+    [RunWith(typeof (XbxRunner))]
+    public abstract class InstanceContextSpecification<TSystemUnderTest> :
+        IContextSpecification,
+        IFakeAccessor
         where TSystemUnderTest : class
     {
-        private readonly AutoFakeContainer<TSystemUnderTest> _autoFakeContainer = new AutoFakeContainer<TSystemUnderTest>();
+        private readonly AutoFakeContainer<TSystemUnderTest> _autoFakeContainer =
+            new AutoFakeContainer<TSystemUnderTest>();
+
         private readonly List<IBehaviorConfig> _behaviors = new List<IBehaviorConfig>();
 
         /// <summary>
@@ -39,73 +40,7 @@ namespace Xunit
         /// </summary>
         protected static TSystemUnderTest Sut { get; private set; }
 
-        #region IDependencyAccessor Members
-
-        /// <summary>
-        ///   Creates a dependency of the type specified by <typeparamref name = "TInterfaceType" />.
-        ///   This method reuses existing instances. If an instance of <typeparamref name = "TInterfaceType" />
-        ///   was already requested it's returned here. (You can say this is kind of a singleton behavior)
-        /// 
-        ///   Besides that, you can obtain a reference to automatically injected stubs with this 
-        ///   method.
-        /// </summary>
-        /// <typeparam name = "TInterfaceType">
-        ///   The type to create a dependency for. (Should be an interface)
-        /// </typeparam>
-        /// <returns>
-        ///   An instance implementing <see cref = "TInterfaceType" />.
-        /// </returns>
-        public TInterfaceType The<TInterfaceType>() where TInterfaceType : class
-        {
-            return _autoFakeContainer.Get<TInterfaceType>();
-        }
-
-        /// <summary>
-        ///   Creates a dependency of the type specified by <typeparamref name = "TInterfaceType" />.
-        /// </summary>
-        /// <typeparam name = "TInterfaceType">
-        ///   The type to create a dependency for. (Should be an interface)
-        /// </typeparam>
-        /// <returns>
-        ///   An newly created instance implementing <typeparamref name = "TInterfaceType" />.
-        /// </returns>
-        public TInterfaceType An<TInterfaceType>() where TInterfaceType : class
-        {
-            return _autoFakeContainer.Stub<TInterfaceType>();
-        }
-
-        /// <summary>
-        ///   Creates a list of dependencies of the type specified by <typeparamref name = "TInterfaceType" />.
-        /// </summary>
-        /// <typeparam name = "TInterfaceType">
-        ///   Specifies the dependency type. (Should be an interface).
-        /// </typeparam>
-        /// <returns>
-        ///   An newly created instance implementing <typeparamref name = "TInterfaceType" />.
-        /// </returns>
-        public IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
-        {
-            return _autoFakeContainer.CreateStubCollectionOf<TInterfaceType>();
-        }
-
-        /// <summary>
-        ///   Uses the instance supplied by <paramref name = "instance" /> during the 
-        ///   creation of the sut. The specified instance will be injected into the constructor.
-        /// </summary>
-        /// <typeparam name = "TInterfaceType">
-        ///   Specifies the interface type.
-        /// </typeparam>
-        /// <param name = "instance">
-        ///   Specifies the instance to be used for the specification.
-        /// </param>
-        public void Use<TInterfaceType>(TInterfaceType instance) where TInterfaceType : class
-        {
-            _autoFakeContainer.Inject(typeof (TInterfaceType), instance);
-        }
-
-        #endregion
-
-        #region ISpecification Members
+        #region IContextSpecification Members
 
         /// <summary>
         ///   Initializes the specification class.
@@ -128,6 +63,61 @@ namespace Xunit
             _behaviors.ForEach(x => x.Cleanup(this));
             _behaviors.Clear();
             AfterTheSpecification();
+        }
+
+        #endregion
+
+        #region IFakeAccessor Members
+
+        /// <summary>
+        ///   Creates a fake of the type specified by <typeparamref name = "TInterfaceType" />.
+        ///   This method reuses existing instances. If an instance of <typeparamref name = "TInterfaceType" />
+        ///   was already requested it's returned here. (You can say this is kind of a singleton behavior)
+        ///   Besides that, you can obtain a reference to automatically injected fakes with this
+        ///   method.
+        /// </summary>
+        /// <typeparam name = "TInterfaceType">The type to create a fake for. (Should be an interface or an abstract class)</typeparam>
+        /// <returns>
+        ///   An instance implementing <see cref = "TInterfaceType" />.
+        /// </returns>
+        public TInterfaceType The<TInterfaceType>() where TInterfaceType : class
+        {
+            return _autoFakeContainer.Get<TInterfaceType>();
+        }
+
+
+        /// <summary>
+        ///   Creates a fake of the type specified by <typeparamref name = "TInterfaceType" />.
+        /// </summary>
+        /// <typeparam name = "TInterfaceType">The type to create a fake for. (Should be an interface or an abstract class)</typeparam>
+        /// <returns>
+        ///   An newly created fake implementing <typeparamref name = "TInterfaceType" />.
+        /// </returns>
+        public TInterfaceType An<TInterfaceType>() where TInterfaceType : class
+        {
+            return _autoFakeContainer.Stub<TInterfaceType>();
+        }
+
+        /// <summary>
+        ///   Creates a list containing 3 fake instances of the type specified
+        ///   via <typeparamref name = "TInterfaceType" />.
+        /// </summary>
+        /// <typeparam name = "TInterfaceType">Specifies the item type of the list. This should be an interface or an abstract class.</typeparam>
+        /// <returns>An <see cref = "IList{T}" />.</returns>
+        public IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
+        {
+            return _autoFakeContainer.CreateFakeCollectionOf<TInterfaceType>();
+        }
+
+        /// <summary>
+        ///   Uses the instance supplied by <paramref name = "instance" /> during the
+        ///   creation of the sut. The specified instance will be injected into the constructor.
+        /// </summary>
+        /// <typeparam name = "TInterfaceType">Specifies the interface type.</typeparam>
+        /// <param name = "instance">Specifies the instance to be used for the specification.</param>
+        public void Use<TInterfaceType>(TInterfaceType instance) where TInterfaceType : class
+        {
+            _autoFakeContainer.Inject(typeof (TInterfaceType), instance);
         }
 
         #endregion

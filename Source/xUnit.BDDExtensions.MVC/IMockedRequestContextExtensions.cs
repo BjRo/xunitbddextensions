@@ -19,7 +19,6 @@ using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
-using Xunit.Internal;
 
 namespace Xunit
 {

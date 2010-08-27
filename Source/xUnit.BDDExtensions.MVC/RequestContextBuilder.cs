@@ -28,7 +28,7 @@ namespace Xunit
     /// </summary>
     public class RequestContextBuilder : IMockedRequestContext
     {
-        private readonly IDependencyAccessor _dependencyAccessor;
+        private readonly IFakeAccessor _fakeAccessor;
 
         private HttpContextBase _context;
 
@@ -64,17 +64,17 @@ namespace Xunit
 
         private T An<T>() where T : class
         {
-            return _dependencyAccessor.An<T>();
+            return _fakeAccessor.An<T>();
         }
 
         private T The<T>() where T : class
         {
-            return _dependencyAccessor.The<T>();
+            return _fakeAccessor.The<T>();
         }
 
-        public RequestContextBuilder(IDependencyAccessor dependencyAccessor)
+        public RequestContextBuilder(IFakeAccessor fakeAccessor)
         {
-            _dependencyAccessor = dependencyAccessor;
+            _fakeAccessor = fakeAccessor;
             EnsureMockedContext();
         }
 
