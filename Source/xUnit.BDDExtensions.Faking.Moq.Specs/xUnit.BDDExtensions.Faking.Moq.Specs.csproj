@@ -8,7 +8,7 @@
     <ProjectGuid>{5D9AC244-FC0B-475C-A999-AF6EAA55B4AC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Xunit.Specs</RootNamespace>
+    <RootNamespace>Xunit.Faking.Moq.Specs</RootNamespace>
     <AssemblyName>xUnit.BDDExtensions.Faking.Moq.Specs</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -58,6 +58,8 @@
     <Compile Include="Setting_up_method_return_values_using_xunitbddextensions_api.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Using_value_functions_for_generating_return_values_using_xunitbddextensions_api.cs" />
+    <Compile Include="Verifying_that_a_behavior_was_executed.cs" />
+    <Compile Include="Verifying_that_a_behavior_was_not_executed.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xUnit.BDDExtensions.Assertions\xUnit.BDDExtensions.Assertions.csproj">

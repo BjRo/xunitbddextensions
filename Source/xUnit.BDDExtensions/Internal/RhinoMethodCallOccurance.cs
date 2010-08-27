@@ -15,7 +15,7 @@
 using System;
 using Rhino.Mocks;
 
-namespace Xunit
+namespace Xunit.Internal
 {
     /// <summary>
     ///   This class encapsulates the Rhino.Mocks mechanics for specifiing call expectations.
@@ -23,21 +23,21 @@ namespace Xunit
     /// <typeparam name = "TDependency">
     ///   Specifies the type of the dependency which is configured via the methods on <see cref = "RhinoMocksExtensions" />.
     /// </typeparam>
-    public class MethodCallOccurance<TDependency>
+    public class RhinoMethodCallOccurance<TDependency> : IMethodCallOccurance
     {
         private readonly Action<TDependency> _action;
-        private readonly TDependency _dependency;
+        private readonly TDependency _fake;
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref = "MethodCallOccurance&lt;TDependency&gt;" /> class.
+        ///   Initializes a new instance of the <see cref = "RhinoMethodCallOccurance{TFake}" /> class.
         /// </summary>
-        /// <param name = "mock">The dependency on which an action is expected.</param>
+        /// <param name = "fake">The dependency on which an action is expected.</param>
         /// <param name = "action">The action that should have been called.</param>
-        public MethodCallOccurance(TDependency mock, Action<TDependency> action)
+        public RhinoMethodCallOccurance(TDependency fake, Action<TDependency> action)
         {
-            _dependency = mock;
+            _fake = fake;
             _action = action;
-            _dependency.AssertWasCalled(action, y => y.Repeat.AtLeastOnce());
+            _fake.AssertWasCalled(action, y => y.Repeat.AtLeastOnce());
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Xunit
         /// </param>
         public void Times(int numberOfTimesTheMethodShouldHaveBeenCalled)
         {
-            _dependency.AssertWasCalled(_action, y => y.Repeat.Times(numberOfTimesTheMethodShouldHaveBeenCalled));
+            _fake.AssertWasCalled(_action, y => y.Repeat.Times(numberOfTimesTheMethodShouldHaveBeenCalled));
         }
 
         /// <summary>

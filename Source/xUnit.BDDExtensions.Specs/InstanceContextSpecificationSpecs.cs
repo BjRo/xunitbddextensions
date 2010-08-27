@@ -15,10 +15,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using Xunit;
 
-namespace Xunit.Specs
+namespace Xunit.InstanceContextSpecificationSpecs
 {
     [Concern(typeof(InstanceContextSpecification<>))]
     public class When_a_an_external_instance_is_used_in_a_specification : InstanceContextSpecification<ClassWithSingleDependency>

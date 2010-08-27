@@ -82,6 +82,7 @@
     <Compile Include="DefaultBehaviorConfig.cs" />
     <Compile Include="EventRaiserExtensions.cs" />
     <Compile Include="ICommandOptions.cs" />
+    <Compile Include="IMethodCallOccurance.cs" />
     <Compile Include="Internal\DelayedExceptionCommand.cs" />
     <Compile Include="FakeEngineExtensions.cs" />
     <Compile Include="Internal\XbxRunner.cs" />
@@ -96,8 +97,8 @@
     <Compile Include="InstanceContextSpecification.cs" />
     <Compile Include="IRunnerConfiguration.cs" />
     <Compile Include="RunnerConfiguration.cs" />
-    <Compile Include="MethodCallOccurance.cs" />
-    <Compile Include="MockingExtensions.cs" />
+    <Compile Include="Internal\RhinoMethodCallOccurance.cs" />
+    <Compile Include="FakeApi.cs" />
     <Compile Include="ObservationAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyStubExtensions.cs" />
@@ -110,7 +111,6 @@
     <Compile Include="PropertyStubs\TerminalStubRule.cs" />
     <Compile Include="Internal\RhinoCommandOptions.cs" />
     <Compile Include="Internal\RhinoFakeEngine.cs" />
-    <Compile Include="RhinoMocksExtensions.cs" />
     <Compile Include="Internal\RhinoQueryOptions.cs" />
     <Compile Include="StaticContextSpecification.cs" />
     <Compile Include="IContextSpecification.cs" />

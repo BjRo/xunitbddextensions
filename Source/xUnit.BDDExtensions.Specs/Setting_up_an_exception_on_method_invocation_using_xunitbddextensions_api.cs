@@ -1,9 +1,9 @@
 using System;
 using System.ComponentModel;
-using Xunit;
-namespace Xunit.Specs
+
+namespace Xunit.Faking.RhinoMocks.FakeApiSpecs
 {
-    [Concern(typeof(MockingExtensions))]
+    [Concern(typeof(FakeApi))]
     public class When_setting_up_an_exception_which_should_be_thrown_when_the_method_is_called_on_a_generated__Stub__with_exact_parameters_using_xunitbddextensions_own_api  : StaticContextSpecification
     {
         private IServiceProvider _dependency;

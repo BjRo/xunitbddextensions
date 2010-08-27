@@ -1,6 +1,6 @@
-namespace Xunit.Specs
+namespace Xunit.Faking.RhinoMocks.FakeApiSpecs
 {
-    [Concern(typeof(MockingExtensions))]
+    [Concern(typeof(FakeApi))]
     public class Given_that_the_return_value_of_a_configured_parameterless_method_is_evaluated_by_a_function_when_the_configure_method_is_invoked  : StaticContextSpecification
     {
         private IDependencyWithReturnValues _dependency;
@@ -27,7 +27,7 @@ namespace Xunit.Specs
         }
     }
 
-    [Concern(typeof(MockingExtensions))]
+    [Concern(typeof(FakeApi))]
     public class Given_that_the_return_value_of_a_configured_method_with_a_single_parameter_is_evaluated_by_a_function_when_the_configured_method_is_finally_invoked : StaticContextSpecification
     {
         private IDependencyWithReturnValues _dependency;
@@ -67,7 +67,7 @@ namespace Xunit.Specs
         }
     }
 
-    [Concern(typeof(MockingExtensions))]
+    [Concern(typeof(FakeApi))]
     public class Given_that_the_return_value_of_a_configured_method_with_two_parameters_is_evaluated_by_a_function_when_the_configured_method_is_finally_invoked : StaticContextSpecification
     {
         private IDependencyWithReturnValues _dependency;
@@ -117,7 +117,7 @@ namespace Xunit.Specs
         }
     }
 
-    [Concern(typeof(MockingExtensions))]
+    [Concern(typeof(FakeApi))]
     public class Given_that_the_return_value_of_a_configured_method_with_three_parameters_is_evaluated_by_a_function_when_the_configured_method_is_finally_invoked : StaticContextSpecification
     {
         private IDependencyWithReturnValues _dependency;
@@ -177,7 +177,7 @@ namespace Xunit.Specs
         }
     }
 
-    [Concern(typeof(MockingExtensions))]
+    [Concern(typeof(FakeApi))]
     public class Given_that_the_return_value_of_a_configured_method_with_four_parameters_is_evaluated_by_a_function_when_the_configured_method_is_finally_invoked : StaticContextSpecification
     {
         private IDependencyWithReturnValues _dependency;

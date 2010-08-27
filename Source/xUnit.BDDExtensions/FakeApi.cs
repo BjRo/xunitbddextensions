@@ -1,11 +1,11 @@
 // Copyright 2010 xUnit.BDDExtensions
-//  
+//   
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//  
-//      http://www.apache.org/licenses/LICENSE-2.0
-//  
+//   
+//       http://www.apache.org/licenses/LICENSE-2.0
+//   
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,61 +14,43 @@
 //  
 using System;
 using System.Linq.Expressions;
+using Xunit.Internal;
 
 namespace Xunit
 {
     /// <summary>
-    /// Interface to a fake framework. 
+    ///   A set of extension methods for setting up behavior on fakes in a fashion independant 
+    ///   to a particular fake framework.
     /// </summary>
-    public interface IFakeEngine
+    public static class FakeApi
     {
         /// <summary>
-        /// Creates a fake of the type specified via <paramref name="interfaceType"/>.
+        ///   Configures the behavior of the fake specified by <paramref name = "fake" />.
         /// </summary>
-        /// <param name="interfaceType">
-        /// Specifies the interface type to create a fake for.
-        /// </param>
-        /// <returns>
-        /// The created fake instance.
-        /// </returns>
-        object Stub(Type interfaceType);
-
-        /// <summary>
-        /// Creates a partial mock.
-        /// </summary>
-        /// <typeparam name="T">
-        /// Specifies the type of the partial mock. This needs to be 
-        /// an abstract base class.
-        /// </typeparam>
-        /// <param name="args">
-        /// Specifies the constructor parameters.
-        /// </param>
-        /// <returns>
-        /// The created instance.
-        /// </returns>
-        T PartialMock<T>(params  object[] args) where T : class;
-
-        /// <summary>
-        ///   Configures the behavior of the fake specified by <paramref name = "dependency" />.
-        /// </summary>
-        /// <typeparam name = "TDependency">
+        /// <typeparam name = "TFake">
         ///   Specifies the type of the fake.
         /// </typeparam>
         /// <typeparam name = "TReturnValue">
         ///   Specifies the type of the return value.
         /// </typeparam>
-        /// <param name = "dependency">
+        /// <param name = "fake">
         ///   The fake to configure behavior on.
         /// </param>
         /// <param name = "func">
-        ///   Expression to set up the behavior.
+        ///   Configures the behavior. This must be a void method.
         /// </param>
         /// <returns>
         ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
         /// </returns>
-        IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TDependency, TReturnValue>(
-            TDependency dependency, 
-            Expression<Func<TDependency, TReturnValue>> func) where TDependency : class;
+        public static IQueryOptions<TReturnValue> WhenToldTo<TFake, TReturnValue>(
+            this TFake fake,
+            Expression<Func<TFake, TReturnValue>> func) where TFake : class
+        {
+            Guard.AgainstArgumentNull(fake, "fake");
+            Guard.AgainstArgumentNull(func, "func");
+
+            return RunnerConfiguration.FakeEngine.SetUpQueryBehaviorFor(fake, func);
+        }
 
         /// <summary>
         ///   Configures the behavior of the fake specified by <paramref name = "fake" />.
@@ -88,9 +70,15 @@ namespace Xunit
         /// <remarks>
         ///   This method is used for command, e.g. methods returning void.
         /// </remarks>
-        ICommandOptions SetUpCommandBehaviorFor<TFake>(
-            TFake fake,
-            Expression<Action<TFake>> func) where TFake : class;
+        public static ICommandOptions WhenToldTo<TFake>(
+            this TFake fake,
+            Expression<Action<TFake>> func) where TFake : class
+        {
+            Guard.AgainstArgumentNull(fake, "fake");
+            Guard.AgainstArgumentNull(func, "func");
+
+            return RunnerConfiguration.FakeEngine.SetUpCommandBehaviorFor(fake, func);
+        }
 
         /// <summary>
         /// Verifies that the behavior specified by <paramref name="func"/>
@@ -105,9 +93,15 @@ namespace Xunit
         /// <param name="func">
         /// Specifies the behavior that was not supposed to happen.
         /// </param>
-        void VerifyBehaviorWasNotExecuted<TFake>(
-            TFake fake,
-            Expression<Action<TFake>> func) where TFake : class;
+        public static void WasNotToldTo<TFake>(
+            this TFake fake,
+            Expression<Action<TFake>> func) where TFake : class 
+        {
+            Guard.AgainstArgumentNull(fake, "fake");
+            Guard.AgainstArgumentNull(func, "func");
+
+            RunnerConfiguration.FakeEngine.VerifyBehaviorWasNotExecuted(fake, func);
+        }
 
         /// <summary>
         /// Verifies that the behavior specified by <paramref name="func"/>
@@ -126,8 +120,14 @@ namespace Xunit
         /// A <see cref="IMethodCallOccurance"/> which can be used
         /// to narrow down the expectations to a particular amount of times.
         /// </returns>
-        IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
-            TFake fake, 
-            Expression<Action<TFake>> func) where TFake : class ;
+        public static IMethodCallOccurance WasToldTo<TFake>(
+            this TFake fake, 
+            Expression<Action<TFake>> func) where TFake : class
+        {
+            Guard.AgainstArgumentNull(fake, "fake");
+            Guard.AgainstArgumentNull(func, "func");
+
+            return RunnerConfiguration.FakeEngine.VerifyBehaviorWasExecuted(fake, func);
+        }
     }
 }

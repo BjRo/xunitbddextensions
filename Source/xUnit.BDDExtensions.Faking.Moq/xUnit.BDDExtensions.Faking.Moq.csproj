@@ -8,7 +8,7 @@
     <ProjectGuid>{EA948E79-F988-4D6E-89CB-265AE8C7C22E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Xunit</RootNamespace>
+    <RootNamespace>Xunit.Faking.Moq</RootNamespace>
     <AssemblyName>xUnit.BDDExtensions.Faking.Moq</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -52,6 +52,7 @@
     </Compile>
     <Compile Include="MoqCommandOptions.cs" />
     <Compile Include="MoqFakeEngine.cs" />
+    <Compile Include="MoqMethodCallOccurance.cs" />
     <Compile Include="MoqQueryOptions.cs" />
   </ItemGroup>
   <ItemGroup>

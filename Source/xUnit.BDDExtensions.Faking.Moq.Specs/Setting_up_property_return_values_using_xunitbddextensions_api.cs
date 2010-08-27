@@ -1,6 +1,6 @@
-namespace Xunit.Specs
+namespace Xunit.Faking.Moq.FakeApiSpecs
 {
-    [Concern(typeof(MockingExtensions))]
+    [Concern(typeof(Xunit.FakeApi))]
     public class When_setting_up_a_property_result_on_a_generated__Stub__with_exact_parameters_using_xunitbddextensions_own_api  : StaticContextSpecification
     {
         private IDependencyWithProperty _dependency;

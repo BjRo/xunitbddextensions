@@ -16,7 +16,7 @@ using System;
 using System.Linq.Expressions;
 using Moq;
 
-namespace Xunit
+namespace Xunit.Faking.Moq
 {
     /// <summary>
     ///   An implementation of <see cref = "IFakeEngine" />
@@ -61,12 +61,30 @@ namespace Xunit
         }
 
         public ICommandOptions SetUpCommandBehaviorFor<TDependency>(
-            TDependency dependency,
+            TDependency fake,
             Expression<Action<TDependency>> func) where TDependency : class
         {
-            var mock = Mock.Get(dependency);
+            var mock = Mock.Get(fake);
 
             return new MoqCommandOptions<TDependency>(mock.Setup(func));
+        }
+
+        public void VerifyBehaviorWasNotExecuted<TDependency>(
+            TDependency fake, 
+            Expression<Action<TDependency>> func) where TDependency : class
+        {
+            var mock = Mock.Get(fake);
+
+            mock.Verify(func, Times.Never());
+        }
+
+        public IMethodCallOccurance VerifyBehaviorWasExecuted<TDependency>(
+            TDependency fake, 
+            Expression<Action<TDependency>> func) where TDependency : class
+        {
+            var mock = Mock.Get(fake);
+
+            return new MoqMethodCallOccurance<TDependency>(mock, func);
         }
 
         #endregion

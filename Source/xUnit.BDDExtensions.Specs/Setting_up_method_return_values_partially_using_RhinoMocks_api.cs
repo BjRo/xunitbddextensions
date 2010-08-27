@@ -2,9 +2,9 @@ using System;
 using System.ComponentModel;
 using Rhino.Mocks;
 
-namespace Xunit.Specs
+namespace Xunit.Faking.RhinoMocks.FakeApiSpecs
 {
-    [Concern(typeof(MockingExtensions))]
+    [Concern(typeof(FakeApi))]
     public class When_setting_up_a_method_result_on_a_generated__Stub__partially_using_RhinoMocks_argument_matchers  : StaticContextSpecification
     {
         private IServiceProvider _dependency;

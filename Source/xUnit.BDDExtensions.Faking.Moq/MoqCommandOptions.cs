@@ -16,7 +16,7 @@ using System;
 using Moq.Language.Flow;
 using Xunit.Internal;
 
-namespace Xunit
+namespace Xunit.Faking.Moq
 {
     internal class MoqCommandOptions<TTarget> : ICommandOptions where TTarget : class
     {

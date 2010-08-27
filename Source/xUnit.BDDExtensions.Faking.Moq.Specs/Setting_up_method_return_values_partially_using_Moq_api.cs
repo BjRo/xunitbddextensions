@@ -2,9 +2,9 @@ using System;
 using System.ComponentModel;
 using Moq;
 
-namespace Xunit.Specs
+namespace Xunit.Faking.Moq.FakeApiSpecs
 {
-    [Concern(typeof(MockingExtensions))]
+    [Concern(typeof(Xunit.FakeApi))]
     public class When_setting_up_a_method_result_on_a_generated__Stub__partially_using_Moqs_argument_matchers  : StaticContextSpecification
     {
         private IServiceProvider _dependency;

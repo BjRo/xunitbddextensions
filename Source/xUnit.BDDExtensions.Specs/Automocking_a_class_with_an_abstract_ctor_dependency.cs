@@ -1,6 +1,6 @@
 using Xunit.Internal;
 
-namespace Xunit.Specs
+namespace Xunit.Faking.RhinoMocks.AutoFakeContainerSpecs
 {
     [Concern(typeof(AutoFakeContainer<>))]
     public class When_trying_to_build_a_class_under_test_that_has_a_ctor_dependency_on_an_abstract_class : StaticContextSpecification

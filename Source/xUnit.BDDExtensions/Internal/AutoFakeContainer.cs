@@ -51,10 +51,24 @@ namespace Xunit.Internal
         }
 
         public ICommandOptions SetUpCommandBehaviorFor<TDependency>(
-            TDependency dependency,
+            TDependency fake,
             Expression<Action<TDependency>> func) where TDependency : class
         {
-            return _fakeEngine.SetUpCommandBehaviorFor(dependency, func);
+            return _fakeEngine.SetUpCommandBehaviorFor(fake, func);
+        }
+
+        public void VerifyBehaviorWasNotExecuted<TDependency>(
+            TDependency fake, 
+            Expression<Action<TDependency>> func) where TDependency : class
+        {
+            _fakeEngine.VerifyBehaviorWasNotExecuted(fake, func);
+        }
+
+        public IMethodCallOccurance VerifyBehaviorWasExecuted<TDependency>(
+            TDependency fake, 
+            Expression<Action<TDependency>> func) where TDependency : class
+        {
+            return _fakeEngine.VerifyBehaviorWasExecuted(fake, func);
         }
 
         #endregion

@@ -42,20 +42,34 @@ namespace Xunit.Internal
         {
             var compiledFunction = func.Compile();
 
-            Guard.AgainstArgumentNull(compiledFunction, "compiledFunction");
-
             return new RhinoQueryOptions<TReturnValue>(dependency.Stub(f => compiledFunction(f)));
         }
 
         public ICommandOptions SetUpCommandBehaviorFor<TDependency>(
-            TDependency dependency,
+            TDependency fake,
             Expression<Action<TDependency>> func) where TDependency : class
         {
             var compiledFunction = func.Compile();
 
-            Guard.AgainstArgumentNull(compiledFunction, "compiledFunction");
+            return new RhinoCommandOptions(fake.Stub(compiledFunction));
+        }
 
-            return new RhinoCommandOptions(dependency.Stub(compiledFunction));
+        public void VerifyBehaviorWasNotExecuted<TDependency>(
+            TDependency fake,
+            Expression<Action<TDependency>> func) where TDependency : class
+        {
+            var compiledFunction = func.Compile();
+
+            fake.AssertWasNotCalled(compiledFunction);
+        }
+
+        public IMethodCallOccurance VerifyBehaviorWasExecuted<TDependency>(
+            TDependency fake, 
+            Expression<Action<TDependency>> func) where TDependency : class 
+        {
+            var compiledFunction = func.Compile();
+
+            return new RhinoMethodCallOccurance<TDependency>(fake, compiledFunction);
         }
 
         #endregion
