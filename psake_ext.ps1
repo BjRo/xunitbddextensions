@@ -49,3 +49,8 @@ using System.Runtime.InteropServices;
 	Write-Host "Generating assembly info file: $file"
 	Write-Output $asmInfo > $file
 }
+
+function Get-FrameworkDirectory() 
+{ 
+    $([System.Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory().Replace("v2.0.50727", "v4.0.30319")) 
+}
