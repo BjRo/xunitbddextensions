@@ -22,6 +22,7 @@ namespace Xunit.Internal
 {
     public class XbxRunner : ITestClassCommand
     {
+        private readonly TestCommandFactory _commandFactory = new TestCommandFactory();
         private IContextSpecification _contextSpec;
         private Exception _initializationException;
         private IEnumerable<IMethodInfo> _observationMethods;
@@ -82,22 +83,12 @@ namespace Xunit.Internal
             if (_initializationException != null)
             {
                 yield return new DelayedExceptionCommand(_initializationException, testMethod);
+                yield break;
             }
 
-            //TODO: Implement Skip on complete spec.
-
-            var skipReason = MethodUtility.GetSkipReason(testMethod);
-
-            if (skipReason != null)
+            foreach (var cmd in _commandFactory.CreateTestCommands(testMethod))
             {
-                yield return new SkipCommand(testMethod, MethodUtility.GetDisplayName(testMethod), skipReason);
-            }
-            else
-            {
-                foreach (var testCommand in MethodUtility.GetTestCommands(testMethod))
-                {
-                    yield return testCommand;
-                }
+                yield return cmd;
             }
         }
 

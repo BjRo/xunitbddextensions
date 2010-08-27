@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="Automocking_a_class_with_an_abstract_ctor_dependency.cs" />
     <Compile Include="CollectionStubSpecs.cs" />
+    <Compile Include="Should_automatically_skip_observations_that_throw_a_NotImplementException.cs" />
     <Compile Include="Should_be_able_to_run_with_xunit_facts_instead_of_observations.cs" />
     <Compile Include="Verifying_that_a_behavior_was_executed.cs" />
     <Compile Include="EventRaiserExtensionsSpec.cs" />

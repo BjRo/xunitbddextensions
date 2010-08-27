@@ -85,6 +85,8 @@
     <Compile Include="IMethodCallOccurance.cs" />
     <Compile Include="Internal\DelayedExceptionCommand.cs" />
     <Compile Include="FakeEngineExtensions.cs" />
+    <Compile Include="Internal\SkipIfNotImplementedCommand.cs" />
+    <Compile Include="Internal\TestCommandFactory.cs" />
     <Compile Include="Internal\XbxRunner.cs" />
     <Compile Include="IQueryOptions.cs" />
     <Compile Include="Internal\AutoFakeContainer.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="IFakeEngine.cs" />
     <Compile Include="InstanceContextSpecification.cs" />
     <Compile Include="IRunnerConfiguration.cs" />
+    <Compile Include="ObservationNotImplementedException.cs" />
     <Compile Include="RunnerConfiguration.cs" />
     <Compile Include="Internal\RhinoMethodCallOccurance.cs" />
     <Compile Include="FakeApi.cs" />
