@@ -49,15 +49,15 @@ namespace Xunit
         T PartialMock<T>(params  object[] args) where T : class;
 
         /// <summary>
-        ///   Configures the behavior of the fake specified by <paramref name = "dependency" />.
+        ///   Configures the behavior of the fake specified by <paramref name = "fake" />.
         /// </summary>
-        /// <typeparam name = "TDependency">
+        /// <typeparam name = "TFake">
         ///   Specifies the type of the fake.
         /// </typeparam>
         /// <typeparam name = "TReturnValue">
         ///   Specifies the type of the return value.
         /// </typeparam>
-        /// <param name = "dependency">
+        /// <param name = "fake">
         ///   The fake to configure behavior on.
         /// </param>
         /// <param name = "func">
@@ -66,9 +66,9 @@ namespace Xunit
         /// <returns>
         ///   A <see cref = "IQueryOptions{TReturn}" /> for further configuration.
         /// </returns>
-        IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TDependency, TReturnValue>(
-            TDependency dependency, 
-            Expression<Func<TDependency, TReturnValue>> func) where TDependency : class;
+        IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TFake, TReturnValue>(
+            TFake fake, 
+            Expression<Func<TFake, TReturnValue>> func) where TFake : class;
 
         /// <summary>
         ///   Configures the behavior of the fake specified by <paramref name = "fake" />.
@@ -129,5 +129,25 @@ namespace Xunit
         IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
             TFake fake, 
             Expression<Action<TFake>> func) where TFake : class ;
+
+        /// <summary>
+        /// Gets an <see cref="IEventRaiser"/> which can be used to raise an event
+        /// on the fake specified via <typeparamref name="TFake"/>.
+        /// </summary>
+        /// <typeparam name="TFake">
+        /// Specifies the type of the fake.
+        /// </typeparam>
+        /// <param name="fake">
+        /// Specifies the fake instance.
+        /// </param>
+        /// <param name="assignement">
+        /// A function specifying the event assignement.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IEventRaiser"/>.
+        /// </returns>
+        IEventRaiser CreateEventRaiser<TFake>(
+            TFake fake, 
+            Action<TFake> assignement) where TFake : class;
     }
 }

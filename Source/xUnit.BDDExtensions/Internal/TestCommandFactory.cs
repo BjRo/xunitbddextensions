@@ -4,7 +4,7 @@ using Xunit.Sdk;
 
 namespace Xunit.Internal
 {
-    internal class TestCommandFactory
+    public class TestCommandFactory
     {
         public IEnumerable<ITestCommand> CreateTestCommands(IMethodInfo testMethod)
         {

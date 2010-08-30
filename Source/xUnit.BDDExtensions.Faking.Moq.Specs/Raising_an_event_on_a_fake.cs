@@ -14,10 +14,10 @@
 // 
 using System;
 
-namespace Xunit.Specs
+namespace Xunit.Faking.Moq.FakeApiSpecs
 {
-    [Concern(typeof(EventRaiserExtensions))]
-    public class When_raising_an_event : StaticContextSpecification
+    [Concern(typeof(FakeApi))]
+    public class When_using_the_bddextension_wrapper_to_raise_an_event : StaticContextSpecification
     {
         private bool _wasRaised;
         private IHaveEvent _dependency;
@@ -30,12 +30,13 @@ namespace Xunit.Specs
 
         protected override void Because()
         {
-            _dependency.Event(x => x.EventOccurred += null)
+            _dependency
+                .Event(x => x.EventOccurred += null)
                 .Raise(null, EventArgs.Empty);
         }
 
         [Observation]
-        public void Should_raise_event()
+        public void Should_fire_the_event_so_that_registered_clients_recieve_the_event_notification()
         {
             _wasRaised.ShouldBeTrue();
         }

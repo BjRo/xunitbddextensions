@@ -15,16 +15,20 @@
 using System;
 using System.Linq.Expressions;
 using Moq;
+using Xunit.Internal;
 
-namespace Xunit.Faking.Moq
+namespace Xunit.Faking.Moq.Internal
 {
-    internal class MoqMethodCallOccurance<TDependency> : IMethodCallOccurance where TDependency : class
+    public class MoqMethodCallOccurance<TFake> : IMethodCallOccurance where TFake : class
     {
-        private readonly Expression<Action<TDependency>> _func;
-        private readonly Mock<TDependency> _mock;
+        private readonly Expression<Action<TFake>> _func;
+        private readonly Mock<TFake> _mock;
 
-        public MoqMethodCallOccurance(Mock<TDependency> mock, Expression<Action<TDependency>> func)
+        public MoqMethodCallOccurance(Mock<TFake> mock, Expression<Action<TFake>> func)
         {
+            Guard.AgainstArgumentNull(mock, "mock");
+            Guard.AgainstArgumentNull(func, "func");
+
             _mock = mock;
             _func = func;
 

@@ -53,6 +53,7 @@
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Auto_injecting_fakes_into_a_class_with_an_abstract_class_ctor_dependency.cs" />
+    <Compile Include="Raising_an_event_on_a_fake.cs" />
     <Compile Include="Setting_up_method_return_values_partially_using_Moq_api.cs" />
     <Compile Include="Setting_up_an_exception_on_method_invocation_using_xunitbddextensions_api.cs" />
     <Compile Include="Setting_up_property_return_values_using_xunitbddextensions_api.cs" />

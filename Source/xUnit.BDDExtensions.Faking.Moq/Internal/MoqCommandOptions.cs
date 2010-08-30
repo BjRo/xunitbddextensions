@@ -16,13 +16,13 @@ using System;
 using Moq.Language.Flow;
 using Xunit.Internal;
 
-namespace Xunit.Faking.Moq
+namespace Xunit.Faking.Moq.Internal
 {
-    internal class MoqCommandOptions<TTarget> : ICommandOptions where TTarget : class
+    public class MoqCommandOptions<TFake> : ICommandOptions where TFake : class
     {
-        private readonly ISetup<TTarget> _methodOptions;
+        private readonly ISetup<TFake> _methodOptions;
 
-        public MoqCommandOptions(ISetup<TTarget> methodOptions)
+        public MoqCommandOptions(ISetup<TFake> methodOptions)
         {
             Guard.AgainstArgumentNull(methodOptions, "methodOptions");
 

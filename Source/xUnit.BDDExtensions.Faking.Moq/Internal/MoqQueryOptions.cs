@@ -16,15 +16,16 @@ using System;
 using Moq.Language.Flow;
 using Xunit.Internal;
 
-namespace Xunit.Faking.Moq
+namespace Xunit.Faking.Moq.Internal
 {
-    internal class MoqQueryOptions<TTarget, TReturnValue> : IQueryOptions<TReturnValue> where TTarget : class
+    public class MoqQueryOptions<TFake, TReturnValue> : IQueryOptions<TReturnValue> where TFake : class
     {
-        private readonly ISetup<TTarget, TReturnValue> _methodOptions;
+        private readonly ISetup<TFake, TReturnValue> _methodOptions;
 
-        public MoqQueryOptions(ISetup<TTarget, TReturnValue> methodOptions)
+        public MoqQueryOptions(ISetup<TFake, TReturnValue> methodOptions)
         {
             Guard.AgainstArgumentNull(methodOptions, "methodOptions");
+
             _methodOptions = methodOptions;
         }
 

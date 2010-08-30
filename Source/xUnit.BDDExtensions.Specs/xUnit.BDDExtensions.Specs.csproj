@@ -90,7 +90,7 @@
     <Compile Include="Should_automatically_skip_observations_that_throw_a_NotImplementException.cs" />
     <Compile Include="Should_be_able_to_run_with_xunit_facts_instead_of_observations.cs" />
     <Compile Include="Verifying_that_a_behavior_was_executed.cs" />
-    <Compile Include="EventRaiserExtensionsSpec.cs" />
+    <Compile Include="Raising_an_event_on_a_fake.cs" />
     <Compile Include="InstanceContextSpecificationSpecs.cs" />
     <Compile Include="BDDExtensionsSpecs.cs" />
     <Compile Include="MethodInfoDummy.cs" />

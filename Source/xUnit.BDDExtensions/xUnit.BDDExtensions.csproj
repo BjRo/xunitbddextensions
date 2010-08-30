@@ -78,11 +78,12 @@
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="DefaultBehaviorConfig.cs" />
-    <Compile Include="EventRaiserExtensions.cs" />
     <Compile Include="ICommandOptions.cs" />
+    <Compile Include="IEventRaiser.cs" />
     <Compile Include="IMethodCallOccurance.cs" />
     <Compile Include="Internal\DelayedExceptionCommand.cs" />
     <Compile Include="FakeEngineExtensions.cs" />
+    <Compile Include="Internal\RhinoEventRaiser.cs" />
     <Compile Include="Internal\SkipIfNotImplementedCommand.cs" />
     <Compile Include="Internal\TestCommandFactory.cs" />
     <Compile Include="Internal\XbxRunner.cs" />

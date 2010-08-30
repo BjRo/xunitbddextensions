@@ -43,32 +43,37 @@ namespace Xunit.Internal
             return _fakeEngine.Stub(interfaceType);
         }
 
-        public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TDependency, TReturnValue>(
-            TDependency dependency,
-            Expression<Func<TDependency, TReturnValue>> func) where TDependency : class
+        public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TFake, TReturnValue>(
+            TFake fake,
+            Expression<Func<TFake, TReturnValue>> func) where TFake : class
         {
-            return _fakeEngine.SetUpQueryBehaviorFor(dependency, func);
+            return _fakeEngine.SetUpQueryBehaviorFor(fake, func);
         }
 
-        public ICommandOptions SetUpCommandBehaviorFor<TDependency>(
-            TDependency fake,
-            Expression<Action<TDependency>> func) where TDependency : class
+        public ICommandOptions SetUpCommandBehaviorFor<TFake>(
+            TFake fake,
+            Expression<Action<TFake>> func) where TFake : class
         {
             return _fakeEngine.SetUpCommandBehaviorFor(fake, func);
         }
 
-        public void VerifyBehaviorWasNotExecuted<TDependency>(
-            TDependency fake, 
-            Expression<Action<TDependency>> func) where TDependency : class
+        public void VerifyBehaviorWasNotExecuted<TFake>(
+            TFake fake, 
+            Expression<Action<TFake>> func) where TFake : class
         {
             _fakeEngine.VerifyBehaviorWasNotExecuted(fake, func);
         }
 
-        public IMethodCallOccurance VerifyBehaviorWasExecuted<TDependency>(
-            TDependency fake, 
-            Expression<Action<TDependency>> func) where TDependency : class
+        public IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
+            TFake fake, 
+            Expression<Action<TFake>> func) where TFake : class
         {
             return _fakeEngine.VerifyBehaviorWasExecuted(fake, func);
+        }
+
+        public IEventRaiser CreateEventRaiser<TFake>(TFake fake, Action<TFake> assignement) where TFake : class
+        {
+            return _fakeEngine.CreateEventRaiser(fake, assignement);
         }
 
         #endregion

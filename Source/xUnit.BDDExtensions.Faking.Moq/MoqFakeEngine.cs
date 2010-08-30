@@ -15,6 +15,7 @@
 using System;
 using System.Linq.Expressions;
 using Moq;
+using Xunit.Faking.Moq.Internal;
 
 namespace Xunit.Faking.Moq
 {
@@ -51,40 +52,49 @@ namespace Xunit.Faking.Moq
             return objectProperty.GetValue(instance, null) as T;
         }
 
-        public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TDependency, TReturnValue>(
-            TDependency dependency,
-            Expression<Func<TDependency, TReturnValue>> func) where TDependency : class
-        {
-            var mock = Mock.Get(dependency);
-
-            return new MoqQueryOptions<TDependency, TReturnValue>(mock.Setup(func));
-        }
-
-        public ICommandOptions SetUpCommandBehaviorFor<TDependency>(
-            TDependency fake,
-            Expression<Action<TDependency>> func) where TDependency : class
+        public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TFake, TReturnValue>(
+            TFake fake,
+            Expression<Func<TFake, TReturnValue>> func) where TFake : class
         {
             var mock = Mock.Get(fake);
 
-            return new MoqCommandOptions<TDependency>(mock.Setup(func));
+            return new MoqQueryOptions<TFake, TReturnValue>(mock.Setup(func));
         }
 
-        public void VerifyBehaviorWasNotExecuted<TDependency>(
-            TDependency fake, 
-            Expression<Action<TDependency>> func) where TDependency : class
+        public ICommandOptions SetUpCommandBehaviorFor<TFake>(
+            TFake fake,
+            Expression<Action<TFake>> func) where TFake : class
+        {
+            var mock = Mock.Get(fake);
+
+            return new MoqCommandOptions<TFake>(mock.Setup(func));
+        }
+
+        public void VerifyBehaviorWasNotExecuted<TFake>(
+            TFake fake, 
+            Expression<Action<TFake>> func) where TFake : class
         {
             var mock = Mock.Get(fake);
 
             mock.Verify(func, Times.Never());
         }
 
-        public IMethodCallOccurance VerifyBehaviorWasExecuted<TDependency>(
-            TDependency fake, 
-            Expression<Action<TDependency>> func) where TDependency : class
+        public IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
+            TFake fake, 
+            Expression<Action<TFake>> func) where TFake : class
         {
             var mock = Mock.Get(fake);
 
-            return new MoqMethodCallOccurance<TDependency>(mock, func);
+            return new MoqMethodCallOccurance<TFake>(mock, func);
+        }
+
+        public IEventRaiser CreateEventRaiser<TFake>(
+            TFake fake, 
+            Action<TFake> assignement) where TFake : class
+        {
+            var mock = Mock.Get(fake);
+
+            return new MoqEventRaiser<TFake>(mock, assignement);
         }
 
         #endregion

@@ -37,39 +37,48 @@ namespace Xunit.Internal
         }
 
         public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TDependency, TReturnValue>(
-            TDependency dependency,
+            TDependency fake,
             Expression<Func<TDependency, TReturnValue>> func) where TDependency : class
         {
             var compiledFunction = func.Compile();
 
-            return new RhinoQueryOptions<TReturnValue>(dependency.Stub(f => compiledFunction(f)));
+            return new RhinoQueryOptions<TReturnValue>(fake.Stub(f => compiledFunction(f)));
         }
 
-        public ICommandOptions SetUpCommandBehaviorFor<TDependency>(
-            TDependency fake,
-            Expression<Action<TDependency>> func) where TDependency : class
+        public ICommandOptions SetUpCommandBehaviorFor<TFake>(
+            TFake fake,
+            Expression<Action<TFake>> func) where TFake : class
         {
             var compiledFunction = func.Compile();
 
             return new RhinoCommandOptions(fake.Stub(compiledFunction));
         }
 
-        public void VerifyBehaviorWasNotExecuted<TDependency>(
-            TDependency fake,
-            Expression<Action<TDependency>> func) where TDependency : class
+        public void VerifyBehaviorWasNotExecuted<TFake>(
+            TFake fake,
+            Expression<Action<TFake>> func) where TFake : class
         {
             var compiledFunction = func.Compile();
 
             fake.AssertWasNotCalled(compiledFunction);
         }
 
-        public IMethodCallOccurance VerifyBehaviorWasExecuted<TDependency>(
-            TDependency fake, 
-            Expression<Action<TDependency>> func) where TDependency : class 
+        public IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
+            TFake fake, 
+            Expression<Action<TFake>> func) where TFake : class 
         {
             var compiledFunction = func.Compile();
 
-            return new RhinoMethodCallOccurance<TDependency>(fake, compiledFunction);
+            return new RhinoMethodCallOccurance<TFake>(fake, compiledFunction);
+        }
+
+        public IEventRaiser CreateEventRaiser<TFake>(
+            TFake fake, 
+            Action<TFake> assignement) where TFake : class
+        {
+            var eventRaiser = fake.Stub(assignement).IgnoreArguments().GetEventRaiser();
+
+            return new RhinoEventRaiser(eventRaiser);
         }
 
         #endregion
