@@ -4,7 +4,7 @@ properties {
   $build_dir = "$base_dir\Build" 
   $buildartifacts_dir = "$build_dir\" 
   $sln_file = "$base_dir\Source\xUnit.BDDExtensions.sln" 
-  $version = "1.5.0.0"
+  $version = "1.5.0.1"
   $tools_dir = "$base_dir\Tools"
   $release_dir = "$base_dir\Release"
 } 
@@ -37,14 +37,16 @@ task Compile -depends Init {
 } 
 
 task Test -depends Compile {
-  exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Specs.dll }
-  exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Mocking.RhinoMocks.Specs.dll }
-  exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Mocking.Moq.Specs.dll }
-  exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.Reporting.Specs.dll }
-  exec { & $tools_dir\xUnit\xunit.console.exe $build_dir\xUnit.BDDExtensions.MVC.Specs.dll }
+  exec { & $tools_dir\xUnit\xunit.console.clr4.exe $build_dir\xUnit.BDDExtensions.Specs.dll }
+  exec { & $tools_dir\xUnit\xunit.console.clr4.exe $build_dir\xUnit.BDDExtensions.Faking.Moq.Specs.dll }
+  exec { & $tools_dir\xUnit\xunit.console.clr4.exe $build_dir\xUnit.BDDExtensions.Reporting.Specs.dll }
+  exec { & $tools_dir\xUnit\xunit.console.clr4.exe $build_dir\xUnit.BDDExtensions.MVC.Specs.dll }
 }
 
 task Merge {
+    . .\psake_ext.ps1
+    $framework_dir = Get-FrameworkDirectory
+
     $old = pwd
     cd $build_dir
     
@@ -52,16 +54,16 @@ task Merge {
     Rename-Item $build_dir\xUnit.BDDExtensions.dll xUnit.BDDExtensions.Partial.dll
 
     exec {
-    
+        
      & $tools_dir\ILMerge\ILMerge.exe xUnit.BDDExtensions.Partial.dll `
         xUnit.BDDExtensions.Assertions.dll `
-        xUnit.BDDExtensions.Mocking.RhinoMocks.dll `
         StructureMap.dll `
         StructureMap.AutoMocking.dll `
         Rhino.Mocks.dll `
         /out:xUnit.BDDExtensions.dll `
         "/internalize:$base_dir\ILMergeExcludes.txt" `
         /t:library  `
+        /targetplatform:"v4,$framework_dir"
     }
 
     Remove-Item xUnit.BDDExtensions.MVC.Partial.dll -ErrorAction SilentlyContinue 
@@ -74,6 +76,7 @@ task Merge {
         /out:xUnit.BDDExtensions.MVC.dll `
         "/internalize:$base_dir\ILMergeMVCExcludes.txt" `
         /t:library `
+        /targetplatform:"v4,$framework_dir"
     }
 
     Remove-Item ReportGenerator.Partial.exe -ErrorAction SilentlyContinue 
@@ -86,6 +89,7 @@ task Merge {
         NVelocity.dll `
         /out:ReportGenerator.exe `
         /t:winexe `
+        /targetplatform:"v4,$framework_dir"
     }
      
     cd $old

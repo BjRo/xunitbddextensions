@@ -6,7 +6,8 @@
     <CSharp>
       <FormatSettings>
         <ANONYMOUS_METHOD_DECLARATION_BRACES>NEXT_LINE</ANONYMOUS_METHOD_DECLARATION_BRACES>
-        <INDENT_ANONYMOUS_METHOD_BLOCK>False</INDENT_ANONYMOUS_METHOD_BLOCK>
+        <CASE_BLOCK_BRACES>NEXT_LINE</CASE_BLOCK_BRACES>
+        <INITIALIZER_BRACES>NEXT_LINE</INITIALIZER_BRACES>
         <MODIFIERS_ORDER IsNull="False">
           <Item>public</Item>
           <Item>protected</Item>
@@ -74,6 +75,20 @@
     <XML>
       <FormatSettings />
     </XML>
+    <FileHeader><![CDATA[ Copyright 2010 xUnit.BDDExtensions
+   
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License. 
+ You may obtain a copy of the License at
+   
+       http://www.apache.org/licenses/LICENSE-2.0
+   
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ implied. See the License for the specific language governing permissions and
+ limitations under the License.  
+ ]]></FileHeader>
     <GenerateMemberBody />
     <Naming2>
       <EventHandlerPatternLong>$object$_On$event$</EventHandlerPatternLong>

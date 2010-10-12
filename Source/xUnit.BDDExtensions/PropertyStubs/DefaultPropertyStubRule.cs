@@ -27,7 +27,7 @@ namespace Xunit.PropertyStubs
 
         public void Stub(IPropertyAdapter property)
         {
-            var stub = Core.MockingEngine.Stub(property.PropertyType);
+            var stub = RunnerConfiguration.FakeEngine.Stub(property.PropertyType);
             property.Stub(stub);
         }
     }

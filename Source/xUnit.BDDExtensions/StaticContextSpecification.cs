@@ -12,24 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //  
+using System;
 using System.Collections.Generic;
 using Xunit.Internal;
 
 namespace Xunit
 {
     /// <summary>
-    ///   Base class for specifications.
+    ///   A context specification which just provides the basic framework / template (without auto-faking).
     /// </summary>
-    public abstract class StaticContextSpecification : ISpecification
+    [RunWith(typeof(XbxRunner))]
+    public abstract class StaticContextSpecification : IContextSpecification
     {
-        private readonly IMockingEngine _mockingEngine;
+        private readonly IFakeEngine _fakeEngine;
 
         /// <summary>
         ///   Creates a new instance of the <see cref = "StaticContextSpecification" /> class.
         /// </summary>
         protected StaticContextSpecification()
         {
-            _mockingEngine = Core.MockingEngine;
+            _fakeEngine = RunnerConfiguration.FakeEngine;
         }
 
         #region ISpecification Members
@@ -37,7 +39,7 @@ namespace Xunit
         /// <summary>
         ///   Initializes the specification class.
         /// </summary>
-        void ISpecification.Initialize()
+        void IContextSpecification.InitializeContext()
         {
             EstablishContext();
             Because();
@@ -46,9 +48,10 @@ namespace Xunit
         /// <summary>
         ///   Cleans up the specification class.
         /// </summary>
-        void ISpecification.Cleanup()
+        void IContextSpecification.CleanupSpecification()
         {
             AfterEachObservation();
+            AfterTheSpecification();
         }
 
         #endregion
@@ -67,39 +70,46 @@ namespace Xunit
         /// </summary>
         protected abstract void Because();
 
-        /// <summary>
-        ///   Is called after each observation. Can be used for cleanup.
-        /// </summary>
+        [Obsolete("EstablishContext and Because are now executed once for all observations which renders this method useless. Use AfterTheSpecification instead.")]
         protected virtual void AfterEachObservation()
         {
         }
 
         /// <summary>
-        ///   Creates a dependency of the type specified by <typeparamref name = "TInterfaceType" />.
+        ///   Is called after each observation. Can be used for cleanup.
         /// </summary>
-        /// <typeparam name = "TInterfaceType">
-        ///   The type to create a dependency for. (Should be an interface)
-        /// </typeparam>
-        /// <returns>
-        ///   An newly created instance implementing <typeparamref name = "TInterfaceType" />.
-        /// </returns>
-        protected TInterfaceType An<TInterfaceType>() where TInterfaceType : class
+        protected virtual void AfterTheSpecification()
         {
-            return _mockingEngine.Stub<TInterfaceType>();
         }
 
         /// <summary>
-        ///   Creates a list of dependencies of the type specified by <typeparamref name = "TInterfaceType" />.
+        /// Creates a list containing 3 fake instances of the type specified 
+        /// via <typeparamref name="TInterfaceType"/>.
         /// </summary>
-        /// <typeparam name = "TInterfaceType">
-        ///   Specifies the dependency type. (Should be an interface).
+        /// <typeparam name="TInterfaceType">
+        /// Specifies the item type of the list. This should be an interface or an abstract class.
         /// </typeparam>
         /// <returns>
-        ///   An newly created instance implementing <typeparamref name = "TInterfaceType" />.
+        /// An <see cref="IList{T}"/>.
+        /// </returns>
+        protected TInterfaceType An<TInterfaceType>() where TInterfaceType : class
+        {
+            return (TInterfaceType)_fakeEngine.Stub(typeof(TInterfaceType));
+        }
+
+        /// <summary>
+        /// Creates a list containing 3 fake instances of the type specified 
+        /// via <typeparamref name="TInterfaceType"/>.
+        /// </summary>
+        /// <typeparam name="TInterfaceType">
+        /// Specifies the item type of the list. This should be an interface or an abstract class.
+        /// </typeparam>
+        /// <returns>
+        /// An <see cref="IList{T}"/>.
         /// </returns>
         protected IList<TInterfaceType> Some<TInterfaceType>() where TInterfaceType : class
         {
-            return _mockingEngine.CreateStubCollectionOf<TInterfaceType>();
+            return _fakeEngine.CreateFakeCollectionOf<TInterfaceType>();
         }
     }
 }

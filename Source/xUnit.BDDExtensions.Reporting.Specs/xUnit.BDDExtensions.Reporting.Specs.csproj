@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Xunit.Reporting.Specs</RootNamespace>
     <AssemblyName>xUnit.BDDExtensions.Reporting.Specs</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -31,6 +31,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -58,8 +59,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\NVelocity\NVelocity.dll</HintPath>
     </Reference>
-    <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Rhino.Mocks">
       <HintPath>..\..\Lib\Rhino\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
@@ -71,9 +71,6 @@
       <HintPath>..\..\Lib\StructureMap\StructureMap.AutoMocking.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -110,10 +107,6 @@
     <ProjectReference Include="..\xUnit.BDDExtensions.Assertions\xUnit.BDDExtensions.Assertions.csproj">
       <Project>{DEE9E6A5-E4CA-475E-9B3A-314C7C0C8E59}</Project>
       <Name>xUnit.BDDExtensions.Assertions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\xUnit.BDDExtensions.Mocking.RhinoMocks\xUnit.BDDExtensions.Mocking.RhinoMocks.csproj">
-      <Project>{BBF8D13E-313A-4A6F-B945-948252A655A7}</Project>
-      <Name>xUnit.BDDExtensions.Mocking.RhinoMocks</Name>
     </ProjectReference>
     <ProjectReference Include="..\xUnit.BDDExtensions.Reporting\xUnit.BDDExtensions.Reporting.csproj">
       <Project>{80D7D01B-FB52-4DF5-9C20-9A4F95CD4441}</Project>

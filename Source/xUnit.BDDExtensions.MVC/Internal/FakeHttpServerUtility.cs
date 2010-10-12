@@ -16,7 +16,7 @@ using System.Web;
 
 namespace Xunit.Internal
 {
-    internal abstract class FakeHttpServerUtility : HttpServerUtilityBase
+    public abstract class FakeHttpServerUtility : HttpServerUtilityBase
     {
         public override string MapPath(string path)
         {

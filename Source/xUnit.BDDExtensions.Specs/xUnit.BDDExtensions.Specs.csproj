@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Xunit.Specs</RootNamespace>
     <AssemblyName>xUnit.BDDExtensions.Specs</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -31,6 +31,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,8 +53,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Rhino.Mocks">
       <HintPath>..\..\Lib\Rhino\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
@@ -87,23 +87,26 @@
     </Compile>
     <Compile Include="Automocking_a_class_with_an_abstract_ctor_dependency.cs" />
     <Compile Include="CollectionStubSpecs.cs" />
-    <Compile Include="EventRaiserExtensionsSpec.cs" />
+    <Compile Include="Should_automatically_skip_observations_that_throw_a_NotImplementException.cs" />
+    <Compile Include="Should_be_able_to_run_with_xunit_facts_instead_of_observations.cs" />
+    <Compile Include="Verifying_that_a_behavior_was_executed.cs" />
+    <Compile Include="Raising_an_event_on_a_fake.cs" />
     <Compile Include="InstanceContextSpecificationSpecs.cs" />
     <Compile Include="BDDExtensionsSpecs.cs" />
     <Compile Include="MethodInfoDummy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyStubExtensionsSpecs.cs" />
-    <Compile Include="RhinoMocksExtensionsSpec.cs" />
-    <Compile Include="SpecificationCommandSpecs.cs" />
+    <Compile Include="Setting_up_an_exception_on_method_invocation_using_xunitbddextensions_api.cs" />
+    <Compile Include="Setting_up_method_return_values_partially_using_RhinoMocks_api.cs" />
+    <Compile Include="Setting_up_method_return_values_using_xunitbddextensions_api.cs" />
+    <Compile Include="Setting_up_property_return_values_using_xunitbddextensions_api.cs" />
+    <Compile Include="Using_value_functions_for_generating_return_values_using_xunitbddextensions_api.cs" />
+    <Compile Include="Verifying_that_a_behavior_was_not_executed.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xUnit.BDDExtensions.Assertions\xUnit.BDDExtensions.Assertions.csproj">
       <Project>{DEE9E6A5-E4CA-475E-9B3A-314C7C0C8E59}</Project>
       <Name>xUnit.BDDExtensions.Assertions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\xUnit.BDDExtensions.Mocking.RhinoMocks\xUnit.BDDExtensions.Mocking.RhinoMocks.csproj">
-      <Project>{BBF8D13E-313A-4A6F-B945-948252A655A7}</Project>
-      <Name>xUnit.BDDExtensions.Mocking.RhinoMocks</Name>
     </ProjectReference>
     <ProjectReference Include="..\xUnit.BDDExtensions\xUnit.BDDExtensions.csproj">
       <Project>{01CCC787-B3E5-4D4F-917A-950E276EC3E0}</Project>

@@ -35,12 +35,12 @@ namespace Xunit
         /// Creates a Controller ActionInvoker which kann be usesd for Test
         /// <see cref="ISpecificationActionInvoker"/>
         ///</summary>
-        ///<param name="dependencyAccessor">The dependency Accessor from the mocking framework</param>
+        ///<param name="fakeAccessor">The fake Accessor from the mocking framework</param>
         ///<param name="actionInvoker">A Custom Controller Action for the test Invoker which overides the implementation</param>
-        public ControllerActionInvokerBuilder(IDependencyAccessor dependencyAccessor,
+        public ControllerActionInvokerBuilder(IFakeAccessor fakeAccessor,
                                               ISpecificationActionInvoker actionInvoker)
         {
-            _contextBuilder = new RequestContextBuilder(dependencyAccessor);
+            _contextBuilder = new RequestContextBuilder(fakeAccessor);
             _actionInvoker = actionInvoker;
         }
 

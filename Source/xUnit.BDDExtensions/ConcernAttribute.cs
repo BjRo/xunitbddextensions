@@ -20,7 +20,7 @@ namespace Xunit
     /// A concern. This attribute marks a specification to be related to a particular type.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class ConcernAttribute : TraitAttribute
+    public class ConcernAttribute : Attribute
     {
         /// <summary>
         /// Initializes the <see cref="ConcernAttribute"/> class.
@@ -28,7 +28,7 @@ namespace Xunit
         /// <param name="type">
         /// The type related to the concern.
         /// </param>
-        public ConcernAttribute(Type type) : base("Concern", type.FullName)
+        public ConcernAttribute(Type type) 
         {
             Type = type;
         }
@@ -40,9 +40,9 @@ namespace Xunit
         /// The type related to the concern.
         /// </param>
         /// <param name="scenario">
-        /// Specifies a scenario.
+        /// Specifies an optional scenario in which the type is used.
         /// </param>
-        public ConcernAttribute(Type type, string scenario) : base("Concern", type.FullName)
+        public ConcernAttribute(Type type, string scenario) 
         {
             Type = type;
             Scenario = scenario;

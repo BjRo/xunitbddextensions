@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Xunit</RootNamespace>
     <AssemblyName>xUnit.BDDExtensions</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -31,6 +31,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,6 +55,9 @@
     <DocumentationFile>bin\Release\xUnit.BDDExtensions.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\..\Lib\Rhino\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\StructureMap\StructureMap.dll</HintPath>
@@ -63,9 +67,6 @@
       <HintPath>..\..\Lib\StructureMap\StructureMap.AutoMocking.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
@@ -80,29 +81,29 @@
     </Compile>
     <Compile Include="BehaviorConfigBase.cs" />
     <Compile Include="ICommandOptions.cs" />
-    <Compile Include="Internal\ConfigurationExpression.cs" />
-    <Compile Include="Internal\ICore.cs" />
-    <Compile Include="Internal\NulloCore.cs" />
+    <Compile Include="IEventRaiser.cs" />
+    <Compile Include="IMethodCallOccurance.cs" />
+    <Compile Include="Internal\DelayedExceptionCommand.cs" />
+    <Compile Include="FakeEngineExtensions.cs" />
+    <Compile Include="Internal\RhinoEventRaiser.cs" />
+    <Compile Include="Internal\SkipIfNotImplementedCommand.cs" />
+    <Compile Include="Internal\TestCommandFactory.cs" />
+    <Compile Include="Internal\XbxRunner.cs" />
     <Compile Include="IQueryOptions.cs" />
-    <Compile Include="Internal\AutoMockingContainer.cs" />
-    <Compile Include="Internal\FabricContext.cs" />
+    <Compile Include="Internal\AutoFakeContainer.cs" />
     <Compile Include="ConcernAttribute.cs" />
-    <Compile Include="Internal\DefaultBuilder.cs" />
-    <Compile Include="Internal\Core.cs" />
-    <Compile Include="Internal\EnumerableBuilder.cs" />
     <Compile Include="Internal\EnumerableExtensions.cs" />
     <Compile Include="Internal\Guard.cs" />
     <Compile Include="IBehaviorConfig.cs" />
-    <Compile Include="IDependencyAccessor.cs" />
-    <Compile Include="IMockingEngine.cs" />
+    <Compile Include="IFakeAccessor.cs" />
+    <Compile Include="IFakeEngine.cs" />
     <Compile Include="InstanceContextSpecification.cs" />
-    <Compile Include="Internal\IFabric.cs" />
-    <Compile Include="Internal\IFabricContext.cs" />
-    <Compile Include="Internal\IConfigurationRule.cs" />
-    <Compile Include="Internal\IBuilder.cs" />
-    <Compile Include="Internal\Fabric.cs" />
-    <Compile Include="MockingExtensions.cs" />
-    <Compile Include="ObservationAttributeBase.cs" />
+    <Compile Include="IRunnerConfiguration.cs" />
+    <Compile Include="ObservationNotImplementedException.cs" />
+    <Compile Include="RunnerConfiguration.cs" />
+    <Compile Include="Internal\RhinoMethodCallOccurance.cs" />
+    <Compile Include="FakeApi.cs" />
+    <Compile Include="ObservationAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyStubExtensions.cs" />
     <Compile Include="PropertyStubs\CollectionPropertyStubRule.cs" />
@@ -112,10 +113,12 @@
     <Compile Include="PropertyStubs\IPropertyAdapter.cs" />
     <Compile Include="PropertyStubs\IPropertyStubRule.cs" />
     <Compile Include="PropertyStubs\TerminalStubRule.cs" />
+    <Compile Include="Internal\RhinoCommandOptions.cs" />
+    <Compile Include="Internal\RhinoFakeEngine.cs" />
+    <Compile Include="Internal\RhinoQueryOptions.cs" />
     <Compile Include="StaticContextSpecification.cs" />
-    <Compile Include="Internal\MockFactoryExtensions.cs" />
-    <Compile Include="ISpecification.cs" />
-    <Compile Include="SpecificationCommand.cs" />
+    <Compile Include="IContextSpecification.cs" />
+    <Compile Include="RunnerConfigurationAttribute.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

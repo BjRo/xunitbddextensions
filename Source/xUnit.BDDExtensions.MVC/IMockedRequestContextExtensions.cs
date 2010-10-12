@@ -19,7 +19,6 @@ using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
-using Xunit.Internal;
 
 namespace Xunit
 {
@@ -49,7 +48,7 @@ namespace Xunit
             httpRequest.Browser=new HttpBrowserCapabilities();
             HttpContext.Current = new HttpContext(httpRequest,new HttpResponse(TextWriter.Null));
             var viewContext = new ViewContext {HttpContext = context.Context};
-            var htmlHelper = new HtmlHelper(viewContext, Core.MockingEngine.Stub<IViewDataContainer>());
+            var htmlHelper = new HtmlHelper(viewContext, RunnerConfiguration.FakeEngine.Stub<IViewDataContainer>());
             var str = htmlHelper.AntiForgeryToken().ToHtmlString();
             var name = GetXmlAttributeValue(str, "name");
             var value = GetXmlAttributeValue(str, "value");
