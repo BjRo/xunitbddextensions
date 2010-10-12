@@ -124,7 +124,7 @@ namespace Xunit.Internal
             Request.WhenToldTo(requestBase => requestBase.Headers).Return(new NameValueCollection());
             Request.WhenToldTo(requestBase => requestBase.Form).Return(new NameValueCollection());
             Request.WhenToldTo(requestBase => requestBase.QueryString).Return(new NameValueCollection());
-
+            Request.ContentType = "";
             var cookiesCollection = new HttpCookieCollection();
             Request.WhenToldTo(requestBase => requestBase.Cookies).Return(cookiesCollection);
             Response.WhenToldTo(responseBase => responseBase.Cookies).Return(cookiesCollection);

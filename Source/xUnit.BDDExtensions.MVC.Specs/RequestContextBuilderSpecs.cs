@@ -104,6 +104,12 @@ namespace Xunit.Specs
         {
             Sut.Request.HttpMethod.ShouldBeEqualTo("GET");
         }
+
+        [Observation]
+        public void Shoud_l_the_request_context_type_not_null()
+        {
+            Sut.Request.ContentType.ShouldNotBeNull();
+        }
     }
 
     public class When_adding_the_role_administrator_to_request_context : ConcernOfRequestContextBuilder
