@@ -15,7 +15,7 @@ namespace Xunit.Faking.RhinoMocks.AutoFakeContainerSpecs
 
         protected override void Because()
         {
-            _instance = _autoMocker.ClassUnderTest;
+            _instance = _autoMocker.CreateTarget();
         }
 
         [Observation]

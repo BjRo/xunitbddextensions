@@ -14,92 +14,110 @@
 //  
 using System;
 using System.Linq.Expressions;
+using StructureMap;
 using StructureMap.AutoMocking;
 
 namespace Xunit.Internal
 {
-    public sealed class AutoFakeContainer<TTargetClass> :
-        AutoMocker<TTargetClass>,
-        ServiceLocator,
-        IFakeEngine where TTargetClass : class
-    {
-        private readonly IFakeEngine _fakeEngine;
+	public sealed class AutoFakeContainer<TTargetClass> :
+		ServiceLocator,
+		IFakeEngine where TTargetClass : class
+	{
+		private readonly IFakeEngine _fakeEngine;
+		private readonly StructureMapAutoMockerAdapter<TTargetClass> _autoMocker;
 
-        public AutoFakeContainer() : this(RunnerConfiguration.Instance)
-        {
-        }
+		public AutoFakeContainer(): this(RunnerConfiguration.Instance)
+		{
+		}
 
-        public AutoFakeContainer(IRunnerConfiguration runnerConfiguration)
-        {
-            _fakeEngine = runnerConfiguration.FakeEngine;
-            _serviceLocator = this;
-            _container = new AutoMockedContainer(this);
-        }
+		public AutoFakeContainer(IRunnerConfiguration runnerConfiguration)
+		{
+			_fakeEngine = runnerConfiguration.FakeEngine;
+			_autoMocker = new StructureMapAutoMockerAdapter<TTargetClass>(this);
+		}
 
-        #region IFakeEngine Members
+		public TTargetClass CreateTarget()
+		{
+			try
+			{
+				return _autoMocker.ClassUnderTest;
+			}
+			catch (StructureMapException ex)
+			{
+				throw new TargetCreationException(typeof(TTargetClass), ex);
+			}
+		}
 
-        public object Stub(Type interfaceType)
-        {
-            return _fakeEngine.Stub(interfaceType);
-        }
+		public TFakeSingleton Get<TFakeSingleton>() where TFakeSingleton : class
+		{
+			return _autoMocker.Get<TFakeSingleton>();
+		}
 
-        public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TFake, TReturnValue>(
-            TFake fake,
-            Expression<Func<TFake, TReturnValue>> func) where TFake : class
-        {
-            return _fakeEngine.SetUpQueryBehaviorFor(fake, func);
-        }
+		public void Inject(Type contract, object implementation)
+		{
+			_autoMocker.Inject(contract, implementation);
+		}
 
-        public ICommandOptions SetUpCommandBehaviorFor<TFake>(
-            TFake fake,
-            Expression<Action<TFake>> func) where TFake : class
-        {
-            return _fakeEngine.SetUpCommandBehaviorFor(fake, func);
-        }
+		#region IFakeEngine Members
 
-        public void VerifyBehaviorWasNotExecuted<TFake>(
-            TFake fake, 
-            Expression<Action<TFake>> func) where TFake : class
-        {
-            _fakeEngine.VerifyBehaviorWasNotExecuted(fake, func);
-        }
+		public T PartialMock<T>(params object[] args) where T : class
+		{
+			return _fakeEngine.PartialMock<T>(args);
+		}
 
-        public IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
-            TFake fake, 
-            Expression<Action<TFake>> func) where TFake : class
-        {
-            return _fakeEngine.VerifyBehaviorWasExecuted(fake, func);
-        }
 
-        public IEventRaiser CreateEventRaiser<TFake>(TFake fake, Action<TFake> assignement) where TFake : class
-        {
-            return _fakeEngine.CreateEventRaiser(fake, assignement);
-        }
+		public object Stub(Type interfaceType)
+		{
+			return _fakeEngine.Stub(interfaceType);
+		}
 
-        #endregion
+		public IQueryOptions<TReturnValue> SetUpQueryBehaviorFor<TFake, TReturnValue>(
+			TFake fake,
+			Expression<Func<TFake, TReturnValue>> func) where TFake : class
+		{
+			return _fakeEngine.SetUpQueryBehaviorFor(fake, func);
+		}
 
-        #region ServiceLocator Members
+		public ICommandOptions SetUpCommandBehaviorFor<TFake>(
+			TFake fake,
+			Expression<Action<TFake>> func) where TFake : class
+		{
+			return _fakeEngine.SetUpCommandBehaviorFor(fake, func);
+		}
 
-        public T Service<T>() where T : class
-        {
-            return (T) Service(typeof (T));
-        }
+		public void VerifyBehaviorWasNotExecuted<TFake>(
+			TFake fake,
+			Expression<Action<TFake>> func) where TFake : class
+		{
+			_fakeEngine.VerifyBehaviorWasNotExecuted(fake, func);
+		}
 
-        public object Service(Type serviceType)
-        {
-            return _fakeEngine.Stub(serviceType);
-        }
+		public IMethodCallOccurance VerifyBehaviorWasExecuted<TFake>(
+			TFake fake,
+			Expression<Action<TFake>> func) where TFake : class
+		{
+			return _fakeEngine.VerifyBehaviorWasExecuted(fake, func);
+		}
 
-        public T PartialMock<T>(params object[] args) where T : class
-        {
-            return _fakeEngine.PartialMock<T>(args);
-        }
+		public IEventRaiser CreateEventRaiser<TFake>(TFake fake, Action<TFake> assignement) where TFake : class
+		{
+			return _fakeEngine.CreateEventRaiser(fake, assignement);
+		}
 
-        #endregion
+		#endregion
 
-        public T Stub<T>() where T : class
-        {
-            return (T)Stub(typeof(T));
-        }
-    }
+		#region ServiceLocator Members
+
+		T ServiceLocator.Service<T>()
+		{
+			return _fakeEngine.Stub<T>();
+		}
+
+		object ServiceLocator.Service(Type serviceType)
+		{
+			return _fakeEngine.Stub(serviceType);
+		}
+
+		#endregion
+	}
 }

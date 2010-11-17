@@ -138,7 +138,7 @@ namespace Xunit
         /// </returns>
         protected virtual TSystemUnderTest CreateSut()
         {
-            return _autoFakeContainer.ClassUnderTest;
+            return _autoFakeContainer.CreateTarget();
         }
 
         /// <summary>

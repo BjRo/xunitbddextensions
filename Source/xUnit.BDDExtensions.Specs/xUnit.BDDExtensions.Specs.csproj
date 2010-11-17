@@ -85,6 +85,8 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AutoFakeContainer_cannot_build_target_because_it_does_not_have_a_public_ctor.cs" />
+    <Compile Include="AutoFakeContainer_cannot_build_target_because_it_throws_an_exception.cs" />
     <Compile Include="Automocking_a_class_with_an_abstract_ctor_dependency.cs" />
     <Compile Include="CollectionStubSpecs.cs" />
     <Compile Include="Should_automatically_skip_observations_that_throw_a_NotImplementException.cs" />

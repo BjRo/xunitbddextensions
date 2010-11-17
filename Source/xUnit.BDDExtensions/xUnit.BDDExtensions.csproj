@@ -80,6 +80,7 @@
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BehaviorConfigBase.cs" />
+    <Compile Include="Catch.cs" />
     <Compile Include="ICommandOptions.cs" />
     <Compile Include="IEventRaiser.cs" />
     <Compile Include="IMethodCallOccurance.cs" />
@@ -87,6 +88,8 @@
     <Compile Include="FakeEngineExtensions.cs" />
     <Compile Include="Internal\RhinoEventRaiser.cs" />
     <Compile Include="Internal\SkipIfNotImplementedCommand.cs" />
+    <Compile Include="Internal\StructureMapAutoMockerAdapter.cs" />
+    <Compile Include="Internal\TargetCreationException.cs" />
     <Compile Include="Internal\TestCommandFactory.cs" />
     <Compile Include="Internal\XbxRunner.cs" />
     <Compile Include="IQueryOptions.cs" />
@@ -119,6 +122,7 @@
     <Compile Include="StaticContextSpecification.cs" />
     <Compile Include="IContextSpecification.cs" />
     <Compile Include="RunnerConfigurationAttribute.cs" />
+    <Compile Include="XbxException.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

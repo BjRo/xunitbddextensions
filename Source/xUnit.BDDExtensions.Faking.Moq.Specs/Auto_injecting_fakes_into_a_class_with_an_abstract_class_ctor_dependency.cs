@@ -15,7 +15,7 @@ namespace Xunit.Faking.Moq.AutoFakeContainerSpecs
 
         protected override void Because()
         {
-            _instance = _autoMocker.ClassUnderTest;
+            _instance = _autoMocker.CreateTarget();
         }
 
         [Observation]
