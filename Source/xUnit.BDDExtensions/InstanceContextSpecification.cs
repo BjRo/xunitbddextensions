@@ -48,7 +48,6 @@ namespace Xunit
         void IContextSpecification.InitializeContext()
         {
             EstablishContext();
-            _behaviors.ForEach(x => x.EstablishContext(this));
             Sut = CreateSut();
             _behaviors.ForEach(x => x.PrepareSut(Sut));
             PrepareSut();
@@ -175,9 +174,11 @@ namespace Xunit
         /// <typeparam name = "TBehaviorConfig">
         ///   Specifies the type of the config to be executed.
         /// </typeparam>
-        protected void With<TBehaviorConfig>() where TBehaviorConfig : IBehaviorConfig, new()
+        protected TBehaviorConfig With<TBehaviorConfig>() where TBehaviorConfig : IBehaviorConfig, new()
         {
-            With(new TBehaviorConfig());
+            var behaviorConfig = new TBehaviorConfig();
+            With(behaviorConfig);
+            return behaviorConfig;
         }
 
         /// <summary>
@@ -192,6 +193,8 @@ namespace Xunit
             Guard.AgainstArgumentNull(behaviorConfig, "behaviorConfig");
 
             _behaviors.Add(behaviorConfig);
+
+            behaviorConfig.EstablishContext(this);
         }
     }
 }

@@ -56,7 +56,7 @@ namespace Xunit.InstanceContextSpecificationSpecs
         }
 
         protected override void Because()
-       { 
+        { 
             _accessor = _configuration.Accessor;
         }
 
