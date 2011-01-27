@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7D8D2F82-AD6A-4765-82DF-E96173D3B6F0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xunit.Examples</RootNamespace>
+    <AssemblyName>xUnit.BDDExtensions.Examples</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit">
+      <HintPath>..\..\Lib\xUnit\xunit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>GlobalAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Banking\Account.cs" />
+    <Compile Include="Banking\BankingSpecs.cs" />
+    <Compile Include="EmptySpecs.cs" />
+    <Compile Include="Permission\AllPermissionsDenied.cs" />
+    <Compile Include="Permission\IPermission.cs" />
+    <Compile Include="Permission\IPermissionService.cs" />
+    <Compile Include="Permission\IUser.cs" />
+    <Compile Include="Permission\PermissionService.cs" />
+    <Compile Include="Permission\PermissionServiceSpecs.cs" />
+    <Compile Include="Permission\TestCommand.cs" />
+    <Compile Include="Permission\TestCommandSpecs.cs" />
+    <Compile Include="Permission\TestPermission.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\xUnit.BDDExtensions.Assertions\xUnit.BDDExtensions.Assertions.csproj">
+      <Project>{DEE9E6A5-E4CA-475E-9B3A-314C7C0C8E59}</Project>
+      <Name>xUnit.BDDExtensions.Assertions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\xUnit.BDDExtensions\xUnit.BDDExtensions.csproj">
+      <Project>{01CCC787-B3E5-4D4F-917A-950E276EC3E0}</Project>
+      <Name>xUnit.BDDExtensions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Permission\Permissions.cd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
