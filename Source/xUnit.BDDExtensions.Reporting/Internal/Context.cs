@@ -117,8 +117,7 @@ namespace Xunit.Reporting.Internal
         /// </returns>
         public static bool Specification(Type type)
         {
-            return type.IsMarkedWith<ConcernAttribute>() &&
-                   type.Implements<IContextSpecification>() &&
+            return type.Implements<IContextSpecification>() &&
                    type.ContainsMethodsMarkedWith<FactAttribute>();
         }
 

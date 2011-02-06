@@ -112,6 +112,7 @@
     <Compile Include="Internal\IModelBuilder.cs" />
     <Compile Include="Internal\IReport.cs" />
     <Compile Include="Internal\IReportEngine.cs" />
+    <Compile Include="Internal\__Uncategorized__.cs" />
     <Compile Include="Internal\ObservationFormatter.cs" />
     <Compile Include="Internal\ReportEngine.cs" />
     <Compile Include="EngineRegistry.cs" />

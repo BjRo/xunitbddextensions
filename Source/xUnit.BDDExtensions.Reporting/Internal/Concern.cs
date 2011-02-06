@@ -17,6 +17,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Xunit.Reporting.Internal
@@ -27,8 +28,8 @@ namespace Xunit.Reporting.Internal
     public class Concern : IEnumerable<Context>
     {
         private readonly List<Context> _contexts = new List<Context>();
-        private readonly Type _relatedType;
-        private readonly string _scenario;
+    	public Type RelatedType { get; private set; }
+    	public string Scenario { get; private set; }
 
         /// <summary>
         ///   Creates a new instance of the <see cref = "Concern" /> class.
@@ -39,12 +40,12 @@ namespace Xunit.Reporting.Internal
         /// <param name = "scenario">
         ///   Specifies an optional scenario.
         /// </param>
-        private Concern(Type relatedType, string scenario)
+        protected Concern(Type relatedType, string scenario)
         {
             Debug.Assert(relatedType != null);
 
-            _relatedType = relatedType;
-            _scenario = scenario;
+            RelatedType = relatedType;
+            Scenario = scenario;
         }
 
         /// <summary>
@@ -127,13 +128,7 @@ namespace Xunit.Reporting.Internal
         {
             Debug.Assert(Context.Specification(specType));
 
-            var concernAttribute = specType.GetFirstAttribute<ConcernAttribute>();
-
-            Debug.Assert(concernAttribute != null);
-
-            return new Concern(
-                concernAttribute.Type,
-                concernAttribute.Scenario);
+        	return GetConcern(specType);
         }
 
         /// <summary>
@@ -148,12 +143,10 @@ namespace Xunit.Reporting.Internal
         /// </returns>
         public bool IsRelatedTo(Type specType)
         {
-            var concernAttribute = specType.GetFirstAttribute<ConcernAttribute>();
+        	var concern = GetConcern(specType);
 
-            Debug.Assert(concernAttribute != null);
-
-            return Equals(_relatedType, concernAttribute.Type) &&
-                   string.Equals(_scenario, concernAttribute.Scenario);
+            return Equals(RelatedType, concern.RelatedType) &&
+                   string.Equals(Scenario, concern.Scenario);
         }
 
         /// <summary>
@@ -163,14 +156,25 @@ namespace Xunit.Reporting.Internal
         {
             var sb = new StringBuilder();
 
-            sb.Append(_relatedType.Name);
+            sb.Append(RelatedType.Name);
 
-            if (!string.IsNullOrEmpty(_scenario))
+            if (!string.IsNullOrEmpty(Scenario))
             {
-                sb.AppendFormat(" ({0})", _scenario);
+                sb.AppendFormat(" ({0})", Scenario);
             }
 
             return sb.ToString();
         }
+
+		private static Concern GetConcern(MemberInfo specType)
+		{
+			var concernAttribute = specType.GetFirstAttribute<ConcernAttribute>();
+
+			return concernAttribute == null ?
+				new __Uncategorized__() :
+				new Concern(
+				concernAttribute.Type,
+				concernAttribute.Scenario);	
+		}
     }
 }

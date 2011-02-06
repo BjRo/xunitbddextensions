@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="Internal\AssemblyLoaderSpecs.cs" />
     <Compile Include="Internal\AssemblySpecs.cs" />
+    <Compile Include="Internal\A_concern_for_a_class_without_a_ConcernAttribute.cs" />
     <Compile Include="Internal\Configuration\ArgumentMapFactorySpecs.cs" />
     <Compile Include="Internal\Configuration\CollectionPropertyKeySpecs.cs" />
     <Compile Include="Internal\Configuration\ArgumentsSpecs.cs" />
